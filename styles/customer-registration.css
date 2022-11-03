@@ -1,4 +1,4 @@
-/* This is the CSS file for styling of login-customer page */
+/* This is the CSS file for styling of registration-customer page */
 body{
     padding: 0;
     margin: 0;
@@ -21,7 +21,7 @@ a{
 
 .left-panel{
     width: 40vw;
-    background-image: url("../assets/customer-login.jpg");
+    background-image: url("../assets/customer-registration.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -52,7 +52,7 @@ a{
 
 .form-container{
     display: flex;
-    max-width: 50%;
+    /*max-width: 50%;*/
     padding: 50px 70px;
     margin: 128px 42px;
     flex-direction: column;
@@ -74,6 +74,14 @@ a{
     margin-bottom: 5%;
 }
 
+.form-grid{
+    display: flex;
+}
+
+.form-grid-column{
+    padding: 5px;
+}
+
 /* Input styling */
 .text-input{
     outline-color: #354BC0;
@@ -84,9 +92,25 @@ a{
     -ms-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    min-width: 250px;
+    min-width: 200px;
     padding: 10px;
     font-size: 16px;
+    background-color: #FFF;
+}
+
+.date-input{
+    outline-color: #354BC0;
+    outline-width: medium;
+    border: 2px solid #354BC0;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    min-width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
     background-color: #FFF;
 }
 
@@ -99,19 +123,22 @@ a{
     border-radius: 5px;
 }
 
+.input-container{
+    margin-bottom: 15px;
+}
+
 .input-error-text{
     position: absolute;
     color: #FF1F00;
     font-size: 14px;
 }
 
-.forget-password-container{
-    margin: 16px;
-    text-align: right;
+.remember-me-container{
+    margin-bottom: 6px;
 }
 
-.remember-me-container{
-    margin-bottom: 16px;
+.term-policy-container{
+    margin-bottom: 18px;
 }
 
 .button-container{
@@ -135,8 +162,4 @@ a{
 
 .button:active{
     transform: scale(.96);
-}
-
-.register-container{
-    text-align: center;
 }

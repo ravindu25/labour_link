@@ -1,0 +1,434 @@
+/* This is the CSS file for styling of home page page */
+body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #F9F9F9;
+}
+
+a{
+    text-decoration: none;
+    color: #007AFF;
+}
+
+.text-white{
+    color: #FFF !important;
+}
+
+.nav-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+    background-color: #102699;
+}
+
+.nav-bar-items{
+    display: flex;
+    width: 80%;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.logo-container{
+    margin: 6px 12px;
+}
+
+.labour-link-logo{
+    width: 200px;
+    height: 80px;
+}
+
+.search-container{
+    display: flex;
+    align-items: center;
+    padding: 2px 8px;
+    margin: 5px 10px;
+}
+
+.search-icon-container{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 100%;
+    padding: 16px;
+    padding-right: 0;
+    border-radius: 25px 0 0 25px;
+    background-color: #4053BA;
+}
+
+.search-icon{
+    height: 16px;
+}
+
+.search-bar-input{
+    outline: none;
+    border: none;
+    border-radius: 0 25px 25px 0;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    min-width: 400px;
+    max-width: 450px;
+    height: 24px;
+    padding: 12px 16px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    color: #FFF;
+    background-color: #4053BA;
+}
+
+.search-bar-input::placeholder{
+    color: #FFF;
+}
+
+.nav-link-container{
+    display: flex;
+    align-items: center;
+    /*margin-left: 5%;*/
+}
+
+.nav-link-items{
+    margin: 2px 8px;
+}
+
+.nav-links{
+    color: #FFF;
+}
+
+.nav-select{
+    outline: none;
+    border: none;
+    padding: 12px 16px;
+    max-width: 100px;
+    font-size: 16px;
+    color: #FFF;
+    font-family: 'Poppins', sans-serif;
+    background-color: #102699;
+    border-radius: 16px;
+}
+
+.nav-link-items-button{
+    min-width: 120px;
+    outline: none;
+    border: none;
+    padding: 10px 5px;
+    color: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 16px;
+    background-color: #354BC0;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.nav-link-items-button:active{
+    transform: scale(.96);
+}
+
+.banner{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    min-height: 60vh;
+    background-image: url("../assets/home-page/home-page-banner.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.banner-container{
+    width: 15%;
+    padding-left: 48px;
+    color: white;
+}
+
+.banner-content{
+    font-size: 36px;
+}
+
+.job-section{
+    margin: 36px 0;
+}
+
+.job-section-heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.job-section-heading h1{
+    font-size: 40px;
+    color: #102699;
+}
+
+.job-arrow-down{
+    margin-left: 15px;
+    height: 32px;
+}
+
+.card-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 36px 6px;
+}
+
+.job-card{
+    width: 20%;
+    margin: 16px 16px;
+    padding-bottom: 16px;
+    overflow: hidden;
+    border-radius: 18px;
+    background-color: #102699;
+    box-shadow: 0 2px 5px #73706C;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+    transition-timing-function: ease-in-out;
+}
+
+.job-card:hover{
+    transform: translateY(-10px);
+}
+
+.job-card-image{
+    width: 100%;
+}
+
+.card-text{
+    text-align: center;
+}
+
+.card-text p{
+    color: #FFF;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+}
+
+.card-button{
+    min-width: 120px;
+    outline: none;
+    border: 4px solid #2B3B96;
+    padding: 10px 5px;
+    color: #354BC0;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 16px;
+    background-color: #FFF;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.card-button:active{
+    transform: scale(.96);
+}
+
+.housing-section{
+    display: flex;
+    align-items: stretch;
+    height: max-content;
+    margin-top: 48px;
+}
+
+.left-panel{
+    width: 50vw;
+    background-image: url("../assets/home-page/housing-package-image.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.right-panel{
+    width: 50vw;
+    height: max-content;
+    background-color: #8BC6EC;
+    background-image: url("../assets/home-page/housing-package-gradient-2.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.housing-heading{
+    padding: 12px 24px;
+    background-color: #102699;
+}
+
+.housing-content{
+    height: calc(100% - 84px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 96px 64px;
+}
+
+.housing-heading h1{
+    margin: 0;
+    color: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center;
+}
+
+.housing-content-first{
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    text-align: center;
+}
+
+.housing-content-second{
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 34px;
+    text-align: center;
+    margin: 24px 12px;
+}
+
+.housing-content-button{
+    display: flex;
+    align-items: center;
+    min-width: 120px;
+    outline: none;
+    border: 4px solid #2B3B96;
+    padding: 8px 32px;
+    color: #354BC0;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 16px;
+    background-color: #FFF;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.housing-content-button:active{
+    transform: scale(.96);
+}
+
+.housing-content-button-image{
+    height: 32px;
+    width: 32px;
+}
+
+.feedback-section{
+    padding: 48px 24px;
+    background-image: url("../assets/svg/home-page-wave.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.feedback-heading-container{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 10%;
+}
+
+.feedback-section h1{
+    margin: 0;
+    font-size: 40px;
+    font-family: 'Poppins', sans-serif;
+    color: #354BC0;
+}
+
+.feedback-thumbsup-icon{
+    height: 36px;
+    width: 36px;
+    margin-right: 12px;
+}
+
+.feedback-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback-card{
+    width: 20%;
+    margin: 16px 24px;
+    padding: 24px;
+    background-color: #FFF;
+    border: 4px solid #354BC0;
+    border-radius: 24px;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.feedback-card:hover{
+    transform: scale(1.05);
+}
+
+.feedback-author-container{
+    display: flex;
+    align-items: center;
+}
+
+.feedback-text{
+    font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+}
+
+.feedback-smile-icon{
+    height: 24px;
+    width: 24px;
+    margin-right: 6px;
+}
+
+.feedback-author{
+    font-size: 18px;
+    color: #03A8CF;
+}
+
+.footer{
+    padding: 24px;
+    padding-top: 32px;
+    color: #FFF;
+    background-color: #102699;
+    font-family: 'Inter', sans-serif;
+}
+
+.footer-row{
+    display: flex;
+    align-items: start;
+    justify-content: space-evenly;
+}
+
+.footer-column h4{
+    margin-bottom: 24px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer-column ul{
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.footer-column li{
+    margin-bottom: 6px;
+}
+
+.footer-more-link{
+    text-decoration: none;
+    color: #FFFFFF;
+    font-weight: lighter;
+    font-size: 14px;
+}
+
+.social-icon{
+    height: 20px;
+    width: 20px;
+    margin: 4px 8px;
+}
+
+@media (max-width: 1350px){
+    .search-container{
+        display: none;
+    }
+    .nav-bar-items{
+        justify-content: space-evenly;
+    }
+}
