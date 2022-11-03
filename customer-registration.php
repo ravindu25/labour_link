@@ -31,19 +31,18 @@
                             <br/>
                             <span class="input-error-text" id="input-firstname-error"></span>
                         </div>
-                        <label for="email-or-phone">Email or phone number</label>
+                        <label for="email">Email</label>
                         <br/>
                         <div class="input-container">
-                            <input type="text" id="email-or-phone" class="text-input" style="height: 26px"/>
+                            <input type="text" id="email" class="text-input"/>
                             <br/>
-                            <span class="input-error-text" id="input-email-or-phone-error"></span>
+                            <span class="input-error-text" id="input-email-error"></span>
                         </div>
-                        <label for="password">Password</label>
-                        <br/>
+                        <label for="password">NIC number</label>
                         <div class="input-container">
-                            <input type="password" id="password" class="text-input"/>
+                            <input type="text" id="nic-number" class="text-input" style="height: 26px"/>
                             <br/>
-                            <span class="input-error-text" id="input-password-error"></span>
+                            <span class="input-error-text" id="input-nic-error"></span>
                         </div>
                     </div>
                     <div class="form-grid-column">
@@ -54,6 +53,13 @@
                             <br/>
                             <span class="input-error-text" id="input-lastname-error"></span>
                         </div>
+                        <label for="phone-number">Phone number</label>
+                        <br/>
+                        <div class="input-container">
+                            <input type="text" id="phone-number" class="text-input"/>
+                            <br/>
+                            <span class="input-error-text" id="input-phone-error"></span>
+                        </div>
                         <label for="dob">Date of birth(MM/DD/YY)</label>
                         <br/>
                         <div class="input-container">
@@ -61,6 +67,30 @@
                             <br/>
                             <span class="input-error-text" id="input-dob-error"></span>
                         </div>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div style="padding-left: 4px">
+                        <label for="address">Address</label>
+                        <br/>
+                        <div class="input-container">
+                            <input type="text" id="address" class="text-input" style="min-width: 440px;"/>
+                            <br/>
+                            <span class="input-error-text" id="input-address-error"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-grid-column">
+                        <label for="password">Password</label>
+                        <br/>
+                        <div class="input-container">
+                            <input type="password" id="password" class="text-input"/>
+                            <br/>
+                            <span class="input-error-text" id="input-password-error"></span>
+                        </div>
+                    </div>
+                    <div class="form-grid-column">
                         <label for="confirm-password">Confirm Password</label>
                         <br/>
                         <div class="input-container">
