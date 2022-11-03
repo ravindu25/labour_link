@@ -38,12 +38,6 @@
                             <br/>
                             <span class="input-error-text" id="input-email-error"></span>
                         </div>
-                        <label for="password">NIC number</label>
-                        <div class="input-container">
-                            <input type="text" id="nic-number" class="text-input" style="height: 26px"/>
-                            <br/>
-                            <span class="input-error-text" id="input-nic-error"></span>
-                        </div>
                     </div>
                     <div class="form-grid-column">
                         <label for="lastname">Last name</label>
@@ -60,13 +54,6 @@
                             <br/>
                             <span class="input-error-text" id="input-phone-error"></span>
                         </div>
-                        <label for="dob">Date of birth(MM/DD/YY)</label>
-                        <br/>
-                        <div class="input-container">
-                            <input type="date" id="dob" class="date-input"/>
-                            <br/>
-                            <span class="input-error-text" id="input-dob-error"></span>
-                        </div>
                     </div>
                 </div>
                 <div class="form-grid">
@@ -82,6 +69,12 @@
                 </div>
                 <div class="form-grid">
                     <div class="form-grid-column">
+                        <label for="password">NIC number</label>
+                        <div class="input-container">
+                            <input type="text" id="nic-number" class="text-input" style="height: 26px"/>
+                            <br/>
+                            <span class="input-error-text" id="input-nic-error"></span>
+                        </div>
                         <label for="password">Password</label>
                         <br/>
                         <div class="input-container">
@@ -91,6 +84,13 @@
                         </div>
                     </div>
                     <div class="form-grid-column">
+                        <label for="dob">Date of birth(MM/DD/YY)</label>
+                        <br/>
+                        <div class="input-container">
+                            <input type="date" id="dob" class="date-input"/>
+                            <br/>
+                            <span class="input-error-text" id="input-dob-error"></span>
+                        </div>
                         <label for="confirm-password">Confirm Password</label>
                         <br/>
                         <div class="input-container">
