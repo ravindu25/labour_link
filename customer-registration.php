@@ -27,7 +27,7 @@
                         <label for="firstname">First name</label>
                         <br/>
                         <div class="input-container">
-                            <input type="text" id="firstname" class="text-input"/>
+                            <input type="text" id="firstname" class="text-input" name="firstname"/>
                             <br/>
                             <span class="input-error-text" id="input-firstname-error"></span>
                         </div>
@@ -93,3 +93,8 @@
 <script src="./scripts/registration-input-validation.js" type="text/javascript"></script>
 </body>
 </html>
+
+<?php
+//insert data from form
+
+?>

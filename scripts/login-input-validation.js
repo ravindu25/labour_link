@@ -2,7 +2,7 @@
     Javascript file for the frontend validation of customer-login.html
  */
 
-const usernameField = document.getElementById("username");
+const usernameField = document.getElementById("email");
 const passwordField = document.getElementById("password");
 const submitButton = document.getElementById("submit-button");
 const loginForm = document.getElementById("login-form");
@@ -13,7 +13,7 @@ passwordField.innerText = '';
 
 function validateInputs(username, password){
     // Getting error text fields
-    const usernameError = document.getElementById("input-username-error");
+    const usernameError = document.getElementById("input-email-error");
     const passwordError = document.getElementById("input-password-error");
     if(username === ''){
         usernameError.innerText = 'Please enter the username';
@@ -27,7 +27,7 @@ function validateInputs(username, password){
 
 function removeErrorMessages(){
     // Getting error text fields
-    const usernameError = document.getElementById("input-username-error");
+    const usernameError = document.getElementById("input-email-error");
     const passwordError = document.getElementById("input-password-error");
 
     usernameError.innerText = '';
