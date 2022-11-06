@@ -21,7 +21,7 @@
         <div class="form-container">
             <h4>Welcome to Labour Link!</h4>
             <h2>Create account</h2>
-            <form id="registration-form">
+            <form id="registration-form" action="" method="POST">
                 <div class="form-grid">
                     <div class="form-grid-column">
                         <label for="firstname">First name</label>
@@ -34,7 +34,7 @@
                         <label for="email">Email</label>
                         <br/>
                         <div class="input-container">
-                            <input type="text" id="email" class="text-input"/>
+                            <input type="text" id="email" class="text-input" name="email"/>
                             <br/>
                             <span class="input-error-text" id="input-email-error"></span>
                         </div>
@@ -43,14 +43,14 @@
                         <label for="lastname">Last name</label>
                         <br/>
                         <div class="input-container">
-                            <input type="text" id="lastname" class="text-input"/>
+                            <input type="text" id="lastname" class="text-input"  name="lastname"/>
                             <br/>
                             <span class="input-error-text" id="input-lastname-error"></span>
                         </div>
                         <label for="phone-number">Phone number</label>
                         <br/>
                         <div class="input-container">
-                            <input type="text" id="phone-number" class="text-input"/>
+                            <input type="text" id="phone-number" class="text-input"  name="phone"/>
                             <br/>
                             <span class="input-error-text" id="input-phone-error"></span>
                         </div>
@@ -61,7 +61,7 @@
                         <label for="address">Address</label>
                         <br/>
                         <div class="input-container">
-                            <input type="text" id="address" class="text-input" style="min-width: 440px;"/>
+                            <input type="text" id="address" class="text-input" style="min-width: 440px;"  name="address"/>
                             <br/>
                             <span class="input-error-text" id="input-address-error"></span>
                         </div>
@@ -71,14 +71,14 @@
                     <div class="form-grid-column">
                         <label for="password">NIC number</label>
                         <div class="input-container">
-                            <input type="text" id="nic-number" class="text-input" style="height: 26px"/>
+                            <input type="text" id="nic-number" class="text-input" style="height: 26px"  name="nic"/>
                             <br/>
                             <span class="input-error-text" id="input-nic-error"></span>
                         </div>
                         <label for="password">Password</label>
                         <br/>
                         <div class="input-container">
-                            <input type="password" id="password" class="text-input"/>
+                            <input type="password" id="password" class="text-input"  name="password"/>
                             <br/>
                             <span class="input-error-text" id="input-password-error"></span>
                         </div>
@@ -87,7 +87,7 @@
                         <label for="dob">Date of birth(MM/DD/YY)</label>
                         <br/>
                         <div class="input-container">
-                            <input type="date" id="dob" class="date-input"/>
+                            <input type="date" id="dob" class="date-input" name="dob"/>
                             <br/>
                             <span class="input-error-text" id="input-dob-error"></span>
                         </div>
@@ -112,19 +112,48 @@
                 </div>
 
                 <div class="button-container">
-                    <button type="button" class="button" id="register-button">
-                        Register
-                    </button>
+                    <input type="submit" class="button" id="register-button" value="Register" name="submit">
                 </div>
             </form>
         </div>
     </section>
 </main>
-<script src="./scripts/registration-input-validation.js" type="text/javascript"></script>
+<!-- <script src="./scripts/registration-input-validation.js" type="text/javascript"></script> -->
 </body>
 </html>
 
 <?php
-//insert data from form
+//use db
+require_once 'db.php';
 
-?>
+//insert data from form
+if(isset($_POST['submit'])){
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $nic = $_POST['nic'];
+    $password = $_POST['password'];
+    $dob = $_POST['dob'];
+  
+    $sql1 = "INSERT INTO User (First_Name, Last_Name, Email, User_Address, Contact_No, NIC, Pswd, DOB, Type) VALUES ('$firstname', '$lastname', '$email', '$address', '$phone', '$nic', '$password', '$dob', 'Customer')";
+    $result1 = mysqli_query($conn, $sql1);
+
+    $sql2="SELECT User_ID FROM User WHERE Email='$email'";
+    $result2 = mysqli_query($conn, $sql2);
+    $row = mysqli_fetch_assoc($result2);
+    $user_id = $row['User_ID'];
+    
+    $sql3 = "INSERT INTO Customer (Customer_ID) VALUES ('$user_id')";
+    $result3 = mysqli_query($conn, $sql3);
+
+    if($result1 && $result3){
+        echo "Successfully Inserted";
+    }else{
+        echo "Error in Insertion";
+        echo("Error description: " . mysqli_error($conn));
+    }
+}
+
+?>  
