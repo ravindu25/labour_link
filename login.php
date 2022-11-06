@@ -73,7 +73,7 @@
    
 
         //check if the username and password is correct
-        $sql = "SELECT * FROM User WHERE Email = '$email'";
+        $sql = "SELECT * FROM User WHERE Username = '$email'";
         $result = $conn->query($sql);
         
         //if the username and password is correct, redirect to the customer homepage
