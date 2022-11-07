@@ -12,6 +12,24 @@
     <title>LabourLink</title>
 </head>
 <body>
+<div class="register-select-modal" id="register-modal">
+</div>
+<div class="register-select-content" id="register-modal-content">
+    <div class="register-select-heading">
+        <img src="./assets/svg/user-check-solid.svg" alt="house icon" class="register-select-icon" />
+        <h1>Select registration type</h1>
+    </div>
+    <div class="reg-type-container">
+        <div class="reg-type-card">
+            <img src="./assets/home-page/job-type/labour-type.svg" alt="worker" class="reg-type-image" />
+            <button type="button" onclick="window.location.href='worker-registration.php'" class="card-button">Worker</button>
+        </div>
+        <div class="reg-type-card">
+            <img src="./assets/home-page/job-type/customer-type.svg" alt="customer" class="reg-type-image" />
+            <button type="button" onclick="window.location.href='customer-registration.php'" class="card-button">Customer</button>
+        </div>
+    </div>
+</div>
 <nav class="nav-bar">
     <div class="nav-bar-items">
         <div class="logo-container">
@@ -41,7 +59,7 @@
             <div class="nav-link-items"><a href="#" class="nav-links">About</a></div>
             <div class="nav-link-items"><a href="#" class="nav-links">Contact Us</a></div>
             <div class="nav-link-items">
-                <button type="button" class="nav-link-items-button" style="background-color: #FFF; color: #102699;" onclick="window.location.href='customer-registration.php'"> 
+                <button type="button" id="register-button" class="nav-link-items-button" style="background-color: #FFF; color: #102699;">
                     REGISTER
                 </button>
             </div>
@@ -235,5 +253,6 @@
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+<script src="./scripts/index.js" type="text/javascript"></script>
 </body>
 </html>

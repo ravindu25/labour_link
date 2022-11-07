@@ -21,7 +21,7 @@
         <div class="form-container">
             <h4>Welcome to Labour Link!</h4>
             <h2>Create account</h2>
-            <form id="registration-form" action="" method="POST">
+            <form id="registration-form" action="customer-registration.php" method="POST">
                 <div class="form-grid">
                     <div class="form-grid-column">
                         <label for="firstname">First name</label>
@@ -110,15 +110,15 @@
                     <span>I agree to all the <a href="#" class="terms-link">Terms</a> and <a href="#"
                                                                                              class="terms-link">Privacy policy</a></span>
                 </div>
-
                 <div class="button-container">
-                    <input type="submit" class="button" id="register-button" value="Register" name="submit">
+<!--                    <button type="submit" class="button" id="register-button" name="register-button">Register</button>-->
+                    <input type="submit" class="button" id="register-button" value="Register" name="register-button" />
                 </div>
             </form>
         </div>
     </section>
 </main>
-<!-- <script src="./scripts/registration-input-validation.js" type="text/javascript"></script> -->
+ <script src="./scripts/registration-input-validation.js" type="text/javascript"></script>
 </body>
 </html>
 
@@ -127,7 +127,8 @@
 require_once 'db.php';
 
 //insert data from form
-if(isset($_POST['submit'])){
+if(isset($_POST['firstname'])){
+    echo 'Inside the registration form';
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
