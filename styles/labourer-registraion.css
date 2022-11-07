@@ -1,0 +1,203 @@
+/* CSS file for labourer registration page */
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: #007AFF;
+}
+
+
+.main-container{
+    display:flex;
+    min-height: 100vh;
+    background-image: url("../assets/login-labour-background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+.left-panel{
+    width: 40vw;
+    background-image: url("../assets/labour-registration.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.right-panel{
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-container{
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 100%;
+    height: 96px;
+    margin-top:25px;
+    margin-right: 5px;
+    text-align:right;
+}
+
+.labour-link-logo{
+    height: 100%;
+}
+
+.form-container{
+    display: flex;
+    padding: 50px 70px;
+    margin: 128px 42px;
+    flex-direction:column;
+    background-color: #FFF;
+    border: 5px solid #102699;
+    border-radius:25px;
+}
+
+.form-container h4{
+    font-size: 20px;
+    color: #5F6773;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.form-container h2{
+    font-size:32px;
+    margin: 0;
+    margin-bottom : 5%;
+}
+
+.form-grid{
+    display: flex;
+}
+
+.form-grid-column{
+    padding:5px;
+}
+
+.text-input{
+    outline-color:#354BC0;
+    outline-width: medium;
+    border: 2px solid #354BC0;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance:none;
+    min-width: 200px;
+    padding:10px;
+    font-size: 16px;
+    background-color:#FFF;
+}
+
+.date-input{
+    outline-color: #354BC0;
+    outline-width: medium;
+    border: 2px solid #354BC0;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -ms-appearance:none;
+    -moz-appearance: none;
+    appearance:none;
+    min-width: 200px;
+    padding:10px;
+    font-size: 16px;
+    font-family: 'Poppins',sans-serif;
+    background-color: #FFF;
+}
+
+.text-input:valid,
+.text-input:focus,
+.text-input:active{
+    outline-color: #354BC0;
+    outline-width: medium;
+    border-radius: 5px;
+}
+
+.input-container{
+    margin-bottom: 15px;
+}
+
+.input-error-text{
+    position:absolute;
+    color: #FF1F00;
+    font-size: 14px;
+}
+
+.remember-me-container{
+    margin-bottom: 6px;
+}
+
+validate-container{
+    margin-bottom: 6px;
+}
+
+.term-policy-container{
+    margin-bottom: 18px;
+}
+
+.button-container{
+    margin-bottom:10px;
+    text-align: center;
+}
+
+.upload-box{
+    outline-color:#354BC0;
+    outline-width: medium;
+    border: 2px solid #354BC0;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance:none;
+    min-width: 445px;
+    padding:10px;
+    font-size: 16px;
+    background-color:#FFF;
+}
+
+
+.reg-button{
+    min-width:120px;
+    outline: none;
+    border: none;
+    padding: 10px 5px;
+    margin-left: 15px;
+    color: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 25px;
+    background-color: #354BC0;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.back-button{
+    min-width:120px;
+    outline: none;
+    border: none;
+    padding: 10px 5px;
+    margin-right: 15px;
+    color: #102699;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 25px;
+    background-color: #D0CFCE;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.reg-button:active{
+    transform: scale(0.96)
+}
+
+.back-button:active{
+    transform: scale(0.96)
+}
