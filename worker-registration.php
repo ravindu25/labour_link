@@ -21,7 +21,7 @@
         <div class="form-container">
             <h4>Welcome to Labour Link!</h4>
             <h2>Create account</h2>
-            <form id="registration-form">
+            <form id="registration-form" action="" method="POST">
                 <div class="form-grid">
                     <div class="form-grid-column">
                         <label for="firstname">First name</label><br>
@@ -31,19 +31,19 @@
                         </div>
                         <label for="email">Email</label><br>
                         <div class="input-container">
-                            <input type="text" id="email" class="text-input"><br>
+                            <input type="text" id="email" class="text-input"  name="email"><br>
                             <span class="input-error-text" id="input-email-error"></span>
                         </div>
                     </div>
                     <div class="form-grid-column">
                         <label for="lastname">Last name</label><br>
                         <div class="input-container">
-                            <input type="text" id="lastname" class="text-input"><br>
+                            <input type="text" id="lastname" class="text-input"  name="lastname"><br>
                             <span class="input-error-text" id="input-lastname-error"></span>
                         </div>
                         <label for="phone number">Phone number</label><br>
                         <div class="input-container">
-                            <input type="text" id="phone-number" class="text-input"><br>
+                            <input type="text" id="phone-number" class="text-input"  name="phone"><br>
                             <span class="input-error-text" id="input-phone-error"></span>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                     <div style="padding-left: 4px">
                         <label for="address">Address</label><br>
                         <div class="input-container">
-                            <input type="text" id="address" class="text-input" style="min-width: 440px;"><br>
+                            <input type="text" id="address" class="text-input" style="min-width: 440px;"  name="address"><br>
                             <span class="input-error-text" id="input-address-error"></span>
                         </div>
                     </div>
@@ -61,27 +61,27 @@
                     <div class="form-grid-column">
                         <label for="nic-number">NIC number</label>
                         <div class="input-container">
-                            <input type="text" id="nic-number" class="text-input" style="height: 26px">
+                            <input type="text" id="nic-number" class="text-input" style="height: 26px"  name="nic">
                             <span class="input-error-text" id="input-nic-error"></span>
                         </div>
                         <label for="password">Password</label><br>
                         <div class="input-container">
-                            <input type="password" id="password" class="text-input"><br>
+                            <input type="password" id="password" class="text-input"  name="password"><br>
                             <span class="input-error-text" id="input-password-error"></span>
                         </div>
                         <label for="validate-identity">Upload front image of NIC</label><br>
                         <div class="input-container">
-                            <input type="file" class="upload-box" id="validate-identity-front">
+                            <input type="file" class="upload-box" id="validate-identity-front"  name="nic-front">
                         </div>
                         <label for="validate-identity">Letter from Garama sewaka</label><br>
                         <div class="input-container">
-                            <input type="file" class="upload-box" id="validate-letter">
+                            <input type="file" class="upload-box" id="validate-letter"  name="letter-gs">
                         </div>
                     </div>
                     <div class="form-grid-column">
                         <label for="dob">Date of birth(MM/DD/YY)</label><br>
                         <div class="input-container">
-                            <input type="date" id="dob" class="date-input">
+                            <input type="date" id="dob" class="date-input"  name="dob">
                             <span class="input-error-text" id="input-dob-error"></span>
                         </div>
                         <label for="confirm-password">Confirm Password</label><br>
@@ -92,11 +92,11 @@
 
                         <label for="validate-identity">Upload back image of NIC</label><br>
                         <div class="input-container">
-                            <input type="file" class="upload-box" id="validate-identity-back">
+                            <input type="file" class="upload-box" id="validate-identity-back"  name="nic-back">
                         </div>
                         <label for="city">City</label><br>
                         <div class="input-container">
-                            <input type="text" id="city" class="text-input"><br>
+                            <input type="text" id="city" class="text-input"  name="city"><br>
                             <span class="input-error-text" id="input-city-error"></span>
                         </div>
                     </div>
@@ -116,13 +116,58 @@
                     <button type="button" class="back-button" id="back-button">
                         Back
                     </button>
-                    <button type="button" class="reg-button" id="register-button">
+                    <!-- <button type="button" class="reg-button" id="register-button">
                         Register
-                    </button>
+                    </button> -->
+                    <input type="submit" class="reg-button" id="register-button" value="Register" name="register-button" />
                 </div>
             </form>
         </div>
     </section>
 </main>
 </body>
-</html
+</html>
+
+<?php
+//db connection
+require_once 'db.php';
+
+//get data from form
+if(isset($_POST['register-button'])){
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $nic = $_POST['nic'];
+    $password = $_POST['password'];
+    $dob = $_POST['dob'];
+    $city = $_POST['city'];
+    $nic_front = $_POST['nic-front'];
+    $nic_back = $_POST['nic-back'];
+    $letter_gs = $_POST['letter-gs'];
+
+    //insert data to db
+    $sql1 = "INSERT INTO User (First_Name, Last_Name, Email, User_Address, Contact_No, NIC, Pswd, DOB, Type) VALUES ('$firstname', '$lastname', '$email', '$address', '$phone', '$nic', '$password', '$dob', 'Worker')";
+    $result1 = mysqli_query($conn, $sql1);
+    $sql2 = "SELECT User_ID FROM User WHERE Email = '$email'";
+    $result2 = mysqli_query($conn, $sql2);
+    $row = mysqli_fetch_assoc($result2);
+    $user_id = $row['User_ID'];
+    $sql3 = "INSERT INTO Worker (Worker_ID, City) VALUES ('$user_id', '$city')";
+    $result3 = mysqli_query($conn, $sql3);
+
+    if($result1 && $result3){
+        echo("Successfully Registered");
+    }else{
+        echo("Error\n");
+        //print db error
+        echo(mysqli_error($conn));
+    }
+
+   
+}
+
+
+
+?>

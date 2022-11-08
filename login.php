@@ -73,7 +73,7 @@
    
 
         //check if the username and password is correct
-        $sql = "SELECT * FROM User WHERE Username = '$email'";
+        $sql = "SELECT * FROM User WHERE Email = '$email'";
         $result = $conn->query($sql);
         
         //if the username and password is correct, redirect to the customer homepage
@@ -96,8 +96,8 @@
                 //redirect to the homepage based on user type                
                 if ($_SESSION['user_type'] == 'Customer') {
                     header("Location: customer_homepage.php");
-                } else if ($_SESSION['user_type'] == 'Labourer') {
-                    header("Location: labourer_homepage.php");    
+                } else if ($_SESSION['user_type'] == 'Worker') {
+                    header("Location: worker_homepage.php");    
                 }
 
 

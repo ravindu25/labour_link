@@ -128,7 +128,6 @@ require_once 'db.php';
 
 //insert data from form
 if(isset($_POST['firstname'])){
-    echo 'Inside the registration form';
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
