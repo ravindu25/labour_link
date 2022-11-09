@@ -1,4 +1,17 @@
 /* This is the CSS file for styling of home page page */
+:root{
+    --primary-color: #102699;
+    --primary-bright-color: #0051FF;
+    --primary-shade-color: #C4DDF2;
+    --primary-purple-color: #354BC0;
+    --dark-color: #26221B;
+    --dark-shade-color: #323E40;
+    --success-color: #1DC90E;
+    --success-bright-color: #1DC90E;
+    --danger-color: #FF5B19;
+    --warning-color: #FF5B19;
+}
+
 body{
     padding: 0;
     margin: 0;
@@ -168,7 +181,7 @@ a{
     min-width: 120px;
     outline: none;
     border: none;
-    padding: 10px 5px;
+    padding: 10px 12px;
     color: #FFF;
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
@@ -178,8 +191,81 @@ a{
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
 }
 
+.dropdown{
+    position: relative;
+}
+
+.dropdown-items{
+    display: none;
+    position: absolute;
+    width: 100%;
+    background-color: #FFF;
+    margin-top: 6px;
+    padding: 16px 8px;
+    border-radius: 12px;
+}
+
+.dropdown-item{
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    padding: 12px 8px;
+    border-radius: 8px;
+}
+
+.dropdown-item:hover{
+    background-color: var(--primary-shade-color);
+}
+
 .nav-link-items-button:active{
     transform: scale(.96);
+}
+
+/* Styling for tables */
+
+.main-table{
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    background-color: #FFF;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    color: #323E40;
+}
+
+.main-th{
+    margin: 4px 0;
+    padding: 10px;
+    font-size: 24px;
+    font-weight: normal;
+    font-family: 'Poppins', sans-serif;
+    color: #FFF;
+    background-color: var(--primary-purple-color);
+    border-left: 2px solid #FFF;
+}
+
+.main-td{
+    padding: 12px 8px;
+    color: var(--dark-color);
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    border-left: 2px solid #323E40;
+}
+
+.main-th:first-child{
+    border-spacing: 0;
+    border-width: 0;
+}
+
+.main-td:first-child{
+    border-spacing: 0;
+    border-width: 0;
+}
+
+.main-td .blue-badge{
+    margin-top: 6px;
+    font-size: 12px;
 }
 
 .banner{
