@@ -211,6 +211,9 @@
                 <?php
                 require_once '../db.php';
                 $search = $_POST['search'];
+                if(!isset($search)){
+                    $search = "";
+                }
                 if($search == ""){
                     $sql = "SELECT First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID ORDER BY Timestamp DESC LIMIT 5;";
                 }else{
