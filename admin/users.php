@@ -18,26 +18,15 @@
     <title>Users | Admin Dashboard</title>
 </head>
 <body>
-<div class="register-select-modal" id="register-modal">
+<div class="backdrop-modal" id="backdrop-modal">
 </div>
-<div class="register-select-content" id="register-modal-content">
-    <div class="register-select-heading">
-        <img src="../assets/svg/user-check-solid.svg" alt="house icon" class="register-select-icon"/>
-        <h1>Select registration type</h1>
+<div class="reset-login-content" id="reset-login-content">
+    <div class="reset-login-title">
+        <h1>Do you want to reset selected login?</h1>
     </div>
-    <div class="reg-type-container">
-        <div class="reg-type-card">
-            <img src="../assets/home-page/job-type/labour-type.svg" alt="worker" class="reg-type-image"/>
-            <button type="button" onclick="window.location.href='../worker-registration.php'" class="card-button">
-                Worker
-            </button>
-        </div>
-        <div class="reg-type-card">
-            <img src="../assets/home-page/job-type/customer-type.svg" alt="customer" class="reg-type-image"/>
-            <button type="button" onclick="window.location.href='../customer-registration.php'" class="card-button">
-                Customer
-            </button>
-        </div>
+    <div class="reset-login-buttons">
+            <button type="button" onclick="closeResetModal()" class="reset-cancel-button">Cancel</button>
+            <button type="button" class="reset-confirm-button">Confirm</button>
     </div>
 </div>
 <nav class="nav-bar">
@@ -304,7 +293,7 @@
                             <div class="more-button-container">
                                 <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                                 </button>
-                                <button class="suspend-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
+                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
                                 </button>
                             </div>
                         </td>
@@ -321,7 +310,7 @@
                             <div class="more-button-container">
                                 <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                                 </button>
-                                <button class="activate-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Activate
+                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
                                 </button>
                             </div>
                         </td>
@@ -338,7 +327,7 @@
                             <div class="more-button-container">
                                 <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                                 </button>
-                                <button class="suspend-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
+                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
                                 </button>
                             </div>
                         </td>
@@ -355,7 +344,7 @@
                             <div class="more-button-container">
                                 <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                                 </button>
-                                <button class="suspend-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
+                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
                                 </button>
                             </div>
                         </td>
@@ -372,7 +361,7 @@
                             <div class="more-button-container">
                                 <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                                 </button>
-                                <button class="suspend-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
+                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
                                 </button>
                             </div>
                         </td>
@@ -389,7 +378,7 @@
                             <div class="more-button-container">
                                 <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                                 </button>
-                                <button class="activate-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Activate
+                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
                                 </button>
                             </div>
                         </td>
@@ -406,7 +395,7 @@
                             <div class="more-button-container">
                                 <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                                 </button>
-                                <button class="suspend-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
+                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
                                 </button>
                             </div>
                         </td>
@@ -434,6 +423,7 @@
     </div>
 </footer>
 <script src="../scripts/modals.js" type="text/javascript"></script>
+<script src="../scripts/admin/users.js" type="text/javascript"></script>
 <script src="../scripts/index.js" type="text/javascript"></script>
 </body>
 

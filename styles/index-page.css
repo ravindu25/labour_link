@@ -198,6 +198,7 @@ a{
 
 .dropdown{
     position: relative;
+    z-index: 1;
 }
 
 .dropdown-items{
