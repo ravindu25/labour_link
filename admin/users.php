@@ -178,10 +178,12 @@
                 <div class="login-search-container">
                     <label for="login-search" class="login-search-text">Search(Using username, date etc)</label>
                     <br/>
-                    <div class="search-input-container">
-                        <input type="text" id="login-search" class="login-search"/>
-                        <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
+                    <form action="" method="POST">
+                        <div class="search-input-container">
+                            <input type="text" id="login-search" class="login-search"  name="search"/>
+                            <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -206,74 +208,42 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Dhanaga Deepanjana
-                        <br/>
-                        <span class="success-badge">Success</span>
-                    </td>
-                    <td class="main-td">21 Oct 2022</td>
-                    <td class="main-td">5. 55 AM</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                            </button>
-                            <button class="suspend-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Rushdha Rasheed
-                        <br/>
-                        <span class="failed-badge">Failed</span>
-                    </td>
-                    <td class="main-td">17 Oct 2022</td>
-                    <td class="main-td">11. 31 PM</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                            </button>
-                            <button class="activate-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Activate
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Mohamed Izzath
-                        <br/>
-                        <span class="success-badge">Success</span>
-                    </td>
-                    <td class="main-td">8 Oct 2022</td>
-                    <td class="main-td">8. 12 PM</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                            </button>
-                            <button class="suspend-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Ravindu Wegiriya
-                        <br/>
-                        <span class="success-badge">Success</span>
-                    </td>
-                    <td class="main-td">8 Oct 2022</td>
-                    <td class="main-td">11. 21 AM</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                            </button>
-                            <button class="suspend-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                <?php
+                require_once '../db.php';
+                $search = $_POST['search'];
+                if($search == ""){
+                    $sql = "SELECT First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID ORDER BY Timestamp DESC LIMIT 5;";
+                }else{
+                    $sql = "SELECT First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID WHERE First_Name LIKE '%$search%' OR Last_Name LIKE '%$search%' ORDER BY Timestamp DESC LIMIT 5;;";
+                }
+                
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo('
+                        <tr class="main-tr">
+                            <td class="main-td" style="text-align: left;">' . $row['First_Name'] . ' ' . $row['Last_Name'] . '
+                                
+                                <br/>'.
+                                //if login success
+                                ($row['Success_Flag'] == 1 ? '<span class="success-badge">Success</span>' : '<span class="failed-badge">Failed</span>')
+                            
+                            .'</td>
+                            <td class="main-td">'.$row['date(Timestamp)'].'</td>
+                            <td class="main-td">'.$row['time(Timestamp)'].'</td>
+                            <td class="main-td">
+                                <div class="more-button-container">
+                                    <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
+                                    </button>
+                                    <button class="suspend-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>');
+                    }
+                }
+                ?> 
+               
                 </tbody>
             </table>
             <div class="pagination-container">
