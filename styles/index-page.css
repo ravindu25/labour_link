@@ -3,13 +3,18 @@
     --primary-color: #102699;
     --primary-bright-color: #0051FF;
     --primary-shade-color: #C4DDF2;
+    --primary-background-color: #ABC3EF;
     --primary-purple-color: #354BC0;
     --dark-color: #26221B;
     --dark-shade-color: #323E40;
     --success-color: #1DC90E;
     --success-bright-color: #1DC90E;
+    --success-shade-color: #DEF2D5;
+    --success-dark-color: #2C6327;
     --danger-color: #FF5B19;
+    --danger-shade-color: #F2D49B;
     --warning-color: #FF5B19;
+    --warning-dark-color: #9A2D01;
 }
 
 body{

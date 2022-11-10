@@ -14,7 +14,7 @@
     <!-- CSS files -->
     <link href="../styles/index-page.css" rel="stylesheet"/>
     <link href="../styles/dashboard.css" rel="stylesheet"/>
-    <link href="../styles/worker/worker-dashboard.css" rel="stylesheet"/>
+    <link href="../styles/admin/worker-dashboard.css" rel="stylesheet"/>
     <title>Worker Dashboard | LabourLink</title>
 </head>
 <body>
