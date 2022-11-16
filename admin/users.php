@@ -205,14 +205,15 @@
                     $search = $_POST['search'];
                 }
                 if($search == ""){
-                    $sql = "SELECT First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID ORDER BY Timestamp DESC LIMIT 5;";
+                    $sql = "SELECT User.User_ID, First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag, Activation_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID ORDER BY Timestamp DESC LIMIT 5;";
                 }else{
-                    $sql = "SELECT First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID WHERE First_Name LIKE '%$search%' OR Last_Name LIKE '%$search%' ORDER BY Timestamp DESC LIMIT 5;;";
+                    $sql = "SELECT User.User_ID, First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag, Activation_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID WHERE First_Name LIKE '%$search%' OR Last_Name LIKE '%$search%' ORDER BY Timestamp DESC LIMIT 5;;";
                 }
                 
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
+                        $user_id=$row['User_ID'];
                         echo('
                         <tr class="main-tr">
                             <td class="main-td" style="text-align: left;">' . $row['First_Name'] . ' ' . $row['Last_Name'] . '
@@ -227,10 +228,12 @@
                             <td class="main-td">
                                 <div class="more-button-container">
                                     <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                                    </button>
-                                    <button class="suspend-button"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
-                                    </button>
-                                </div>
+                                    </button>&nbsp;'.
+
+                                    ($row['Activation_Flag'] == 1 ? '<button class="suspend-button" onclick="suspend_user('.$user_id.')"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
+                                    </button>' : '<button class="activate-button" onclick="activate_user('.$user_id.')"><i class="fa-solid fa-user-check"></i>&nbsp;&nbsp;Activate
+                                    </button>').
+                                '</div>
                             </td>
                         </tr>');
                     }
@@ -254,9 +257,11 @@
                 <div class="search-users-container">
                     <label for="users-search" class="users-search-text">Search(Using username, role etc)</label>
                     <br/>
+                    <form action="" method="POST">
                     <div class="search-input-container">
-                        <input type="text" id="users-search" class="users-search"/>
+                        <input type="text" id="users-search" class="users-search" name="users-search"/>
                         <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -281,125 +286,46 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Dhanaga Deepanjana
-                            <br/>
-                            <span class="active-badge">Active</span>
-                        </td>
-                        <td class="main-td">21 Oct 2022</td>
-                        <td class="main-td">Admin</td>
-                        <td class="main-td">
-                            <div class="more-button-container">
-                                <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                                </button>
-                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Rushdha Rasheed
-                            <br/>
-                            <span class="suspend-badge">Suspend</span>
-                        </td>
-                        <td class="main-td">17 Oct 2022</td>
-                        <td class="main-td">Admin</td>
-                        <td class="main-td">
-                            <div class="more-button-container">
-                                <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                                </button>
-                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Mohamed Izzath
-                            <br/>
-                            <span class="active-badge">Active</span>
-                        </td>
-                        <td class="main-td">8 Oct 2022</td>
-                        <td class="main-td">Admin</td>
-                        <td class="main-td">
-                            <div class="more-button-container">
-                                <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                                </button>
-                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Ravindu Wegiriya
-                            <br/>
-                            <span class="active-badge">Active</span>
-                        </td>
-                        <td class="main-td">8 Oct 2022</td>
-                        <td class="main-td">Admin</td>
-                        <td class="main-td">
-                            <div class="more-button-container">
-                                <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                                </button>
-                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Saman Gunawardhana
-                            <br/>
-                            <span class="active-badge">Active</span>
-                        </td>
-                        <td class="main-td">22 Oct 2022</td>
-                        <td class="main-td">Worker</td>
-                        <td class="main-td">
-                            <div class="more-button-container">
-                                <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                                </button>
-                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Avinash Sudira
-                            <br/>
-                            <span class="suspend-badge">Suspend</span>
-                        </td>
-                        <td class="main-td">17 Oct 2022</td>
-                        <td class="main-td">Worker</td>
-                        <td class="main-td">
-                            <div class="more-button-container">
-                                <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                                </button>
-                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Saman Gunathilaka
-                            <br/>
-                            <span class="active-badge">Active</span>
-                        </td>
-                        <td class="main-td">21 Oct 2022</td>
-                        <td class="main-td">Worker</td>
-                        <td class="main-td">
-                            <div class="more-button-container">
-                                <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                                </button>
-                                <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php
+                    require_once '../db.php';
+                    if(!isset($_POST['users-search'])){
+                        $search = "";
+                    }else{
+                        $search = $_POST['users-search'];
+                    }
+                    if($search == ""){
+                        $sql = "SELECT * FROM User";
+                    }else{
+                        $sql = "SELECT * FROM User";
+                    }
+
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                                $user_id=$row['User_ID'];
+                                echo('<tr class="main-tr">
+                                <td class="main-td" style="text-align: left;">
+                                    '.$row['First_Name'].' '.$row['Last_Name'].'
+                                    <br/>
+                                    <span class="active-badge">Active</span>
+                                </td>
+                                <td class="main-td">21 Oct 2022</td>
+                                <td class="main-td">'.$row['Type'].'</td>
+                                <td class="main-td">
+                                    <div class="more-button-container">
+                                        <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
+                                        </button>
+                                        <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>');
+                        }
+                    }
+                    
+                    ?>
+                    
+                  
                     </tbody>
                 </table>
                 <div class="pagination-container">
@@ -417,13 +343,81 @@
         </div>
     </section>
 </main>
+
 <footer class="footer">
     <div class="footer-row" style="border-top: 1px solid #FFF; padding-top: 16px;">
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/admin/users.js" type="text/javascript"></script>
 <script src="../scripts/index.js" type="text/javascript"></script>
+
+<script>
+    function suspend_user(user_id){
+
+        // fetch('http://localhost/labour_link/admin/suspend-user.php', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'www-form-urlencoded'
+        //     },
+        //     body: "user_id=" + user_id
+        // }).then(response => response.text())
+        //     .then(data => {
+        //         console.log(data);
+        //         if(data.status === 'Success'){
+        //             alert('User suspended successfully');
+        //             location.reload();
+        //         }else{
+        //             alert('Error occurred');
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.error('Error:', error);
+        //     });
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+                if(this.responseText === 'Success'){
+                    // alert('User suspended successfully');
+                    location.reload();
+                }else{
+                    // alert('Error occurred');
+                    location.reload();
+                }
+            }
+        }
+        xmlhttp.open("POST","http://localhost/labour_link/admin/suspend-user.php",true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("user_id=" + user_id);
+
+    }
+    function activate_user(user_id){
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+                if(this.responseText === 'Success'){
+                    // alert('User activated successfully');
+                    location.reload();
+                }else{
+                    // alert('Error occurred');
+                    location.reload();
+                }
+            }
+        }
+        xmlhttp.open("POST","http://localhost/labour_link/admin/activate-user.php",true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("user_id=" + user_id);
+
+
+
+
+    }
+        
+
+</script>
 </body>
 
+
+</html>

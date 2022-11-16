@@ -10,6 +10,10 @@
     <!-- CSS files -->
     <link href="./styles/index-page.css" rel="stylesheet"/>
     <title>LabourLink</title>
+
+     <!--Fontawesome-->
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet"/>
+
 </head>
 <body>
 <div class="register-select-modal" id="register-modal">
@@ -81,7 +85,7 @@
                                 class="nav-link-items-button"
                                 style="background-color: #FFF; color: #102699;">
                             <i class="fa-regular fa-circle-user"></i>&nbsp;
-                            <?php echo $_SESSION['username']; ?>
+                            <?php echo "Hi, ".$_SESSION['first_name']; ?>
                             &nbsp;
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
@@ -93,7 +97,7 @@
                             <a href="#">
                                 <div class="dropdown-item" id="dropdown-item">
                                     <i class="fa-solid fa-right-from-bracket"></i>
-                                    &nbsp;&nbsp;Logout
+                                    &nbsp;&nbsp;<a href="logout.php">Logout</a>
                                 </div>
                             </a>
                         </div>
