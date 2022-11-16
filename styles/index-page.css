@@ -4,6 +4,7 @@
     --primary-bright-color: #0051FF;
     --primary-shade-color: #C4DDF2;
     --primary-background-color: #ABC3EF;
+    --primary-background-shade-color: #E7F2FF;
     --primary-purple-color: #354BC0;
     --dark-color: #26221B;
     --dark-shade-color: #323E40;
@@ -27,6 +28,15 @@ body{
 a{
     text-decoration: none;
     color: #007AFF;
+}
+
+.backdrop-modal{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #72736F;
+    opacity: 0.5;
+    visibility: hidden;
 }
 
 .register-select-modal{
