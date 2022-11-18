@@ -9,7 +9,7 @@
 
     <!-- CSS files -->
     <link href="./styles/customer-login.css" rel="stylesheet"/>
-    <title>LabourLink | Customer login</title>
+    <title>LabourLink | Login</title>
 </head>
 <body>
 <main class="main-container">
