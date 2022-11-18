@@ -99,31 +99,69 @@
                 <input type="date" id="start-date" />
             </div>
             <div class="form-time-row">
-                <label for="remaining-time">
+                <label>
                     Days needed to complete
                 </label>
                 <div class="time-row">
-                    <div class="time-card">
-                        <h3>1</h3>
-                        <h4>Day</h4>
-                    </div>
-                    <div class="time-card">
-                        <h3>2</h3>
-                        <h4>Days</h4>
-                    </div>
-                    <div class="time-card">
-                        <h3>7</h3>
-                        <h4>Days</h4>
-                    </div>
-                    <div class="time-card">
-                        <h3>14</h3>
-                        <h4>Days</h4>
-                    </div>
-                    <div class="time-card">
-                        <h3>30</h3>
-                        <h4>Days</h4>
-                    </div>
+                    <label>
+                        <input type="radio" name="time-input" value="1" class="time-card-input" />
+                        <div class="time-card">
+                            <h3>1</h3>
+                            <h4>Day</h4>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="time-input" value="2" class="time-card-input" />
+                        <div class="time-card">
+                            <h3>2</h3>
+                            <h4>Days</h4>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="time-input" value="7" class="time-card-input" checked/>
+                        <div class="time-card">
+                            <h3>7</h3>
+                            <h4>Days</h4>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="time-input" value="14" class="time-card-input"/>
+                        <div class="time-card">
+                            <h3>14</h3>
+                            <h4>Days</h4>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="time-input" value="30" class="time-card-input"/>
+                        <div class="time-card">
+                            <h3>30</h3>
+                            <h4>Days</h4>
+                        </div>
+                    </label>
                 </div>
+            </div>
+            <div class="form-payment-row">
+                <label>Payment method</label>
+                <div class="payment-methods-container">
+                    <label>
+                        <input type="radio" name="payment-method" class="payment-method-radio" />
+                        <div class="payment-method-card">
+                            <img src="../assets/customer/dashboard/undraw_savings_re_eq4w.svg" alt="manual-payment" class="payment-method-image" />
+                            <h5>Manual payments</h5>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="payment-method" class="payment-method-radio" checked />
+                        <div class="payment-method-card">
+                            <img src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg" alt="online-payment" class="payment-method-image" />
+                            <h5>Online payments</h5>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="form-button-container">
+                <button type="button" class="more-button">Cancel</button>
+                <button type="submit" class="more-button submit-button">Create Booking</button>
             </div>
         </form>
     </div>
