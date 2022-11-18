@@ -14,8 +14,8 @@
     <!-- CSS files -->
     <link href="../styles/index-page.css" rel="stylesheet"/>
     <link href="../styles/dashboard.css" rel="stylesheet"/>
-    <link href="../styles/customer/customer-dashboard.css" rel="stylesheet"/>
-    <title>Customer Dashboard | LabourLink</title>
+    <link href="../styles/customer/customer-bookings.css" rel="stylesheet"/>
+    <title>Bookings | LabourLink</title>
 </head>
 <body>
 <div class="backdrop-modal" id="backdrop-modal">
@@ -63,6 +63,69 @@
                 <button type="button" class="more-button" id="back-button">Back</button>
             </div>
         </div>
+    </div>
+</div>
+<div class="create-booking-container" id="create-booking-container">
+    <div class="create-booking-scroll-wrapper">
+        <div class="create-booking-title">
+            <h1>Create new <u>Booking</u></h1>
+        </div>
+        <form>
+            <div class="form-input-row">
+                <label for="job-type">Job type</label>
+                <select id="job-type">
+                    <option value="plumber">Plumber</option>
+                    <option value="electrician">Electrician</option>
+                    <option value="painter">Painter</option>
+                    <option value="carpenter">Carpenter</option>
+                    <option value="mason">Mason</option>
+                    <option value="janitor">Janitor</option>
+                    <option value="mechanical">Mechanical</option>
+                    <option value="gardner">Gardner</option>
+                </select>
+            </div>
+            <div class="form-input-row">
+                <label for="worker">Worker</label>
+                <select id="worker">
+                    <option value="saman-gunawardhana">Saman Guanawardhana</option>
+                    <option value="sunil-perera">Sunil Perera</option>
+                    <option value="sunith-hettiarachchi">Sunith Hettiarachchi</option>
+                    <option value="dammika-kumara">Dammika Kumara</option>
+                    <option value="kapila-dharmadhasa">Kapila Dharmadhasa</option>
+                </select>
+            </div>
+            <div class="form-input-row">
+                <label for="start-date">Start date</label>
+                <input type="date" id="start-date" />
+            </div>
+            <div class="form-time-row">
+                <label for="remaining-time">
+                    Days needed to complete
+                </label>
+                <div class="time-row">
+                    <div class="time-card">
+                        <h3>1</h3>
+                        <h4>Day</h4>
+                    </div>
+                    <div class="time-card">
+                        <h3>2</h3>
+                        <h4>Days</h4>
+                    </div>
+                    <div class="time-card">
+                        <h3>7</h3>
+                        <h4>Days</h4>
+                    </div>
+                    <div class="time-card">
+                        <h3>14</h3>
+                        <h4>Days</h4>
+                    </div>
+                    <div class="time-card">
+                        <h3>30</h3>
+                        <h4>Days</h4>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 <nav class="nav-bar">
@@ -185,14 +248,14 @@
             <h1>Welcome Back <u>Rushdha Rasheed</u></h1>
             <h5>Last accessed 21st October 2022</h5>
         </div>
-        <div class="overview-content">
-            <h1>Overview</h1>
+        <div class="new-booking">
+            <h1>Do you want to create a new booking?</h1>
+            <button class="more-button" id="booking-create-button">Create Booking</button>
         </div>
         <!--Recent bookings section-->
         <div class="recent-bookings">
             <div class="recent-bookings-title">
                 <h1>Recently made Bookings</h1>
-                <button class="more-button">More Bookings</button>
             </div>
             <div class="recent-bookings-container">
                 <div class="booking-card">
@@ -262,156 +325,137 @@
                 </div>
             </div>
         </div>
-        <!--Recent feedbacks section-->
-        <div class="recent-feedbacks">
-            <div class="recent-feedbacks-title">
-                <h1>Recently made Feedbacks</h1>
-                <button class="more-button">More Feedbacks</button>
-            </div>
-            <div class="recent-feedbacks-container">
-                <table class="main-table">
-                    <thead>
-                    <tr class="main-tr">
-                        <th class="main-th">Comment</th>
-                        <th class="main-th">Worker name</th>
-                        <th class="main-th">Commented date</th>
-                        <th class="main-th">Service</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Extremely satisfied with the work done
-                            <br />
-                            <span class="blue-badge">Updated 15 days ago</span>
-                        </td>
-                        <td class="main-td">Saman Gunawardhana</td>
-                        <td class="main-td">21 Oct 2022</td>
-                        <td class="main-td">Plumbing</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Process was neatly done on time
-                            <br />
-                            <span class="blue-badge">Updated 20 days ago</span>
-                        </td>
-                        <td class="main-td">Kapila Gunawardana</td>
-                        <td class="main-td">16 Oct 2022</td>
-                        <td class="main-td">Gardening</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Work not completed on time. Slighlty dissappointing
-                            <br />
-                            <span class="blue-badge">Updated 27 days ago</span>
-                        </td>
-                        <td class="main-td">Saman Gunathilaka</td>
-                        <td class="main-td">09 Oct 2022</td>
-                        <td class="main-td">Electrical</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Payment not going through
-                            <br />
-                            <span class="blue-badge">Updated 1 month ago</span>
-                        </td>
-                        <td class="main-td">Kapila Dharmadhasa</td>
-                        <td class="main-td">05 Oct 2022</td>
-                        <td class="main-td">Mason</td>
-                    </tr>
-                    </tbody>
-                </table>
+        <!--Booking search container-->
+        <div class="booking-search">
+            <div class="booking-search-title">
+                <h1>Search for bookings</h1>
+                <form action="" method="POST">
+                    <div class="booking-search-input-container">
+                        <label for="booking-search">Search (Worker name etc)</label>
+                        <div class="booking-search-input-field">
+                            <input type="text" id="booking-search" class="booking-search-input" name="users-search"/>
+                            <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-        <!--Housings and payments section-->
-        <div class="housing-payments">
-            <div class="housing-dash-content">
-                <h1>Housing</h1>
-                <div class="housing-card">
-                    <h4>Housing package details</h4>
-                    <h3>Bambalapitiya Colombo</h3>
-                    <span class="blue-badge">Started date - 21 Nov 2022</span>
-                    <div class="housing-job-list">
-                        <div class="housing-job-item">
-                            <div class="job-item-text">
-                                <h4>Plumbing</h4>
-                                <h3>Saman Gunawardhana</h3>
-                            </div>
-                            <div class="jon-item-button">
-                                <button type="button" class="in-pogress-button">In-progress</button>
-                            </div>
+        <div class="recent-payments-container">
+            <table class="main-table">
+                <thead>
+                <tr class="main-tr">
+                    <th class="main-th">
+                        <div class="table-heading-container">Worker name&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
                         </div>
-                        <div class="housing-job-item">
-                            <div class="job-item-text">
-                                <h4>Electrician</h4>
-                                <h3>Sunil Perera</h3>
-                            </div>
-                            <div class="jon-item-button">
-                                <button type="button" class="in-pogress-button">In-progress</button>
-                            </div>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">Start date&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">End date&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
+                    </th>
+                    <th class="main-th">More actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Saman Gunawardhana
+                        <br/>
+                        <span class="pending-badge">Pending</span>
+                    </td>
+                    <td class="main-td">21 Oct 2022</td>
+                    <td class="main-td">27 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
+                            </button>
+                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
                         </div>
-                        <div class="housing-job-item">
-                            <div class="job-item-text">
-                                <h4>Painting</h4>
-                                <h3>Sunith Hettiarachchi</h3>
-                            </div>
-                            <div class="jon-item-button">
-                                <button type="button" class="pending-button">Pending</button>
-                            </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Sunil Perera
+                        <br/>
+                        <span class="pending-badge">Pending</span>
+                    </td>
+                    <td class="main-td">12 Oct 2022</td>
+                    <td class="main-td">20 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
+                            </button>
+                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
                         </div>
-                        <div class="housing-job-item">
-                            <div class="job-item-text">
-                                <h4>Mechanical</h4>
-                                <h3>Dammika Kumara</h3>
-                            </div>
-                            <div class="jon-item-button">
-                                <button type="button" class="completed-button">Completed</button>
-                            </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Sunith Hettiarachchi
+                        <br/>
+                        <span class="rejected-badge">Rejected</span>
+                    </td>
+                    <td class="main-td">1 Oct 2022</td>
+                    <td class="main-td">5 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
+                            </button>
+                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
                         </div>
-                    </div>
-                </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Dammika Kumara
+                        <br/>
+                        <span class="completed-badge">Completed</span>
+                    </td>
+                    <td class="main-td">23 Oct 2022</td>
+                    <td class="main-td">28 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
+                            </button>
+                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Dinesh Attanayaka
+                        <br/>
+                        <span class="completed-badge">Completed</span>
+                    </td>
+                    <td class="main-td">10 Oct 2022</td>
+                    <td class="main-td">24 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
+                            </button>
+                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="pagination-container">
+                <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
-            <div class="payments-dash-content">
-                <h1>Payments</h1>
-                <div class="payments-list">
-                    <div class="payment-item">
-                        <div class="payment-text">
-                            <span class="blue-badge">21 Oct 2022</span>
-                            <h3>Rushdha Rasheed</h3>
-                            <h4>Saman Gunawardhana</h4>
-                        </div>
-                        <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 17000.00</button>
-                        </div>
-                    </div>
-                    <div class="payment-item">
-                        <div class="payment-text">
-                            <span class="blue-badge">19 Oct 2022</span>
-                            <h3>Rushdha Rasheed</h3>
-                            <h4>Dammika Kumara</h4>
-                        </div>
-                        <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 25000.00</button>
-                        </div>
-                    </div>
-                    <div class="payment-item">
-                        <div class="payment-text">
-                            <span class="blue-badge">21 Oct 2022</span>
-                            <h3>Rushdha Rasheed</h3>
-                            <h4>Dinesh Attanayaka</h4>
-                        </div>
-                        <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 31500.00</button>
-                        </div>
-                    </div>
-                    <div class="payment-item">
-                        <div class="payment-text">
-                            <span class="blue-badge">19 Oct 2022</span>
-                            <h3>Rushdha Rasheed</h3>
-                            <h4>Kapila Dharmadhasa</h4>
-                        </div>
-                        <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 19000.00</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
         </div>
     </section>
 </main>

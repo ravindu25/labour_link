@@ -23,16 +23,23 @@
     font-weight: normal;
 }
 
-.overview-content{
-    text-align: center;
+.new-booking{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.overview-content h1{
-    margin: 16px;
+.new-booking h1{
     color: var(--primary-color);
-    font-size: 36px;
-    font-weight: bold;
     font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.new-booking button{
+    color: #FFF;
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
 }
 
 .recent-bookings-title{
@@ -302,139 +309,279 @@
     min-width: 180px;
 }
 
-.recent-feedbacks-title{
+.booking-search-title{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 12px;
 }
 
-.recent-feedbacks-title h1{
+.booking-search-title h1{
     color: var(--primary-color);
     font-family: 'Poppins', sans-serif;
     font-size: 28px;
     font-weight: normal;
 }
 
-.housing-payments{
-    display: flex;
-}
-
-.housing-dash-content{
-    width: 50%;
-}
-
-.housing-dash-content h1 {
-    color: var(--primary-color);
-    font-family: 'Poppins', sans-serif;
-    font-size: 28px;
-    font-weight: normal;
-}
-
-.housing-card{
-    width: 80%;
-    padding: 48px 36px;
-    background-color: #FFF;
-    border: 3px solid var(--primary-color);
-    border-radius: 12px;
-}
-
-.housing-card h4{
-    margin: 0;
-    color: var(--dark-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.housing-card h3{
-    margin: 16px 0;
-    color: var(--dark-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 32px;
-    font-weight: 500;
-}
-
-.housing-job-list {
-    display: flex;
-    flex-direction: column;
-    margin-top: 24px;
-}
-
-.housing-job-item{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 8px 0;
-}
-
-.housing-job-item h4{
-    margin: 0;
-    color: var(--primary-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.housing-job-item h3{
-    margin: 8px 0;
-    color: var(--dark-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 28px;
-    font-weight: normal;
-}
-
-.payments-dash-content{
-    width: 50%;
-}
-
-.payments-dash-content h1 {
-    color: var(--primary-color);
-    font-family: 'Poppins', sans-serif;
-    font-size: 28px;
-    font-weight: normal;
-}
-
-.payments-list{
+.booking-search-input-container{
     display: flex;
     flex-direction: column;
 }
 
-.payment-item{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    padding: 20px;
-    background-color: #FFF;
-    border: 2px solid var(--success-color);
-    border-radius: 12px;
-}
-
-.payment-text h3{
-    margin: 0;
-    color: var(--primary-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 28px;
-    font-weight: normal;
-}
-
-.payment-text h4{
-    margin: 8px 0px;
+.booking-search-input-container label{
     color: var(--dark-color);
     font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-weight: normal;
 }
 
-.payment-amount-button{
+.booking-search-input{
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 0 2px 2px;
+    border-radius: 12px 0 0 12px;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 22px;
+    min-width: 200px;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+}
+
+.booking-search-input:valid,
+.booking-search-input:focus,
+.booking-search-input:active{
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 0 2px 2px;
+    border-radius: 12px 0 0 12px;
+}
+
+.booking-search-input-field{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.search-icon-small{
+    height: 46px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 2px 2px 0;
+    border-radius: 0 12px 12px 0;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 24px;
+    color: var(--primary-color);
+    background-color: #FFF;
+}
+
+.sort-button{
+    height: 48px;
+    width: 48px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+}
+
+.table-heading-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pending-badge{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--dark-shade-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.completed-badge{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--success-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.rejected-badge{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--danger-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.update-button{
+    outline: none;
+    border: 3px solid var(--success-dark-color);
+    padding: 8px 18px;
+    color: var(--success-dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.update-button:active{
+    transform: scale(.98);
+}
+
+.disable-button{
+    outline: none;
+    border: 3px solid var(--grey-color);
+    padding: 8px 18px;
+    color: var(--grey-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+}
+
+.delete-button{
+    outline: none;
+    border: 3px solid var(--warning-dark-color);
+    padding: 8px 18px;
+    color: var(--warning-dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.delete-button:active {
+    transform: scale(.96);
+}
+
+.pagination-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.pagination-button{
+    height: 40px;
+    width: 40px;
     outline: none;
     border: none;
-    padding: 12px 24px;
-    color: var(--success-color);
+    color: var(--primary-color);
     font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 8px;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 4px;
+    background-color: var(--primary-background-shade-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.pagination-button:active {
+    transform: scale(.96);
+}
+
+.pagination-button-current{
+    height: 48px;
+    width: 48px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: var(--primary-background-shade-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.pagination-button-current:active {
+    transform: scale(.96);
+}
+
+.create-booking-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    height: 90vh;
+    transform: translate(-50%, -50%) ;
+    margin: 16px;
+    max-height: 90vh;
+    color: #102699;
     background-color: #FFF;
-    border: 2px solid var(--success-color);
+    border-radius: 16px;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.create-booking-scroll-wrapper{
+    margin: 32px 48px;
+    margin-right: 24px;
+    padding-right: 24px;
+    overflow: auto;
+    height: calc(100% - 64px);
+}
+
+.create-booking-title{
+    padding: 16px 12px;
+    background-color: var(--primary-shade-color);
+    border-radius: 12px;
+}
+
+.create-booking-title h1{
+    margin: 0;
+    text-align: center;
+    font-weight: normal;
+}
+
+.form-input-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+    font-size: 20px;
+}
+
+.form-input-row select{
+    outline: none;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    min-width: 300px;
+    color: var(--primary-color);
+    padding: 8px;
+    width: 320px;
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+}
+
+.form-input-row input[type="date"]{
+    outline: none;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    min-width: 300px;
+    color: var(--primary-color);
+    padding: 8px;
+    width: 300px;
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
 }
