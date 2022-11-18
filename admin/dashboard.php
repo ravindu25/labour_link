@@ -91,7 +91,7 @@
                             class="nav-link-items-button"
                             style="background-color: #FFF; color: #102699;">
                         <i class="fa-regular fa-circle-user"></i>&nbsp;
-                        <?php echo $_SESSION['username']; ?>
+                        Hi,&nbsp;<?php echo $_SESSION['first_name']; ?>
                         &nbsp;
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
@@ -103,7 +103,7 @@
                         <a href="#">
                             <div class="dropdown-item" id="dropdown-item">
                                 <i class="fa-solid fa-right-from-bracket"></i>
-                                &nbsp;&nbsp;Logout
+                                &nbsp;&nbsp;<a href="../logout.php">Logout</a>
                             </div>
                         </a>
                     </div>

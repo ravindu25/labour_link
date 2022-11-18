@@ -297,7 +297,7 @@
                     if($search == ""){
                         $sql = "SELECT * FROM User";
                     }else{
-                        $sql = "SELECT * FROM User";
+                        $sql = "SELECT * FROM User WHERE First_Name LIKE '%$search%'";
                     }
 
                     $result = $conn->query($sql);
@@ -317,9 +317,9 @@
                                 echo('<tr class="main-tr">
                                 <td class="main-td" style="text-align: left;">
                                     '.$row['First_Name'].' '.$row['Last_Name'].'
-                                    <br/>
-                                    <span class="active-badge">Active</span>
-                                </td>
+                                    <br/>'
+                                    .($row['Activation_Flag'] == 1 ? '<span class="success-badge">Active</span>' : '<span class="suspend-badge">Suspended</span>').
+                                '</td>
                                 <td class="main-td">'.$last_login.'</td>
                                 <td class="main-td">'.$row['Type'].'</td>
                                 <td class="main-td">
