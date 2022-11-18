@@ -26,7 +26,7 @@
     </div>
     <div class="reset-login-buttons">
             <button type="button" onclick="closeResetModal()" class="reset-cancel-button">Cancel</button>
-            <button type="button" class="reset-confirm-button">Confirm</button>
+            <button type="button" onclick="resetLogin()" class="reset-confirm-button">Confirm</button>
     </div>
 </div>
 <nav class="nav-bar">
@@ -102,6 +102,7 @@
         </div>
     </div>
 </nav>
+<span style="display:none" id="reset-user-id"></span>
 <main class="main-section">
     <section class="sidebar">
         <h1 class="sidebar-heading">Dashboard</h1>
@@ -223,7 +224,7 @@
                                 ($row['Success_Flag'] == 1 ? '<span class="success-badge">Success</span>' : '<span class="failed-badge">Failed</span>')
                             
                             .'</td>
-                            <td class="main-td">'.$row['date(Timestamp)'].'</td>
+                            <td class="main-td">'.date("d M Y", strtotime($row['date(Timestamp)'])).'</td>
                             <td class="main-td">'.$row['time(Timestamp)'].'</td>
                             <td class="main-td">
                                 <div class="more-button-container">
@@ -302,6 +303,16 @@
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
+                                $sql2="SELECT date(Timestamp) FROM Login_Attempt WHERE User_ID=".$row['User_ID']." ORDER BY Timestamp DESC LIMIT 1;";
+                                $result2 = $conn->query($sql2);
+                                $row2 = $result2->fetch_assoc();
+                                $last_login=$row2['date(Timestamp)'];
+                                if($last_login == ""){
+                                    $last_login = "Never";
+                                }else{
+                                    //format date with month in words
+                                    $last_login = date("d M Y", strtotime($last_login));
+                                }
                                 $user_id=$row['User_ID'];
                                 echo('<tr class="main-tr">
                                 <td class="main-td" style="text-align: left;">
@@ -309,13 +320,13 @@
                                     <br/>
                                     <span class="active-badge">Active</span>
                                 </td>
-                                <td class="main-td">21 Oct 2022</td>
+                                <td class="main-td">'.$last_login.'</td>
                                 <td class="main-td">'.$row['Type'].'</td>
                                 <td class="main-td">
                                     <div class="more-button-container">
                                         <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                                         </button>
-                                        <button class="reset-login-button" onclick="openResetModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
+                                        <button class="reset-login-button" onclick="openResetModal('.$user_id.')"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
                                         </button>
                                     </div>
                                 </td>
@@ -397,8 +408,11 @@
         var xmlhttp=new XMLHttpRequest();
         xmlhttp.onreadystatechange=function() {
             if (this.readyState==4 && this.status==200) {
-                if(this.responseText === 'Success'){
+                var response = this.responseText;
+
+                if(response == "Success"){
                     // alert('User activated successfully');
+                    //print data type of response
                     location.reload();
                 }else{
                     // alert('Error occurred');
@@ -410,9 +424,28 @@
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send("user_id=" + user_id);
 
+    }
+    function resetLogin(){
+        user_id=document.getElementById("reset-user-id").value;
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+                var response = this.responseText;
 
-
-
+                if(response == "Success"){
+                    // alert('User activated successfully');
+                    //print data type of response
+                    location.reload();
+                }else{
+                    // alert('Error occurred');
+                    location.reload();
+                }
+            }
+        }
+        xmlhttp.open("POST","http://localhost/labour_link/admin/reset-login.php",true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("user_id=" + user_id);
+        
     }
         
 
