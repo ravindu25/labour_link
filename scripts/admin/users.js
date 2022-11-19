@@ -1,6 +1,10 @@
 const backdropModal = document.getElementById("backdrop-modal");
+const adminCreateButton = document.getElementById("create-admin-button");
+const adminCreateCancelButton = document.getElementById("admin-create-cancel-button");
 
 backdropModal.addEventListener('click', () => { closeResetModal() });
+adminCreateButton.addEventListener('click', () => { openAdminForm() });
+adminCreateCancelButton.addEventListener('click', () => { closeAdminForm(); })
 
 function openResetModal(user_id){
     const backdropModal = document.getElementById("backdrop-modal");
@@ -17,4 +21,20 @@ function closeResetModal(){
 
     backdropModal.style.visibility = 'hidden';
     resetModalContent.style.visibility = 'hidden';
+}
+
+function openAdminForm(){
+    const backdropModal = document.getElementById("admin-backdrop-modal");
+    const adminForm = document.getElementById("create-admin-form");
+
+    backdropModal.style.visibility = 'visible';
+    adminForm.style.visibility = 'visible';
+}
+
+function closeAdminForm(){
+    const backdropModal = document.getElementById("admin-backdrop-modal");
+    const adminForm = document.getElementById("create-admin-form");
+
+    backdropModal.style.visibility = 'hidden';
+    adminForm.style.visibility = 'hidden';
 }

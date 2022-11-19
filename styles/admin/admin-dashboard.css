@@ -2,6 +2,10 @@
     background-color: #ABC3EF;
 }
 
+.sidebar-item-selected{
+    background-color: #ABC3EF;
+}
+
 .main-heading{
     padding: 12px 24px;
     color: #FFF;

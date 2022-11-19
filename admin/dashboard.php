@@ -21,7 +21,7 @@ session_start();
     <!-- CSS files -->
     <link href="../styles/index-page.css" rel="stylesheet"/>
     <link href="../styles/dashboard.css" rel="stylesheet"/>
-    <link href="../styles/admin/worker-dashboard.css" rel="stylesheet"/>
+    <link href="../styles/admin/admin-dashboard.css" rel="stylesheet"/>
     <title>Worker Dashboard | LabourLink</title>
 </head>
 <body>
@@ -76,7 +76,6 @@ session_start();
             <div class="nav-link-items"><a href="#" class="nav-links">About</a></div>
             <div class="nav-link-items"><a href="#" class="nav-links">Contact Us</a></div>
             <?php
-            session_start();
             if (!isset($_SESSION['username'])) {
 
                 ?>

@@ -1,9 +1,9 @@
 <?php
 session_start();
-   //if not logged in redirect to login page
-    if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
-         header("Location: admin-login.php"); 
-    }
+//if not logged in redirect to login page
+if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
+    // header("Location: admin-login.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,13 +27,98 @@ session_start();
 <body>
 <div class="backdrop-modal" id="backdrop-modal">
 </div>
+<div class="backdrop-modal" id="admin-backdrop-modal">
+</div>
 <div class="reset-login-content" id="reset-login-content">
     <div class="reset-login-title">
         <h1>Do you want to reset selected login?</h1>
     </div>
     <div class="reset-login-buttons">
-            <button type="button" onclick="closeResetModal()" class="reset-cancel-button">Cancel</button>
-            <button type="button" onclick="resetLogin()" class="reset-confirm-button">Confirm</button>
+        <button type="button" onclick="closeResetModal()" class="reset-cancel-button">Cancel</button>
+        <button type="button" onclick="resetLogin()" class="reset-confirm-button">Confirm</button>
+    </div>
+</div>
+<div class="create-admin-form" id="create-admin-form">
+    <div class="create-admin-wrapper">
+        <div class="create-admin-title">
+            <h1>Create new <u>Admin</u></h1>
+        </div>
+        <form id="admin-create-form" action="#" method="POST">
+            <div class="admin-form-container">
+                <div class="admin-form-row">
+                    <div class="admin-form-column">
+                        <label for="first-name">First name</label>
+                        <br/>
+                        <input type="text" id="first-name" name="first-name"/>
+                        <span class="input-error-text" id="input-first-name-error"></span>
+                    </div>
+                    <div class="admin-form-column">
+                        <label for="last-name">Last name</label>
+                        <br/>
+                        <input type="text" id="last-name" name="last-name"/>
+                        <span class="input-error-text" id="input-last-name-error"></span>
+                    </div>
+                </div>
+                <div class="admin-form-row">
+                    <div class="admin-form-column">
+                        <label for="email">Email</label>
+                        <br/>
+                        <input type="text" id="email" name="email"/>
+                        <span class="input-error-text" id="input-email-error"></span>
+                    </div>
+                    <div class="admin-form-column">
+                        <label for="phone-number">Phone number</label>
+                        <br/>
+                        <input type="text" id="phone-number" name="phone-number"/>
+                        <span class="input-error-text" id="input-phone-number-error"></span>
+                    </div>
+                </div>
+                <div class="admin-form-row">
+                    <div class="admin-form-column">
+                        <label for="address">Address</label>
+                        <br/>
+                        <input type="text" id="address" name="address"/>
+                        <span class="input-error-text" id="input-address-error"></span>
+                    </div>
+                </div>
+                <div class="admin-form-row">
+                    <div class="admin-form-column">
+                        <label for="nic-number">Nic number</label>
+                        <br/>
+                        <input type="text" id="nic-number" name="nic-number"/>
+                        <span class="input-error-text" id="input-nic-number-error"></span>
+                    </div>
+                    <div class="admin-form-column">
+                        <label for="phone-number">Date of birth(MM/DD/YYYY)</label>
+                        <br/>
+                        <input type="date" id="dob" name="dob"/>
+                        <span class="input-error-text" id="input-dob-error"></span>
+                    </div>
+                </div>
+                <div class="admin-form-row">
+                    <div class="admin-form-column">
+                        <label for="initial-password">Initial password</label>
+                        <br/>
+                        <input type="password" id="initial-password" name="initial-password"/>
+                        <span class="input-error-text" id="input-initial-password-error"></span>
+                    </div>
+                    <div class="admin-form-column">
+                        <label for="confirm-password">Confirm password</label>
+                        <br/>
+                        <input type="password" id="confirm-password" name="confirm-password"/>
+                        <span class="input-error-text" id="input-confirm-password-error"></span>
+                    </div>
+                </div>
+                <div class="form-message">
+                    <h5>Note that: We will prompt to change password in initial login</h5>
+                </div>
+                <div class="button-container">
+                    <button type="button" class="cancel-button" id="admin-create-cancel-button">Cancel</button>
+                    <button type="submit" class="submit-button" id="admin-create-submit-button">Create Admin</button>
+                </div>
+            </div>
+
+        </form>
     </div>
 </div>
 <nav class="nav-bar">
@@ -65,7 +150,6 @@ session_start();
             <div class="nav-link-items"><a href="#" class="nav-links">About</a></div>
             <div class="nav-link-items"><a href="#" class="nav-links">Contact Us</a></div>
             <?php
-            session_start();
             if (!isset($_SESSION['username'])) {
 
                 ?>
@@ -87,7 +171,7 @@ session_start();
                                 class="nav-link-items-button"
                                 style="background-color: #FFF; color: #102699;">
                             <i class="fa-regular fa-circle-user"></i>&nbsp;
-                            <?php echo $_SESSION['username']; ?>
+                            Hi,&nbsp;<?php echo $_SESSION['first_name']; ?>
                             &nbsp;
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
@@ -177,7 +261,7 @@ session_start();
                     <br/>
                     <form action="" method="POST">
                         <div class="search-input-container">
-                            <input type="text" id="login-search" class="login-search"  name="search"/>
+                            <input type="text" id="login-search" class="login-search" name="search"/>
                             <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </form>
@@ -207,47 +291,47 @@ session_start();
                 <tbody>
                 <?php
                 require_once '../db.php';
-                if(!isset($_POST['search'])){
+                if (!isset($_POST['search'])) {
                     $search = "";
-                }else{
+                } else {
                     $search = $_POST['search'];
                 }
-                if($search == ""){
+                if ($search == "") {
                     $sql = "SELECT User.User_ID, First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag, Activation_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID ORDER BY Timestamp DESC LIMIT 5;";
-                }else{
+                } else {
                     $sql = "SELECT User.User_ID, First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag, Activation_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID WHERE First_Name LIKE '%$search%' OR Last_Name LIKE '%$search%' ORDER BY Timestamp DESC LIMIT 5;;";
                 }
-                
+
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $user_id=$row['User_ID'];
+                        $user_id = $row['User_ID'];
                         echo('
                         <tr class="main-tr">
                             <td class="main-td" style="text-align: left;">' . $row['First_Name'] . ' ' . $row['Last_Name'] . '
                                 
-                                <br/>'.
-                                //if login success
-                                ($row['Success_Flag'] == 1 ? '<span class="success-badge">Success</span>' : '<span class="failed-badge">Failed</span>')
-                            
-                            .'</td>
-                            <td class="main-td">'.date("d M Y", strtotime($row['date(Timestamp)'])).'</td>
-                            <td class="main-td">'.$row['time(Timestamp)'].'</td>
+                                <br/>' .
+                            //if login success
+                            ($row['Success_Flag'] == 1 ? '<span class="success-badge">Success</span>' : '<span class="failed-badge">Failed</span>')
+
+                            . '</td>
+                            <td class="main-td">' . date("d M Y", strtotime($row['date(Timestamp)'])) . '</td>
+                            <td class="main-td">' . $row['time(Timestamp)'] . '</td>
                             <td class="main-td">
                                 <div class="more-button-container">
                                     <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                                    </button>&nbsp;'.
+                                    </button>&nbsp;' .
 
-                                    ($row['Activation_Flag'] == 1 ? '<button class="suspend-button" onclick="suspend_user('.$user_id.')"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
-                                    </button>' : '<button class="activate-button" onclick="activate_user('.$user_id.')"><i class="fa-solid fa-user-check"></i>&nbsp;&nbsp;Activate
-                                    </button>').
-                                '</div>
+                            ($row['Activation_Flag'] == 1 ? '<button class="suspend-button" onclick="suspend_user(' . $user_id . ')"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
+                                    </button>' : '<button class="activate-button" onclick="activate_user(' . $user_id . ')"><i class="fa-solid fa-user-check"></i>&nbsp;&nbsp;Activate
+                                    </button>') .
+                            '</div>
                             </td>
                         </tr>');
                     }
                 }
-                ?> 
-               
+                ?>
+
                 </tbody>
             </table>
             <div class="pagination-container">
@@ -266,98 +350,98 @@ session_start();
                     <label for="users-search" class="users-search-text">Search(Using username, role etc)</label>
                     <br/>
                     <form action="" method="POST">
-                    <div class="search-input-container">
-                        <input type="text" id="users-search" class="users-search" name="users-search"/>
-                        <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </form>
-                    </div>
+                        <div class="search-input-container">
+                            <input type="text" id="users-search" class="users-search" name="users-search"/>
+                            <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
                 </div>
             </div>
-            <div class="recent-payments-container">
-                <table class="main-table">
-                    <thead>
-                    <tr class="main-tr">
-                        <th class="main-th">
-                            <div class="table-heading-date">Username/Status&nbsp;<button class="sort-button"><i
-                                            class="fa-solid fa-arrow-up"></i></button>
-                            </div>
-                        </th>
-                        <th class="main-th">
-                            <div class="table-heading-date">Recent login&nbsp;<button class="sort-button"><i
-                                            class="fa-solid fa-arrow-up"></i></button>
-                        </th>
-                        <th class="main-th">
-                            <div class="table-heading-date">Role&nbsp;<button class="sort-button"><i
-                                            class="fa-solid fa-arrow-up"></i></button>
-                        </th>
-                        <th class="main-th">More actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    require_once '../db.php';
-                    if(!isset($_POST['users-search'])){
-                        $search = "";
-                    }else{
-                        $search = $_POST['users-search'];
-                    }
-                    if($search == ""){
-                        $sql = "SELECT * FROM User";
-                    }else{
-                        $sql = "SELECT * FROM User WHERE First_Name LIKE '%$search%'";
-                    }
+        </div>
+        <div class="recent-payments-container">
+            <table class="main-table">
+                <thead>
+                <tr class="main-tr">
+                    <th class="main-th">
+                        <div class="table-heading-date">Username/Status&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
+                        </div>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-date">Recent login&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-date">Role&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
+                    </th>
+                    <th class="main-th">More actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                require_once '../db.php';
+                if (!isset($_POST['users-search'])) {
+                    $search = "";
+                } else {
+                    $search = $_POST['users-search'];
+                }
+                if ($search == "") {
+                    $sql = "SELECT * FROM User";
+                } else {
+                    $sql = "SELECT * FROM User WHERE First_Name LIKE '%$search%'";
+                }
 
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                                $sql2="SELECT date(Timestamp) FROM Login_Attempt WHERE User_ID=".$row['User_ID']." ORDER BY Timestamp DESC LIMIT 1;";
-                                $result2 = $conn->query($sql2);
-                                $row2 = $result2->fetch_assoc();
-                                $last_login=$row2['date(Timestamp)'];
-                                if($last_login == ""){
-                                    $last_login = "Never";
-                                }else{
-                                    //format date with month in words
-                                    $last_login = date("d M Y", strtotime($last_login));
-                                }
-                                $user_id=$row['User_ID'];
-                                echo('<tr class="main-tr">
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $sql2 = "SELECT date(Timestamp) FROM Login_Attempt WHERE User_ID=" . $row['User_ID'] . " ORDER BY Timestamp DESC LIMIT 1;";
+                        $result2 = $conn->query($sql2);
+                        $row2 = $result2->fetch_assoc();
+                        $last_login = $row2['date(Timestamp)'];
+                        if ($last_login == "") {
+                            $last_login = "Never";
+                        } else {
+                            //format date with month in words
+                            $last_login = date("d M Y", strtotime($last_login));
+                        }
+                        $user_id = $row['User_ID'];
+                        echo('<tr class="main-tr">
                                 <td class="main-td" style="text-align: left;">
-                                    '.$row['First_Name'].' '.$row['Last_Name'].'
+                                    ' . $row['First_Name'] . ' ' . $row['Last_Name'] . '
                                     <br/>'
-                                    .($row['Activation_Flag'] == 1 ? '<span class="success-badge">Active</span>' : '<span class="suspend-badge">Suspended</span>').
-                                '</td>
-                                <td class="main-td">'.$last_login.'</td>
-                                <td class="main-td">'.$row['Type'].'</td>
+                            . ($row['Activation_Flag'] == 1 ? '<span class="success-badge">Active</span>' : '<span class="suspend-badge">Suspended</span>') .
+                            '</td>
+                                <td class="main-td">' . $last_login . '</td>
+                                <td class="main-td">' . $row['Type'] . '</td>
                                 <td class="main-td">
                                     <div class="more-button-container">
                                         <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                                         </button>
-                                        <button class="reset-login-button" onclick="openResetModal('.$user_id.')"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
+                                        <button class="reset-login-button" onclick="openResetModal(' . $user_id . ')"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
                                         </button>
                                     </div>
                                 </td>
                             </tr>');
-                        }
                     }
-                    
-                    ?>
-                    
-                  
-                    </tbody>
-                </table>
-                <div class="pagination-container">
-                    <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
-                    <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
-                    <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
-                    <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
-                </div>
+                }
+
+                ?>
+
+
+                </tbody>
+            </table>
+            <div class="pagination-container">
+                <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
+        </div>
         </div>
         <div class="create-admin">
             <h1>Do you want to add new <u>Admin</u></h1>
-            <button class="more-button">Create Admin</button>
+            <button class="more-button" id="create-admin-button">Create Admin</button>
         </div>
     </section>
 </main>
@@ -370,10 +454,11 @@ session_start();
 
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/admin/users.js" type="text/javascript"></script>
-<script src="../scripts/index.js" type="text/javascript"></script>
+<script src="../scripts/admin/admin-create-validation.js" type="text/javascript"></script>
+<!--<script src="../scripts/index.js" type="text/javascript"></script>-->
 
 <script>
-    function suspend_user(user_id){
+    function suspend_user(user_id) {
 
         // fetch('http://localhost/labour_link/admin/suspend-user.php', {
         //     method: 'POST',
@@ -394,67 +479,69 @@ session_start();
         //     .catch((error) => {
         //         console.error('Error:', error);
         //     });
-        var xmlhttp=new XMLHttpRequest();
-        xmlhttp.onreadystatechange=function() {
-            if (this.readyState==4 && this.status==200) {
-                if(this.responseText === 'Success'){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText === 'Success') {
                     // alert('User suspended successfully');
                     location.reload();
-                }else{
+                } else {
                     // alert('Error occurred');
                     location.reload();
                 }
             }
         }
-        xmlhttp.open("POST","http://localhost/labour_link/admin/suspend-user.php",true);
+        xmlhttp.open("POST", "http://localhost/labour_link/admin/suspend-user.php", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send("user_id=" + user_id);
 
     }
-    function activate_user(user_id){
-        var xmlhttp=new XMLHttpRequest();
-        xmlhttp.onreadystatechange=function() {
-            if (this.readyState==4 && this.status==200) {
+
+    function activate_user(user_id) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
                 var response = this.responseText;
 
-                if(response == "Success"){
+                if (response == "Success") {
                     // alert('User activated successfully');
                     //print data type of response
                     location.reload();
-                }else{
+                } else {
                     // alert('Error occurred');
                     location.reload();
                 }
             }
         }
-        xmlhttp.open("POST","http://localhost/labour_link/admin/activate-user.php",true);
+        xmlhttp.open("POST", "http://localhost/labour_link/admin/activate-user.php", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send("user_id=" + user_id);
 
     }
-    function resetLogin(){
-        user_id=document.getElementById("reset-user-id").value;
-        var xmlhttp=new XMLHttpRequest();
-        xmlhttp.onreadystatechange=function() {
-            if (this.readyState==4 && this.status==200) {
+
+    function resetLogin() {
+        user_id = document.getElementById("reset-user-id").value;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
                 var response = this.responseText;
 
-                if(response == "Success"){
+                if (response == "Success") {
                     // alert('User activated successfully');
                     //print data type of response
                     location.reload();
-                }else{
+                } else {
                     // alert('Error occurred');
                     location.reload();
                 }
             }
         }
-        xmlhttp.open("POST","http://localhost/labour_link/admin/reset-login.php",true);
+        xmlhttp.open("POST", "http://localhost/labour_link/admin/reset-login.php", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send("user_id=" + user_id);
-        
+
     }
-        
+
 
 </script>
 </body>
