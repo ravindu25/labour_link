@@ -1,7 +1,7 @@
 <?php
     $servername = "localhost";
     $username = "root";
-    $password = "ruw2000925";
+    $password = "root";
     $dbname = "labour_link";
 
     // Create connection

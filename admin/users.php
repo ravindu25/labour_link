@@ -43,7 +43,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         <div class="create-admin-title">
             <h1>Create new <u>Admin</u></h1>
         </div>
-        <form id="admin-create-form" action="#" method="POST">
+        <form id="admin-create-form" action="" method="POST">
             <div class="admin-form-container">
                 <div class="admin-form-row">
                     <div class="admin-form-column">
@@ -83,7 +83,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 </div>
                 <div class="admin-form-row">
                     <div class="admin-form-column">
-                        <label for="nic-number">Nic number</label>
+                        <label for="nic-number">NIC Number</label>
                         <br/>
                         <input type="text" id="nic-number" name="nic-number"/>
                         <span class="input-error-text" id="input-nic-number-error"></span>
@@ -114,7 +114,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 </div>
                 <div class="button-container">
                     <button type="button" class="cancel-button" id="admin-create-cancel-button">Cancel</button>
-                    <button type="submit" class="submit-button" id="admin-create-submit-button">Create Admin</button>
+                    <input type="submit" class="submit-button" id="admin-create-submit-button" name="admin-create-submit-button" value="Create Admin"/>
                 </div>
             </div>
 
@@ -548,3 +548,41 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
 
 
 </html>
+
+
+<?php
+
+    include_once '../db.php';
+    if(isset($_POST['first-name'])){
+        $first_name = $_POST['first-name'];
+        $last_name = $_POST['last-name'];
+        $email = $_POST['email'];
+        $password = $_POST['initial-password'];
+        $phone_number= $_POST['phone-number'];
+        $address = $_POST['address'];
+        $nic= $_POST['nic-number'];
+        $dob= $_POST['dob'];
+       
+
+        $sql1 = "INSERT INTO User (First_Name, Last_Name, Email, User_Address, Contact_No, NIC, Pswd, DOB, Type) VALUES ('$first_name', '$last_name', '$email', '$address', '$phone_number', '$nic', '$password', '$dob', 'Admin')";
+        $result1 = mysqli_query($conn, $sql1);
+    
+        $sql2="SELECT User_ID FROM User WHERE Email='$email'";
+        $result2 = mysqli_query($conn, $sql2);
+        $row = mysqli_fetch_assoc($result2);
+        $user_id = $row['User_ID'];
+        
+        $sql3 = "INSERT INTO System_Admin (Admin_ID) VALUES ('$user_id')";
+        $result3 = mysqli_query($conn, $sql3);
+    
+        if($result1 && $result3){
+            echo "Successfully Inserted";
+        }else{
+            echo "Error in Insertion";
+            echo("Error description: " . mysqli_error($conn));
+            echo("<script>console.log('PHP: " . mysqli_error($conn) . "');</script>");
+            
+        }
+    }
+
+?>
