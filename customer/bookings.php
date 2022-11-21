@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    // Check whether customer is logged in
+    if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Customer') {
+        header("Location: ../login.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,47 +202,54 @@
             <div class="nav-link-items"><a href="#" class="nav-links">About</a></div>
             <div class="nav-link-items"><a href="#" class="nav-links">Contact Us</a></div>
             <?php
-            session_start();
-            if (!isset($_SESSION['username'])) {
+                if (!isset($_SESSION['username'])) {
 
-                ?>
-                <div class="nav-link-items">
-                    <button type="button" id="register-button" class="nav-link-items-button"
-                            style="background-color: #FFF; color: #102699;">
-                        REGISTER
-                    </button>
-                </div>
-                <div class="nav-link-items">
-                    <button type="button" class="nav-link-items-button" onclick="window.location.href='login.php'">
-                        LOGIN
-                    </button>
-                </div>
-            <?php } else { ?>
-                <div class="nav-link-items">
-                    <div class="dropdown" id="dropdown">
-                        <button type="button" id="user-dropdown-button" onClick="opendropdown()"
-                                class="nav-link-items-button"
+                    ?>
+                    <div class="nav-link-items">
+                        <button type="button" id="register-button" class="nav-link-items-button"
                                 style="background-color: #FFF; color: #102699;">
-                            <i class="fa-regular fa-circle-user"></i>&nbsp;
-                            <?php echo "Hi, " . $_SESSION['first_name']; ?>
-                            &nbsp;
-                            <i class="fa-solid fa-chevron-down"></i>
+                            REGISTER
                         </button>
-                        <div class="dropdown-items" id="dropdown-items">
-                            <a href="#">
+                    </div>
+                    <div class="nav-link-items">
+                        <button type="button" class="nav-link-items-button" onclick="window.location.href='login.php'">
+                            LOGIN
+                        </button>
+                    </div>
+                <?php } else { ?>
+                    <div class="nav-link-items">
+                        <div class="dropdown" id="dropdown">
+                            <button type="button" id="user-dropdown-button" onClick="opendropdown()"
+                                    class="nav-link-items-button"
+                                    style="background-color: #FFF; color: #102699;">
+                                <i class="fa-regular fa-circle-user"></i>&nbsp;
+                                <?php echo "Hi, " . $_SESSION['first_name']; ?>
+                                &nbsp;
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <div class="dropdown-items" id="dropdown-items">
+                                <?php
+                                    if ($_SESSION['user_type'] == 'Admin') {
+                                        echo '<a href="../admin/dashboard.php">';
+                                    } else if ($_SESSION['user_type'] == 'Customer') {
+                                        echo '<a href="../customer/dashboard.php">';
+                                    } else {
+                                        echo '<a href="../worker/dashboard.php">';
+                                    }
+                                ?>
                                 <div class="dropdown-item" id="dropdown-item"><i class="fa-solid fa-gauge-high"></i>&nbsp;&nbsp;Dashboard
                                 </div>
-                            </a>
-                            <a href="#">
-                                <div class="dropdown-item" id="dropdown-item">
-                                    <i class="fa-solid fa-right-from-bracket"></i>
-                                    &nbsp;&nbsp;<a href="../logout.php">Logout</a>
-                                </div>
-                            </a>
+                                </a>
+                                <a href="#">
+                                    <div class="dropdown-item" id="dropdown-item">
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                        &nbsp;&nbsp;<a href="../logout.php">Logout</a>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php } ?>
+                <?php } ?>
         </div>
     </div>
 </nav>
@@ -244,13 +258,13 @@
         <h1 class="sidebar-heading">Dashboard</h1>
         <div class="sidebar-items">
             <a href="./dashboard.php">
-                <div class="sidebar-item sidebar-item-selected">
+                <div class="sidebar-item">
                     <i class="fa-solid fa-server sidebar-item-icon"></i>
                     <h4 class="sidebar-icon-heading">Overview</h4>
                 </div>
             </a>
             <a href="./bookings.php">
-                <div class="sidebar-item">
+                <div class="sidebar-item sidebar-item-selected">
                     <i class="fa-solid fa-b sidebar-item-icon"></i>
                     <h4 class="sidebar-icon-heading">Booking</h4>
                 </div>
@@ -283,8 +297,8 @@
     </section>
     <section class="main-content">
         <div class="main-heading">
-            <h1>Welcome Back <u>Rushdha Rasheed</u></h1>
-            <h5>Last accessed 21st October 2022</h5>
+            <h1>All About Your <u>Bookings</u> Here!</h1>
+            <h5>Logged as <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></h5>
         </div>
         <div class="new-booking">
             <h1>Do you want to create a new booking?</h1>

@@ -90,6 +90,7 @@
                 $_SESSION['user_type'] = $row['Type'];
 
                 $_SESSION['first_name'] = $row['First_Name'];
+                $_SESSION['last_name'] = $row['Last_Name'];
 
                 //insert the login to login log table
                 $log_sql = "INSERT INTO Login_Attempt (User_ID, Success_Flag) VALUES ('$user_id', 1)";

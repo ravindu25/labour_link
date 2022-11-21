@@ -90,15 +90,25 @@
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
                         <div class="dropdown-items" id="dropdown-items">
-                            <a href="#">
+                            <?php
+                                if($_SESSION['user_type'] == 'Admin'){
+                                    echo '<a href="./admin/dashboard.php">';
+                                }else if($_SESSION['user_type'] == 'Customer'){
+                                    echo '<a href="./customer/dashboard.php">';
+                                }else{
+                                    echo '<a href="./worker/dashboard.php">';
+                                }
+                            ?>
                                 <div class="dropdown-item" id="dropdown-item"><i class="fa-solid fa-gauge-high"></i>&nbsp;&nbsp;Dashboard
                                 </div>
                             </a>
                             <a href="#">
+                                <a href="logout.php">
                                 <div class="dropdown-item" id="dropdown-item">
                                     <i class="fa-solid fa-right-from-bracket"></i>
-                                    &nbsp;&nbsp;<a href="logout.php">Logout</a>
+                                    &nbsp;&nbsp;Logout
                                 </div>
+                                </a>
                             </a>
                         </div>
                     </div>
