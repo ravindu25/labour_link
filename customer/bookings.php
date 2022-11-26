@@ -77,12 +77,12 @@
         <div class="create-booking-title">
             <h1>Create new <u>Booking</u></h1>
         </div>
-        <form>
+        <form action="create-booking.php" method="post">
             <div class="form-input-row">
                 <label for="job-type">Job type</label>
-                <select id="job-type">
-                    <option value="plumber">Plumber</option>
+                <select id="job-type" name="job-type">
                     <option value="electrician">Electrician</option>
+                    <option value="plumber">Plumber</option>
                     <option value="painter">Painter</option>
                     <option value="carpenter">Carpenter</option>
                     <option value="mason">Mason</option>
@@ -92,18 +92,12 @@
                 </select>
             </div>
             <div class="form-input-row">
-                <label for="worker">Worker</label>
-                <select id="worker">
-                    <option value="saman-gunawardhana">Saman Guanawardhana</option>
-                    <option value="sunil-perera">Sunil Perera</option>
-                    <option value="sunith-hettiarachchi">Sunith Hettiarachchi</option>
-                    <option value="dammika-kumara">Dammika Kumara</option>
-                    <option value="kapila-dharmadhasa">Kapila Dharmadhasa</option>
-                </select>
+                <label for="worker-id">Worker</label>
+                <select id="worker-id" name="worker-name"></select>
             </div>
             <div class="form-input-row">
                 <label for="start-date">Start date</label>
-                <input type="date" id="start-date" />
+                <input type="date" id="start-date" name="start-date" />
             </div>
             <div class="form-time-row">
                 <label>
@@ -151,14 +145,14 @@
                 <label>Payment method</label>
                 <div class="payment-methods-container">
                     <label>
-                        <input type="radio" name="payment-method" class="payment-method-radio" />
+                        <input type="radio" name="payment-method" class="payment-method-radio" value="manual" />
                         <div class="payment-method-card">
                             <img src="../assets/customer/dashboard/undraw_savings_re_eq4w.svg" alt="manual-payment" class="payment-method-image" />
                             <h5>Manual payments</h5>
                         </div>
                     </label>
                     <label>
-                        <input type="radio" name="payment-method" class="payment-method-radio" checked />
+                        <input type="radio" name="payment-method" class="payment-method-radio" value="online" checked />
                         <div class="payment-method-card">
                             <img src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg" alt="online-payment" class="payment-method-image" />
                             <h5>Online payments</h5>
@@ -167,7 +161,7 @@
                 </div>
             </div>
             <div class="form-button-container">
-                <button type="button" class="more-button">Cancel</button>
+                <button type="button" class="more-button" id="booking-create-cancel-button">Cancel</button>
                 <button type="submit" class="more-button submit-button">Create Booking</button>
             </div>
         </form>
@@ -518,4 +512,5 @@
 </footer>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/customer/bookings.js" type="text/javascript"></script>
+<script src="../scripts/customer/create-booking-fetch-workers.js" type="text/javascript"></script>
 </body>

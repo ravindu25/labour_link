@@ -1,11 +1,17 @@
 const backButton = document.getElementById("back-button");
 const createBookingButton = document.getElementById("booking-create-button");
+const bookingCreateCancelButton = document.getElementById("booking-create-cancel-button");
 
 backButton.addEventListener('click', () => { closeBookingDetailsModal() });
 createBookingButton.addEventListener('click', () => {
     closeBookingDetailsModal();
     openCreateBookingModal();
-})
+});
+
+bookingCreateCancelButton.addEventListener('click', () => {
+    closeCreateBookingModal();
+});
+
 
 function openBookingDetailsModal(){
     const backdropModal = document.getElementById("backdrop-modal");

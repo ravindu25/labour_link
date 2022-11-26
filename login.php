@@ -88,7 +88,7 @@
                 //get user type from db
             
                 $_SESSION['user_type'] = $row['Type'];
-
+                $_SESSION['user_id'] = $row['User_ID'];
                 $_SESSION['first_name'] = $row['First_Name'];
                 $_SESSION['last_name'] = $row['Last_Name'];
 
