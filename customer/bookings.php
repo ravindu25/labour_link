@@ -27,6 +27,15 @@
 <body>
 <div class="backdrop-modal" id="backdrop-modal">
 </div>
+<div class="success-message-container" id="booking-create-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Booking created successfully</h1>
+</div>
+<div class="failed-message-container" id="booking-create-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking created successfully</h1>
+        <h5>Your login session outdated. Please login again.</h5>
+    </div>
+</div>
 <div class="booking-details-container" id="booking-details-container">
     <div class="booking-details-scroll-wrapper">
         <div class="booking-details-title">
@@ -77,7 +86,7 @@
         <div class="create-booking-title">
             <h1>Create new <u>Booking</u></h1>
         </div>
-        <form action="create-booking.php" method="post">
+        <form id="booking-create-form">
             <div class="form-input-row">
                 <label for="job-type">Job type</label>
                 <select id="job-type" name="job-type">
@@ -97,7 +106,7 @@
             </div>
             <div class="form-input-row">
                 <label for="start-date">Start date</label>
-                <input type="date" id="start-date" name="start-date" />
+                <input type="date" id="start-date" name="start-date"/>
             </div>
             <div class="form-time-row">
                 <label>
@@ -105,14 +114,14 @@
                 </label>
                 <div class="time-row">
                     <label>
-                        <input type="radio" name="time-input" value="1" class="time-card-input" />
+                        <input type="radio" name="time-input" value="1" class="time-card-input"/>
                         <div class="time-card">
                             <h3>1</h3>
                             <h4>Day</h4>
                         </div>
                     </label>
                     <label>
-                        <input type="radio" name="time-input" value="2" class="time-card-input" />
+                        <input type="radio" name="time-input" value="2" class="time-card-input"/>
                         <div class="time-card">
                             <h3>2</h3>
                             <h4>Days</h4>
@@ -145,16 +154,18 @@
                 <label>Payment method</label>
                 <div class="payment-methods-container">
                     <label>
-                        <input type="radio" name="payment-method" class="payment-method-radio" value="manual" />
+                        <input type="radio" name="payment-method" class="payment-method-radio" value="manual"/>
                         <div class="payment-method-card">
-                            <img src="../assets/customer/dashboard/undraw_savings_re_eq4w.svg" alt="manual-payment" class="payment-method-image" />
+                            <img src="../assets/customer/dashboard/undraw_savings_re_eq4w.svg" alt="manual-payment"
+                                 class="payment-method-image"/>
                             <h5>Manual payments</h5>
                         </div>
                     </label>
                     <label>
-                        <input type="radio" name="payment-method" class="payment-method-radio" value="online" checked />
+                        <input type="radio" name="payment-method" class="payment-method-radio" value="online" checked/>
                         <div class="payment-method-card">
-                            <img src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg" alt="online-payment" class="payment-method-image" />
+                            <img src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg" alt="online-payment"
+                                 class="payment-method-image"/>
                             <h5>Online payments</h5>
                         </div>
                     </label>
@@ -162,7 +173,9 @@
             </div>
             <div class="form-button-container">
                 <button type="button" class="more-button" id="booking-create-cancel-button">Cancel</button>
-                <button type="submit" class="more-button submit-button">Create Booking</button>
+                <button type="submit" class="more-button submit-button" id="booking-create-submit-button">Create
+                    Booking
+                </button>
             </div>
         </form>
     </div>
@@ -513,4 +526,5 @@
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/customer/bookings.js" type="text/javascript"></script>
 <script src="../scripts/customer/create-booking-fetch-workers.js" type="text/javascript"></script>
+<script src="../scripts/customer/create-booking.js" type="text/javascript"></script>
 </body>
