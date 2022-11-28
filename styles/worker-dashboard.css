@@ -1,0 +1,91 @@
+/*
+* This file contains the main styling related to dashboards
+*/
+
+.main-section{
+    display: flex;
+    align-items: stretch;
+}
+
+.sidebar{
+    min-width: 15%;
+    max-width: 20%;
+    min-height: calc(100vh - 150px);
+    padding: 24px 0;
+    background-color: #FFF;
+}
+
+.sidebar-heading{
+    margin: 0;
+    margin-bottom: 12px;
+    text-align: center;
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+.sidebar-item{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    padding: 20px 28px;
+}
+
+.sidebar-item-selected{
+    background-color: #ABC3EF;
+}
+
+.sidebar-icon-heading{
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+}
+
+.sidebar-item-icon{
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+    color: var(--primary-color);
+}
+
+.main-content{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px 48px;
+}
+
+.more-button{
+    outline: none;
+    border: 3px solid var(--primary-bright-color);
+    padding: 12px 18px;
+    color: var(--primary-bright-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: var(--primary-shade-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.more-button:active{
+    transform: scale(.96);
+}
+
+
+@media (max-width: 1350px){
+    .sidebar{
+        width: 50px;
+    }
+
+    .sidebar-heading{
+        display: none;
+    }
+
+    .sidebar-icon-heading{
+        display: none;
+    }
+}

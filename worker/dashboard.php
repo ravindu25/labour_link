@@ -1,8 +1,8 @@
 <?php
-session_start();
-   //if not logged in redirect to login page
-    if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
-         header("Location: admin-login.php"); 
+    session_start();
+    // Check whether labourer is logged in
+    if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Labour') {
+        header("Location: ../login.php");
     }
 ?>
 <!DOCTYPE html>
@@ -20,32 +20,12 @@ session_start();
 
     <!-- CSS files -->
     <link href="../styles/index-page.css" rel="stylesheet"/>
-    <link href="../styles/dashboard.css" rel="stylesheet"/>
-    <link href="../styles/admin/admin-dashboard.css" rel="stylesheet"/>
-    <title>Worker Dashboard | LabourLink</title>
+    <link href="../styles/worker-dashboard.css" rel="stylesheet"/>
+    <link href="../styles/worker/worker-dashboard.css" rel="stylesheet"/>
+    <title>Labourer Dashboard | LabourLink</title>
 </head>
 <body>
-<div class="register-select-modal" id="register-modal">
-</div>
-<div class="register-select-content" id="register-modal-content">
-    <div class="register-select-heading">
-        <img src="../assets/svg/user-check-solid.svg" alt="house icon" class="register-select-icon"/>
-        <h1>Select registration type</h1>
-    </div>
-    <div class="reg-type-container">
-        <div class="reg-type-card">
-            <img src="../assets/home-page/job-type/labour-type.svg" alt="worker" class="reg-type-image"/>
-            <button type="button" onclick="window.location.href='../worker-registration.php'" class="card-button">
-                Worker
-            </button>
-        </div>
-        <div class="reg-type-card">
-            <img src="../assets/home-page/job-type/customer-type.svg" alt="customer" class="reg-type-image"/>
-            <button type="button" onclick="window.location.href='../customer-registration.php'" class="card-button">
-                Customer
-            </button>
-        </div>
-    </div>
+<div class="backdrop-modal" id="backdrop-modal">
 </div>
 <nav class="nav-bar">
     <div class="nav-bar-items">
@@ -59,7 +39,8 @@ session_start();
             <input type="text" class="search-bar-input" placeholder="Search for a labourer or a service"/>
         </div>
         <div class="nav-link-container">
-            <div class="nav-link-items"><a href="#" class="nav-links">Home</a></div>
+            <div class="nav-link-items"><a href="#" class="nav-links">Home</a>
+            </div>
             <div class="nav-link-items">
                 <select name="jobs" class="nav-select">
                     <option value="jobs" selected>Jobs</option>
@@ -76,6 +57,7 @@ session_start();
             <div class="nav-link-items"><a href="#" class="nav-links">About</a></div>
             <div class="nav-link-items"><a href="#" class="nav-links">Contact Us</a></div>
             <?php
+            session_start();
             if (!isset($_SESSION['username'])) {
 
                 ?>
@@ -90,31 +72,32 @@ session_start();
                         LOGIN
                     </button>
                 </div>
-            <?php }else{ ?>
-            <div class="nav-link-items">
-                <div class="dropdown" id="dropdown">
-                    <button type="button" id="user-dropdown-button" onClick="opendropdown()"
-                            class="nav-link-items-button"
-                            style="background-color: #FFF; color: #102699;">
-                        <i class="fa-regular fa-circle-user"></i>&nbsp;
-                        Hi,&nbsp;<?php echo $_SESSION['first_name']; ?>
-                        &nbsp;
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                    <div class="dropdown-items" id="dropdown-items">
-                        <a href="#">
-                            <div class="dropdown-item" id="dropdown-item"><i class="fa-solid fa-gauge-high"></i>&nbsp;&nbsp;Dashboard
-                            </div>
-                        </a>
-                        <a href="#">
-                            <div class="dropdown-item" id="dropdown-item">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                                &nbsp;&nbsp;<a href="../logout.php">Logout</a>
-                            </div>
-                        </a>
+            <?php } 
+            else { ?>
+                <div class="nav-link-items">
+                    <div class="dropdown" id="dropdown">
+                        <button type="button" id="user-dropdown-button" onClick="opendropdown()"
+                                class="nav-link-items-button"
+                                style="background-color: #FFF; color: #102699;">
+                            <i class="fa-regular fa-circle-user"></i>&nbsp;
+                            <?php echo "Hi, " . $_SESSION['first_name']; ?>
+                            &nbsp;
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-items" id="dropdown-items">
+                            <a href="#">
+                                <div class="dropdown-item" id="dropdown-item"><i class="fa-solid fa-gauge-high"></i>&nbsp;&nbsp;Dashboard
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="dropdown-item" id="dropdown-item">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    &nbsp;&nbsp;<a href="../logout.php">Logout</a>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php } ?>
         </div>
     </div>
@@ -153,18 +136,6 @@ session_start();
                     <h4 class="sidebar-icon-heading">Payments</h4>
                 </div>
             </a>
-            <a href="./users.php">
-                <div class="sidebar-item">
-                    <i class="fa-solid fa-user-check sidebar-item-icon"></i>
-                    <h4 class="sidebar-icon-heading">Users</h4>
-                </div>
-            </a>
-            <a href="./reports.php">
-                <div class="sidebar-item">
-                    <i class="fa-regular fa-newspaper sidebar-item-icon"></i>
-                    <h4 class="sidebar-icon-heading">Reports</h4>
-                </div>
-            </a>
             <a href="./profile.php">
                 <div class="sidebar-item">
                     <i class="fa-regular fa-circle-user sidebar-item-icon"></i>
@@ -175,22 +146,50 @@ session_start();
     </section>
     <section class="main-content">
         <div class="main-heading">
-            <h1>Welcome back <u>Ravindu Wegiriya</u></h1>
-            <h5>Last accessed 21st October 2022</h5>
+        <h1>Welcome Back
+                <u>
+                    <?php
+                        echo $_SESSION['first_name'] . " " . $_SESSION['last_name']
+                    ?>
+                </u>
+            </h1>
+            <?php
+                require_once('../db.php');
+                // Getting the most recent logging attempt of the current user
+                $sql = "SELECT * FROM User WHERE Email = '{$_SESSION['username']}'";
+                $result = $conn -> query($sql);
+
+                // Getting the current user id
+                $row = $result->fetch_assoc();
+                $userId = $row['User_ID'];
+
+
+                $sql = "SELECT * FROM Login_attempt WHERE User_ID = {$userId} ORDER BY Timestamp DESC LIMIT 1";
+                $result = $conn -> query($sql);
+
+                $row = $result->fetch_assoc();
+                $latestTime = date_create($row['Timestamp']);
+
+                $dateInText = date_format($latestTime, 'dS F Y');
+
+                echo "<h5>Last accessed $dateInText</h5>";
+            ?>            
         </div>
+        <div class="overview-content">
+            <h1>Overview</h1>
+        </div>
+        <!--Recent bookings section-->
         <div class="recent-bookings">
             <div class="recent-bookings-title">
-                <h1>Recently made Bookings</h1>
+                <h1>Recent Bookings</h1>
                 <button class="more-button">More Bookings</button>
             </div>
             <div class="recent-bookings-container">
                 <div class="booking-card">
                     <div class="card-text">
-                        <h3>Mechanical</h3>
-                        <p>Work by</p>
-                        <h4>Dammika Kumara</h4>
+                        <h3>Eletrical</h3>
                         <p>Customer</p>
-                        <h4>Mohamed Izzath</h4>
+                        <h4>Mohomed Izzath</h4>
                     </div>
                     <div class="booking-card-button-row">
                         <div class="badge-container">
@@ -201,11 +200,9 @@ session_start();
                 </div>
                 <div class="booking-card">
                     <div class="card-text">
-                        <h3>Plumbing</h3>
-                        <p>Work by</p>
-                        <h4>Saman Gunawardhana</h4>
+                        <h3>Eletrical</h3>
                         <p>Customer</p>
-                        <h4>Dhananga Deepanjana</h4>
+                        <h4>Ravindu Wegiriya</h4>
                     </div>
                     <div class="booking-card-button-row">
                         <div class="badge-container">
@@ -216,11 +213,9 @@ session_start();
                 </div>
                 <div class="booking-card">
                     <div class="card-text">
-                        <h3>Painting</h3>
-                        <p>Work by</p>
-                        <h4>Avinash Sudira</h4>
+                        <h3>Eletrical</h3>
                         <p>Customer</p>
-                        <h4>Ravindu Wegiriya</h4>
+                        <h4>Dhananga Deepanjana</h4>
                     </div>
                     <div class="booking-card-button-row">
                         <div class="badge-container">
@@ -231,9 +226,7 @@ session_start();
                 </div>
                 <div class="booking-card">
                     <div class="card-text">
-                        <h3>Plumbing</h3>
-                        <p>Work by</p>
-                        <h4>Dinesh Attanayaka</h4>
+                        <h3>Eletrical</h3>
                         <p>Customer</p>
                         <h4>Rushdha Rasheed</h4>
                     </div>
@@ -246,24 +239,23 @@ session_start();
                 </div>
                 <div class="booking-card">
                     <div class="card-text">
-                        <h3>Painting</h3>
-                        <p>Work by</p>
-                        <h4>Avinash Sudira</h4>
+                        <h3>Eletrical</h3>
                         <p>Customer</p>
-                        <h4>Dhananga Deepanjana</h4>
+                        <h4>Mohomed Izzath</h4>
                     </div>
                     <div class="booking-card-button-row">
                         <div class="badge-container">
-                            <div class="blue-badge">30 Nov 2022</div>
+                            <div class="blue-badge">30 Dec 2022</div>
                         </div>
                         <button class="pending-button">Pending</button>
                     </div>
                 </div>
             </div>
         </div>
+        <!--Recent feedbacks section-->
         <div class="recent-feedbacks">
             <div class="recent-feedbacks-title">
-                <h1>Recently made Feedbacks</h1>
+                <h1>Recent Feedbacks</h1>
                 <button class="more-button">More Feedbacks</button>
             </div>
             <div class="recent-feedbacks-container">
@@ -271,114 +263,127 @@ session_start();
                     <thead>
                     <tr class="main-tr">
                         <th class="main-th">Comment</th>
-                        <th class="main-th">Worker name</th>
+                        <th class="main-th">Customer name</th>
                         <th class="main-th">Commented date</th>
-                        <th class="main-th">Made by</th>
+                        <th class="main-th">Service</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Extremely satisfied with the work done
-                            <br/>
+                        <td class="main-td" style="text-align: left;">Extremely satisfied with the work done
+                            <br />
                             <span class="blue-badge">Updated 15 days ago</span>
                         </td>
-                        <td class="main-td">Saman Gunawardhana</td>
+                        <td class="main-td">Mohomed Izzath</td>
                         <td class="main-td">21 Oct 2022</td>
-                        <td class="main-td">Mohamed Izzath</td>
+                        <td class="main-td">Electrical</td>
                     </tr>
                     <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Process was neatly done on time
-                            <br/>
+                        <td class="main-td" style="text-align: left;">Process was neatly done on time
+                            <br />
                             <span class="blue-badge">Updated 20 days ago</span>
                         </td>
-                        <td class="main-td">Kapila Gunawardana</td>
-                        <td class="main-td">16 Oct 2022</td>
                         <td class="main-td">Ravindu Wegiriya</td>
+                        <td class="main-td">16 Oct 2022</td>
+                        <td class="main-td">Electrical</td>
                     </tr>
                     <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Work not completed on time. Slighlty dissappointing
-                            <br/>
+                        <td class="main-td" style="text-align: left;">Work not completed on time. Slighlty dissappointing
+                            <br />
                             <span class="blue-badge">Updated 27 days ago</span>
                         </td>
-                        <td class="main-td">Saman Gunathilaka</td>
+                        <td class="main-td">Dhananga Deepanjana</td>
                         <td class="main-td">09 Oct 2022</td>
-                        <td class="main-td">Rushdha Rasheed</td>
+                        <td class="main-td">Electrical</td>
                     </tr>
                     <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Payment not going through
-                            <br/>
+                        <td class="main-td" style="text-align: left;">Payment not going through
+                            <br />
                             <span class="blue-badge">Updated 1 month ago</span>
                         </td>
-                        <td class="main-td">Kapila Dharmadhasa</td>
+                        <td class="main-td">Rushdha Rasheed</td>
                         <td class="main-td">05 Oct 2022</td>
-                        <td class="main-td">Dhananga Deepanjana</td>
+                        <td class="main-td">Electrical</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="recent-payments">
-            <div class="recent-payments-title">
-                <h1>Recently made Feedbacks</h1>
-                <button class="more-button">More Payments</button>
+        <!--Housings and payments section-->
+        <div class="housing-payments">
+            <div class="housing-dash-content">
+                <h1>Housing</h1>
+                <div class="housing-card">
+                    <h4>Housing package details</h4>
+                    <h3>Bambalapitiya Colombo</h3>
+                    <span class="blue-badge">Started date - 21 Nov 2022</span>
+                    <div class="housing-job-item">
+                            <div class="job-item-text">
+                                <h3>Electrical</h3>
+                            </div>
+                            <div class="jon-item-button">
+                                <button type="button" class="pending-button">Pending</button>
+                            </div>
+                        </div>
+                </div>
+                <div class="housing-card">
+                    <h4>Housing package details</h4>
+                    <h3>Kollupitiya Colombo</h3>
+                    <span class="blue-badge">Started date - 10 Nov 2022</span>
+                    <div class="housing-job-item">
+                            <div class="job-item-text">
+                                <h3>Electrical</h3>
+                            </div>
+                            <div class="jon-item-button">
+                                <button type="button" class="completed-button">Completed</button>
+                            </div>
+                        </div>
+                </div>
             </div>
-            <div class="recent-payments-container">
-                <table class="main-table">
-                    <thead>
-                    <tr class="main-tr">
-                        <th class="main-th">Customer name/Date</th>
-                        <th class="main-th">Worker name</th>
-                        <th class="main-th">Amount</th>
-                        <th class="main-th">Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Dhananga Deepanjana<br/>
-                            <span class="blue-badge">19 Nov 2022</span>
-                        </td>
-                        <td class="main-td">
-                            Saman Gunawardhana
-                        </td>
-                        <td class="main-td">Rs. 27000.00</td>
-                        <td class="main-td"><span class="payment-success-badge">Success</span></td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Ravindu Wegiriya<br/>
-                            <span class="blue-badge">30 Nov 2022</span>
-                        </td>
-                        <td class="main-td">
-                            Avinash Sudira
-                        </td>
-                        <td class="main-td">Rs. 12500.00</td>
-                        <td class="main-td"><span class="payment-success-failed">Failed</span></td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Rushdha Rasheeda<br/>
-                            <span class="blue-badge">1 Nov 2022</span>
-                        </td>
-                        <td class="main-td">
-                            Dinesh Attanayaka
-                        </td>
-                        <td class="main-td">Rs. 1700.00</td>
-                        <td class="main-td"><span class="payment-success-badge">Success</span></td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Mohamed Izzath<br/>
-                            <span class="blue-badge">19 Nov 2022</span>
-                        </td>
-                        <td class="main-td">
-                            Kapila Dharmadhasa
-                        </td>
-                        <td class="main-td">Rs. 12000.00</td>
-                        <td class="main-td"><span class="payment-success-badge">Success</span></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="payments-dash-content">
+                <h1>Payments</h1>
+                <div class="payments-list">
+                    <div class="payment-item">
+                        <div class="payment-text">
+                            <span class="blue-badge">21 Oct 2022</span>
+                            <h3>Mohomed Izzath</h3>
+                            <h4>Saman Gunawardhana</h4>
+                        </div>
+                        <div class="payment-button">
+                            <button type="button" class="payment-amount-button">Rs. 27900.00</button>
+                        </div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-text">
+                            <span class="blue-badge">19 Oct 2022</span>
+                            <h3>Ravindu Wegiriya</h3>
+                            <h4>Saman Gunawardhana</h4>
+                        </div>
+                        <div class="payment-button">
+                            <button type="button" class="payment-amount-button">Rs. 12000.00</button>
+                        </div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-text">
+                            <span class="blue-badge">21 Oct 2022</span>
+                            <h3>Dhananga Deepanjana</h3>
+                            <h4>Saman Gunawardhana</h4>
+                        </div>
+                        <div class="payment-button">
+                            <button type="button" class="payment-amount-button">Rs. 17000.00</button>
+                        </div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-text">
+                            <span class="blue-badge">19 Oct 2022</span>
+                            <h3>Rushdha Rasheed</h3>
+                            <h4>Saman Gunawardhana</h4>
+                        </div>
+                        <div class="payment-button">
+                            <button type="button" class="payment-amount-button">Rs. 21000.00</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -389,6 +394,5 @@ session_start();
     </div>
 </footer>
 <script src="../scripts/modals.js" type="text/javascript"></script>
-<script src="../scripts/index.js" type="text/javascript"></script>
+<script src="../scripts/customer/bookings.js" type="text/javascript"></script>
 </body>
-
