@@ -1,7 +1,7 @@
 <?php
     session_start();
     // Check whether labourer is logged in
-    if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Labour') {
+    if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Worker') {
         header("Location: ../login.php");
     }
 ?>
