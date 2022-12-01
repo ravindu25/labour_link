@@ -1,9 +1,9 @@
 <?php
     session_start();
     // Check whether labourer is logged in
-    if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Worker') {
-        header("Location: ../login.php");
-    }
+    // if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Worker') {
+    //     header("Location: ../login.php");
+    // }
 ?>
 <!DOCTYPE html>
 <html lang="en">

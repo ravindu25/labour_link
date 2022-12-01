@@ -1,7 +1,7 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
+    $servername = "labour-link.c4wgecowfejr.ap-northeast-1.rds.amazonaws.com";
+    $username = "admin";
+    $password = "LabourLink123*";
     $dbname = "labour_link";
 
     // Create connection
