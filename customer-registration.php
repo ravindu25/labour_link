@@ -111,8 +111,10 @@
                                                                                              class="terms-link">Privacy policy</a></span>
                 </div>
                 <div class="button-container">
-<!--                    <button type="submit" class="button" id="register-button" name="register-button">Register</button>-->
-                    <input type="submit" class="button" id="register-button" value="Register" name="register-button" />
+                    <button type="button" id="back-button" class="back-button" onclick="window.location.href='index.php'">
+                        Back
+                    </button>
+                    <input type="submit" class="register-button" id="register-button" value="Register" name="register-button" />
                 </div>
             </form>
         </div>

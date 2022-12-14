@@ -146,7 +146,22 @@ a{
     text-align: center;
 }
 
-.button{
+.back-button{
+    min-width: 120px;
+    outline: none;
+    border: none;
+    margin-right: 18px;
+    padding: 10px 5px;
+    color: #354BC0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 16px;
+    background-color: #D0CFCE;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.register-button{
     min-width: 120px;
     outline: none;
     border: none;
@@ -160,6 +175,6 @@ a{
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
 }
 
-.button:active{
+.back-button:active, .register-button:active{
     transform: scale(.96);
 }
