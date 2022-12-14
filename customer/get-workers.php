@@ -13,13 +13,13 @@
     $sql = '';
 
     switch($workerType){
-        case 'electrician':
+        case 'Electrician':
             $sql = "select User.User_ID, User.First_Name, User.Last_Name from User inner join Electrician on User.User_ID = Electrician.Electrician_ID";
             break;
-        case 'painter':
+        case 'Painter':
             $sql = "select User.User_ID, User.First_Name, User.Last_Name from User inner join Painter on User.User_ID = Painter.Painter_ID";
             break;
-        case 'mason':
+        case 'Mason':
             $sql = "select User.User_ID, User.First_Name, User.Last_Name from User inner join Mason on User.User_ID = Mason.Mason_ID";
             break;
         default:

@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mariadb://localhost:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="labour_link@labour-link.c4wgecowfejr.ap-northeast-1.rds.amazonaws.com" uuid="475dfc38-d111-4e38-a823-0a2260e2f5b0">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://labour-link.c4wgecowfejr.ap-northeast-1.rds.amazonaws.com:3306/labour_link</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

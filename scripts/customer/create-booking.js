@@ -66,10 +66,11 @@ function createBooking(dataSource, data){
             bookingBackdrop.style.visibility = 'hidden';
             bookingCreateForm.style.visibility = 'hidden';
 
-            setTimeout(5000, () => {
+            setTimeout( () => {
                 successDiv.style.visibility = 'hidden';
                 messageBackdrop.style.visibility = 'hidden';
-            });
+                window.location.href = "../customer/bookings.php";
+            }, 5000);
         }else if(XMLHttpRequestObject.status === 400){
             const failDiv = document.getElementById('booking-create-fail');
             const bookingCreateForm = document.getElementById('create-booking-container');
@@ -81,10 +82,11 @@ function createBooking(dataSource, data){
             bookingBackdrop.style.visibility = 'hidden';
             bookingCreateForm.style.visibility = 'hidden';
 
-            setTimeout(5000, () => {
+            setTimeout( () => {
                 successDiv.style.visibility = 'hidden';
                 messageBackdrop.style.visibility = 'hidden';
-            });
+                window.location.href = "../customer/bookings.php";
+            }, 5000);
         }
     }
 

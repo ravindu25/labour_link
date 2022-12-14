@@ -113,12 +113,9 @@
                 </div>
 
                 <div class="button-container">
-                    <button type="button" class="back-button" id="back-button">
+                    <button type="button" class="back-button" id="back-button" onclick="window.location.href='index.php'">
                         Back
                     </button>
-                    <!-- <button type="button" class="reg-button" id="register-button">
-                        Register
-                    </button> -->
                     <input type="submit" class="reg-button" id="register-button" value="Register" name="register-button" />
                 </div>
             </form>
