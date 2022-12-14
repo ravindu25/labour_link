@@ -45,7 +45,10 @@
                     <span>Remember me</span>
                 </div>
                 <div class="button-container">
-                    <button type="submit" id="submit-button" class="button">
+                    <button type="button" id="back-button" class="back-button" onclick="window.location.href='index.php'">
+                        Back
+                    </button>
+                    <button type="submit" id="submit-button" class="submit-button">
                         Login
                     </button>
                 </div>

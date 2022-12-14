@@ -52,18 +52,39 @@ function createBooking(dataSource, data){
     XMLHttpRequestObject.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     XMLHttpRequestObject.onreadystatechange = function (){
+        console.log(XMLHttpRequestObject.readyState);
+        console.log(XMLHttpRequestObject.status);
+
         if(XMLHttpRequestObject.readyState === 4 && XMLHttpRequestObject.status === 200){
             const successDiv = document.getElementById('booking-create-success');
-            const bookingCreateForm = document.getElementById('booking-details-container');
+            const bookingCreateForm = document.getElementById('create-booking-container');
+            const bookingBackdrop = document.getElementById('backdrop-modal');
+            const messageBackdrop = document.getElementById('message-backdrop');
 
             successDiv.style.visibility = 'visible';
+            messageBackdrop.style.visibility = 'visible';
+            bookingBackdrop.style.visibility = 'hidden';
             bookingCreateForm.style.visibility = 'hidden';
-        }else{
+
+            setTimeout(5000, () => {
+                successDiv.style.visibility = 'hidden';
+                messageBackdrop.style.visibility = 'hidden';
+            });
+        }else if(XMLHttpRequestObject.status === 400){
             const failDiv = document.getElementById('booking-create-fail');
-            const bookingCreateForm = document.getElementById('booking-details-container');
+            const bookingCreateForm = document.getElementById('create-booking-container');
+            const bookingBackdrop = document.getElementById('backdrop-modal');
+            const messageBackdrop = document.getElementById('message-backdrop');
 
             failDiv.style.visibility = 'visible';
+            messageBackdrop.style.visibility = 'visible';
+            bookingBackdrop.style.visibility = 'hidden';
             bookingCreateForm.style.visibility = 'hidden';
+
+            setTimeout(5000, () => {
+                successDiv.style.visibility = 'hidden';
+                messageBackdrop.style.visibility = 'hidden';
+            });
         }
     }
 

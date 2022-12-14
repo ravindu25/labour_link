@@ -17,6 +17,7 @@
     --warning-color: #FF5B19;
     --warning-dark-color: #9A2D01;
     --grey-color: #978C87;
+    --grey-color-shade: #D0CFCE;
 }
 
 body{
@@ -32,6 +33,15 @@ a{
 }
 
 .backdrop-modal{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #72736F;
+    opacity: 0.5;
+    visibility: hidden;
+}
+
+.message-backdrop{
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -500,7 +510,6 @@ a{
 
 .feedback-container{
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 

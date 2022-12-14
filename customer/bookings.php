@@ -27,6 +27,8 @@
 <body>
 <div class="backdrop-modal" id="backdrop-modal">
 </div>
+<div class="message-backdrop" id="message-backdrop">
+</div>
 <div class="success-message-container" id="booking-create-success">
     <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Booking created successfully</h1>
 </div>
