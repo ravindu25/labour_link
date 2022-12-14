@@ -150,6 +150,21 @@ if(isset($_POST['firstname'])){
 
     if($result1 && $result3){
         echo "Successfully Inserted";
+
+        //send email
+        require_once 'mailconfiguration.php';
+
+        $mail->addAddress($email, $firstname);
+        $mail->isHTML(true);
+        $mail->Subject = 'Registration Confirmation';
+        $mail->Body = "Dear $firstname $lastname,<br><br>Thank you for registering with us.<br><br>Regards,<br>Team Labour Link";
+        if ($mail->send()) {
+            echo 'Email sent';
+        } else {
+            echo 'Email not sent';
+        }
+        
+
     }else{
         echo "Error in Insertion";
         echo("Error description: " . mysqli_error($conn));
