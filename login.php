@@ -103,7 +103,7 @@
                 if ($_SESSION['user_type'] == 'Customer') {
                     header("Location: index.php");
                 } else if ($_SESSION['user_type'] == 'Worker') {
-                    header("Location: worker_homepage.php");    
+                    header("Location: worker/dashboard.php");    
                 }
 
 

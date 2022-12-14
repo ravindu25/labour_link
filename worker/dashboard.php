@@ -1,9 +1,9 @@
 <?php
     session_start();
     // Check whether labourer is logged in
-    // if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Worker') {
-    //     header("Location: ../login.php");
-    // }
+    if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Worker') {
+        header("Location: ../login.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +57,7 @@
             <div class="nav-link-items"><a href="#" class="nav-links">About</a></div>
             <div class="nav-link-items"><a href="#" class="nav-links">Contact Us</a></div>
             <?php
-            session_start();
+            // session_start();
             if (!isset($_SESSION['username'])) {
 
                 ?>
@@ -185,70 +185,51 @@
                 <button class="more-button">More Bookings</button>
             </div>
             <div class="recent-bookings-container">
-                <div class="booking-card">
-                    <div class="card-text">
-                        <h3>Eletrical</h3>
-                        <p>Customer</p>
-                        <h4>Mohomed Izzath</h4>
-                    </div>
-                    <div class="booking-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">21 Oct 2022</div>
+            <?php
+                require_once '../db.php';
+
+                // $sql = "SELECT First_Name,Last_Name ,Start_Date , Completion_Flag FROM user INNER JOIN booking ON user.User_ID = booking.Customer_ID INNER JOIN confirmed_booking ON booking.Booking_ID = confirmed_booking.Booking_ID";
+
+                $sql = "SELECT First_Name,Last_Name ,Start_Date FROM user INNER JOIN booking ON user.User_ID = booking.Customer_ID";
+
+                $array1 = array("Plumbing","Carpentry","Electrical","Painting","Masonry","Janitorial","Mechanical","Gardening");
+                $array2 = array("Pending","Completed","Rejected","In-Progress");
+
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+
+                        $arrValue = array_rand($array2,1);
+                        if($arrValue == 0){
+                            $btn = "<button class='pending-button'>Pending</button>";  
+                        }
+                        else if($arrValue == 1){
+                            $btn = "<button class='completed-button'>Completed</button>";
+                        }
+                        else if($arrValue == 2){
+                            $btn = "<button class='rejected-button'>Rejected</button>";
+                        }
+                        else {
+                            $btn = "<button class='in-pogress-button'>In-Progress</button>";  
+                        }
+                        echo('
+                        <div class="booking-card"
+                            <div class="card-text">
+                                <h3>'.$array1[array_rand($array1,1)].'</h3>
+                                <p>Customer</p>
+                                <h4>' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</h4>
+                            <div class="booking-card-button-row">
+                                <div class="badge-container">
+                                    <div class="blue-badge">' . date("d M Y", strtotime($row['Start_Date'])) . '</div> 
+                                </div>
+                                '. $btn .'
+                            </div>
                         </div>
-                        <button class="completed-button">Completed</button>
-                    </div>
-                </div>
-                <div class="booking-card">
-                    <div class="card-text">
-                        <h3>Eletrical</h3>
-                        <p>Customer</p>
-                        <h4>Ravindu Wegiriya</h4>
-                    </div>
-                    <div class="booking-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">12 Nov 2022</div>
-                        </div>
-                        <button class="in-pogress-button">In-Progress</button>
-                    </div>
-                </div>
-                <div class="booking-card">
-                    <div class="card-text">
-                        <h3>Eletrical</h3>
-                        <p>Customer</p>
-                        <h4>Dhananga Deepanjana</h4>
-                    </div>
-                    <div class="booking-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">30 Nov 2022</div>
-                        </div>
-                        <button class="in-pogress-button">In-Progress</button>
-                    </div>
-                </div>
-                <div class="booking-card">
-                    <div class="card-text">
-                        <h3>Eletrical</h3>
-                        <p>Customer</p>
-                        <h4>Rushdha Rasheed</h4>
-                    </div>
-                    <div class="booking-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">1 Nov 2022</div>
-                        </div>
-                        <button class="rejected-button">Rejected</button>
-                    </div>
-                </div>
-                <div class="booking-card">
-                    <div class="card-text">
-                        <h3>Eletrical</h3>
-                        <p>Customer</p>
-                        <h4>Mohomed Izzath</h4>
-                    </div>
-                    <div class="booking-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">30 Dec 2022</div>
-                        </div>
-                        <button class="pending-button">Pending</button>
-                    </div>
+
+                    ');
+                    }
+                }
+                ?>
                 </div>
             </div>
         </div>
