@@ -92,14 +92,14 @@
             <div class="form-input-row">
                 <label for="job-type">Job type</label>
                 <select id="job-type" name="job-type">
-                    <option value="electrician">Electrician</option>
-                    <option value="plumber">Plumber</option>
-                    <option value="painter">Painter</option>
-                    <option value="carpenter">Carpenter</option>
-                    <option value="mason">Mason</option>
-                    <option value="janitor">Janitor</option>
-                    <option value="mechanical">Mechanical</option>
-                    <option value="gardner">Gardner</option>
+                    <option value="Electrician">Electrician</option>
+                    <option value="Plumber">Plumber</option>
+                    <option value="Painter">Painter</option>
+                    <option value="Carpenter">Carpenter</option>
+                    <option value="Mason">Mason</option>
+                    <option value="Janitor">Janitor</option>
+                    <option value="Mechanical">Mechanical</option>
+                    <option value="Gardner">Gardner</option>
                 </select>
             </div>
             <div class="form-input-row">

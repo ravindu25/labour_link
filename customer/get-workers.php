@@ -14,16 +14,16 @@
 
     switch($workerType){
         case 'electrician':
-            $sql = "select user.User_ID, user.First_Name, user.Last_Name from user inner join electrician on user.User_ID = electrician.Electrician_ID";
+            $sql = "select User.User_ID, User.First_Name, User.Last_Name from User inner join Electrician on User.User_ID = Electrician.Electrician_ID";
             break;
         case 'painter':
-            $sql = "select user.User_ID, user.First_Name, user.Last_Name from user inner join painter on user.User_ID = painter.Painter_ID";
+            $sql = "select User.User_ID, User.First_Name, User.Last_Name from User inner join Painter on User.User_ID = Painter.Painter_ID";
             break;
         case 'mason':
-            $sql = "select user.User_ID, user.First_Name, user.Last_Name from user inner join mason on user.User_ID = mason.Mason_ID";
+            $sql = "select User.User_ID, User.First_Name, User.Last_Name from User inner join Mason on User.User_ID = Mason.Mason_ID";
             break;
         default:
-            $sql = "select user.User_ID, user.First_Name, user.Last_Name from user inner join electrician on user.User_ID = electrician.Electrician_ID";
+            $sql = "select User.User_ID, User.First_Name, User.Last_Name from User inner join Electrician on User.User_ID = Electrician.Electrician_ID";
     }
 
     $result = $conn->query($sql);

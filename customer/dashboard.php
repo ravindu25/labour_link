@@ -214,7 +214,7 @@
                 $userId = $row['User_ID'];
 
 
-                $sql = "SELECT * FROM Login_attempt WHERE User_ID = {$userId} ORDER BY Timestamp DESC LIMIT 1";
+                $sql = "SELECT * FROM Login_Attempt WHERE User_ID = {$userId} ORDER BY Timestamp DESC LIMIT 1";
                 $result = $conn -> query($sql);
 
                 $row = $result->fetch_assoc();
