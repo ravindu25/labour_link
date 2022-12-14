@@ -164,7 +164,7 @@
                 $userId = $row['User_ID'];
 
 
-                $sql = "SELECT * FROM Login_attempt WHERE User_ID = {$userId} ORDER BY Timestamp DESC LIMIT 1";
+                $sql = "SELECT * FROM Login_Attempt WHERE User_ID = {$userId} ORDER BY Timestamp DESC LIMIT 1";
                 $result = $conn -> query($sql);
 
                 $row = $result->fetch_assoc();
@@ -190,7 +190,7 @@
 
                 // $sql = "SELECT First_Name,Last_Name ,Start_Date , Completion_Flag FROM user INNER JOIN booking ON user.User_ID = booking.Customer_ID INNER JOIN confirmed_booking ON booking.Booking_ID = confirmed_booking.Booking_ID";
 
-                $sql = "SELECT First_Name,Last_Name ,Start_Date FROM user INNER JOIN booking ON user.User_ID = booking.Customer_ID";
+                $sql = "SELECT First_Name,Last_Name ,Start_Date FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID";
 
                 $array1 = array("Plumbing","Carpentry","Electrical","Painting","Masonry","Janitorial","Mechanical","Gardening");
                 $array2 = array("Pending","Completed","Rejected","In-Progress");
