@@ -238,7 +238,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
     <section class="main-content">
         <div class="main-heading">
             <h1>Control panel for managing <u>Users</u></h1>
-            <h5>Logged as Ravindu Wegiriya</h5>
+            <h5>Logged as <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></h5>
         </div>
         <div class="recent-logins">
             <div class="recent-logins-title">

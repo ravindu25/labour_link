@@ -162,8 +162,34 @@ session_start();
     </section>
     <section class="main-content">
         <div class="main-heading">
-            <h1>Welcome back <u>Ravindu Wegiriya</u></h1>
-            <h5>Last accessed 21st October 2022</h5>
+            <h1>Welcome Back
+                <u>
+                    <?php
+                        echo $_SESSION['first_name'] . " " . $_SESSION['last_name']
+                    ?>
+                </u>
+            </h1>
+            <?php
+                require_once('../db.php');
+                // Getting the most recent logging attempt of the current user
+                $sql = "SELECT * FROM User WHERE Email = '{$_SESSION['username']}'";
+                $result = $conn -> query($sql);
+
+                // Getting the current user id
+                $row = $result->fetch_assoc();
+                $userId = $row['User_ID'];
+
+
+                $sql = "SELECT * FROM Login_Attempt WHERE User_ID = {$userId} ORDER BY Timestamp DESC LIMIT 1";
+                $result = $conn -> query($sql);
+
+                $row = $result->fetch_assoc();
+                $latestTime = date_create($row['Timestamp']);
+
+                $dateInText = date_format($latestTime, 'dS F Y');
+
+                echo "<h5>Last accessed $dateInText</h5>";
+            ?>
         </div>
         <div class="recent-bookings">
             <div class="recent-bookings-title">
