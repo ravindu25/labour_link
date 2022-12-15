@@ -85,19 +85,6 @@
         </div>
         <div class="nav-link-container">
             <div class="nav-link-items"><a href="#" class="nav-links">Home</a></div>
-            <div class="nav-link-items">
-                <select name="jobs" class="nav-select">
-                    <option value="jobs" selected>Jobs</option>
-                    <option value="plumbing">Plumbing</option>
-                    <option value="carpentry">Carpentry</option>
-                    <option value="electrical">Electrical</option>
-                    <option value="painting">Painting</option>
-                    <option value="masonry">Masonry</option>
-                    <option value="janitorial">Janitorial</option>
-                    <option value="mechanical">Mechanical</option>
-                    <option value="gardening">Gardening</option>
-                </select>
-            </div>
             <div class="nav-link-items"><a href="#" class="nav-links">About</a></div>
             <div class="nav-link-items"><a href="#" class="nav-links">Contact Us</a></div>
             <?php
@@ -232,74 +219,63 @@
         <div class="recent-bookings">
             <div class="recent-bookings-title">
                 <h1>Recently made Bookings</h1>
-                <button class="more-button">More Bookings</button>
+                <button class="more-button" onclick="window.location.href='bookings.php'">More Bookings</button>
             </div>
             <div class="recent-bookings-container">
-                <div class="booking-card">
-                    <div class="card-text">
-                        <h3>Mechanical</h3>
-                        <p>Work by</p>
-                        <h4>Dammika Kumara</h4>
-                    </div>
-                    <div class="booking-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">21 Oct 2022</div>
-                        </div>
-                        <button class="completed-button">Completed</button>
-                    </div>
-                </div>
-                <div class="booking-card">
-                    <div class="card-text">
-                        <h3>Plumbing</h3>
-                        <p>Work by</p>
-                        <h4>Saman Gunawardhana</h4>
-                    </div>
-                    <div class="booking-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">12 Nov 2022</div>
-                        </div>
-                        <button class="in-pogress-button">In-Progress</button>
-                    </div>
-                </div>
-                <div class="booking-card">
-                    <div class="card-text">
-                        <h3>Painting</h3>
-                        <p>Work by</p>
-                        <h4>Avinash Sudira</h4>
-                    </div>
-                    <div class="booking-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">30 Nov 2022</div>
-                        </div>
-                        <button class="in-pogress-button">In-Progress</button>
-                    </div>
-                </div>
-                <div class="booking-card">
-                    <div class="card-text">
-                        <h3>Plumbing</h3>
-                        <p>Work by</p>
-                        <h4>Dinesh Attanayaka</h4>
-                    </div>
-                    <div class="booking-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">1 Nov 2022</div>
-                        </div>
-                        <button class="rejected-button">Rejected</button>
-                    </div>
-                </div>
-                <div class="booking-card">
-                    <div class="card-text">
-                        <h3>Painting</h3>
-                        <p>Work by</p>
-                        <h4>Avinash Sudira</h4>
-                    </div>
-                    <div class="booking-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">30 Nov 2022</div>
-                        </div>
-                        <button class="pending-button">Pending</button>
-                    </div>
-                </div>
+                <?php
+                    require_once('../db.php');
+
+                    // Getting customer id from the session
+                    $customer_id = $customer_id = $_SESSION['user_id'];
+                    $sql_get_bookings = "select Booking.*, User.First_Name, User.Last_Name from Booking inner join User on Booking.Worker_ID = User.User_ID where Booking.Customer_ID = $customer_id";
+
+                    $status = array("Pending","Completed","Rejected","In-Progress");
+
+                    $result = $conn->query($sql_get_bookings);
+
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+                            $worker_type = $row['Worker_Type'];
+                            $worker_name = $row['First_Name'] . " " . $row['Last_Name'];
+                            $start_date = date("d M Y", strtotime($row['Start_Date']));
+                            $statusValue = array_rand($status);
+
+                            $button = '';
+                            switch($statusValue){
+                                case 0:
+                                    $button = '<button class="pending-button">Pending</button>';
+                                    break;
+                                case 1:
+                                    $button = '<button class="completed-button">Completed</button>';
+                                    break;
+                                case 2:
+                                    $button = '<button class="rejected-button">Rejected</button>';
+                                    break;
+                                case 3:
+                                    $button = '<button class="in-pogress-button">In-Progress</button>';
+                                    break;
+                                default:
+                                    $button = '<button class="in-pogress-button">In-Progress</button>';
+                                    break;
+                            }
+
+                            echo "
+                                <div class='booking-card'>
+                                    <div class='card-text'>
+                                        <h3>$worker_type</h3>
+                                        <p>Work by</p>
+                                        <h4>$worker_name</h4>
+                                    </div>
+                                    <div class='booking-card-button-row'>
+                                        <div class='badge-container'>
+                                            <div class='blue-badge'>$start_date</div>
+                                        </div>
+                                        $button
+                                    </div>
+                                </div>";
+                        }
+                    }
+                ?>
             </div>
         </div>
         <!--Recent feedbacks section-->

@@ -41,19 +41,6 @@
         <div class="nav-link-container">
             <div class="nav-link-items"><a href="#" class="nav-links">Home</a>
             </div>
-            <div class="nav-link-items">
-                <select name="jobs" class="nav-select">
-                    <option value="jobs" selected>Jobs</option>
-                    <option value="plumbing">Plumbing</option>
-                    <option value="carpentry">Carpentry</option>
-                    <option value="electrical">Electrical</option>
-                    <option value="painting">Painting</option>
-                    <option value="masonry">Masonry</option>
-                    <option value="janitorial">Janitorial</option>
-                    <option value="mechanical">Mechanical</option>
-                    <option value="gardening">Gardening</option>
-                </select>
-            </div>
             <div class="nav-link-items"><a href="#" class="nav-links">About</a></div>
             <div class="nav-link-items"><a href="#" class="nav-links">Contact Us</a></div>
             <?php

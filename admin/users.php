@@ -134,62 +134,49 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         </div>
         <div class="nav-link-container">
             <div class="nav-link-items"><a href="#" class="nav-links">Home</a></div>
-            <div class="nav-link-items">
-                <select name="jobs" class="nav-select">
-                    <option value="jobs" selected>Jobs</option>
-                    <option value="plumbing">Plumbing</option>
-                    <option value="carpentry">Carpentry</option>
-                    <option value="electrical">Electrical</option>
-                    <option value="painting">Painting</option>
-                    <option value="masonry">Masonry</option>
-                    <option value="janitorial">Janitorial</option>
-                    <option value="mechanical">Mechanical</option>
-                    <option value="gardening">Gardening</option>
-                </select>
-            </div>
             <div class="nav-link-items"><a href="#" class="nav-links">About</a></div>
             <div class="nav-link-items"><a href="#" class="nav-links">Contact Us</a></div>
             <?php
-            if (!isset($_SESSION['username'])) {
+                if (!isset($_SESSION['username'])) {
 
-                ?>
-                <div class="nav-link-items">
-                    <button type="button" id="register-button" class="nav-link-items-button"
-                            style="background-color: #FFF; color: #102699;">
-                        REGISTER
-                    </button>
-                </div>
-                <div class="nav-link-items">
-                    <button type="button" class="nav-link-items-button" onclick="window.location.href='login.php'">
-                        LOGIN
-                    </button>
-                </div>
-            <?php } else { ?>
-                <div class="nav-link-items">
-                    <div class="dropdown" id="dropdown">
-                        <button type="button" id="user-dropdown-button" onClick="opendropdown()"
-                                class="nav-link-items-button"
+                    ?>
+                    <div class="nav-link-items">
+                        <button type="button" id="register-button" class="nav-link-items-button"
                                 style="background-color: #FFF; color: #102699;">
-                            <i class="fa-regular fa-circle-user"></i>&nbsp;
-                            Hi,&nbsp;<?php echo $_SESSION['first_name']; ?>
-                            &nbsp;
-                            <i class="fa-solid fa-chevron-down"></i>
+                            REGISTER
                         </button>
-                        <div class="dropdown-items" id="dropdown-items">
-                            <a href="#">
-                                <div class="dropdown-item" id="dropdown-item"><i class="fa-solid fa-gauge-high"></i>&nbsp;&nbsp;Dashboard
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="dropdown-item" id="dropdown-item">
-                                    <i class="fa-solid fa-right-from-bracket"></i>
-                                    &nbsp;&nbsp;Logout
-                                </div>
-                            </a>
+                    </div>
+                    <div class="nav-link-items">
+                        <button type="button" class="nav-link-items-button" onclick="window.location.href='login.php'">
+                            LOGIN
+                        </button>
+                    </div>
+                <?php }else{ ?>
+                    <div class="nav-link-items">
+                        <div class="dropdown" id="dropdown">
+                            <button type="button" id="user-dropdown-button" onClick="opendropdown()"
+                                    class="nav-link-items-button"
+                                    style="background-color: #FFF; color: #102699;">
+                                <i class="fa-regular fa-circle-user"></i>&nbsp;
+                                Hi,&nbsp;<?php echo $_SESSION['first_name']; ?>
+                                &nbsp;
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <div class="dropdown-items" id="dropdown-items">
+                                <a href="#">
+                                    <div class="dropdown-item" id="dropdown-item"><i class="fa-solid fa-gauge-high"></i>&nbsp;&nbsp;Dashboard
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="dropdown-item" id="dropdown-item">
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                        &nbsp;&nbsp;<a href="../logout.php">Logout</a>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php } ?>
+                <?php } ?>
         </div>
     </div>
 </nav>

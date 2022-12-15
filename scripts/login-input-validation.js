@@ -15,8 +15,15 @@ function validateInputs(username, password){
     // Getting error text fields
     const usernameError = document.getElementById("input-email-error");
     const passwordError = document.getElementById("input-password-error");
+
+    // Checking the email using regex
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+
     if(username === ''){
-        usernameError.innerText = 'Please enter the username';
+        usernameError.innerText = 'Please enter the email';
+    }else if(!emailPattern.test(username)){
+        usernameError.innerText = 'Invalid email address';
+        return false;
     }else if(password === ''){
         passwordError.innerText = 'Please enter the password';
     }

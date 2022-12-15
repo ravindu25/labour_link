@@ -119,8 +119,9 @@ a{
 
 .nav-bar-items{
     display: flex;
-    width: 80%;
+    width: 90%;
     align-items: center;
+    justify-content: center;
     font-family: 'Inter', sans-serif;
 }
 
@@ -180,7 +181,7 @@ a{
 .nav-link-container{
     display: flex;
     align-items: center;
-    /*margin-left: 5%;*/
+    margin-left: 2%;
 }
 
 .nav-link-items{
