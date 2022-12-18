@@ -134,7 +134,7 @@
 </section>
 <section class="contact-form-container">
     <div class="contact-form">
-        <form action="#" method="POST">
+        <form action="" method="POST">
             <div class="form-title">
                 <i class="fa-solid fa-envelope"></i>
                 <h1>Send us a message!</h1>
@@ -142,31 +142,31 @@
             <div class="form-row">
                 <div class="form-column">
                     <label class="form-input-label" for="first-name">First Name</label>
-                    <input type="text" class="form-input" id="first-name"/>
+                    <input type="text" class="form-input" id="first-name" name="first-name"/>
                 </div>
                 <div class="form-column">
                     <label class="form-input-label" for="last-name">Last Name</label>
-                    <input type="text" class="form-input" id="last-name"/>
+                    <input type="text" class="form-input" id="last-name" name="last-name"/>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-column">
                     <label class="form-input-label" for="contact-number">Contact Number</label>
-                    <input type="text" class="form-input" id="contact-number"/>
+                    <input type="text" class="form-input" id="contact-number" name="contact-number"/>
                 </div>
                 <div class="form-column">
                     <label class="form-input-label" for="email-address">Email Address</label>
-                    <input type="text" class="form-input" id="email-address"/>
+                    <input type="text" class="form-input" id="email-address" name="email"/>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-column">
                     <label class="form-input-label" for="message">Message</label>
-                    <textarea class="form-text-area" id="message"></textarea>
+                    <textarea class="form-text-area" id="message"  name="message"></textarea>
                 </div>
             </div>
             <div class="button-container">
-                <button type="submit" class="submit-button">Submit</button>
+                <button type="submit" class="submit-button" name="submit-button">Submit</button>
             </div>
         </form>
     </div>
@@ -230,3 +230,46 @@
 <script src="./scripts/index.js" type="text/javascript"></script>
 </body>
 </html>
+
+<?php
+    if(isset($_POST['submit-button'])){
+        require_once 'db.php';
+
+        $first_name = $_POST['first-name'];
+        $last_name = $_POST['last-name'];
+        $contact_number = $_POST['contact-number'];
+        $email = $_POST['email'];
+        $message = $_POST['message'];
+
+        $sql = "INSERT INTO Message (First_Name, Last_Name, Contact_Num, Email, Message) VALUES ('$first_name', '$last_name', '$contact_number', '$email', '$message')";
+        $result = mysqli_query($conn, $sql);
+
+        if($result){
+            echo "Successfuly sent";
+            require_once 'mailconfiguration.php';
+
+            $mail->addAddress('labourlinklanka@gmail.com');
+            $mail->isHTML(true);
+            $mail->Subject = "Message from $first_name";
+            //add reply to
+            $mail->addReplyTo($email);
+            $mail->Body = "You have received a message from $first_name $last_name. <br> Contact Number: $contact_number <br> Email: $email <br> Message: $message";
+
+            if ($mail->send()) {
+                echo 'Email sent';
+            } else {
+                echo 'Email not sent';
+            }
+
+
+        }else{
+            //echo the mysql error if the query fails
+            echo mysqli_error($conn);
+
+        
+        }
+
+        
+    }
+
+?>
