@@ -36,6 +36,7 @@
                     <input type="password" id="password" name="password" class="text-input"/>
                     <br/>
                     <span class="input-error-text" id="input-password-error"></span>
+                    <br/>
                 </div>
                 <div class="forget-password-container">
                     <a href="#" class="login-link">Forgot password?</a>
@@ -84,6 +85,10 @@
             $row = $result->fetch_assoc();
             $user_id=$row['User_ID'];
             if ($row['Pswd'] == $password) {
+                if($row['Activation_Flag']==0){
+                    echo "<script>document.getElementById('input-password-error').innerHTML = 'Your Account is Suspended. <br> Please contact us for more details. ';</script>";
+                    exit();
+                }
                 //start the session
                 session_start();
                 //set the session variable
