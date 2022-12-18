@@ -512,7 +512,6 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var response = this.responseText;
-
                 if (response == "Success") {
                     // alert('User activated successfully');
                     //print data type of response
@@ -521,6 +520,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     // alert('Error occurred');
                     location.reload();
                 }
+                
             }
         }
         xmlhttp.open("POST", "http://localhost/labour_link/admin/reset-login.php", true);
