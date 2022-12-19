@@ -227,7 +227,7 @@
 
                     // Getting customer id from the session
                     $customer_id = $customer_id = $_SESSION['user_id'];
-                    $sql_get_bookings = "select Booking.*, User.First_Name, User.Last_Name from Booking inner join User on Booking.Worker_ID = User.User_ID where Booking.Customer_ID = $customer_id ORDER BY Booking.Start_Date DESC LIMIT 5";
+                    $sql_get_bookings = "select Booking.*, User.First_Name, User.Last_Name from Booking inner join User on Booking.Worker_ID = User.User_ID where Booking.Customer_ID = $customer_id ORDER BY Booking.Created_Date DESC LIMIT 5";
 
                     $status = array("Pending","Completed","Rejected","In-Progress");
 
