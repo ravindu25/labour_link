@@ -177,7 +177,7 @@
 
                 // $sql = "SELECT First_Name,Last_Name ,Start_Date , Completion_Flag FROM user INNER JOIN booking ON user.User_ID = booking.Customer_ID INNER JOIN confirmed_booking ON booking.Booking_ID = confirmed_booking.Booking_ID";
 
-                $sql = "SELECT First_Name,Last_Name ,Start_Date, Worker_Type FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']}";
+                $sql = "SELECT First_Name,Last_Name ,Start_Date, Worker_Type, Created_Date FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} ORDER BY Created_Date DESC LIMIT 5";
 
                 // $array1 = array("Plumbing","Carpentry","Electrical","Painting","Masonry","Janitorial","Mechanical","Gardening");
                 $array2 = array("Pending","Completed","Rejected","In-Progress");

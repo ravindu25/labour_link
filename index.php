@@ -46,9 +46,9 @@
             <input type="text" class="search-bar-input" placeholder="Search for a labourer or a service"/>
         </div>
         <div class="nav-link-container">
-            <div class="nav-link-items"><a href="#" class="nav-links">Home</a></div>
+            <div class="nav-link-items"><a href="index.php" class="nav-links">Home</a></div>
             <div class="nav-link-items"><a href="#" class="nav-links">About</a></div>
-            <div class="nav-link-items"><a href="#" class="nav-links">Contact Us</a></div>
+            <div class="nav-link-items"><a href="contact-us.php" class="nav-links">Contact Us</a></div>
             <?php
             session_start();
             if (!isset($_SESSION['username'])) {
