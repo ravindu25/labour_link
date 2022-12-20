@@ -1,13 +1,5 @@
 <?php
     require_once('../db.php');
-    /* Workers and their type */
-    /*
-    $workers['plumber'] = ['Sampath Fernando', 'Sunil Hettiarachchi', 'Shantha Wijewardene', 'Kalindu Perera'];
-    $workers['carpenter'] = ['Janaka Hettiarachchi', 'Roshan Ranasinghe', 'Sampath Attanayaka', 'Ruwan Perera'];
-    $workers['janitor'] = ['Lahiru Fernando', 'Manjula Hettiarachchi', 'Isuru Wijewardene', 'Rasika Perera'];
-    $workers['mechanical'] = ['Chandana Perera', 'Mahesh Kumara', 'Aruna Hettiarachchi', 'Asanka Gunawardhana'];
-    $workers['gardner'] = ['Sameera Gunathilaka', 'Ajith Fernando', 'Pradeep Hettiarachchi', 'Tharindu Gunawardhana'];
-    */
 
     $workerType = $_GET['type'];
     $sql = '';

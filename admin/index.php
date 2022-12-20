@@ -7,7 +7,4 @@
         header("Location: dashboard.php");
     }
 
-
-
-
 ?>
