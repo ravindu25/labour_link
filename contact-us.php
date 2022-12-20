@@ -137,7 +137,7 @@
         <form action="#" method="POST">
             <div class="form-title">
                 <i class="fa-solid fa-envelope"></i>
-                <h1>Send us a message!</h1>
+                <h1>Drop a message!</h1>
             </div>
             <div class="form-row">
                 <div class="form-column">
