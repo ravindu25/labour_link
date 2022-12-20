@@ -7,11 +7,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
+    <!--Fontawesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet"/>
+
     <!-- CSS files -->
     <link href="./styles/customer-registration.css" rel="stylesheet"/>
     <title>LabourLink | Customer registration</title>
 </head>
 <body>
+<div class="backdrop-modal" id="backdrop-modal">
+</div>
+<div class="success-message-container" id="register-success">
+    <h1><i class="fa-solid fa-check"></i></h1>
+    <div class="success-message-text">
+        <h1>Registration Successful</h1>
+        <h3>Thank you for registering. Please check your email for a confirmation. You will be redirect to the <u>home page</u> shortly</h3>
+    </div>
+</div>
+<div class="failed-message-container" id="register-failed">
+    <h1><i class="fa-solid fa-xmark"></i></h1>
+    <div class="failed-message-text">
+        <h1>Registration Failed</h1>
+        <h3 id="error-text"></h3>
+    </div>
+</div>
 <main class="main-container">
     <section class="left-panel"></section>
     <section class="right-panel">
@@ -121,6 +140,7 @@
     </section>
 </main>
  <script src="./scripts/registration-input-validation.js" type="text/javascript"></script>
+ <script src="./scripts/customer-registration.js" type="text/javascript"></script>
 </body>
 </html>
 
@@ -161,15 +181,14 @@ if(isset($_POST['firstname'])){
         $mail->Subject = 'Registration Confirmation';
         $mail->Body = "Dear $firstname $lastname,<br><br>Thank you for registering with us.<br><br>Regards,<br>Team Labour Link";
         if ($mail->send()) {
-            echo 'Email sent';
+            echo '<script>showSuccessMessage();</script>';
         } else {
-            echo 'Email not sent';
+            echo '<script>showFailMessage("We are having trouble with sending email. Please check you\'r email address.");</script>';
         }
         
 
     }else{
-        echo "Error in Insertion";
-        echo("Error description: " . mysqli_error($conn));
+        echo '<script>showFailMessage("We are having trouble with registration process. Please try again later.");</script>';
     }
 }
 
