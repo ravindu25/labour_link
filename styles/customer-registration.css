@@ -16,7 +16,7 @@ a{
     height: 100vh;
     background-color: #72736F;
     opacity: 0.5;
-    /*visibility: hidden;*/
+    visibility: hidden;
 }
 
 .success-message-container{
@@ -31,7 +31,7 @@ a{
     background-color: #FFF;
     border-radius: 16px;
     opacity: 1;
-    /*visibility: hidden;*/
+    visibility: hidden;
 }
 
 .failed-message-container{
