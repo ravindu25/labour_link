@@ -121,13 +121,14 @@
                 </div>
 
                 <div class="remember-me-container">
-                    <input type="checkbox" class="login-checkbox"/>
+                    <input type="checkbox" class="login-checkbox" id="remember-checkbox"/>
                     <span>Remember me</span>
                 </div>
                 <div class="term-policy-container">
-                    <input type="checkbox" class="policy-checkbox"/>
-                    <span>I agree to all the <a href="#" class="terms-link">Terms</a> and <a href="#"
-                                                                                             class="terms-link">Privacy policy</a></span>
+                    <input type="checkbox" class="policy-checkbox" id="privacy-checkbox"/>
+                    <span>I agree to all the <a href="#" class="terms-link">Terms</a> and <a href="#" class="terms-link">Privacy policy</a></span>
+                    <br />
+                    <span class="input-error-text" id="input-privacy-error"></span>
                 </div>
                 <div class="button-container">
                     <button type="button" id="back-button" class="back-button" onclick="window.location.href='index.php'">
@@ -171,8 +172,6 @@ if(isset($_POST['firstname'])){
     $result3 = mysqli_query($conn, $sql3);
 
     if($result1 && $result3){
-        echo "Successfully Inserted";
-
         //send email
         require_once 'mailconfiguration.php';
 

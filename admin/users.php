@@ -236,6 +236,10 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         </div>
     </section>
     <section class="main-content">
+        <div class="loader-container" id="loader-container">
+            <div class="dashboard-loader"></div>
+        </div>
+        <div class="main-content-container" id="main-content-container">
         <div class="main-heading">
             <h1>Control panel for managing <u>Users</u></h1>
             <h5>Logged as <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></h5>
@@ -290,6 +294,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 }
 
                 $result = $conn->query($sql);
+
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $user_id = $row['User_ID'];
@@ -317,6 +322,8 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         </tr>');
                     }
                 }
+                echo '<script src="../scripts/admin/users.js" type="text/javascript"></script>';
+                echo '<script>closeLoader()</script>';
                 ?>
 
                 </tbody>
@@ -328,7 +335,6 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
                 <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
-        </div>
         </div>
         <div class="search-users">
             <div class="search-users-title">
@@ -425,10 +431,10 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
-        </div>
         <div class="create-admin">
             <h1>Do you want to add new <u>Admin</u></h1>
             <button class="more-button" id="create-admin-button">Create Admin</button>
+        </div>
         </div>
     </section>
 </main>

@@ -109,6 +109,33 @@ a{
     color: #FFF !important;
 }
 
+.loader-backdrop{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #72736F;
+    opacity: 0.5;
+    visibility: hidden;
+}
+
+.loader{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) ;
+    border: 16px solid var(--primary-shade-color);
+    border-top: 16px solid var(--primary-color);
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .nav-bar{
     display: flex;
     align-items: center;

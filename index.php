@@ -34,6 +34,8 @@
         </div>
     </div>
 </div>
+<div class="loader-backdrop"></div>
+<div class="loader"></div>
 <nav class="nav-bar">
     <div class="nav-bar-items">
         <div class="logo-container">

@@ -6,6 +6,10 @@
     background-color: #ABC3EF;
 }
 
+.main-content-container{
+    display:none;
+}
+
 .reset-login-content{
     position: fixed;
     left: 50%;

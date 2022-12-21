@@ -11,6 +11,7 @@ const nicField = document.getElementById("nic-number");
 const addressField = document.getElementById("address");
 const passwordField = document.getElementById("password");
 const confirmPasswordField = document.getElementById("confirm-password");
+const privacyCheck = document.getElementById("privacy-checkbox");
 
 const registrationForm = document.getElementById("registration-form");
 const registerButton = document.getElementById("register-button");
@@ -56,6 +57,7 @@ function validateInputs(firstname, lastname, email, phone, nic, dob, address, pa
     const addressError = document.getElementById("input-address-error");
     const passwordError = document.getElementById("input-password-error");
     const confirmPasswordError = document.getElementById("input-confirm-password-error");
+    const privacyCheckError = document.getElementById("input-privacy-error");
 
     // Regular expressions for checking email and password
     const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -93,6 +95,9 @@ function validateInputs(firstname, lastname, email, phone, nic, dob, address, pa
     }else if(password !== confirmPassword){
         passwordError.innerText = 'Password and confirm password don\'t match';
         return false;
+    }else if(!privacyCheck.checked){
+        privacyCheckError.innerText = 'You need to agree to the terms and conditions';
+        return false;
     }
 
     return true;
@@ -108,6 +113,7 @@ function removeErrorMessages(){
     const addressError = document.getElementById("input-address-error");
     const passwordError = document.getElementById("input-password-error");
     const confirmPasswordError = document.getElementById("input-confirm-password-error");
+    const privacyCheckError = document.getElementById("input-privacy-error");
 
     firstnameError.innerText = '';
     lastnameError.innerText = '';
@@ -118,11 +124,12 @@ function removeErrorMessages(){
     addressError.innerText = '';
     passwordError.innerText = '';
     confirmPasswordError.innerText = '';
+    privacyCheckError.innerText = '';
 }
 
 registerButton.addEventListener('click', (e) => {
     e.preventDefault();
-    if(validateInputs(firstNameField.value, lastNameField.value, emailField.value, phoneNumberField.value, nicField.value, dobField.value, addressField.value,passwordField.value, confirmPasswordField.value)){
+    if(validateInputs(firstNameField.value, lastNameField.value, emailField.value, phoneNumberField.value, nicField.value, dobField.value, addressField.value,passwordField.value, confirmPasswordField.value, privacyCheck.checked)){
         registrationForm.submit();
     }
 })
