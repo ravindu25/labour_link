@@ -237,7 +237,10 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
     </section>
     <section class="main-content">
         <div class="loader-container" id="loader-container">
-            <div class="dashboard-loader"></div>
+            <!--<div class="dashboard-loader"></div>-->
+            <svg id="spinner" class="spinner" width="50%" height="50%" viewBox="0 0 50 50">
+                <circle class="path" cx="25" cy="25" r="20" fill="#ABC3EF" stroke-width="5"></circle>
+            </svg>
         </div>
         <div class="main-content-container" id="main-content-container">
         <div class="main-heading">
