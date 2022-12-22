@@ -106,7 +106,7 @@
 
                 //redirect to the homepage based on user type                
                 if ($_SESSION['user_type'] == 'Customer') {
-                    header("Location: index.php");
+                    header("Location: customer/dashboard.php");
                 } else if ($_SESSION['user_type'] == 'Worker') {
                     header("Location: worker/dashboard.php");    
                 }

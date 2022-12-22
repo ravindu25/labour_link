@@ -337,8 +337,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         </tr>');
                     }
                 }
-                echo '<script src="../scripts/admin/loader.js" type="text/javascript"></script>';
-                echo '<script>closeLoader()</script>';
+                
                 ?>
 
                 </tbody>
@@ -431,6 +430,8 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                                 </td>
                             </tr>');
                     }
+                    echo '<script src="../scripts/admin/loader.js" type="text/javascript"></script>';
+                    echo '<script>closeLoader()</script>';
                 }
 
                 ?>
