@@ -38,6 +38,19 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         <button type="button" onclick="resetLogin()" class="reset-confirm-button">Confirm</button>
     </div>
 </div>
+<div class="success-message-container" id="register-success">
+    <h1><i class="fa-solid fa-check"></i></h1>
+    <div class="success-message-text">
+        <h1>Admin Account Created!</h1>
+    </div>
+</div>
+<div class="failed-message-container" id="register-failed">
+    <h1><i class="fa-solid fa-xmark"></i></h1>
+    <div class="failed-message-text">
+        <h1>Account Creation Failed</h1>
+        <h3 id="error-text"></h3>
+    </div>
+</div>
 <div class="create-admin-form" id="create-admin-form">
     <div class="create-admin-wrapper">
         <div class="create-admin-title">
@@ -237,7 +250,6 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
     </section>
     <section class="main-content">
         <div class="loader-container" id="loader-container">
-            <!--<div class="dashboard-loader"></div>-->
             <svg id="spinner" class="spinner" width="50%" height="50%" viewBox="0 0 50 50">
                 <circle class="path" cx="25" cy="25" r="20" fill="#ABC3EF" stroke-width="5"></circle>
             </svg>
@@ -325,7 +337,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         </tr>');
                     }
                 }
-                echo '<script src="../scripts/admin/users.js" type="text/javascript"></script>';
+                echo '<script src="../scripts/admin/loader.js" type="text/javascript"></script>';
                 echo '<script>closeLoader()</script>';
                 ?>
 
@@ -436,7 +448,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         </div>
         <div class="create-admin">
             <h1>Do you want to add new <u>Admin</u></h1>
-            <button class="more-button" id="create-admin-button">Create Admin</button>
+            <button type="button" class="more-button" id="create-admin-button">Create Admin</button>
         </div>
         </div>
     </section>
@@ -449,9 +461,8 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
 </footer>
 
 <script src="../scripts/modals.js" type="text/javascript"></script>
-<script src="../scripts/admin/users.js" type="text/javascript"></script>
 <script src="../scripts/admin/admin-create-validation.js" type="text/javascript"></script>
-<!--<script src="../scripts/index.js" type="text/javascript"></script>-->
+<script src="../scripts/admin/users.js" type="text/javascript"></script>
 
 <script>
     function suspend_user(user_id) {
@@ -572,11 +583,9 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         $result3 = mysqli_query($conn, $sql3);
     
         if($result1 && $result3){
-            echo "Successfully Inserted";
+            echo "<script>showSuccessMessage()</script>";
         }else{
-            echo "Error in Insertion";
-            echo("Error description: " . mysqli_error($conn));
-            echo("<script>console.log('PHP: " . mysqli_error($conn) . "');</script>");
+            echo "<script>showFailMessage('We are having trouble with account. Please try again later.')</script>";
             
         }
     }

@@ -39,11 +39,34 @@ function closeAdminForm(){
     adminForm.style.visibility = 'hidden';
 }
 
-function closeLoader(){
-    const loaderContainer = document.getElementById("loader-container");
-    const mainContent = document.getElementById("main-content-container");
+// Displaying the success message
+function showSuccessMessage(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const successMessage = document.getElementById('register-success');
 
-    loaderContainer.style.display = 'none';
-    mainContent.style.display = 'block';
-    console.log('Function executed!');
+    backdrop.style.visibility = 'visible';
+    successMessage.style.visibility = 'visible';
+
+    // Redirect to the home page
+    setTimeout(() => {
+        backdrop.style.visibility = 'hidden';
+        successMessage.style.visibility = 'hidden';
+    }, 5000);
+}
+
+// Displaying the fail message
+function showFailMessage(errorText){
+    const backdrop = document.getElementById('backdrop-modal');
+    const failMessage = document.getElementById('register-failed');
+    const errorTextHeading = document.getElementById('error-text');
+
+    backdrop.style.visibility = 'visible';
+    failMessage.style.visibility = 'visible';
+    errorTextHeading.innerText = errorText;
+
+    // Redirect to the home page
+    setTimeout(() => {
+        backdrop.style.visibility = 'hidden';
+        failMessage.style.visibility = 'hidden';
+    }, 5000);
 }
