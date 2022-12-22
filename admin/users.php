@@ -38,6 +38,15 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         <button type="button" onclick="resetLogin()" class="reset-confirm-button">Confirm</button>
     </div>
 </div>
+<div class="suspend-user-content" id="suspend-user-content">
+    <div class="suspend-user-title">
+        <h1 id="suspend-user-text">Do you want to suspend the selected user?</h1>
+    </div>
+    <div class="suspend-user-buttons">
+        <button type="button" onclick="closeSuspendModal()" class="suspend-cancel-button">Cancel</button>
+        <button type="button" id="suspend-confirm-button" class="suspend-confirm-button">Confirm</button>
+    </div>
+</div>
 <div class="success-message-container" id="register-success">
     <h1><i class="fa-solid fa-check"></i></h1>
     <div class="success-message-text">
@@ -329,8 +338,8 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                                     <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                                     </button>&nbsp;' .
 
-                            ($row['Activation_Flag'] == 1 ? '<button class="suspend-button" onclick="suspend_user(' . $user_id . ')"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
-                                    </button>' : '<button class="activate-button" onclick="activate_user(' . $user_id . ')"><i class="fa-solid fa-user-check"></i>&nbsp;&nbsp;Activate
+                            ($row['Activation_Flag'] == 1 ? '<button class="suspend-button" onclick="openSuspendModal(' . $user_id . ', true)"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
+                                    </button>' : '<button class="activate-button" onclick="openSuspendModal(' . $user_id . ', false)"><i class="fa-solid fa-user-check"></i>&nbsp;&nbsp;Activate
                                     </button>') .
                             '</div>
                             </td>
@@ -463,94 +472,6 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/admin/admin-create-validation.js" type="text/javascript"></script>
 <script src="../scripts/admin/users.js" type="text/javascript"></script>
-
-<script>
-    function suspend_user(user_id) {
-
-        // fetch('http://localhost/labour_link/admin/suspend-user.php', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'www-form-urlencoded'
-        //     },
-        //     body: "user_id=" + user_id
-        // }).then(response => response.text())
-        //     .then(data => {
-        //         console.log(data);
-        //         if(data.status === 'Success'){
-        //             alert('User suspended successfully');
-        //             location.reload();
-        //         }else{
-        //             alert('Error occurred');
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         console.error('Error:', error);
-        //     });
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText === 'Success') {
-                    // alert('User suspended successfully');
-                    location.reload();
-                } else {
-                    // alert('Error occurred');
-                    location.reload();
-                }
-            }
-        }
-        xmlhttp.open("POST", "http://localhost/labour_link/admin/suspend-user.php", true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send("user_id=" + user_id);
-
-    }
-
-    function activate_user(user_id) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                var response = this.responseText;
-
-                if (response == "Success") {
-                    // alert('User activated successfully');
-                    //print data type of response
-                    location.reload();
-                } else {
-                    // alert('Error occurred');
-                    location.reload();
-                }
-            }
-        }
-        xmlhttp.open("POST", "http://localhost/labour_link/admin/activate-user.php", true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send("user_id=" + user_id);
-
-    }
-
-    function resetLogin() {
-        user_id = document.getElementById("reset-user-id").value;
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                var response = this.responseText;
-                if (response == "Success") {
-                    // alert('User activated successfully');
-                    //print data type of response
-                    location.reload();
-                } else {
-                    // alert('Error occurred');
-                    location.reload();
-                }
-                
-            }
-        }
-        xmlhttp.open("POST", "http://localhost/labour_link/admin/reset-login.php", true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send("user_id=" + user_id);
-
-    }
-
-
-</script>
 </body>
 
 
