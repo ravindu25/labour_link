@@ -106,7 +106,7 @@
     text-align: center;
 }
 
-.reset-login-title, .suspend-user-title h1{
+.reset-login-title h1, .suspend-user-title h1{
     font-weight: normal;
     font-size: 32px;
 }
@@ -157,11 +157,11 @@
 .create-admin-form{
     position: fixed;
     left: 50%;
-    top: 50%;
-    height: 90vh;
+    top: 45%;
     transform: translate(-50%, -50%) ;
     margin: 16px;
-    max-height: 90vh;
+    min-height: fit-content;
+    max-height: 80vh;
     color: #102699;
     background-color: #FFF;
     border-radius: 16px;
