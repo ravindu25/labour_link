@@ -36,7 +36,32 @@
 </div>
 <div class="loader-backdrop"></div>
 <div class="loader"></div>
+<div class="search-backdrop" id="search-backdrop"></div>
 <nav class="nav-bar">
+    <div class="search-component-container" id="search-component-container">
+        <div class="search-main-container">
+            <i class="fa-solid fa-magnifying-glass search-main-icon"></i>
+            <input type="text" class="search-main-input" id="search-main-input" />
+        </div>
+        <div class="search-items">
+            <div class="search-item search-item-selected">
+                <i class="fa-solid fa-wrench"></i>
+                <h3>Saman Gunawardhana</h3>
+            </div>
+            <div class="search-item">
+                <i class="fa-solid fa-wrench"></i>
+                <h3>Saman Perera</h3>
+            </div>
+            <div class="search-item">
+                <i class="fa-solid fa-wrench"></i>
+                <h3>Saman Fernando</h3>
+            </div>
+            <div class="search-item">
+                <i class="fa-solid fa-wrench"></i>
+                <h3>Kapila Saman Gunawardhana</h3>
+            </div>
+        </div>
+    </div>
     <div class="nav-bar-items">
         <div class="logo-container">
             <img src="./assets/logo-croped.png" alt="labourlink logo" class="labour-link-logo"/>
@@ -45,7 +70,7 @@
             <div class="search-icon-container">
                 <img src="./assets/svg/search.svg" alt="search" class="search-icon"/>
             </div>
-            <input type="text" class="search-bar-input" placeholder="Search for a labourer or a service"/>
+            <input type="text" class="search-bar-input" id="search-bar-input" placeholder="Search for a labourer or a service"/>
         </div>
         <div class="nav-link-container">
             <div class="nav-link-items"><a href="./index.php" class="nav-links">Home</a></div>

@@ -86,7 +86,8 @@ a{
     appearance: none;
     min-width: 320px;
     padding: 10px;
-    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
     background-color: #FFF;
 }
 
