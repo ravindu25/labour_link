@@ -17,76 +17,7 @@
 
 </head>
 <body>
-<nav class="nav-bar">
-    <div class="nav-bar-items">
-        <div class="logo-container">
-            <img src="./assets/logo-croped.png" alt="labourlink logo" class="labour-link-logo"/>
-        </div>
-        <div class="search-container">
-            <div class="search-icon-container">
-                <img src="./assets/svg/search.svg" alt="search" class="search-icon"/>
-            </div>
-            <input type="text" class="search-bar-input" placeholder="Search for a labourer or a service"/>
-        </div>
-        <div class="nav-link-container">
-            <div class="nav-link-items"><a href="./index.php" class="nav-links">Home</a></div>
-            <div class="nav-link-items"><a href="./about.php" class="nav-links">About</a></div>
-            <div class="nav-link-items"><a href="./contact-us.php" class="nav-links">Contact Us</a></div>
-            <?php
-                session_start();
-                if (!isset($_SESSION['username'])) {
-
-                    ?>
-                    <div class="nav-link-items">
-                        <button type="button" id="register-button" class="nav-link-items-button"
-                                style="background-color: #FFF; color: #102699;">
-                            REGISTER
-                        </button>
-                    </div>
-                    <div class="nav-link-items">
-                        <button type="button" class="nav-link-items-button" onclick="window.location.href='login.php'">
-                            LOGIN
-                        </button>
-                    </div>
-                <?php }else{ ?>
-                    <div class="nav-link-items">
-                        <div class="dropdown" id="dropdown">
-                            <button type="button" id="user-dropdown-button" onClick="opendropdown()"
-                                    class="nav-link-items-button"
-                                    style="background-color: #FFF; color: #102699;">
-                                <i class="fa-regular fa-circle-user"></i>&nbsp;
-                                <?php echo "Hi, ".$_SESSION['first_name']; ?>
-                                &nbsp;
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </button>
-                            <div class="dropdown-items" id="dropdown-items">
-                                <?php
-                                    if($_SESSION['user_type'] == 'Admin'){
-                                        echo '<a href="./admin/dashboard.php">';
-                                    }else if($_SESSION['user_type'] == 'Customer'){
-                                        echo '<a href="./customer/dashboard.php">';
-                                    }else{
-                                        echo '<a href="./worker/dashboard.php">';
-                                    }
-                                ?>
-                                <div class="dropdown-item" id="dropdown-item"><i class="fa-solid fa-gauge-high"></i>&nbsp;&nbsp;Dashboard
-                                </div>
-                                </a>
-                                <a href="#">
-                                    <a href="logout.php">
-                                        <div class="dropdown-item" id="dropdown-item">
-                                            <i class="fa-solid fa-right-from-bracket"></i>
-                                            &nbsp;&nbsp;Logout
-                                        </div>
-                                    </a>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-        </div>
-    </div>
-</nav>
+<?php include_once './components/navbar.php' ?>
 <section class="contact-banner">
     <div class="contact-banner-left-panel">
         <h1>Want to reach us?</h1>

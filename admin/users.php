@@ -139,69 +139,10 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     <input type="submit" class="submit-button" id="admin-create-submit-button" name="admin-create-submit-button" value="Create Admin"/>
                 </div>
             </div>
-
         </form>
     </div>
 </div>
-<nav class="nav-bar">
-    <div class="nav-bar-items">
-        <div class="logo-container">
-            <img src="../assets/logo-croped.png" alt="labourlink logo" class="labour-link-logo"/>
-        </div>
-        <div class="search-container">
-            <div class="search-icon-container">
-                <img src="../assets/svg/search.svg" alt="search" class="search-icon"/>
-            </div>
-            <input type="text" class="search-bar-input" placeholder="Search for a labourer or a service"/>
-        </div>
-        <div class="nav-link-container">
-            <div class="nav-link-items"><a href="../index.php" class="nav-links">Home</a></div>
-            <div class="nav-link-items"><a href="../about-us.php" class="nav-links">About</a></div>
-            <div class="nav-link-items"><a href="../contact-us.php" class="nav-links">Contact Us</a></div>
-            <?php
-                if (!isset($_SESSION['username'])) {
-
-                    ?>
-                    <div class="nav-link-items">
-                        <button type="button" id="register-button" class="nav-link-items-button"
-                                style="background-color: #FFF; color: #102699;">
-                            REGISTER
-                        </button>
-                    </div>
-                    <div class="nav-link-items">
-                        <button type="button" class="nav-link-items-button" onclick="window.location.href='login.php'">
-                            LOGIN
-                        </button>
-                    </div>
-                <?php }else{ ?>
-                    <div class="nav-link-items">
-                        <div class="dropdown" id="dropdown">
-                            <button type="button" id="user-dropdown-button" onClick="opendropdown()"
-                                    class="nav-link-items-button"
-                                    style="background-color: #FFF; color: #102699;">
-                                <i class="fa-regular fa-circle-user"></i>&nbsp;
-                                Hi,&nbsp;<?php echo $_SESSION['first_name']; ?>
-                                &nbsp;
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </button>
-                            <div class="dropdown-items" id="dropdown-items">
-                                <a href="#">
-                                    <div class="dropdown-item" id="dropdown-item"><i class="fa-solid fa-gauge-high"></i>&nbsp;&nbsp;Dashboard
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="dropdown-item" id="dropdown-item">
-                                        <i class="fa-solid fa-right-from-bracket"></i>
-                                        &nbsp;&nbsp;<a href="../logout.php">Logout</a>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-        </div>
-    </div>
-</nav>
+<?php include_once '../components/navbar.php' ?>
 <span style="display:none" id="reset-user-id"></span>
 <main class="main-section">
     <section class="sidebar">
@@ -469,7 +410,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
-
+<script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/admin/admin-create-validation.js" type="text/javascript"></script>
 <script src="../scripts/admin/users.js" type="text/javascript"></script>

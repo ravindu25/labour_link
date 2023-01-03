@@ -8,7 +8,7 @@ const registerModal = document.getElementById("register-modal");
 const searchBackdrop = document.getElementById("search-backdrop");
 const searchBar = document.getElementById("search-bar-input");
 
-registerButton.addEventListener('click',() => { openModal() });
+if(registerButton != null) registerButton.addEventListener('click',() => { openModal() });
 registerModal.addEventListener('click', () => { closeModal() });
 searchBar.addEventListener('click', () => { openSearchContainer() });
 searchBackdrop.addEventListener('click', () => { closeSearchContainer() });
