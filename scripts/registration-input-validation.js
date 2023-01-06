@@ -31,7 +31,14 @@ firstNameField.addEventListener('change', () => {removeErrorMessages()});
 lastNameField.addEventListener('change', () => {removeErrorMessages()});
 emailField.addEventListener('change', () => {removeErrorMessages()});
 phoneNumberField.addEventListener('change', () => {removeErrorMessages()});
-nicField.addEventListener('change', () => {removeErrorMessages()});
+nicField.addEventListener('change', () => {
+    removeErrorMessages();
+
+    const currentBirthday = calculateDOB(nicField.value);
+    if(currentBirthday) {
+        dobField.value = currentBirthday;
+    }
+});
 dobField.addEventListener('change', () => {removeErrorMessages()});
 addressField.addEventListener('change', () => {removeErrorMessages()});
 passwordField.addEventListener('change', () => {removeErrorMessages()});
@@ -45,6 +52,57 @@ function getToday(){
     const year = today.getFullYear();
 
     return `${year}-${month}-${date}`;
+}
+
+/*
+    Purpose - Calculate the birthday from the NIC number
+ */
+function calculateDOB(nicNumber) {
+    let year = '1990', dayText = 0, month = 0, day = 0;
+
+    if(nicNumber.length !== 10 && nicNumber.length !== 12){
+        return false;
+    }else if(nicNumber.length === 10){
+        year = '19' + nicNumber.substring(0, 2);
+        dayText = parseInt(nicNumber.substring(2, 5));
+    }else if(nicNumber.length === 12){
+        year = nicNumber.substring(0, 4);
+        dayText = parseInt(nicNumber.substring(4, 7));
+    }
+
+    if(dayText > 500) dayText = dayText - 500;
+
+    if(dayText < 1 || dayText > 366) return false;
+
+    if(dayText > 335){
+        day = dayText - 335; month = 11;
+    }else if(dayText > 305){
+        day = dayText - 305; month = 10;
+    }else if(dayText > 274){
+        day = dayText - 274; month = 9;
+    }else if(dayText > 244){
+        day = dayText - 244; month = 8;
+    }else if(dayText > 213){
+        day = dayText - 213; month = 7;
+    }else if(dayText > 182){
+        day = dayText - 182; month = 6;
+    }else if(dayText > 152){
+        day = dayText - 152; month = 5;
+    }else if(dayText > 121){
+        day = dayText - 121; month = 4;
+    }else if(dayText > 91){
+        day = dayText - 91; month = 3;
+    }else if(dayText > 60){
+        day = dayText - 60; month = 2;
+    }else if(dayText > 31){
+        day = dayText - 31; month = 1;
+    }else{
+        day = dayText; month = 0;
+    }
+
+    const monthText = String(month + 1).padStart(2, '0');
+
+    return `${year}-${monthText}-${day}`;
 }
 
 function validateInputs(firstname, lastname, email, phone, nic, dob, address, password, confirmPassword){
@@ -83,8 +141,8 @@ function validateInputs(firstname, lastname, email, phone, nic, dob, address, pa
     }else if(address === ''){
         addressError.innerText = 'Please enter the address';
         return false;
-    }else if(dob === null){
-        dobError.innerText = 'Please enter date of birth';
+    }else if(!dob){
+        dobError.innerText = 'Dob doesn\'t match with the NIC number';
         return false;
     }else if(password === ''){
         passwordError.innerText = 'Please enter the password';
