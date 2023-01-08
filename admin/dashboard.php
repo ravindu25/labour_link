@@ -22,7 +22,7 @@ session_start();
     <link href="../styles/index-page.css" rel="stylesheet"/>
     <link href="../styles/dashboard.css" rel="stylesheet"/>
     <link href="../styles/admin/admin-dashboard.css" rel="stylesheet"/>
-    <title>Worker Dashboard | LabourLink</title>
+    <title>Admin Dashboard | LabourLink</title>
 </head>
 <body>
 <div class="register-select-modal" id="register-modal">

@@ -324,24 +324,24 @@
                             $start_date = date("d M Y", strtotime($row['Start_Date']));
                             $statusValue = array_rand($status);
 
-                            $button = '';
-                            switch($statusValue){
-                                case 0:
-                                    $button = '<button class="pending-button">Pending</button>';
-                                    break;
-                                case 1:
-                                    $button = '<button class="completed-button">Completed</button>';
-                                    break;
-                                case 2:
-                                    $button = '<button class="rejected-button">Rejected</button>';
-                                    break;
-                                case 3:
-                                    $button = '<button class="in-pogress-button">In-Progress</button>';
-                                    break;
-                                default:
-                                    $button = '<button class="in-pogress-button">In-Progress</button>';
-                                    break;
-                            }
+                            $button = '<button class="pending-button">Pending</button>';
+                            // switch($statusValue){
+                            //     case 0:
+                            //         $button = '<button class="pending-button">Pending</button>';
+                            //         break;
+                            //     case 1:
+                            //         $button = '<button class="completed-button">Completed</button>';
+                            //         break;
+                            //     case 2:
+                            //         $button = '<button class="rejected-button">Rejected</button>';
+                            //         break;
+                            //     case 3:
+                            //         $button = '<button class="in-pogress-button">In-Progress</button>';
+                            //         break;
+                            //     default:
+                            //         $button = '<button class="in-pogress-button">In-Progress</button>';
+                            //         break;
+                            // }
 
                             echo "
                                 <div class='booking-card'>
