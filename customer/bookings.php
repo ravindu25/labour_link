@@ -110,7 +110,7 @@
                 <label for="start-date">Start date</label>
                 <input type="date" id="start-date" name="start-date"/>
             </div>
-            <div class="form-time-row">
+            <div class="form-time-row" id="days-complete-container">
                 <label>
                     Days needed to complete
                 </label>
@@ -151,6 +151,13 @@
                         </div>
                     </label>
                 </div>
+            </div>
+            <div class="form-input-row" id="end-date-container">
+                <label for="end-date">End date</label>
+                <input type="date" id="end-date" name="send-date"/>
+            </div>
+            <div class="form-button-container">
+                <button type="button" class="more-button submit-button" id="change-days-complete-button">Custom date</button>
             </div>
             <div class="form-payment-row">
                 <label>Payment method</label>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="labour_link@labour-link.c4wgecowfejr.ap-northeast-1.rds.amazonaws.com">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.43">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.45">
     <root id="1">
       <DefaultCasing>exact</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
