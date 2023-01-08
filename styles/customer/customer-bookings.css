@@ -567,6 +567,7 @@
     transform: translate(-50%, -50%) ;
     margin: 16px;
     max-height: 90vh;
+    min-width: 50vw;
     color: #102699;
     background-color: #FFF;
     border-radius: 16px;
@@ -674,6 +675,10 @@
 
 .form-payment-row{
     margin-top: 12px;
+}
+
+#end-date-container{
+    display: none;
 }
 
 .payment-methods-container{
