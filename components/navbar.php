@@ -25,10 +25,13 @@
     <div class="search-component-container" id="search-component-container">
         <div class="search-main-container">
             <i class="fa-solid fa-magnifying-glass search-main-icon"></i>
-            <input type="text" class="search-main-input" id="search-main-input" />
+            <input type="text" class="search-main-input" id="search-main-input" name="search-main-input" oninput="mainSearch()"/>
+            
         </div>
         <div class="search-items">
-            <div class="search-item search-item-selected">
+           <span id="searchResult">
+
+           <!-- <div class="search-item search-item-selected">
                 <i class="fa-solid fa-wrench"></i>
                 <h3>Saman Gunawardhana</h3>
             </div>
@@ -43,7 +46,9 @@
             <div class="search-item">
                 <i class="fa-solid fa-wrench"></i>
                 <h3>Kapila Saman Gunawardhana</h3>
-            </div>
+            </div> -->
+           </span>
+            
         </div>
     </div>
     <div class="nav-bar-items">
@@ -115,3 +120,31 @@
         </div>
     </div>
 </nav>
+
+<script>
+    function mainSearch(){
+        var searchInput = document.getElementById("search-main-input").value;
+        if(searchInput.length == 0){
+            document.getElementById("searchResult").innerHTML = "";
+        }else if(searchInput.length >= 4){
+            //ajax call to navbarSearch.php to get results
+            
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    document.getElementById("searchResult").innerHTML = this.responseText;
+                }
+            }
+            xhttp.open("POST", "components/navbarSearch.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("searchInput="+searchInput);
+
+        }else{
+            document.getElementById("searchResult").innerHTML = "No Results";
+        }
+       
+           
+        
+    }
+</script>
