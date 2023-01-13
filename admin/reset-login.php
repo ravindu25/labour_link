@@ -6,9 +6,16 @@ session_start();
  }
     require_once '../db.php';
 
+    function password_generate($chars) {
+        $data = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
+        return substr(str_shuffle($data), 0, $chars);
+    }
+
+
     //use the ajax fetch call to get the user id and do the query and return status
     $user_id = $_POST['user_id'];
-    $sql = "UPDATE User SET Pswd = 'abc123' WHERE User_ID = '$user_id'";
+    $new_password = password_generate(10);
+    $sql = "UPDATE User SET Pswd = '$new_password' WHERE User_ID = '$user_id'";
     $result = $conn->query($sql);
 
     $sql_foremail = "SELECT * FROM User WHERE User_ID = '$user_id'";
@@ -22,7 +29,7 @@ session_start();
     $mail->addAddress($email);
     $mail->isHTML(true);
     $mail->Subject = 'Labour Link Password Reset';
-    $mail->Body = "Dear $name, <br><br> Your password has been reset by the System Admin as per your request. <br> Your new password is 'abc123'. <br> Please change your password after logging in. <br><br> Thank you.";
+    $mail->Body = "Dear $name, <br><br> Your password has been reset by the System Admin as per your request. <br> Your new password is $new_password. <br> Please change your password after logging in. <br><br> Thank you.";
 
     if ($result) {
         echo "Success";
