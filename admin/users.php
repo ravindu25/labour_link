@@ -43,7 +43,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         <h1 id="suspend-user-text">Do you want to suspend the selected user?</h1>
     </div>
     <div class="suspend-user-buttons">
-        <button type="button" onclick="closeSuspendModal()" class="suspend-cancel-button">Cancel</button>
+        <button type="button" id="suspend-cancel-button" onclick="closeSuspendModal()" class="suspend-cancel-button">Cancel</button>
         <button type="button" id="suspend-confirm-button" class="suspend-confirm-button">Confirm</button>
     </div>
 </div>
@@ -305,6 +305,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 </thead>
                 <tbody>
                 <?php
+                $curr_user_id = $_SESSION['user_id'];
                 require_once '../db.php';
                 if (!isset($_POST['search'])) {
                     $search = "";
@@ -312,9 +313,9 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     $search = $_POST['search'];
                 }
                 if ($search == "") {
-                    $sql = "SELECT User.User_ID, First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag, Activation_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID ORDER BY Timestamp DESC LIMIT 5;";
+                    $sql = "SELECT User.User_ID, First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag, Activation_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID ORDER BY Timestamp DESC LIMIT 5";
                 } else {
-                    $sql = "SELECT User.User_ID, First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag, Activation_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID WHERE First_Name LIKE '%$search%' OR Last_Name LIKE '%$search%' ORDER BY Timestamp DESC LIMIT 5;;";
+                    $sql = "SELECT User.User_ID, First_Name, Last_Name, date(Timestamp), time(Timestamp), Success_Flag, Activation_Flag FROM Login_Attempt INNER JOIN User ON Login_Attempt.User_ID=User.User_ID WHERE User.User_ID !=1 AND (First_Name LIKE 'ravi' OR Last_Name LIKE 'ravi') ORDER BY Timestamp DESC LIMIT 5";
                 }
 
                 $result = $conn->query($sql);
@@ -338,9 +339,11 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                                     <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                                     </button>&nbsp;' .
 
-                            ($row['Activation_Flag'] == 1 ? '<button class="suspend-button" onclick="openSuspendModal(' . $user_id . ', true)"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend
-                                    </button>' : '<button class="activate-button" onclick="openSuspendModal(' . $user_id . ', false)"><i class="fa-solid fa-user-check"></i>&nbsp;&nbsp;Activate
-                                    </button>') .
+                            ($row['Activation_Flag'] == 1 ? 
+                            //if the user is the current user, disable the suspend button
+                                    
+                                    '<button class="suspend-button" onclick="openSuspendModal(' . $user_id.','. $curr_user_id . ', true)"><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend</button>' : 
+                                    '<button class="activate-button" onclick="openSuspendModal(' . $user_id . ', false)"><i class="fa-solid fa-user-check"></i>&nbsp;&nbsp;Activate</button>') .
                             '</div>
                             </td>
                         </tr>');
