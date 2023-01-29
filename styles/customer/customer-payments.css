@@ -521,3 +521,144 @@
     left:7px;
     font-weight: normal;
 }
+
+.booking-search-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.booking-search-title h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.booking-search-input-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-search-input-container label{
+    color: var(--dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.booking-search-input{
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 0 2px 2px;
+    border-radius: 12px 0 0 12px;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 22px;
+    min-width: 200px;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+}
+
+.booking-search-input:valid,
+.booking-search-input:focus,
+.booking-search-input:active{
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 0 2px 2px;
+    border-radius: 12px 0 0 12px;
+}
+
+.booking-search-input-field{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.search-icon-small{
+    height: 46px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 2px 2px 0;
+    border-radius: 0 12px 12px 0;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 24px;
+    color: var(--primary-color);
+    background-color: #FFF;
+}
+
+.view-button{
+    outline: none;
+    border: 3px solid var(--success-dark-color);
+    padding: 8px 18px;
+    color: var(--success-dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.pagination-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.pagination-button{
+    height: 40px;
+    width: 40px;
+    outline: none;
+    border: none;
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 4px;
+    background-color: var(--primary-background-shade-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.pagination-button:active {
+    transform: scale(.96);
+}
+
+.pagination-button-current{
+    height: 48px;
+    width: 48px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: var(--primary-background-shade-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.pagination-button-current:active {
+    transform: scale(.96);
+}
+
+.sort-button{
+    height: 48px;
+    width: 48px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+}
