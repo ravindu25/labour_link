@@ -423,7 +423,7 @@
                 <h1>Ongoing Discounts</h1>
             </div>
             <div class="ongoing-discount-container">
-                <div class="discount-cards">
+                <div class="discount-card">
                     <div class="discount-card-text">
                         <h3>Till 2020 Dec 10</h3>
                         <i class="fa-solid fa-champagne-glass"></i>
