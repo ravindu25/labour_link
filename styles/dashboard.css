@@ -81,7 +81,7 @@
     padding: 24px 48px;
 }
 
-.more-button{;
+.more-button{
     outline: none;
     border: 3px solid var(--primary-bright-color);
     padding: 12px 18px;
