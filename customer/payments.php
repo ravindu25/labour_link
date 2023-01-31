@@ -234,7 +234,9 @@
                     <tbody>
                         <?php
                             require_once('../db.php');
-                            $sql = "SELECT * FROM Payments_Due INNER JOIN Booking ON Payments_Due.Booking_ID = Booking.Booking_ID INNER JOIN User ON Booking.Customer_ID=User.User_ID WHERE Booking.Customer_ID = 9";
+                    
+                            $customer_id=$_SESSION['user_id'];
+                            $sql = "SELECT * FROM Payments_Due INNER JOIN Booking ON Payments_Due.Booking_ID = Booking.Booking_ID INNER JOIN User ON Booking.Customer_ID=User.User_ID WHERE Booking.Customer_ID = $customer_id AND Payments_Due.PayHere_Payment_ID IS NULL;";
                             $result = $conn -> query($sql);
 
                             if ($result->num_rows > 0) {
@@ -466,7 +468,7 @@
                     "merchant_id": merchant_id,    // Replace your Merchant ID
                     "return_url": undefined,     // Important
                     "cancel_url": undefined,     // Important
-                    "notify_url": "http://localhost/labour_link/customer/authorize_payment.php",
+                    "notify_url": "https://ravinduwegiriya.com/authorize_payment.php",
                     "order_id": booking_id,
                     "items": "Payment to "+worker_name,
                     "amount": amount,
@@ -497,7 +499,8 @@
     // Payment completed. It can be a successful failure.
     payhere.onCompleted = function onCompleted(orderId) {
         console.log("Payment completed. OrderID:" + orderId);
-        // Note: validate the payment and show success or failure page to the customer
+        //Reload Window
+        window.location.reload();
 
     };
 
