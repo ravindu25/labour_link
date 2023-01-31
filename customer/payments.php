@@ -226,52 +226,50 @@
                     <thead>
                     <tr class="main-tr">
                         <th class="main-th">Worker Name</th>
-                        <th class="main-th">Start Date</th>
+                        <th class="main-th">Due Date</th>
                         <th class="main-th">Amount</th>
                         <th class="main-th">More actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Saman Gunawardhana
-                            <br/>
-                        </td>
-                        <td class="main-td">19 Nov 2022</td>
-                        <td class="main-td">Rs. 27000.00</td>
-                        <td class="main-td">
-                            <button class="more-button" id="booking-create-button">Pay</button>
-                        </td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Avinash Sudira
-                            <br/>
-                        </td>
-                        <td class="main-td">30 Nov 2022</td>
-                        <td class="main-td">Rs. 12500.00</td>
-                        <td class="main-td">
-                            <button class="more-button" id="booking-create-button">Pay</button>
-                        </td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Dinesh Attanayaka
-                            <br/>
-                        </td>
-                        <td class="main-td">01 Nov 2022</td>
-                        <td class="main-td">Rs. 1700.00</td>
-                        <td class="main-td">
-                            <button class="more-button" id="booking-create-button">Pay</button>
-                        </td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Kapila Dharmadhasa
-                            <br/>
-                        </td>
-                        <td class="main-td">19 Nov 2022</td>
-                        <td class="main-td">Rs. 12000.00</td>
-                        <td class="main-td">
-                            <button class="more-button" id="booking-create-button">Pay</button>
-                        </td>
-                    </tr>
+                        <?php
+                            require_once('../db.php');
+                            $sql = "SELECT * FROM Payments_Due INNER JOIN Booking ON Payments_Due.Booking_ID = Booking.Booking_ID INNER JOIN User ON Booking.Customer_ID=User.User_ID WHERE Booking.Customer_ID = 9";
+                            $result = $conn -> query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    $workerId = $row['Worker_ID'];
+                                    $bookingID = $row['Booking_ID'];
+                                    $amount=$row['Due_Amount'];;
+                                    $payment_due_id=$row['Payment_Due_ID'];
+                                    $worker_sql = "SELECT * FROM User WHERE User_ID = {$workerId}";
+                    
+                                    $workerResult = $conn -> query($worker_sql);
+                                    $workerRow = $workerResult->fetch_assoc();
+
+                                    $workerName = $workerRow['First_Name'] . " " . $workerRow['Last_Name'];
+
+
+                                    $dueDate = date_create($row['Due_Date']);
+                                    $dueDateInText = date_format($dueDate, 'dS F Y');
+
+                                    echo "<tr class='main-tr'>
+                                            <td class='main-td' style='text-align: left;'>{$workerRow['First_Name']} {$workerRow['Last_Name']}
+                                                <br/>
+                                            </td>
+                                            <td class='main-td'>{$dueDateInText}</td>
+                                            <td class='main-td'>Rs. {$row['Due_Amount']}</td>
+                                            <td class='main-td'>
+                                                <button class='more-button' type='submit' onclick='payNow($payment_due_id, $bookingID, $amount, \"$workerName\")'>Pay</button>
+                                            
+                                            </td>
+                                        </tr>";
+                                }
+                            }
+                        ?>
+                    
+                    
                     </tbody>
                 </table>
             </div>
@@ -325,7 +323,7 @@
                     <td class="main-td">Success</td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -340,7 +338,7 @@
                     <td class="main-td">Failed</td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -355,7 +353,7 @@
                     <td class="main-td">Success</td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -370,7 +368,7 @@
                     <td class="main-td">Success</td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -385,7 +383,7 @@
                     <td class="main-td">Success</td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -400,7 +398,7 @@
                     <td class="main-td">Failed</td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -432,8 +430,8 @@
                     </div>
                 </div>
             </div>
-            <div class="ongoing-discount-container">
-                <div class="discount-cards">
+            <div class="ongoing-discount">
+                <div class="discount-card">
                     <div class="discount-card-text">
                         <h3>Till 2020 Dec 10</h3>
                         <i class="fa-solid fa-champagne-glass"></i>
@@ -452,4 +450,75 @@
 </footer>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/customer/bookings.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
+<script>
+
+    function payNow(payment_due_id, booking_id, amount, worker_name){
+        // alert(worker_name);
+        //Call AJAX function to get the hash value
+        var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var hash_val = this.responseText;
+            // Put the payment variables here
+                var payment = {
+                    "sandbox": true,
+                    "merchant_id": merchant_id,    // Replace your Merchant ID
+                    "return_url": undefined,     // Important
+                    "cancel_url": undefined,     // Important
+                    "notify_url": "http://localhost/labour_link/customer/authorize_payment.php",
+                    "order_id": booking_id,
+                    "items": "Payment to "+worker_name,
+                    "amount": amount,
+                    "currency": "LKR",
+                    "hash": hash_val, // *Replace with generated hash retrieved from backend
+                    "first_name": "Saman",
+                    "last_name": "Perera",
+                    "email": "samanp@gmail.com",
+                    "phone": "0771234567",
+                    "address": "No.1, Galle Road",
+                    "city": "Colombo",
+                    "country": "Sri Lanka"
+                };
+                payhere.startPayment(payment);
+                
+         }
+        
+        }
+        xmlhttp.open("POST", "http://localhost/labour_link/customer/gethash.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //send order_id and amount
+        xmlhttp.send("order_id="+booking_id+"&amount="+amount);
+        
+        
+
+        
+    }
+    // Payment completed. It can be a successful failure.
+    payhere.onCompleted = function onCompleted(orderId) {
+        console.log("Payment completed. OrderID:" + orderId);
+        // Note: validate the payment and show success or failure page to the customer
+
+    };
+
+    // Payment window closed
+    payhere.onDismissed = function onDismissed() {
+        // Note: Prompt user to pay again or show an error page
+        console.log("Payment dismissed");
+    };
+
+    // Error occurred
+    payhere.onError = function onError(error) {
+        // Note: show an error page
+        console.log("Error:"  + error);
+    };
+    var merchant_id = "1221879";    
+
+
+
+   
+</script>
+
+
+
 </body>
