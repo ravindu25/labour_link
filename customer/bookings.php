@@ -317,7 +317,7 @@
                     require_once('../db.php');
 
                     // Getting customer id from the session
-                    $customer_id = $customer_id = $_SESSION['user_id'];
+                    $customer_id  = $_SESSION['user_id'];
                     $sql_get_bookings = "select Booking.*, User.First_Name, User.Last_Name from Booking inner join User on Booking.Worker_ID = User.User_ID where Booking.Customer_ID = $customer_id ORDER BY Booking.Created_Date DESC LIMIT 5";
 
                     $status = array("Pending","Completed","Rejected","In-Progress");
@@ -332,23 +332,6 @@
                             $statusValue = array_rand($status);
 
                             $button = '<button class="pending-button">Pending</button>';
-                            // switch($statusValue){
-                            //     case 0:
-                            //         $button = '<button class="pending-button">Pending</button>';
-                            //         break;
-                            //     case 1:
-                            //         $button = '<button class="completed-button">Completed</button>';
-                            //         break;
-                            //     case 2:
-                            //         $button = '<button class="rejected-button">Rejected</button>';
-                            //         break;
-                            //     case 3:
-                            //         $button = '<button class="in-pogress-button">In-Progress</button>';
-                            //         break;
-                            //     default:
-                            //         $button = '<button class="in-pogress-button">In-Progress</button>';
-                            //         break;
-                            // }
 
                             echo "
                                 <div class='booking-card'>
@@ -389,117 +372,29 @@
                 <thead>
                 <tr class="main-tr">
                     <th class="main-th">
-                        <div class="table-heading-container">Worker name&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">Worker name&nbsp;<button class="sort-button" id="worker-name-sort"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                         </div>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">Start date&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">Start date&nbsp;<button class="sort-button" id="start-date-sort"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">End date&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">End date&nbsp;<button class="sort-button" id="end-date-sort"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
                     <th class="main-th">More actions</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Saman Gunawardhana
-                        <br/>
-                        <span class="pending-badge">Pending</span>
-                    </td>
-                    <td class="main-td">21 Oct 2022</td>
-                    <td class="main-td">27 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Sunil Perera
-                        <br/>
-                        <span class="pending-badge">Pending</span>
-                    </td>
-                    <td class="main-td">12 Oct 2022</td>
-                    <td class="main-td">20 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Sunith Hettiarachchi
-                        <br/>
-                        <span class="rejected-badge">Rejected</span>
-                    </td>
-                    <td class="main-td">1 Oct 2022</td>
-                    <td class="main-td">5 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Dammika Kumara
-                        <br/>
-                        <span class="completed-badge">Completed</span>
-                    </td>
-                    <td class="main-td">23 Oct 2022</td>
-                    <td class="main-td">28 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Dinesh Attanayaka
-                        <br/>
-                        <span class="completed-badge">Completed</span>
-                    </td>
-                    <td class="main-td">10 Oct 2022</td>
-                    <td class="main-td">24 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                <tbody id="bookings-table-body">
                 </tbody>
             </table>
             <div class="pagination-container">
-                <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
+                <button class="pagination-button" id="previous-page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button-current" id="current-page"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
-        </div>
         </div>
     </section>
 </main>

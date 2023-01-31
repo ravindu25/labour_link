@@ -450,6 +450,16 @@
     font-size: 16px;
 }
 
+.accepted-badge{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--primary-bright-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
 .completed-badge{
     display: inline-block;
     padding: 6px;
