@@ -456,7 +456,7 @@
 <script>
 
     function payNow(payment_due_id, booking_id, amount, worker_name){
-        // alert(worker_name);
+        
         //Call AJAX function to get the hash value
         var xmlhttp = new XMLHttpRequest();
          xmlhttp.onreadystatechange = function () {
