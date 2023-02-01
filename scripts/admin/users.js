@@ -7,12 +7,12 @@ adminCreateButton.addEventListener('click', () => { openAdminForm() });
 adminCreateCancelButton.addEventListener('click', () => { closeAdminForm(); })
 
 function suspend_user(user_id) {
-    console.log(user_id);
-    console.log(curr_user_id);
-    if(user_id == curr_user_id){
-        alert('You cannot suspend yourself');
-        return;
-    }
+    // console.log(user_id);
+    // console.log(curr_user_id);
+    // if(user_id == curr_user_id){
+    //     alert('You cannot suspend yourself');
+    //     return;
+    // }
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -104,10 +104,13 @@ function openSuspendModal(user_id, curr_user_id, isSuspend){
         const suspendHeading = document.getElementById('suspend-user-text');
         if(user_id == curr_user_id){
             suspendHeading.innerText = 'You cannot suspend yourself';
+            
             document.getElementById('suspend-confirm-button').style.display = 'none';
             document.getElementById('suspend-cancel-button').innerHTML = 'Close';
         }else{
             suspendHeading.innerText = 'Do you want to suspend the selected user?';
+            document.getElementById('suspend-confirm-button').style.display = 'block';
+            document.getElementById('suspend-cancel-button').innerHTML = 'Cancel';
 
             const button = document.getElementById('suspend-confirm-button');
             button.addEventListener('click', () => {

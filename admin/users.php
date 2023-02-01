@@ -323,7 +323,33 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $user_id = $row['User_ID'];
-                        echo('
+                        if($user_id == $curr_user_id){
+                            echo('
+                        <tr class="main-tr">
+                            <td class="main-td" style="text-align: left;">' . $row['First_Name'] . ' ' . $row['Last_Name'] . ' (You)'.'
+                                
+                                <br/>' .
+                            //if login success
+                            ($row['Success_Flag'] == 1 ? '<span class="success-badge">Success</span>' : '<span class="failed-badge">Failed</span>')
+
+                            . '</td>
+                            <td class="main-td">' . date("d M Y", strtotime($row['date(Timestamp)'])) . '</td>
+                            <td class="main-td">' . $row['time(Timestamp)'] . '</td>
+                            <td class="main-td">
+                                <div class="more-button-container">
+                                    <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
+                                    </button>&nbsp;' .
+
+                            ($row['Activation_Flag'] == 1 ? 
+                            //if the user is the current user, disable the suspend button
+                                    
+                                    '<button class="suspend-button" onclick="openSuspendModal(' . $user_id.','. $curr_user_id . ', true)" disabled><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend</button>' : 
+                                    '<button class="activate-button" onclick="openSuspendModal(' . $user_id . ', false)"><i class="fa-solid fa-user-check" disabled></i>&nbsp;&nbsp;Activate</button>') .
+                            '</div>
+                            </td>
+                        </tr>');
+                        }else{
+                            echo('
                         <tr class="main-tr">
                             <td class="main-td" style="text-align: left;">' . $row['First_Name'] . ' ' . $row['Last_Name'] . '
                                 
@@ -347,6 +373,8 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                             '</div>
                             </td>
                         </tr>');
+                        }
+                        
                     }
                 }
                 
@@ -424,6 +452,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                             $last_login = date("d M Y", strtotime($last_login));
                         }
                         $user_id = $row['User_ID'];
+                
                         echo('<tr class="main-tr">
                                 <td class="main-td" style="text-align: left;">
                                     ' . $row['First_Name'] . ' ' . $row['Last_Name'] . '
@@ -436,7 +465,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                                     <div class="more-button-container">
                                         <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                                         </button>
-                                        <button class="reset-login-button" onclick="openResetModal(' . $user_id . ')"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
+                                        <button id="suspend-user-button" class="reset-login-button" onclick="openResetModal(' . $user_id . ')"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Reset login
                                         </button>
                                     </div>
                                 </td>
