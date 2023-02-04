@@ -2,9 +2,13 @@ const backButton = document.getElementById("back-button");
 const createBookingButton = document.getElementById("booking-create-button");
 const bookingCreateCancelButton = document.getElementById("booking-create-cancel-button");
 
+const bookingSearchButton = document.getElementById('booking-search-button');
+
+let fetchedBookings = [];
 let allBookings = [];
 let currentBookings = [];
-let currPage = 1;
+let currPage = 0;
+let totalPages = Math.ceil(allBookings.length / 5);
 let workerNameAsc = true;
 let startDateAsc = true;
 let endDateAsc = true;
@@ -71,8 +75,27 @@ previousPageButton.disabled = true;
 function previousPage(){
     [currPage, currentBookings] = goToPreviousPage(currPage, allBookings);
 
-    const currPageButton = document.getElementById('current-page');
+    const currPageButton = document.getElementById('current-page-number');
+    const prevPageButton = document.getElementById('previous-page-number');
+    const nextPageButton = document.getElementById('next-page-number');
+
+    const prevArrow = document.getElementById('previous-page');
+    const nextArrow = document.getElementById('next-page');
+
     currPageButton.innerHTML = `<i class="fa-solid fa-${currPage}"></i>`;
+
+    if(currPage > 1) {
+        prevPageButton.innerHTML = `<i class="fa-solid fa-${currPage - 1}"></i>`;
+    } else {
+        prevPageButton.style.display = 'none';
+        prevArrow.disabled = true;
+        prevArrow.style.color = 'var(--primary-background-color)';
+    }
+
+    nextArrow.disabled = false;
+    nextArrow.style.color = 'var(--primary-color)';
+    nextPageButton.style.display = 'block';
+    nextPageButton.innerHTML = `<i class="fa-solid fa-${currPage + 1}"></i>`;
 }
 
 
@@ -104,8 +127,28 @@ function goToPreviousPage(currPage, allBookings){
 function nextPage(){
     [currPage, currentBookings] = goToNextPage(currPage, allBookings);
 
-    const currPageButton = document.getElementById('current-page');
+    const currPageButton = document.getElementById('current-page-number');
+    const prevPageButton = document.getElementById('previous-page-number');
+    const nextPageButton = document.getElementById('next-page-number');
+
+    const prevArrow = document.getElementById('previous-page');
+    const nextArrow = document.getElementById('next-page');
+
     currPageButton.innerHTML = `<i class="fa-solid fa-${currPage}"></i>`;
+
+    console.log(totalPages);
+    if(currPage < totalPages){
+        nextPageButton.innerHTML = `<i class="fa-solid fa-${currPage + 1}"></i>`;
+    } else {
+        nextPageButton.style.display = 'none';
+        nextArrow.disabled = true;
+        nextArrow.style.color = 'var(--primary-background-color)';
+    }
+
+    prevArrow.disabled = false;
+    prevArrow.style.color = 'var(--primary-color)';
+    prevPageButton.style.display = 'block';
+    prevPageButton.innerHTML = `<i class="fa-solid fa-${currPage - 1}"></i>`;
 }
 
 function goToNextPage(currPage, allBookings){
@@ -131,7 +174,29 @@ function goToNextPage(currPage, allBookings){
     const previousPageButton = document.getElementById('previous-page');
     previousPageButton.disabled = false;
 
+
     return [currPage, selectedBookings];
+}
+
+function loadInitialPage(){
+    nextPage();
+
+    const prevPageButton = document.getElementById('previous-page-number');
+    const nextPageButton = document.getElementById('next-page-number');
+    const prevArrow = document.getElementById('previous-page');
+    const nextArrow = document.getElementById('next-page');
+
+
+    prevPageButton.style.display = 'none';
+    prevArrow.disabled = true;
+    prevArrow.style.color = 'var(--primary-background-color)';
+
+    if(currPage < totalPages) {
+        nextArrow.disabled = false;
+        nextArrow.style.color = 'var(--primary-color)';
+        nextPageButton.style.display = 'block';
+        nextPageButton.innerHTML = `<i class="fa-solid fa-${currPage + 1}"></i>`;
+    }
 }
 
 function rerenderBookings(currentBookings){
@@ -245,10 +310,59 @@ function getBookings(dataSource){
     })
         .then(response => response.json())
         .then(data => {
+            fetchedBookings = data;
             allBookings = data;
-            [currPage, currentBookings] = goToNextPage(0, allBookings);
+            totalPages = Math.ceil(allBookings.length / 5);
+            loadInitialPage();
         })
         .catch(error => console.log(error));
 }
 
 getBookings('http://localhost/labour_link/api/bookings.php');
+
+/*
+    Purpose - Perform searching in booking tables
+ */
+
+function searchBookings(searchTerm, currentBookingsInput){
+
+    let resultBookings = [];
+    currentBookingsInput.forEach(booking => {
+        if(searchParticularBooking(searchTerm, booking)){
+            resultBookings.push(booking);
+        }
+    });
+
+    allBookings = resultBookings;
+    totalPages = Math.ceil(allBookings.length / 5);
+    console.log(`Total bookings ${totalPages}`);
+    currPage = 0;
+    loadInitialPage();
+
+}
+
+/*
+    searchParticularBooking - delegating filter given booking according to the search term
+ */
+
+function searchParticularBooking(searchTerm, booking){
+    if(booking.workerName.includes(searchTerm)) return true;
+    if(booking.workerType.includes(searchTerm)) return true;
+    if(booking.status.includes(searchTerm)) return true;
+
+    return false;
+}
+
+bookingSearchButton.addEventListener('click', () => {
+    const bookingSearchInput = document.getElementById('booking-search');
+
+    allBookings = fetchedBookings;
+
+    if(bookingSearchInput.value !== '') {
+        searchBookings(bookingSearchInput.value, allBookings);
+    } else {
+        totalPages = Math.ceil(allBookings.length / 5);
+        currPage = 0;
+        loadInitialPage();
+    }
+})

@@ -361,7 +361,7 @@
                         <label for="booking-search">Search (Worker name etc)</label>
                         <div class="booking-search-input-field">
                             <input type="text" id="booking-search" class="booking-search-input" name="users-search"/>
-                            <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button type="button" class="search-icon-small" id="booking-search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
                 </form>
@@ -392,7 +392,9 @@
             </table>
             <div class="pagination-container">
                 <button class="pagination-button" id="previous-page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="pagination-button-current" id="current-page"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="previous-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current" id="current-page-number"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="next-page-number" disabled><i class="fa-solid fa-1"></i></button>
                 <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>

@@ -551,6 +551,11 @@
     transform: scale(.96);
 }
 
+.pagination-button:disabled,
+.pagination-button[disabled]{
+    transform: none;
+}
+
 .pagination-button-current{
     height: 48px;
     width: 48px;
@@ -562,11 +567,6 @@
     font-weight: 500;
     border-radius: 12px;
     background-color: var(--primary-background-shade-color);
-    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
-}
-
-.pagination-button-current:active {
-    transform: scale(.96);
 }
 
 .create-booking-container{
