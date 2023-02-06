@@ -10,8 +10,9 @@
         public $endDate;
         public $workerType;
         public $status;
+        public $paymentMethod;
 
-        public function __construct($bookingId, $customerId, $customerName, $workerId, $workerName,$createdDate, $startDate, $endDate, $workerType, $status)
+        public function __construct($bookingId, $customerId, $customerName, $workerId, $workerName,$createdDate, $startDate, $endDate, $workerType, $status, $paymentMethod)
         {
             $this->bookingId = $bookingId;
             $this->customerId = $customerId;
@@ -23,6 +24,7 @@
             $this->endDate = $endDate;
             $this->workerType = $workerType;
             $this->status = $status;
+            $this->paymentMethod = $paymentMethod;
         }
 
         public function getBookingId()
@@ -75,6 +77,11 @@
             return $this->status;
         }
 
+        public function getPaymentMethod()
+        {
+            return $this->paymentMethod;
+        }
+
         public function setCreatedDate($createdDate)
         {
             $this->createdDate = $createdDate;
@@ -100,6 +107,9 @@
             $this->status = $status;
         }
 
-
+        public function setPaymentMethod($paymentMethod)
+        {
+            $this->paymentMethod = $paymentMethod;
+        }
     }
     ?>

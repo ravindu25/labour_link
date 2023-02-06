@@ -14,7 +14,7 @@
     $payment_method = $_REQUEST['payment-method'];
 
     /* Creating the SQL Query Statement for Inserting Booking */
-    $sql_create_booking = "INSERT INTO labour_link.Booking(Customer_ID, Worker_ID, Start_Date, End_Date, Worker_Type) values($customer_id, $worker_id, '$starting_date', '$ending_date', '$worker_type')";
+    $sql_create_booking = "INSERT INTO labour_link.Booking(Customer_ID, Worker_ID, Start_Date, End_Date, Worker_Type, Payment_Method) values($customer_id, $worker_id, '$starting_date', '$ending_date', '$worker_type', '$payment_method')";
 
     $result = $conn->query($sql_create_booking);
 ?>

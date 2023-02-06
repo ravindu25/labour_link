@@ -4,6 +4,7 @@
     if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Customer') {
         header("Location: ../login.php");
     }
+    $userId = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,8 +35,24 @@
 </div>
 <div class="failed-message-container" id="booking-create-fail">
     <div class="message-text">
-        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking created successfully</h1>
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking creation failed</h1>
         <h5>Your login session outdated. Please login again.</h5>
+    </div>
+</div>
+<div class="delete-booking-container" id="delete-booking-container">
+    <div id="delete-booking-content">
+        <div class="delete-booking-title">
+            <h1 id="delete-booking-text">Do you want to delete selected booking?</h1>
+        </div>
+        <div class="delete-booking-buttons" id="delete-booking-buttons">
+            <button type="button" id="delete-cancel-button" onclick="closeDeleteModal()" class="delete-cancel-button">Cancel</button>
+            <button type="button" id="delete-confirm-button" class="delete-confirm-button">Delete</button>
+        </div>
+    </div>
+    <div class="loader-container" id="loader-container" style="height: 100%; width: 100%">
+        <svg id="spinner" class="spinner" width="50%" height="100%" viewBox="0 0 50 50">
+            <circle class="path" style="stroke: #FF5B19;" cx="25" cy="25" r="20" fill="#FFF" stroke-width="5"></circle>
+        </svg>
     </div>
 </div>
 <div class="booking-details-container" id="booking-details-container">
@@ -43,33 +60,31 @@
         <div class="booking-details-title">
             <h1>Current Status of Your <u>Booking</u></h1>
         </div>
-        <div class="status-container">
-            <button type="button" class="status-button">In-Progress</button>
-        </div>
+        <div class="status-container" id="booking-details-status-container"></div>
         <div class="details-container">
             <div class="details-row">
                 <h4>Job type</h4>
-                <h4 class="details-value">Plumber</h4>
+                <h4 class="details-value" id="booking-details-job-type"></h4>
             </div>
             <div class="details-row">
                 <h4>Worker</h4>
-                <h4 class="details-value">Saman Gunawardhana</h4>
+                <h4 class="details-value" id="booking-details-worker-name"></h4>
             </div>
             <div class="details-row">
                 <h4>Start date</h4>
-                <h4 class="details-value">21-Nov-2022</h4>
+                <h4 class="details-value" id="booking-details-start-date"></h4>
             </div>
-            <div class="remaining-time-container">
+            <div class="remaining-time-container" id="remaining-time-container">
                 <h4>This booking will be closed in</h4>
-                <h1 class="countdown-text">12 hrs 3 days</h1>
+                <h1 class="countdown-text" id="booking-details-countdown"></h1>
             </div>
             <div class="payment-method-container">
                 <div class="payment-image-container">
                     <h4>Payment Method</h4>
                     <div class="payment-image-card">
-                        <img class="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
+                        <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
                              alt="payment method"/>
-                        <h4>Online payments</h4>
+                        <h4 id="payment-method-text">Online payments</h4>
                     </div>
                 </div>
                 <div class="payment-details-container">
@@ -163,7 +178,7 @@
                 <label>Payment method</label>
                 <div class="payment-methods-container">
                     <label>
-                        <input type="radio" name="payment-method" class="payment-method-radio" value="manual"/>
+                        <input type="radio" name="payment-method" class="payment-method-radio" value="Manual"/>
                         <div class="payment-method-card">
                             <img src="../assets/customer/dashboard/undraw_savings_re_eq4w.svg" alt="manual-payment"
                                  class="payment-method-image"/>
@@ -171,7 +186,7 @@
                         </div>
                     </label>
                     <label>
-                        <input type="radio" name="payment-method" class="payment-method-radio" value="online" checked/>
+                        <input type="radio" name="payment-method" class="payment-method-radio" value="Online" checked/>
                         <div class="payment-method-card">
                             <img src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg" alt="online-payment"
                                  class="payment-method-image"/>
@@ -312,45 +327,7 @@
             <div class="recent-bookings-title">
                 <h1>Recently made Bookings</h1>
             </div>
-            <div class="recent-bookings-container">
-                <?php
-                    require_once('../db.php');
-
-                    // Getting customer id from the session
-                    $customer_id  = $_SESSION['user_id'];
-                    $sql_get_bookings = "select Booking.*, User.First_Name, User.Last_Name from Booking inner join User on Booking.Worker_ID = User.User_ID where Booking.Customer_ID = $customer_id ORDER BY Booking.Created_Date DESC LIMIT 5";
-
-                    $status = array("Pending","Completed","Rejected","In-Progress");
-
-                    $result = $conn->query($sql_get_bookings);
-
-                    if($result->num_rows > 0){
-                        while($row = $result->fetch_assoc()){
-                            $worker_type = $row['Worker_Type'];
-                            $worker_name = $row['First_Name'] . " " . $row['Last_Name'];
-                            $start_date = date("d M Y", strtotime($row['Start_Date']));
-                            $statusValue = array_rand($status);
-
-                            $button = '<button class="pending-button">Pending</button>';
-
-                            echo "
-                                <div class='booking-card'>
-                                    <div class='card-text'>
-                                        <h3>$worker_type</h3>
-                                        <p>Work by</p>
-                                        <h4>$worker_name</h4>
-                                    </div>
-                                    <div class='booking-card-button-row'>
-                                        <div class='badge-container'>
-                                            <div class='blue-badge'>$start_date</div>
-                                        </div>
-                                        $button
-                                    </div>
-                                </div>";
-                        }
-                    }
-                ?>
-            </div>
+            <div class="recent-bookings-container" id="recent-booking-container"></div>
         </div>
         <!--Booking search container-->
         <div class="booking-search">
@@ -405,6 +382,11 @@
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+<?php
+    echo "<script>
+        let userId = $userId;
+    </script>"
+?>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/customer/bookings.js" type="text/javascript"></script>
 <script src="../scripts/customer/create-booking-fetch-workers.js" type="text/javascript"></script>

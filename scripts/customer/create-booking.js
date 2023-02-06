@@ -74,17 +74,26 @@ for(let i = 0; i < paymentMethodInputs.length; i++){
 }
 
 /* Get the Current Date */
-function getToday(){
+function updateDates(){
     const today = new Date();
     const date = String(today.getDate()).padStart(2, '0');
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const year = today.getFullYear();
 
-    return `${year}-${month}-${date}`;
+    const currentDateText =`${year}-${month}-${date}`;
+
+    startDateInput.min = currentDateText;
+    startDateInput.value = currentDateText;
+    endDateInput.value = currentDateText;
+    endDateInput.value = currentDateText;
+
+    const maximumMonth = String(today.getMonth() + 3).padStart(2, '0');
+
+    startDateInput.max = `${year}-${maximumMonth}-${date}`;
+    endDateInput.max = `${year}-${maximumMonth}-${date}`;
 }
 
-startDateInput.value = getToday();
-endDateInput.value = getToday();
+updateDates();
 
 if(window.XMLHttpRequest){
     XMLHttpRequestObject = new XMLHttpRequest();
@@ -137,6 +146,20 @@ function createBooking(dataSource, data){
 
     XMLHttpRequestObject.send(params);
 }
+
+startDateInput.addEventListener('change', () => {
+    const currentStartDate = new Date(startDateInput.value);
+
+    const date = String(currentStartDate.getDate()).padStart(2, '0');
+    const month = String((currentStartDate.getMonth() + 2) % 12 + 1).padStart(2, '0');
+    const year = currentStartDate.getFullYear();
+
+    const endDateInput = document.getElementById('end-date');
+
+    endDateInput.min = startDateInput.value;
+    endDateInput.value = startDateInput.value;
+    endDateInput.max = `${year}-${month}-${date}`;
+})
 
 submitButton.addEventListener('click', (e) => {
     e.preventDefault();
