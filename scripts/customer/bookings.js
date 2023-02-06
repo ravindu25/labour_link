@@ -24,9 +24,63 @@ bookingCreateCancelButton.addEventListener('click', () => {
 });
 
 
-function openBookingDetailsModal(){
+function openBookingDetailsModal(bookingId){
     const backdropModal = document.getElementById("backdrop-modal");
     const bookingDetails = document.getElementById("booking-details-container");
+
+    const currentBooking = allBookings.find(booking => booking.bookingId == bookingId);
+
+    let bookingStatusButton = null;
+    if(currentBooking.status === 'Pending'){
+        bookingStatusButton = '<button class="pending-button">Pending</button>';
+    } else if(currentBooking.status === 'Accepted'){
+        bookingStatusButton = '<button class="in-pogress-button">Accepted</button>';
+    } else if(currentBooking.status === 'Completed'){
+        bookingStatusButton = '<button class="completed-button">Completed</button>';
+    } else {
+        bookingStatusButton = '<button class="rejected-button">Rejected</button>';
+    }
+
+    const bookingStatusContainer = document.getElementById('booking-details-status-container');
+    bookingStatusContainer.innerHTML = bookingStatusButton;
+
+    document.getElementById('booking-details-job-type').innerText = currentBooking.workerType;
+    document.getElementById('booking-details-worker-name').innerText = currentBooking.workerName;
+    document.getElementById('booking-details-start-date').innerText = currentBooking.startDate;
+
+    if(currentBooking.status === 'Pending' || currentBooking.status === 'Accepted') {
+        const startDate = new Date();
+        const endDate = new Date(currentBooking.endDate);
+
+        let difference = endDate - startDate;
+        const bookingCountDown = document.getElementById('booking-details-countdown');
+
+        if(difference >= 0) {
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            difference -= days * (1000 * 60 * 60 * 24);
+            const hours = Math.floor(difference / (1000 * 60 * 60));
+            const remainingText = `${days} days and ${hours} hours`;
+
+            bookingCountDown.style.color = 'var(--primary-color)';
+            bookingCountDown.innerText = remainingText;
+        } else {
+            bookingCountDown.style.color = 'var(--danger-color)';
+            bookingCountDown.innerText = 'The booking has expired';
+        }
+    } else {
+        document.getElementById('remaining-time-container').style.display = 'none';
+    }
+
+    const paymentImage = document.getElementById('payment-image');
+    const paymentImageText = document.getElementById('payment-method-text');
+
+    if(currentBooking.paymentMethod === 'Manual'){
+        paymentImage.src = '../assets/customer/dashboard/undraw_savings_re_eq4w.svg';
+        paymentImageText.innerText = 'Manual payments';
+    } else {
+        paymentImage.src = '../assets/customer/dashboard/undraw_credit_card_re_blml.svg';
+        paymentImageText.innerText = 'Online payments';
+    }
 
     backdropModal.style.visibility = 'visible';
     bookingDetails.style.visibility = 'visible';
@@ -39,10 +93,6 @@ function closeBookingDetailsModal(){
     backdropModal.style.visibility = 'hidden';
     bookingDetails.style.visibility = 'hidden';
 }
-
-// Get all the cards and add click event
-let cards = document.getElementsByClassName('booking-card');
-for(let card of cards) card.addEventListener('click', () => openBookingDetailsModal());
 
 // Booking create form
 function openCreateBookingModal(){
@@ -61,6 +111,29 @@ function closeCreateBookingModal(){
     createBookingContainer.style.visibility = 'hidden';
 }
 
+function openDeleteModal(bookingId){
+    const backdropModal = document.getElementById('backdrop-modal');
+    const deleteBookingContainer = document.getElementById('delete-booking-container');
+    const deleteButton = document.getElementById('delete-confirm-button');
+    const loadingSpinnerContainer = document.getElementById('loader-container');
+
+    deleteButton.addEventListener('click', async () => {
+        await deleteBooking(bookingId);
+    });
+
+    loadingSpinnerContainer.style.display = 'none';
+    backdropModal.style.visibility = 'visible';
+    deleteBookingContainer.style.visibility = 'visible';
+}
+
+function closeDeleteModal(){
+    const backdropModal = document.getElementById('backdrop-modal');
+    const deleteBookingContainer = document.getElementById('delete-booking-container');
+
+    backdropModal.style.visibility = 'hidden';
+    deleteBookingContainer.style.visibility = 'hidden';
+}
+
 let XMLHttpRequestObject = false;
 
 if(window.XMLHttpRequest){
@@ -68,6 +141,73 @@ if(window.XMLHttpRequest){
 }else if(window.ActiveXObject){
     XMLHttpRequestObject = new ActiveXObject('Microsoft.XMLHTTP');
 }
+
+/*
+    Purpose - Getting the most recent bookings
+ */
+
+function loadRecentBookings(allBookings){
+    let nonRejectedBookings = [];
+    let rejectedBookings = [];
+
+    for(let i = 0; i < allBookings.length; i++){
+        allBookings[i].sortingDate = new Date(allBookings[i].startDate);
+
+        if(allBookings[i].status === 'Rejected'){
+            rejectedBookings.push(allBookings[i]);
+        } else {
+            nonRejectedBookings.push(allBookings[i]);
+        }
+    }
+
+    rejectedBookings.sort((first, second) => second.sortingDate - first.sortingDate);
+    nonRejectedBookings.sort((first, second) => second.sortingDate - first.sortingDate);
+
+    let allSortedBookings = [...nonRejectedBookings, ...rejectedBookings];
+
+    const recentBookingsContainer = document.getElementById('recent-booking-container');
+
+    if(allSortedBookings.length >= 5){
+        for(let i = 0; i < 5; i++){
+            let button = null;
+            let currentBooking = allSortedBookings[i];
+
+            let workerType = currentBooking.workerType;
+            let workerName = currentBooking.workerName;
+            let startDate = currentBooking.startDate;
+
+            if(currentBooking.status === 'Pending'){
+                button = '<button class="pending-button">Pending</button>';
+            } else if(currentBooking.status === 'Accepted'){
+                button = '<button class="in-pogress-button">Accepted</button>';
+            } else if(currentBooking.status === 'Completed'){
+                button = '<button class="completed-button">Completed</button>';
+            } else {
+                button = '<button class="rejected-button">Rejected</button>';
+            }
+
+            let htmlSeg = `<div class='booking-card' onclick="openBookingDetailsModal(${currentBooking.bookingId})">
+                                    <div class='card-text'>
+                                        <h3>${workerType}</h3>
+                                        <p>Work by</p>
+                                        <h4>${workerName}</h4>
+                                    </div>
+                                    <div class='booking-card-button-row'>
+                                        <div class='badge-container'>
+                                            <div class='blue-badge'>${startDate}</div>
+                                        </div>
+                                        ${button}
+                                    </div>
+                                </div>`;
+
+            recentBookingsContainer.innerHTML += htmlSeg;
+        }
+    }
+}
+
+/*
+    Purpose - Perform and apply pagination to the booking table
+ */
 
 const previousPageButton = document.getElementById('previous-page');
 previousPageButton.disabled = true;
@@ -136,7 +276,6 @@ function nextPage(){
 
     currPageButton.innerHTML = `<i class="fa-solid fa-${currPage}"></i>`;
 
-    console.log(totalPages);
     if(currPage < totalPages){
         nextPageButton.innerHTML = `<i class="fa-solid fa-${currPage + 1}"></i>`;
     } else {
@@ -166,8 +305,6 @@ function goToNextPage(currPage, allBookings){
             break;
         }
     }
-
-    const bookingsTableBody = document.getElementById('bookings-table-body');
 
     rerenderBookings(selectedBookings);
 
@@ -217,12 +354,12 @@ function rerenderBookings(currentBookings){
 
         let moreAction = '';
         if(booking.status === 'Completed' || booking.status === 'Rejected'){
-            moreAction = `<button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update</button>
-                <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+            moreAction = `<button class="disable-button" onclick="openBookingDetailsModal(${booking.bookingId})"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;&nbsp;View</button>
+                <button class="disable-button" onclick="openDeleteModal(${booking.bookingId})"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
                 </button>`;
         } else {
-            moreAction = `<button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update</button>
-                                    <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+            moreAction = `<button class="update-button" onclick="openBookingDetailsModal(${booking.bookingId})"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;&nbsp;View</button>
+                                    <button class="delete-button" onclick="openDeleteModal(${booking.bookingId})"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
                                     </button>`
         }
 
@@ -247,7 +384,6 @@ function rerenderBookings(currentBookings){
 }
 
 function sortByColumn(fieldName, asc, currentBookings){
-    console.log(currentBookings);
     if(asc === true) {
         currentBookings = currentBookings.sort((a, b) => {
             if(a[`${fieldName}`] < b[`${fieldName}`]) return 1;
@@ -260,7 +396,6 @@ function sortByColumn(fieldName, asc, currentBookings){
         });
     }
 
-    console.log(currentBookings);
     return currentBookings;
 }
 
@@ -305,7 +440,7 @@ document.getElementById('end-date-sort').addEventListener('click', () =>{
 
 function getBookings(dataSource){
     fetch(dataSource, {
-        method: 'POST',
+        method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
         .then(response => response.json())
@@ -313,12 +448,13 @@ function getBookings(dataSource){
             fetchedBookings = data;
             allBookings = data;
             totalPages = Math.ceil(allBookings.length / 5);
+            loadRecentBookings(allBookings);
             loadInitialPage();
         })
         .catch(error => console.log(error));
 }
 
-getBookings('http://localhost/labour_link/api/bookings.php');
+getBookings(`http://localhost/labour_link/api/bookings.php?customerId=${userId}`);
 
 /*
     Purpose - Perform searching in booking tables
@@ -335,7 +471,6 @@ function searchBookings(searchTerm, currentBookingsInput){
 
     allBookings = resultBookings;
     totalPages = Math.ceil(allBookings.length / 5);
-    console.log(`Total bookings ${totalPages}`);
     currPage = 0;
     loadInitialPage();
 
@@ -365,4 +500,47 @@ bookingSearchButton.addEventListener('click', () => {
         currPage = 0;
         loadInitialPage();
     }
-})
+});
+
+/*
+    Purpose - Delete selected booking
+ */
+
+async function deleteBooking(bookingId){
+    const bookingDeleteContent = document.getElementById('delete-booking-content');
+    const bookingDeleteButtons = document.getElementById('delete-booking-buttons');
+    const loadingSpinnerContainer = document.getElementById('loader-container');
+
+    bookingDeleteButtons.style.display = 'none';
+    bookingDeleteContent.style.display = 'none';
+    loadingSpinnerContainer.style.display = 'block';
+
+    fetch(`http://localhost/labour_link/api/bookings.php?bookingId=${bookingId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then(() => {
+            const bookingMessage = document.getElementById('delete-booking-text');
+
+            loadingSpinnerContainer.style.display = 'none';
+            bookingDeleteContent.style.display = 'block';
+            bookingMessage.innerHTML = `<i class="fa-solid fa-check"></i>&nbsp;&nbsp;Booking deleted successfully`;
+
+            setTimeout(() => {
+                closeDeleteModal();
+                window.location.href = "../customer/bookings.php";
+            }, 5000);
+        })
+        .catch((error) => {
+            const bookingMessage = document.getElementById('delete-booking-text');
+
+            bookingDeleteContent.style.display = 'block';
+            bookingMessage.innerHTML = `<i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking deletion failed`;
+
+            setTimeout(() => {
+                closeDeleteModal();
+                window.location.href = "../customer/bookings.php";
+            }, 5000);
+        });
+}
+
