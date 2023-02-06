@@ -1,0 +1,140 @@
+.worker-banner{
+    min-height: 40vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.main-title{
+    text-align: center;
+    margin: 16px 0;
+    font-size: 40px;
+    color: var(--primary-color);
+}
+
+.worker-section{
+    padding: 0 56px;
+}
+
+.worker-section-title{
+    margin: 0;
+    font-size: 32px;
+    font-weight: normal;
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-color);
+}
+
+.worker-card-container{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 16px 0;
+}
+
+.worker-card{
+    display: flex;
+    flex-direction: column;
+    max-width: 20%;
+    padding: 28px 16px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+}
+
+.worker-card-title{
+    margin: 0;
+    font-size: 28px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
+}
+
+.worker-card-star-container{
+    width: fit-content;
+    padding: 2px 4px;
+    color: var(--primary-color);
+    background-color: var(--primary-background-color);
+    border-radius: 4px;
+    margin: 12px 0;
+}
+
+.worker-image{
+    width: 75%;
+    margin: 0 auto;
+    height: auto;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.worker-image img{
+    width: 100%;
+    height: auto;
+}
+
+.worker-card-location-row h3{
+    margin: 8px 0;
+    font-weight: normal;
+    font-size: 24px;
+}
+
+.worker-card-types-row{
+    display: flex;
+}
+
+.worker-type-badge{
+    padding: 4px 12px;
+    margin-right: 8px;
+    border-radius: 6px;
+    background-color: var(--primary-background-color);
+}
+
+.worker-type-badge h5{
+    margin: 0;
+    color: var(--primary-bright-color);
+    font-size: 18px;
+    font-weight: normal;
+    font-family: 'Inter', sans-serif;
+}
+
+.worker-card-button-container{
+    margin-top: 24px;
+    text-align: center;
+}
+
+.booking-button, .more-button{
+    outline: none;
+    border: 3px solid var(--primary-color);
+    padding: 12px 18px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: var(--primary-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.booking-button:active, .more-button:active{
+    transform: scale(.96);
+}
+
+.view-profile-button{
+    outline: none;
+    border: 3px solid var(--primary-color);
+    padding: 12px 18px;
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: white;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.view-profile-button:active{
+    transform: scale(.96);
+}
+
+.button-container{
+    text-align: center;
+    margin-bottom: 16px;
+}
