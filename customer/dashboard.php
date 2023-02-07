@@ -397,14 +397,14 @@
                             <button type="button" class="payment-amount-button">Rs. 17000.00</button>
                         </div>
                     </div>
-                    <div class="payment-item">
+                    <div class="payment-item-failed">
                         <div class="payment-text">
                             <span class="blue-badge">19 Oct 2022</span>
                             <h3>Rushdha Rasheed</h3>
                             <h4>Dammika Kumara</h4>
                         </div>
                         <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 25000.00</button>
+                            <button type="button" class="payment-amount-button-failed">Rs. 25000.00</button>
                         </div>
                     </div>
                     <div class="payment-item">
