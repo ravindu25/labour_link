@@ -22,25 +22,26 @@ $local_md5sig = strtoupper(
         strtoupper(md5($merchant_secret)) 
     ) 
 );
+ // require_once '../db.php';
+ $servername = "labourlink.cdkspo5cbfve.ap-southeast-1.rds.amazonaws.com";
+ $username = "admin";
+ $password = "LabourLink123*";
+ $dbname = "labour_link";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
        
-if (($local_md5sig === $md5sig) AND ($status_code == 2) ){
-    // require_once '../db.php';
-    $servername = "labourlink.cdkspo5cbfve.ap-southeast-1.rds.amazonaws.com";
-    $username = "admin";
-    $password = "LabourLink123*";
-    $dbname = "labour_link";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+if ($local_md5sig === $md5sig){
+    if($status_code == 2){
+        $sql = "UPDATE Payments_Due SET Payment_Date=NOW(), PayHere_Payment_ID=$payment_id, Mode='$mode' WHERE Booking_ID=$order_id OR Job_ID=$order_id";
+        $result = $conn -> query($sql);
     }
 
-    $sql = "UPDATE Payments_Due SET Payment_Date=NOW(), PayHere_Payment_ID=$payment_id, Mode='$mode' WHERE Booking_ID=$order_id OR Job_ID=$order_id";
-    
-    $result = $conn -> query($sql);
-
+    $sql_to_log = "INSERT INTO Payments_Log (PayHere_Payment_ID, Booking_ID, Mode, Amount, Success_Flag, Status_Message) VALUES ($payment_id, $order_id, '$mode', $payhere_amount, $status_code, '$status_message')";
+    $result = $conn -> query($sql_to_log);
 }
 
 

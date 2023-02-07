@@ -145,7 +145,7 @@
         <h1 class="sidebar-heading">Dashboard</h1>
         <div class="sidebar-items">
             <a href="./dashboard.php">
-                <div class="sidebar-item sidebar-item-selected">
+                <div class="sidebar-item">
                     <i class="fa-solid fa-server sidebar-item-icon"></i>
                     <h4 class="sidebar-icon-heading">Overview</h4>
                 </div>
@@ -169,7 +169,7 @@
                 </div>
             </a>
             <a href="./payments.php">
-                <div class="sidebar-item">
+                <div class="sidebar-item sidebar-item-selected">
                     <i class="fa-regular fa-credit-card sidebar-item-icon"></i>
                     <h4 class="sidebar-icon-heading">Payments</h4>
                 </div>
@@ -276,11 +276,11 @@
                 </table>
             </div>
         </div>
-
+                                <br>
         <!-- Search for payments section -->
         <div class="booking-search">
             <div class="booking-search-title">
-                <h1>Search for bookings</h1>
+                <h1>Search for Payments</h1>
                 <form action="" method="POST">
                     <div class="booking-search-input-container">
                         <label for="booking-search">Search (Using worker name, date etc)</label>
@@ -292,7 +292,7 @@
                 </form>
             </div>
         </div>
-
+        
         <!-- Search for payments table -->
         <div class="recent-payments-container">
             <table class="main-table">
@@ -315,7 +315,47 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="main-tr">
+                <?php
+                require_once '../db.php';
+                $customer_id=$_SESSION['user_id'];
+                $sql = "SELECT * FROM Payments_Log INNER JOIN Booking ON Payments_Log.Booking_ID = Booking.Booking_ID WHERE Booking.Customer_ID = $customer_id;";
+                $result = $conn -> query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $paymentDate = date_create($row['Timestamp']);
+                        $paymentDateInText = date_format($paymentDate, 'dS F Y');
+                        if($row['Success_Flag']==2){
+                            $successMessage="Successful";
+                        }else{
+                            $successMessage="Failed";
+                        }
+                        $sqlGetWorkerName = "SELECT First_Name, Last_Name FROM User WHERE User_ID = ".$row['Worker_ID'];
+                        $resultGetWorkerName = $conn -> query($sqlGetWorkerName);
+                        $rowGetWorkerName = $resultGetWorkerName->fetch_assoc();
+                        echo("<tr class=\"main-tr\">
+                        <td class=\"main-td\" style=\"text-align: left;\">
+                            ".$rowGetWorkerName['First_Name']." ".$rowGetWorkerName['Last_Name']."
+                            <br/>
+                            <span class=\"blue-badge\">".$paymentDateInText."</span>
+                        </td>
+                        <td class=\"main-td\">Rs. ".$row['Amount']."</td>
+                        <td class=\"main-td\">".$successMessage."</td>
+                        <td class=\"main-td\">
+                            <div class=\"more-button-container\">
+                                <button class=\"view-button\"><i class=\"fa-solid fa-pen\"></i>&nbsp;&nbsp;View
+                                </button>
+                            </div>
+                        </td>
+                    </tr>");
+
+                    }
+                }
+
+        
+
+
+                ?>
+                <!-- <tr class="main-tr">
                     <td class="main-td" style="text-align: left;">
                         Saman Gunawardhana
                         <br/>
@@ -330,81 +370,7 @@
                         </div>
                     </td>
                 </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Avinash Sudira
-                        <br/>
-                        <span class="blue-badge">15 Nov 2022</span>
-                    </td>
-                    <td class="main-td">Rs. 12500.00</td>
-                    <td class="main-td">Failed</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Dinesh Attanayaka
-                        <br/>
-                        <span class="blue-badge">10 Nov 2022</span>
-                    </td>
-                    <td class="main-td">Rs. 1700.00</td>
-                    <td class="main-td">Success</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Kapila Dharmadhasa
-                        <br/>
-                        <span class="blue-badge">8 Nov 2022</span>
-                    </td>
-                    <td class="main-td">Rs. 12000.00</td>
-                    <td class="main-td">Success</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Saman Gunawardhana
-                        <br/>
-                        <span class="blue-badge">30 Oct 2022</span>
-                    </td>
-                    <td class="main-td">Rs. 18000.00</td>
-                    <td class="main-td">Success</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Saman Gunawardhana
-                        <br/>
-                        <span class="blue-badge">30 Oct 2022</span>
-                    </td>
-                    <td class="main-td">Rs. 18000.00</td>
-                    <td class="main-td">Failed</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+         -->
                 </tbody>
             </table>
             <div class="pagination-container">
