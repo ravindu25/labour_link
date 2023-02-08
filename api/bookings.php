@@ -34,7 +34,6 @@
                 }
             }
 
-            header('Access-Control-Allow-Origin: http://localhost/labour_link');
             header('Content-Type: application/json');
 
             echo json_encode($booking);
@@ -68,7 +67,6 @@
                 }
             }
 
-            header('Access-Control-Allow-Origin: http://localhost/labour_link');
             header('Content-Type: application/json');
             echo json_encode($all_bookings);
         }
@@ -77,7 +75,6 @@
 
         $sql_delete_booking = "DELETE FROM Booking WHERE Booking_ID = $bookingId";
 
-        header('Access-Control-Allow-Origin: http://localhost/labour_link');
         header('Content-Type: application/json');
 
         if($result = $conn->query($sql_delete_booking)){
