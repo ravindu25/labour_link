@@ -174,8 +174,8 @@
                         <h1>Mohamed Izzath</h1>
                     </div>
                     <div>
-                        <div class ="user-details-item"><h3>mohomedizzath2016@gmail.com</h3></div>
-                        <div class ="user-details-item"><h3>076 - 450 4261</h3></div>
+                        <div class ="user-details-item"><h3>E-mail - mohomedizzath2016@gmail.com</h3></div>
+                        <div class ="user-details-item"><h3>Mobile Number - 076 - 450 4261</h3></div>
                         <div class ="user-details-item"><h3>Address - No. 390 / A 54,Semuthu Uyana,Katuwapitiya,Negambo.</h3></div>
                         <div class ="user-details-item"><h3>Date of birth - 26 January 2001</h3></div>
                         <div><button class= "more-button" id="update-details-button">Update Details</button></div>
