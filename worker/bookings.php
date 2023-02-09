@@ -4,7 +4,6 @@
     if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Worker') {
         header("Location: ../login.php");
     }
-    $userId = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,56 +34,42 @@
 </div>
 <div class="failed-message-container" id="booking-create-fail">
     <div class="message-text">
-        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking creation failed</h1>
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking created successfully</h1>
         <h5>Your login session outdated. Please login again.</h5>
     </div>
 </div>
-<div class="delete-booking-container" id="delete-booking-container">
-    <div id="delete-booking-content">
-        <div class="delete-booking-title">
-            <h1 id="delete-booking-text">Do you want to delete selected booking?</h1>
-        </div>
-        <div class="delete-booking-buttons" id="delete-booking-buttons">
-            <button type="button" id="delete-cancel-button" onclick="closeDeleteModal()" class="delete-cancel-button">Cancel</button>
-            <button type="button" id="delete-confirm-button" class="delete-confirm-button">Delete</button>
-        </div>
-    </div>
-    <div class="loader-container" id="loader-container" style="height: 100%; width: 100%">
-        <svg id="spinner" class="spinner" width="50%" height="100%" viewBox="0 0 50 50">
-            <circle class="path" style="stroke: #FF5B19;" cx="25" cy="25" r="20" fill="#FFF" stroke-width="5"></circle>
-        </svg>
-    </div>
-</div>
-<!-- <div class="booking-details-container" id="booking-details-container">
+<div class="booking-details-container" id="booking-details-container">
     <div class="booking-details-scroll-wrapper">
         <div class="booking-details-title">
             <h1>Current Status of Your <u>Booking</u></h1>
         </div>
-        <div class="status-container" id="booking-details-status-container"></div>
+        <div class="status-container">
+            <button type="button" class="status-button">In-Progress</button>
+        </div>
         <div class="details-container">
             <div class="details-row">
                 <h4>Job type</h4>
-                <h4 class="details-value" id="booking-details-job-type"></h4>
+                <h4 class="details-value">Plumber</h4>
             </div>
             <div class="details-row">
                 <h4>Worker</h4>
-                <h4 class="details-value" id="booking-details-worker-name"></h4>
+                <h4 class="details-value">Saman Gunawardhana</h4>
             </div>
             <div class="details-row">
                 <h4>Start date</h4>
-                <h4 class="details-value" id="booking-details-start-date"></h4>
+                <h4 class="details-value">21-Nov-2022</h4>
             </div>
-            <div class="remaining-time-container" id="remaining-time-container">
+            <div class="remaining-time-container">
                 <h4>This booking will be closed in</h4>
-                <h1 class="countdown-text" id="booking-details-countdown"></h1>
+                <h1 class="countdown-text">12 hrs 3 days</h1>
             </div>
             <div class="payment-method-container">
                 <div class="payment-image-container">
                     <h4>Payment Method</h4>
                     <div class="payment-image-card">
-                        <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
+                        <img class="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
                              alt="payment method"/>
-                        <h4 id="payment-method-text">Online payments</h4>
+                        <h4>Online payments</h4>
                     </div>
                 </div>
                 <div class="payment-details-container">
@@ -97,7 +82,7 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 <div class="create-booking-container" id="create-booking-container">
     <div class="create-booking-scroll-wrapper">
         <div class="create-booking-title">
@@ -125,7 +110,7 @@
                 <label for="start-date">Start date</label>
                 <input type="date" id="start-date" name="start-date"/>
             </div>
-            <div class="form-time-row" id="days-complete-container">
+            <div class="form-time-row">
                 <label>
                     Days needed to complete
                 </label>
@@ -167,18 +152,11 @@
                     </label>
                 </div>
             </div>
-            <div class="form-input-row" id="end-date-container">
-                <label for="end-date">End date</label>
-                <input type="date" id="end-date" name="send-date"/>
-            </div>
-            <div class="form-button-container">
-                <button type="button" class="more-button submit-button" id="change-days-complete-button">Custom date</button>
-            </div>
             <div class="form-payment-row">
                 <label>Payment method</label>
                 <div class="payment-methods-container">
                     <label>
-                        <input type="radio" name="payment-method" class="payment-method-radio" value="Manual"/>
+                        <input type="radio" name="payment-method" class="payment-method-radio" value="manual"/>
                         <div class="payment-method-card">
                             <img src="../assets/customer/dashboard/undraw_savings_re_eq4w.svg" alt="manual-payment"
                                  class="payment-method-image"/>
@@ -186,7 +164,7 @@
                         </div>
                     </label>
                     <label>
-                        <input type="radio" name="payment-method" class="payment-method-radio" value="Online" checked/>
+                        <input type="radio" name="payment-method" class="payment-method-radio" value="online" checked/>
                         <div class="payment-method-card">
                             <img src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg" alt="online-payment"
                                  class="payment-method-image"/>
@@ -321,9 +299,57 @@
         <!--Recent bookings section-->
         <div class="recent-bookings">
             <div class="recent-bookings-title">
-                <h1>Recently made Bookings</h1>
+                <h1>Recent Bookings</h1>
+                <button class="more-button">More Bookings</button>
             </div>
-            <div class="recent-bookings-container" id="recent-booking-container"></div>
+            <div class="recent-bookings-container">
+            <?php
+                require_once '../db.php';
+
+                // $sql = "SELECT First_Name,Last_Name ,Start_Date , Completion_Flag FROM user INNER JOIN booking ON user.User_ID = booking.Customer_ID INNER JOIN confirmed_booking ON booking.Booking_ID = confirmed_booking.Booking_ID";
+
+                $sql = "SELECT First_Name,Last_Name ,Start_Date, Worker_Type, Created_Date FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} ORDER BY Created_Date DESC LIMIT 5";
+
+                // $array1 = array("Plumbing","Carpentry","Electrical","Painting","Masonry","Janitorial","Mechanical","Gardening");
+                $array2 = array("Pending","Completed","Rejected","In-Progress");
+
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+
+                        $arrValue = array_rand($array2,1);
+                        if($arrValue == 0){
+                            $btn = "<button class='pending-button'>Pending</button>";  
+                        }
+                        else if($arrValue == 1){
+                            $btn = "<button class='completed-button'>Completed</button>";
+                        }
+                        else if($arrValue == 2){
+                            $btn = "<button class='rejected-button'>Rejected</button>";
+                        }
+                        else {
+                            $btn = "<button class='in-pogress-button'>In-Progress</button>";  
+                        }
+                        echo('
+                        <div class="booking-card"
+                            <div class="card-text">
+                                <h3>'.$row['Worker_Type'].'</h3>
+                                <p>Customer</p>
+                                <h4>' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</h4>
+                            <div class="booking-card-button-row">
+                                <div class="badge-container">
+                                    <div class="blue-badge">' . date("d M Y", strtotime($row['Start_Date'])) . '</div> 
+                                </div>
+                                '. $btn .'
+                            </div>
+                        </div>
+
+                    ');
+                    }
+                }
+                ?>
+                </div>
+            </div>
         </div>
         <!--Booking search container-->
         <div class="booking-search">
@@ -331,10 +357,10 @@
                 <h1>Search for bookings</h1>
                 <form action="" method="POST">
                     <div class="booking-search-input-container">
-                        <label for="booking-search">Search (Customer name etc)</label>
+                        <label for="booking-search">Search (Worker name etc)</label>
                         <div class="booking-search-input-field">
                             <input type="text" id="booking-search" class="booking-search-input" name="users-search"/>
-                            <button type="button" class="search-icon-small" id="booking-search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
                 </form>
@@ -345,31 +371,117 @@
                 <thead>
                 <tr class="main-tr">
                     <th class="main-th">
-                        <div class="table-heading-container">Customer name&nbsp;<button class="sort-button" id="worker-name-sort"><i
+                        <div class="table-heading-container">Worker name&nbsp;<button class="sort-button"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                         </div>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">Start date&nbsp;<button class="sort-button" id="start-date-sort"><i
+                        <div class="table-heading-container">Start date&nbsp;<button class="sort-button"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">End date&nbsp;<button class="sort-button" id="end-date-sort"><i
+                        <div class="table-heading-container">End date&nbsp;<button class="sort-button"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
                     <th class="main-th">More actions</th>
                 </tr>
                 </thead>
-                <tbody id="bookings-table-body">
+                <tbody>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Saman Gunawardhana
+                        <br/>
+                        <span class="pending-badge">Pending</span>
+                    </td>
+                    <td class="main-td">21 Oct 2022</td>
+                    <td class="main-td">27 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
+                            </button>
+                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Sunil Perera
+                        <br/>
+                        <span class="pending-badge">Pending</span>
+                    </td>
+                    <td class="main-td">12 Oct 2022</td>
+                    <td class="main-td">20 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
+                            </button>
+                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Sunith Hettiarachchi
+                        <br/>
+                        <span class="rejected-badge">Rejected</span>
+                    </td>
+                    <td class="main-td">1 Oct 2022</td>
+                    <td class="main-td">5 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
+                            </button>
+                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Dammika Kumara
+                        <br/>
+                        <span class="completed-badge">Completed</span>
+                    </td>
+                    <td class="main-td">23 Oct 2022</td>
+                    <td class="main-td">28 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
+                            </button>
+                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Dinesh Attanayaka
+                        <br/>
+                        <span class="completed-badge">Completed</span>
+                    </td>
+                    <td class="main-td">10 Oct 2022</td>
+                    <td class="main-td">24 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
+                            </button>
+                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
                 </tbody>
             </table>
             <div class="pagination-container">
-                <button class="pagination-button" id="previous-page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="pagination-button" id="previous-page-number" disabled><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button-current" id="current-page-number"><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button" id="next-page-number" disabled><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
+        </div>
         </div>
     </section>
 </main>
@@ -378,11 +490,6 @@
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
-<?php
-    echo "<script>
-        let userId = $userId;
-    </script>"
-?>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/customer/bookings.js" type="text/javascript"></script>
 <script src="../scripts/customer/create-booking-fetch-workers.js" type="text/javascript"></script>
