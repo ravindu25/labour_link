@@ -431,6 +431,18 @@
     transform: scale(.96);
 }
 
+.disable-button{
+    outline: none;
+    border: 3px solid var(--grey-color);
+    padding: 8px 18px;
+    color: var(--grey-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: #FFF;
+}
+
 .reset-login-button{
     outline: none;
     border: 3px solid var(--warning-dark-color);
