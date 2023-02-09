@@ -86,7 +86,7 @@ function openBookingDetailsModal(bookingId){
     bookingDetails.style.visibility = 'visible';
 }
 
-function closeBookingDetailsModal(){
+function closeBookingDetailsModal(){8888
     const backdropModal = document.getElementById("backdrop-modal");
     const bookingDetails = document.getElementById("booking-details-container");
 
