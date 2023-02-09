@@ -354,7 +354,7 @@ function rerenderBookings(currentBookings){
 
         let moreAction = '';
         if(booking.status === 'Completed' || booking.status === 'Rejected'){
-            moreAction = `<button class="disable-button" onclick="openBookingDetailsModal(${booking.bookingId})"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;&nbsp;View</button>
+            moreAction = `<button class="update-button" onclick="openBookingDetailsModal(${booking.bookingId})"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;&nbsp;View</button>
                 <button class="disable-button" onclick="openDeleteModal(${booking.bookingId})"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
                 </button>`;
         } else {
