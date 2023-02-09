@@ -206,7 +206,11 @@
 }
 
 .failed-message-container h5{
+    font-size: 24px;
     font-weight: normal;
+    margin: 0;
+    margin-bottom: 12px;
+    margin-left: 34px;
 }
 
 .delete-booking-container{
