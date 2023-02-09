@@ -136,7 +136,7 @@
     </section>
     <section class="main-content">
         <div class="main-heading">
-            <h1>All The settings Of Your <u>Profile<u></h1>
+            <h1>All The settings Of Your <u>Profile</u></h1>
             <?php
                 require_once('../db.php');
                 // Getting the most recent logging attempt of the current user
@@ -166,7 +166,8 @@
             </div>
             <div class="profile-details-container">
                 <div class="profile-image">
-
+                    <img class="profile-img" src="..\images/profile-image1.png"></img>
+                    <button class="more-button" id = "uplaod-profile-img"></button>
                 </div>
                 <div class="user-details">
                     <div class="user-name">
@@ -177,7 +178,7 @@
                         <div class ="user-details-item"><h3>076 - 450 4261</h3></div>
                         <div class ="user-details-item"><h3>Address - No. 390 / A 54,Semuthu Uyana,Katuwapitiya,Negambo.</h3></div>
                         <div class ="user-details-item"><h3>Date of birth - 26 January 2001</h3></div>
-                        <div><button class="update-details-button">Update Details</button></div>
+                        <div><button class= "more-button" id="update-details-button">Update Details</button></div>
                     </div>
                 </div>
             </div>
@@ -187,7 +188,7 @@
             <div class="more-action-title"><h1>More actions</h1></div>
             <div class="more-action-box">
                 <div class="change-password-text"><h3>Do you want to change password?</h3></div>
-                <div><button class="change-password-button">Change Password</button></div>
+                <div><button class="more-button" id="change-password-button">Change Password</button></div>
             </div>
         </div>
     </section>
