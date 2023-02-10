@@ -86,7 +86,7 @@ function openBookingDetailsModal(bookingId){
     bookingDetails.style.visibility = 'visible';
 }
 
-function closeBookingDetailsModal(){8888
+function closeBookingDetailsModal(){
     const backdropModal = document.getElementById("backdrop-modal");
     const bookingDetails = document.getElementById("booking-details-container");
 
@@ -140,69 +140,6 @@ if(window.XMLHttpRequest){
     XMLHttpRequestObject = new XMLHttpRequest();
 }else if(window.ActiveXObject){
     XMLHttpRequestObject = new ActiveXObject('Microsoft.XMLHTTP');
-}
-
-/*
-    Purpose - Getting the most recent bookings
- */
-
-function loadRecentBookings(allBookings){
-    let nonRejectedBookings = [];
-    let rejectedBookings = [];
-
-    for(let i = 0; i < allBookings.length; i++){
-        allBookings[i].sortingDate = new Date(allBookings[i].startDate);
-
-        if(allBookings[i].status === 'Rejected'){
-            rejectedBookings.push(allBookings[i]);
-        } else {
-            nonRejectedBookings.push(allBookings[i]);
-        }
-    }
-
-    rejectedBookings.sort((first, second) => second.sortingDate - first.sortingDate);
-    nonRejectedBookings.sort((first, second) => second.sortingDate - first.sortingDate);
-
-    let allSortedBookings = [...nonRejectedBookings, ...rejectedBookings];
-
-    const recentBookingsContainer = document.getElementById('recent-booking-container');
-
-    if(allSortedBookings.length >= 5){
-        for(let i = 0; i < 5; i++){
-            let button = null;
-            let currentBooking = allSortedBookings[i];
-
-            let workerType = currentBooking.workerType;
-            let workerName = currentBooking.workerName;
-            let startDate = currentBooking.startDate;
-
-            if(currentBooking.status === 'Pending'){
-                button = '<button class="pending-button">Pending</button>';
-            } else if(currentBooking.status === 'Accepted'){
-                button = '<button class="in-pogress-button">Accepted</button>';
-            } else if(currentBooking.status === 'Completed'){
-                button = '<button class="completed-button">Completed</button>';
-            } else {
-                button = '<button class="rejected-button">Rejected</button>';
-            }
-
-            let htmlSeg = `<div class='booking-card' onclick="openBookingDetailsModal(${currentBooking.bookingId})">
-                                    <div class='card-text'>
-                                        <h3>${workerType}</h3>
-                                        <p>Work by</p>
-                                        <h4>${workerName}</h4>
-                                    </div>
-                                    <div class='booking-card-button-row'>
-                                        <div class='badge-container'>
-                                            <div class='blue-badge'>${startDate}</div>
-                                        </div>
-                                        ${button}
-                                    </div>
-                                </div>`;
-
-            recentBookingsContainer.innerHTML += htmlSeg;
-        }
-    }
 }
 
 /*
@@ -448,7 +385,6 @@ function getBookings(dataSource){
             fetchedBookings = data;
             allBookings = data;
             totalPages = Math.ceil(allBookings.length / 5);
-            loadRecentBookings(allBookings);
             loadInitialPage();
         })
         .catch(error => console.log(error));
