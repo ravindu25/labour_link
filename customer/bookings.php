@@ -327,7 +327,56 @@
             <div class="recent-bookings-title">
                 <h1>Recently made Bookings</h1>
             </div>
-            <div class="recent-bookings-container" id="recent-booking-container"></div>
+            <div class="recent-bookings-container" id="recent-booking-container">
+                <?php
+                    require_once('../db.php');
+
+                    // Getting customer id from the session
+                    $customer_id = $customer_id = $_SESSION['user_id'];
+                    $sql_get_bookings = "select Booking.*, User.First_Name, User.Last_Name from Booking inner join User on Booking.Worker_ID = User.User_ID where Booking.Customer_ID = $customer_id ORDER BY Booking.Created_Date DESC LIMIT 5";
+
+
+                    $result = $conn->query($sql_get_bookings);
+
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+                            $bookingId = $row['Booking_ID'];
+                            $worker_type = $row['Worker_Type'];
+                            $worker_name = $row['First_Name'] . " " . $row['Last_Name'];
+                            $start_date = date("d M Y", strtotime($row['Start_Date']));
+                            $status = $row['Status'];
+
+                            $button = '<button class="pending-button">Pending</button>';
+
+                            if($status === 'Pending'){
+                                $button = '<button class="pending-button">Pending</button>';
+                            } else if($status === 'Accepted'){
+                                $button = '<button class="in-pogress-button">Accepted</button>';
+                            } else if($status === 'Completed'){
+                                $button = '<button class="completed-button">Completed</button>';
+                            } else {
+                                $button = '<button class="rejected-button">Rejected</button>';
+                            }
+
+
+                            echo "
+                                <div class='booking-card' onclick='openBookingDetailsModal($bookingId)'>
+                                    <div class='card-text'>
+                                        <h3>$worker_type</h3>
+                                        <p>Work by</p>
+                                        <h4>$worker_name</h4>
+                                    </div>
+                                    <div class='booking-card-button-row'>
+                                        <div class='badge-container'>
+                                            <div class='blue-badge'>$start_date</div>
+                                        </div>
+                                        $button
+                                    </div>
+                                </div>";
+                        }
+                    }
+                ?>
+            </div>
         </div>
         <!--Booking search container-->
         <div class="booking-search">
