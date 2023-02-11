@@ -32,52 +32,85 @@
             <h1>Provide feedback about workers!</h1>
             <h5 style="text-align: center"><b>Please select booking to continue.</b>This will assist us in delivering enhanced services.</h5>
         </div>
-        <div class="feedback-cards-container">
-            <div class="pagination-card">
+        <div class="feedback-cards-container" id="create-feedback-bookings-container">
+            <div class="pagination-card-disabled" id="create-feedback-bookings-previous">
                 <i class="fa-solid fa-arrow-left"></i>
             </div>
-            <div class="booking-card-without-hover">
-                <div class='card-text'>
-                    <h3>Painter</h3>
-                    <p>Work by</p>
-                    <h4>Dhananga Deepanjana</h4>
-                </div>
-                <div class='booking-card-button-row'>
-                    <div class='badge-container'>
-                        <div class='blue-badge'>2023-02-11</div>
-                    </div>
-                    <button class="in-pogress-button">Accepted</button>
-                </div>
-            </div>
-            <div class="booking-card-without-hover">
-                <div class='card-text'>
-                    <h3>Painter</h3>
-                    <p>Work by</p>
-                    <h4>Dhananga Deepanjana</h4>
-                </div>
-                <div class='booking-card-button-row'>
-                    <div class='badge-container'>
-                        <div class='blue-badge'>2023-02-11</div>
-                    </div>
-                    <button class="completed-button">Completed</button>
-                </div>
-            </div>
-            <div class="booking-card-without-hover">
-                <div class='card-text'>
-                    <h3>Painter</h3>
-                    <p>Work by</p>
-                    <h4>Dhananga Deepanjana</h4>
-                </div>
-                <div class='booking-card-button-row'>
-                    <div class='badge-container'>
-                        <div class='blue-badge'>2023-02-11</div>
-                    </div>
-                    <button class="rejected-button">Rejected</button>
-                </div>
-            </div>
-            <div class="pagination-card">
-                <i class="fa-solid fa-arrow-right"></i>
-            </div>
+            <?php
+                /*
+                 * Get the most recent 3 or fewer bookings to select to provide feedback
+                 */
+                require_once('../db.php');
+
+                $customerId = $_SESSION['user_id'];
+
+                $sql_get_most_recent_bookings = "select Booking.*, Worker.First_Name AS Worker_First_Name, Worker.Last_Name AS Worker_Last_Name, Customer.First_Name AS Customer_First_Name, Customer.Last_Name AS Customer_Last_Name from Booking inner join User AS Worker ON Booking.Worker_ID = Worker.User_ID inner join User AS Customer ON Booking.Customer_ID = Customer.User_ID where Booking.Customer_ID = $customerId AND Booking.Status IN('Completed', 'Rejected') ORDER BY Booking.Created_Date DESC LIMIT 3";
+
+                $result = $conn->query($sql_get_most_recent_bookings);
+                $firstBooking = true;
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $bookingId = $row['Booking_ID'];
+                        $workerName = $row['Worker_First_Name'] . " " . $row['Worker_Last_Name'];
+                        $createdDate = $row['Created_Date'];
+                        $startDate = $row['Start_Date'];
+                        $workerType = $row['Worker_Type'];
+                        $status = $row['Status'];
+
+                        $bookingStatusButton = null;
+                        if($status === 'Pending'){
+                            $bookingStatusButton = '<button class="pending-button">Pending</button>';
+                        } else if($status === 'Accepted'){
+                            $bookingStatusButton = '<button class="in-pogress-button">Accepted</button>';
+                        } else if($status === 'Completed'){
+                            $bookingStatusButton = '<button class="completed-button">Completed</button>';
+                        } else {
+                            $bookingStatusButton = '<button class="rejected-button">Rejected</button>';
+                        }
+
+                        $divStyling = $firstBooking ? 'feedback-booking-card feedback-booking-card-selected' : 'feedback-booking-card';
+                        $firstBooking = false;
+
+                        echo "
+                        <div class='$divStyling'>
+                            <div class='card-text'>
+                                <h3>$workerType</h3>
+                                <p>Work by</p>
+                                <h4>$workerName</h4>
+                            </div>
+                            <div class='booking-card-button-row'>
+                                <div class='badge-container'>
+                                    <div class='blue-badge'>$startDate</div>
+                                </div>
+                                $bookingStatusButton
+                            </div>
+                        </div>
+                        ";
+                    }
+                }
+
+                $sql_get_bookings = "SELECT COUNT(Booking.Booking_ID) as Booking_Count FROM Booking INNER JOIN User AS Customer on Booking.Customer_ID = Customer.User_ID WHERE Booking.Customer_ID = $customerId AND Booking.Status IN('Completed', 'Rejected')";
+
+                $result = $conn->query($sql_get_bookings);
+                $numOfBookings = null;
+
+                if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()){
+                        $numOfBookings = $row['Booking_Count'];
+                    }
+                }
+
+                if($numOfBookings > 3) {
+                    echo '<div class="pagination-card" id="create-feedback-bookings-next" onclick="goToNextBookingPage()">
+                            <i class="fa-solid fa-arrow-right"></i>
+                    </div>';
+                } else {
+                    echo '<div class="pagination-card-disabled" id="create-feedback-bookings-next">
+                            <i class="fa-solid fa-arrow-right"></i>
+                    </div>';
+                }
+            ?>
         </div>
         <div class="create-feedback-button-container">
             <button class="secondary-button">Cancel</button>
@@ -209,19 +242,6 @@
                  *  - If not customer not allowed to provide feedback
                  */
                 require_once('../db.php');
-
-                $customerId = $_SESSION['user_id'];
-
-                $sql_get_bookings = "SELECT COUNT(Booking.Booking_ID) as Booking_Count FROM Booking INNER JOIN User AS Customer on Booking.Customer_ID = Customer.User_ID WHERE Booking.Customer_ID = $customerId";
-
-                $result = $conn->query($sql_get_bookings);
-                $numOfBookings = null;
-
-                if($result->num_rows > 0){
-                    while($row = $result->fetch_assoc()){
-                        $numOfBookings = $row['Booking_Count'];
-                    }
-                }
 
                 if($numOfBookings > 0){
                     echo "<button class='primary-button' id='provide-feedback-button'>Provide Feedback</button>";
@@ -430,5 +450,11 @@
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+<?php
+    echo "<script>
+        let userId = $customerId;
+    </script>"
+?>
 <script src="../scripts/modals.js" type="text/javascript"></script>
+<script src="../scripts/customer/feedbacks.js" type="text/javascript"></script>
 </body>

@@ -10,7 +10,7 @@
     background-color: #FFF;
     border-radius: 16px;
     opacity: 1;
-    visibility: hidden;
+    /*visibility: hidden;*/
 }
 
 .create-feedback-page{
@@ -41,6 +41,20 @@
 
 .pagination-card:active{
     transform: scale(.96);
+}
+
+.pagination-card-disabled{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    margin: 4px 8px;
+    color: var(--grey-color);
+    background-color: var(--grey-color-shade);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
 }
 
 .create-feedback-button-container{
@@ -172,7 +186,7 @@
     border: 3px solid var(--success-color);
 }
 
-.booking-card-without-hover{
+.feedback-booking-card{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -180,30 +194,39 @@
     margin: 4px 8px;
     padding: 24px;
     color: var(--primary-color);
-    background-color: #FFF;
+    border: 3px solid var(--primary-background-color);
+    background-color: white;
     border-radius: 12px;
-    border: 3px solid var(--primary-color);
     font-family: 'Inter', sans-serif;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.feedback-booking-card:active{
+    transform: scale(.98);
+}
+
+.feedback-booking-card-selected{
+    border: 3px solid var(--primary-color);
 }
 
 .card-text{
     text-align: left;
 }
 
-.booking-card, .booking-card-without-hover h3{
+.booking-card, .feedback-booking-card h3{
     margin: 12px 0;
     font-size: 24px;
     text-align: center;
 }
 
-.booking-card, .booking-card-without-hover p{
+.booking-card, .feedback-booking-card p{
     margin: 0;
     color: var(--dark-color);
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
 }
 
-.booking-card, .booking-card-without-hover h4{
+.booking-card, .feedback-booking-card h4{
     margin: 8px 0;
     color: var(--dark-color);
     font-size: 24px;

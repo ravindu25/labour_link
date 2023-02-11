@@ -17,7 +17,7 @@
     --warning-color: #FF5B19;
     --warning-dark-color: #9A2D01;
     --grey-color: #978C87;
-    --grey-color-shade: #D0CFCE;
+    --grey-color-shade: #E1E5E8;
 }
 
 body{
@@ -38,7 +38,7 @@ a{
     height: 100vh;
     background-color: #72736F;
     opacity: 0.5;
-    visibility: hidden;
+    /*visibility: hidden;*/
 }
 
 .message-backdrop{
