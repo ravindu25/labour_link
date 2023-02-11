@@ -25,6 +25,66 @@
     <title>Feedbacks | LabourLink</title>
 </head>
 <body>
+<div class="backdrop-modal"></div>
+<div class="create-feedback-container">
+    <div class="create-feedback-page" id="first-page">
+        <div class="create-feedback-title">
+            <h1>Provide feedback about workers!</h1>
+            <h5 style="text-align: center"><b>Please select booking to continue.</b>This will assist us in delivering enhanced services.</h5>
+        </div>
+        <div class="feedback-cards-container">
+            <div class="pagination-card">
+                <i class="fa-solid fa-arrow-left"></i>
+            </div>
+            <div class="booking-card-without-hover">
+                <div class='card-text'>
+                    <h3>Painter</h3>
+                    <p>Work by</p>
+                    <h4>Dhananga Deepanjana</h4>
+                </div>
+                <div class='booking-card-button-row'>
+                    <div class='badge-container'>
+                        <div class='blue-badge'>2023-02-11</div>
+                    </div>
+                    <button class="in-pogress-button">Accepted</button>
+                </div>
+            </div>
+            <div class="booking-card-without-hover">
+                <div class='card-text'>
+                    <h3>Painter</h3>
+                    <p>Work by</p>
+                    <h4>Dhananga Deepanjana</h4>
+                </div>
+                <div class='booking-card-button-row'>
+                    <div class='badge-container'>
+                        <div class='blue-badge'>2023-02-11</div>
+                    </div>
+                    <button class="completed-button">Completed</button>
+                </div>
+            </div>
+            <div class="booking-card-without-hover">
+                <div class='card-text'>
+                    <h3>Painter</h3>
+                    <p>Work by</p>
+                    <h4>Dhananga Deepanjana</h4>
+                </div>
+                <div class='booking-card-button-row'>
+                    <div class='badge-container'>
+                        <div class='blue-badge'>2023-02-11</div>
+                    </div>
+                    <button class="rejected-button">Rejected</button>
+                </div>
+            </div>
+            <div class="pagination-card">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </div>
+        <div class="create-feedback-button-container">
+            <button class="secondary-button">Cancel</button>
+            <button class="primary-button">Next&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+</div>
 <nav class="nav-bar">
     <div class="nav-bar-items">
         <div class="logo-container">
@@ -141,7 +201,42 @@
         </div>
         <div class="new-feedback">
             <h1>Provide new Feedback?</h1>
-            <button class="more-button" id="provide-feedback-button">Provide Feedback</button>
+            <?php
+                /*
+                 * Checking whether number of bookings which are completed or rejected
+                 *  - If there are bookings which completed or rejected then customer allowed to provide
+                 *  feedback using that bookings
+                 *  - If not customer not allowed to provide feedback
+                 */
+                require_once('../db.php');
+
+                $customerId = $_SESSION['user_id'];
+
+                $sql_get_bookings = "SELECT COUNT(Booking.Booking_ID) as Booking_Count FROM Booking INNER JOIN User AS Customer on Booking.Customer_ID = Customer.User_ID WHERE Booking.Customer_ID = $customerId";
+
+                $result = $conn->query($sql_get_bookings);
+                $numOfBookings = null;
+
+                if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()){
+                        $numOfBookings = $row['Booking_Count'];
+                    }
+                }
+
+                if($numOfBookings > 0){
+                    echo "<button class='primary-button' id='provide-feedback-button'>Provide Feedback</button>";
+                } else {
+                    echo "
+                        <div class='toolip'>
+                            <div class='tooltiptext'>
+                                Please add bookings to provide feedbacks!
+                            </div>
+                            <button class='primary-button disabled-button' id='provide-feedback-button' disabled>
+                            Provide Feedback&nbsp;&nbsp;<i class='fa-solid fa-question'></i>
+                            </button>
+                        </div>";
+                }
+            ?>
         </div>
         <!-- Recent feedbacks section -->
         <div class="recent-feedback">
@@ -336,7 +431,4 @@
     </div>
 </footer>
 <script src="../scripts/modals.js" type="text/javascript"></script>
-<script src="../scripts/customer/bookings.js" type="text/javascript"></script>
-<script src="../scripts/customer/create-booking-fetch-workers.js" type="text/javascript"></script>
-<script src="../scripts/customer/create-booking.js" type="text/javascript"></script>
 </body>

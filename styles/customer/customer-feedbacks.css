@@ -1,22 +1,114 @@
+.create-feedback-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) ;
+    margin: 16px;
+    min-width: 60vw;
+    max-height: 90vh;
+    color: #102699;
+    background-color: #FFF;
+    border-radius: 16px;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.create-feedback-page{
+    margin: 32px 48px;
+}
+
+.feedback-cards-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    justify-content: center;
+}
+
+.pagination-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    margin: 4px 8px;
+    color: var(--primary-color);
+    background-color: var(--primary-background-shade-color);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.pagination-card:active{
+    transform: scale(.96);
+}
+
+.create-feedback-button-container{
+    margin: 24px 0;
+    text-align: center;
+}
+
+.primary-button{
+    outline: none;
+    border: 3px solid var(--primary-color);
+    padding: 12px 18px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: var(--primary-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.secondary-button{
+    outline: none;
+    border: 3px solid var(--primary-color);
+    padding: 12px 18px;
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: white;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+
+.primary-button:active, .secondary-button:active{
+    transform: scale(.96);
+}
+
+.disabled-button{
+    color: var(--grey-color);
+    border: 3px solid var(--grey-color);
+    background-color: white;
+    transition: none;
+}
+
+.disabled-button:active{
+    transform: none;
+}
+
 .main-section{
     background-color: var(--primary-background-shade-color);
 }
 
-.main-heading{
+.main-heading, .create-feedback-title{
     padding: 12px 24px;
     color: var(--primary-color);
     background-color: var(--primary-shade-color);
     border-radius: 12px;
 }
 
-.main-heading h1{
+.main-heading h1, .create-feedback-title h1{
     text-align: center;
     font-family: 'Inter', sans-serif;
     font-size: 40px;
     font-weight: normal;
 }
 
-.main-heading h5 {
+.main-heading h5, .create-feedback-title h5{
     margin: 0;
     text-align: right;
     font-size: 18px;
@@ -36,11 +128,6 @@
     font-weight: normal;
 }
 
-.new-feedback button{
-    color: #FFF;
-    border-color: var(--primary-color);
-    background-color: var(--primary-color);
-}
 
 .recent-feedback h1{
     color: var(--primary-color);
@@ -85,24 +172,38 @@
     border: 3px solid var(--success-color);
 }
 
+.booking-card-without-hover{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 190px;
+    margin: 4px 8px;
+    padding: 24px;
+    color: var(--primary-color);
+    background-color: #FFF;
+    border-radius: 12px;
+    border: 3px solid var(--primary-color);
+    font-family: 'Inter', sans-serif;
+}
+
 .card-text{
     text-align: left;
 }
 
-.booking-card h3{
+.booking-card, .booking-card-without-hover h3{
     margin: 12px 0;
     font-size: 24px;
     text-align: center;
 }
 
-.booking-card p{
+.booking-card, .booking-card-without-hover p{
     margin: 0;
     color: var(--dark-color);
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
 }
 
-.booking-card h4{
+.booking-card, .booking-card-without-hover h4{
     margin: 8px 0;
     color: var(--dark-color);
     font-size: 24px;
