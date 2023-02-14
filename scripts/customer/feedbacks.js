@@ -51,6 +51,10 @@ function rerenderCreateFeedbackBookings(currentPage, currentBookings){
             </div>`;
     }
 
+    bookingCardContainer.innerHTML += '<div class="feedback-cards-container" id="create-feedback-bookings-cards-container" style="margin-top: 0"></div>';
+
+    const bookingsContainer = document.getElementById('create-feedback-bookings-cards-container');
+
     currentBookings.forEach(booking => {
         let bookingStatusButton = null;
         if(booking.status === 'Pending'){
@@ -64,10 +68,13 @@ function rerenderCreateFeedbackBookings(currentPage, currentBookings){
         }
 
         let divStyling = firstBooking ? 'feedback-booking-card feedback-booking-card-selected' : 'feedback-booking-card';
+
+        currentBookingId = firstBooking ? booking.bookingId : currentBookingId;
+
         firstBooking = false;
 
-       bookingCardContainer.innerHTML += `
-            <div class='${divStyling}'>
+        bookingsContainer.innerHTML += `
+            <div class='${divStyling}' onclick='selectBooking(${booking.bookingId})' id='booking-card-${booking.bookingId}'>
                 <div class='card-text'>
                     <h3>${booking.workerType}</h3>
                     <p>Work by</p>
@@ -93,6 +100,31 @@ function rerenderCreateFeedbackBookings(currentPage, currentBookings){
                  <i class="fa-solid fa-arrow-right"></i>
             </div>`;
     }
+}
+
+function selectBooking(bookingId){
+    const parentContainer = document.getElementById('create-feedback-bookings-cards-container');
+    const nextButton = document.getElementById('first-page-next-button');
+    const bookingsCards = Array.from(parentContainer.children);
+
+    currentBookingId = bookingId;
+
+    bookingsCards.forEach(bookingCard => {
+        if(bookingCard.classList.contains('feedback-booking-card-selected')){
+            bookingCard.classList.remove('feedback-booking-card-selected');
+            bookingCard.classList.add('feedback-booking-card');
+        }
+    });
+
+    const bookingCard = document.getElementById(`booking-card-${bookingId}`);
+
+    if(!bookingCard.classList.contains('feedback-booking-card-selected')){
+        bookingCard.classList.add('feedback-booking-card-selected');
+    }
+}
+
+function goToNextFeedbackPage(){
+    console.log(currentBookingId);
 }
 
 function loadAllBookings(dataSource){

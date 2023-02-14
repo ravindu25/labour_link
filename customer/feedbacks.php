@@ -36,6 +36,7 @@
             <div class="pagination-card-disabled" id="create-feedback-bookings-previous">
                 <i class="fa-solid fa-arrow-left"></i>
             </div>
+            <div class="feedback-cards-container" id="create-feedback-bookings-cards-container" style="margin-top: 0">
             <?php
                 /*
                  * Get the most recent 3 or fewer bookings to select to provide feedback
@@ -48,6 +49,7 @@
 
                 $result = $conn->query($sql_get_most_recent_bookings);
                 $firstBooking = true;
+                $firstBookingId = null;
 
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
@@ -69,11 +71,17 @@
                             $bookingStatusButton = '<button class="rejected-button">Rejected</button>';
                         }
 
-                        $divStyling = $firstBooking ? 'feedback-booking-card feedback-booking-card-selected' : 'feedback-booking-card';
+                        if($firstBooking){
+                            $divStyling = 'feedback-booking-card feedback-booking-card-selected';
+                            $firstBookingId = $bookingId;
+                        } else {
+                            $divStyling = 'feedback-booking-card';
+                        }
+
                         $firstBooking = false;
 
                         echo "
-                        <div class='$divStyling'>
+                        <div class='$divStyling' onclick='selectBooking($bookingId)' id='booking-card-$bookingId'>
                             <div class='card-text'>
                                 <h3>$workerType</h3>
                                 <p>Work by</p>
@@ -102,19 +110,20 @@
                 }
 
                 if($numOfBookings > 3) {
-                    echo '<div class="pagination-card" id="create-feedback-bookings-next" onclick="goToNextBookingPage()">
+                    echo '</div><div class="pagination-card" id="create-feedback-bookings-next" onclick="goToNextBookingPage()">
                             <i class="fa-solid fa-arrow-right"></i>
                     </div>';
                 } else {
-                    echo '<div class="pagination-card-disabled" id="create-feedback-bookings-next">
+                    echo '</div><div class="pagination-card-disabled" id="create-feedback-bookings-next">
                             <i class="fa-solid fa-arrow-right"></i>
                     </div>';
                 }
             ?>
+
         </div>
         <div class="create-feedback-button-container">
             <button class="secondary-button">Cancel</button>
-            <button class="primary-button">Next&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
+            <button class="primary-button" id="first-page-next-button" onclick=" goToNextFeedbackPage()">Next&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
 </div>
@@ -453,6 +462,7 @@
 <?php
     echo "<script>
         let userId = $customerId;
+        let currentBookingId = $firstBookingId;
     </script>"
 ?>
 <script src="../scripts/modals.js" type="text/javascript"></script>
