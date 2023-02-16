@@ -28,6 +28,8 @@
     display: flex;
     flex-wrap: wrap;
     padding: 16px 0;
+    align-items: center;
+    justify-content: center;
 }
 
 .worker-card{
