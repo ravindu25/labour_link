@@ -10,7 +10,7 @@
     background-color: #FFF;
     border-radius: 16px;
     opacity: 1;
-    /*visibility: hidden;*/
+    visibility: hidden;
 }
 
 .create-feedback-page{
@@ -55,6 +55,118 @@
     border-radius: 12px;
     font-family: 'Inter', sans-serif;
     font-size: 28px;
+}
+
+.rating-container-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.rating-container-text{
+    text-align: left;
+    margin-left: 16px;
+}
+
+.rating-container-text h5{
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.rating-container-text p{
+    margin: 0;
+    color: var(--dark-color);
+}
+
+.rating-container-rate{
+    display: flex;
+}
+
+.feedback-star-container{
+    font-size: 48px;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.feedback-star-container:active{
+    transform: scale(.96);
+}
+
+.question-container-row{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-top: 32px;
+}
+
+.question-container{
+    max-width: 60%;
+    text-align: left;
+    margin-left: 16px;
+}
+
+.question-container h5{
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0;
+    color: var(--dark-color);
+}
+
+.question-answer-container{
+    display: flex;
+    justify-content: stretch;
+}
+
+.feedback-answer-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 4px 8px;
+    padding: 8px 0;
+    text-align: center;
+    background-color: var(--primary-background-shade-color);
+    border:3px solid var(--primary-background-shade-color);
+    border-radius: 12px;
+}
+
+.feedback-answer-input{
+    display: none;
+}
+
+.feedback-answer-input:checked + .feedback-answer-container{
+    border:3px solid var(--primary-color);
+}
+
+.feedback-answer-container h5{
+    margin: 0;
+    font-size: 24px;
+    font-family: 'Inter', sans-serif;
+    font-weight: normal;
+}
+
+.written-feedback-row h1{
+    margin: 32px 0;
+    margin-left: 16px;
+    font-weight: normal;
+}
+
+.written-feedback-row textarea{
+    outline: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    resize: none;
+    width: calc(100% - 24px);
+    padding: 12px;
+    border: 3px solid var(--primary-background-color);
+    border-radius: 5px;
+    font-size: 24px;
+    font-family: 'Inter', sans-serif;
 }
 
 .create-feedback-button-container{

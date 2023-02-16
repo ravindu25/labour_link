@@ -25,8 +25,8 @@
     <title>Feedbacks | LabourLink</title>
 </head>
 <body>
-<div class="backdrop-modal"></div>
-<div class="create-feedback-container">
+<div class="backdrop-modal" id="backdrop-modal"></div>
+<div class="create-feedback-container" id="create-feedback-container">
     <div class="create-feedback-page" id="first-page">
         <div class="create-feedback-title">
             <h1>Provide feedback about workers!</h1>
@@ -122,9 +122,135 @@
 
         </div>
         <div class="create-feedback-button-container">
-            <button class="secondary-button">Cancel</button>
+            <button class="secondary-button" onclick="hideFeedbackContainer()">Cancel</button>
             <button class="primary-button" id="first-page-next-button" onclick=" goToNextFeedbackPage()">Next&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
         </div>
+    </div>
+    <div class="create-feedback-page" id="second-page">
+        <div class="create-feedback-title">
+            <h1 id="create-feedback-third-title">Feedback about workers!</h1>
+            <h5 id="create-feedback-third-paragraph" style="text-align: center"><b>Please provide rating about worker.</b>This will assist us in delivering enhanced services.</h5>
+        </div>
+        <div class="rating-container">
+            <div class="rating-container-row">
+                <div class="rating-container-text">
+                    <h5>Punctuality</h5>
+                    <p>How good the worker is in communicating</p>
+                </div>
+                <div class="rating-container-rate">
+                    <div class="feedback-star-container" id="star-punctuality-1" onclick="updateStarRating('punctuality', 1);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="star-punctuality-2" onclick="updateStarRating('punctuality', 2);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="star-punctuality-3" onclick="updateStarRating('punctuality', 3);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="star-punctuality-4" onclick="updateStarRating('punctuality', 4);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="star-punctuality-5"  onclick="updateStarRating('punctuality', 5);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="rating-container-row">
+                <div class="rating-container-text">
+                    <h5>Efficient</h5>
+                    <p>How quickly and accurately does the worker complete tasks</p>
+                </div>
+                <div class="rating-container-rate">
+                    <div class="feedback-star-container" id="star-efficient-1" onclick="updateStarRating('efficient', 1);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="star-efficient-2" onclick="updateStarRating('efficient', 2);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="star-efficient-3" onclick="updateStarRating('efficient', 3);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="star-efficient-4" onclick="updateStarRating('efficient', 4);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="star-efficient-5"  onclick="updateStarRating('efficient', 5);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="rating-container-row">
+                <div class="rating-container-text">
+                    <h5>Professionalism</h5>
+                    <p>How polite is the worker when doing the job done</p>
+                </div>
+                <div class="rating-container-rate">
+                    <div class="feedback-star-container" id="star-professionalism-1" onclick="updateStarRating('professionalism', 1);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="star-professionalism-2" onclick="updateStarRating('professionalism', 2);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="star-professionalism-3" onclick="updateStarRating('professionalism', 3);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="star-professionalism-4" onclick="updateStarRating('professionalism', 4);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="star-professionalism-5"  onclick="updateStarRating('professionalism', 5);">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="question-container-row">
+            <div class="question-container">
+                <h5>Have you noticed any behaviors that might suggest that worker is using drugs?</h5>
+            </div>
+            <div class="question-answer-container">
+                <label>
+                    <input type="radio" name="feedback-answers" value="true" class="feedback-answer-input" />
+                    <div class="feedback-answer-container">
+                        <h5>Yes. I have noticed</h5>
+                    </div>
+                </label>
+                <label>
+                    <input type="radio" name="feedback-answers" value="false" class="feedback-answer-input" checked/>
+                    <div class="feedback-answer-container">
+                        <h5>No. I didn't</h5>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class="create-feedback-button-container">
+            <button class="primary-button" id="second-page-next-button" onclick="goBackFeedbackFirstPage()"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back</button>
+            <button class="secondary-button" onclick="hideFeedbackContainer()">Cancel</button>
+            <button class="primary-button" id="second-page-next-button" onclick="goNextFeedbackThirdPage()">Next&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+    <div class="create-feedback-page" id="third-page">
+        <div class="create-feedback-title">
+            <h1 id="create-feedback-title">Feedback about workers!</h1>
+            <h5 id="create-feedback-paragraph" style="text-align: center"><b>Please provide rating about worker.</b>This will assist us in delivering enhanced services.</h5>
+        </div>
+        <div class="written-feedback-row">
+            <h1>Tell us more about the worker(Optional)</h1>
+            <textarea rows="5" id="feedback-textarea" maxlength="1024"></textarea>
+        </div>
+        <div class="create-feedback-button-container">
+            <button class="primary-button" id="second-page-next-button" onclick="goBackFeedbackSecondPage()"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back</button>
+            <button class="secondary-button" onclick="hideFeedbackContainer()">Cancel</button>
+            <button class="primary-button" id="second-page-next-button" onclick="goNextFeedbackThirdPage()">Submit&nbsp;&nbsp;<i class="fa-solid fa-check"></i></button>
+        </div>
+    </div>
+</div>
+</div>
+<div class="success-message-container" id="feedback-create-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Thank you for providing feedback!</h1>
+</div>
+<div class="failed-message-container" id="feedback-create-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Error occured when processing the feedback!</h1>
+        <h5>Your login session outdated. Please login again.</h5>
     </div>
 </div>
 <nav class="nav-bar">
@@ -253,7 +379,7 @@
                 require_once('../db.php');
 
                 if($numOfBookings > 0){
-                    echo "<button class='primary-button' id='provide-feedback-button'>Provide Feedback</button>";
+                    echo "<button class='primary-button' id='provide-feedback-button' onclick='showFeedbackContainer()'>Provide Feedback</button>";
                 } else {
                     echo "
                         <div class='toolip'>

@@ -38,7 +38,7 @@ a{
     height: 100vh;
     background-color: #72736F;
     opacity: 0.5;
-    /*visibility: hidden;*/
+    visibility: hidden;
 }
 
 .message-backdrop{
