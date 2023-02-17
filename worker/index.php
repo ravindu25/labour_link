@@ -244,7 +244,7 @@
                                     </div>
                                 </div>
                                 <div class='worker-card-button-container'>
-                                    <button type='button' class='view-profile-button'>Profile</button>
+                                    <button type='button' class='view-profile-button'>View Profile</button>
                                     <button type='button' class='booking-button'>Book now!</button>
                                 </div>
                             </div>
@@ -255,7 +255,7 @@
         </div>
         <div class="button-container">
             <button type="button" class="more-button" id="top-workers-button">Load more&nbsp;
-                <i class="fa-solid fa-arrow-down"></i></button>
+                <i class="fa-solid fa-spinner"></i></button>
         </div>
     </div>
     <div class="worker-section">
@@ -374,7 +374,7 @@
         </div>
         <div class="button-container">
             <button type="button" class="more-button">Load more&nbsp;
-                <i class="fa-solid fa-arrow-down"></i></button>
+                <i class="fa-solid fa-spinner"></i></button>
         </div>
     </div>
 </section>
