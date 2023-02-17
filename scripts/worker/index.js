@@ -20,6 +20,7 @@ function loadWorkers(workerType){
         .then(response => response.json())
         .then(data => {
             allWorkers = data;
+            console.log(allWorkers);
         })
         .catch(error => console.log(error));
 }
