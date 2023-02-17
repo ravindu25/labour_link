@@ -126,7 +126,7 @@
     border-radius: 18px;
     background-color: #ABC3EF;
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .booking-button:active, .more-button:active{
