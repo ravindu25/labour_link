@@ -113,6 +113,66 @@
         </div>
     </div>
 </nav>
-
+<footer class="footer">
+    <div class="footer-row">
+        <div class="footer-column">
+            <img src="../assets/logo-croped.png" alt="labourlink logo" class="labour-link-logo"/>
+        </div>
+        <div class="footer-column">
+            <h4>Learn More</h4>
+            <ul>
+                <li><a href="#" class="footer-more-link">About Labour Link</a></li>
+                <li><a href="#" class="footer-more-link">Press Releases</a></li>
+                <li><a href="#" class="footer-more-link">Environment</a></li>
+                <li><a href="#" class="footer-more-link">Jobs</a></li>
+                <li><a href="#" class="footer-more-link">Privacy Policy</a></li>
+                <li><a href="#" class="footer-more-link">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Us</h4>
+            <table>
+                <tr>
+                    <td>Mohamed Izzath:</td>
+                    <td>+94 76 450 4261</td>
+                </tr>
+                <tr>
+                    <td>Ravindu Wegiriya:</td>
+                    <td>+94 71 999 9455</td>
+                </tr>
+                <tr>
+                    <td>Dhananga Deepanjana:</td>
+                    <td>+94 70 530 4401</td>
+                </tr>
+            </table>
+        </div>
+        <div class="footer-column">
+            <h4>Social Media</h4>
+            <p>@labourlink</p>
+            <div class="social-container">
+                <a href="#" class="social-link">
+                    <img src="../assets/svg/socials/facebook-f.svg" alt="facebook" class="social-icon" />
+                </a>
+                <a href="#" class="social-link">
+                    <img src="../assets/svg/socials/instagram.svg" alt="instagram" class="social-icon" />
+                </a>
+                <a href="#" class="social-link">
+                    <img src="../assets/svg/socials/twitter.svg" alt="twitter" class="social-icon" />
+                </a>
+                <a href="#" class="social-link">
+                    <img src="../assets/svg/socials/youtube.svg" alt="youtube" class="social-icon" />
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-row" style="border-top: 1px solid #FFF; padding-top: 16px;">
+        <p>© 2022 Labour Link | All Rights Reserved</p>
+    </div>
+</footer>
+<?php
+echo "<script>
+        let workerType = '$workerType';
+    </script>";
+?>
 </body>
 </html>
