@@ -20,6 +20,9 @@
     <!--Fontawesome-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet"/>
 
+    <!-- Material Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 <body>
 <div class="register-select-modal" id="register-modal">
@@ -122,7 +125,7 @@
             echo '<i class="fa-solid fa-wrench"></i>';
         }
         if($workerType === 'carpenter'){
-            echo '<i class="fa-sharp fa-solid fa-axe"></i>';
+            echo '<span class="material-icons md-36">carpenter</span>';
         }
         if($workerType === 'electrician'){
             echo '<i class="fa-sharp fa-solid fa-screwdriver"></i>';
@@ -140,7 +143,7 @@
             echo '<i class="fa-sharp fa-solid fa-gear"></i>';
         }
         if($workerType === 'gardener'){
-            echo '<i class="fa-sharp fa-solid fa-broom-wide"></i>';
+            echo '<i class="fa-solid fa-trowel"></i>';
         }
         ?>
     </h1>
