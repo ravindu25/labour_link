@@ -286,7 +286,7 @@
                     </div>
                 </div>
                 <div class="worker-card-button-container">
-                    <button type="button" class="view-profile-button">Profile</button>
+                    <button type="button" class="view-profile-button">View Profile</button>
                     <button type="button" class="booking-button">Book now!</button>
                 </div>
             </div>
