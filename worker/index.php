@@ -125,7 +125,7 @@
             echo '<i class="fa-solid fa-wrench"></i>';
         }
         if($workerType === 'carpenter'){
-            echo '<span class="material-icons md-36">carpenter</span>';
+            echo '<span class="material-icons md-40">carpenter</span>';
         }
         if($workerType === 'electrician'){
             echo '<i class="fa-sharp fa-solid fa-screwdriver"></i>';
