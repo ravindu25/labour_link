@@ -117,7 +117,32 @@
 <section class="main-title-container">
     <h1 class="main-title">
         <?php echo ucfirst($workerType). "s" ?>
-        &nbsp;<i class="fa-solid fa-arrow-down"></i>
+        <?php
+        if($workerType === 'plumber'){
+            echo '<i class="fa-solid fa-wrench"></i>';
+        }
+        if($workerType === 'carpenter'){
+            echo '<i class="fa-sharp fa-solid fa-axe"></i>';
+        }
+        if($workerType === 'electrician'){
+            echo '<i class="fa-sharp fa-solid fa-screwdriver"></i>';
+        }
+        if($workerType === 'painter'){
+            echo '<i class="fa-solid fa-paint-roller"></i>';
+        }
+        if($workerType === 'mason'){
+            echo '<i class="fa-solid fa-hammer"></i>';
+        }
+        if($workerType === 'janitor'){
+            echo '<i class="fa-solid fa-broom"></i>';
+        }
+        if($workerType === 'mechanic'){
+            echo '<i class="fa-sharp fa-solid fa-gear"></i>';
+        }
+        if($workerType === 'gardener'){
+            echo '<i class="fa-sharp fa-solid fa-broom-wide"></i>';
+        }
+        ?>
     </h1>
 </section>
 <section class="main-content">
