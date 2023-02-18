@@ -13,7 +13,7 @@
 
     <!-- CSS files -->
     <link href="../styles/index-page.css" rel="stylesheet"/>
-    <link href="../styles/worker/worker-profile.css" rel="stylesheet"/>
+    <link href="../styles/worker/view-worker-profile.css" rel="stylesheet"/>
     <title>Workers | LabourLink</title>
 
     <!--Fontawesome-->
