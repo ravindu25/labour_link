@@ -2,7 +2,6 @@
     include_once('../db.php');
     $workerType = $_GET['workertype'];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,6 +112,17 @@
         </div>
     </div>
 </nav>
+<div class="profile-container">
+    <div class="profile-picture">
+        <img src="../assets/worker/profile-images/worker-1.jpg">
+    </div>
+    <div class="profile-info">
+        <h1>Saman Gunawardhana</h1>
+        <p>Location: New York, NY</p>
+        <p>Experience: 5 years</p>
+        <p>Skills: Painting, Electrical</p>
+    </div>
+</div>
 <footer class="footer">
     <div class="footer-row">
         <div class="footer-column">
