@@ -76,10 +76,15 @@
     margin: 8px 0;
     font-weight: normal;
     font-size: 24px;
+    font-family: 'Inter', sans-serif;
 }
 
 .worker-card-types-row{
     display: flex;
+    font-size: 20px;
+    color: black;
+    font-weight: normal;
+    font-family: 'Inter', sans-serif;
 }
 
 .worker-type-badge{
