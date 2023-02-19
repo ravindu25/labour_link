@@ -13,6 +13,7 @@
 
     <!-- CSS files -->
     <link href="../styles/index-page.css" rel="stylesheet"/>
+    <link href="../styles/worker/index.css" rel="stylesheet"/>
     <link href="../styles/worker/view-worker-profile.css" rel="stylesheet"/>
     <title>Workers | LabourLink</title>
 
@@ -118,17 +119,27 @@
     </div>
     <div class="profile-info">
         <h1>Saman Gunawardhana</h1>
-        <p>Location: New York, NY</p>
+        <div class='worker-card-location-row'>
+            <h3><i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i> Negombo</h3>
+        </div>
         <p>Experience: 5 years</p>
-        <p>Skills: Painting, Electrical</p>
     </div>
-    <div class="rating">
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <p>5.0 (250 reviews)</p>
+    <div class="worker-card-types-row">
+        Category :
+        <div class="worker-type-badge">
+            <h5> Electrician</h5>
+        </div>
+        <div class="worker-type-badge">
+            <h5>Plumber</h5>
+        </div>
+        <div class="rating">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <p>5.0 (250 reviews)</p>
+        </div>
     </div>
 </div>
 <div class="profile-container">

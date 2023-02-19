@@ -91,5 +91,33 @@ function reRenderCards(workersList){
 }
 
 function updateTopWorkers(allWorkers){
+    // Sort workers by descending rating
+    const sortedWorkers = workers.sort((a, b) => parseFloat(b.currentRating) - parseFloat(a.currentRating));
 
+    // Get the top N workers based on topWorkersCount
+    const topWorkers = sortedWorkers.slice(0, topWorkersCount);
+
+    // Update the currentTopWorkers variable
+    currentTopWorkers = topWorkers;
+}
+
+let workerPage = 1; // Keep track of the current worker page number
+
+function loadMoreWorkers(workerType, perPage) {
+    workerPage++; // Increment the page number
+
+    // Fetch the next page of workers
+    fetch(`http://localhost/labour_link/api/workers.php?workerType=${workerType}&page=${workerPage}&perPage=${perPage}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Append the new workers to the allWorkers array
+            allWorkers = allWorkers.concat(data);
+
+            // Re-render the worker cards with the updated list of workers
+            reRenderCards(allWorkers);
+        })
+        .catch(error => console.log(error));
 }

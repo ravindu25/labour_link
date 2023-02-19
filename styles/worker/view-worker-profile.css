@@ -3,14 +3,15 @@
     flex-direction: row;
     align-items: center;
     margin: 20px;
+    padding-left: 20px;
 }
 
 .profile-picture img {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
-    margin-right: 20px;
-    padding: 10px 50px;
+    margin-right: 70px;
+    padding-left: 30px;
 }
 
 .profile-info {
@@ -20,7 +21,7 @@
 
 h1 {
     margin: 0;
-    font-size: 36px;
+    font-size: 40px;
     font-family: 'Poppins', sans-serif;
     color: #102699;
 }
