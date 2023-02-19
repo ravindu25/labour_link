@@ -1,0 +1,138 @@
+.main-section{
+    background-color: var(--primary-bacground-shade-color);
+}
+
+.main-heading{
+    padding: 12px 24px;
+    color: var(--primary-color);
+    background-color: var(--primary-shade-color);
+    border-radius: 12px;
+}
+
+.main-heading h1{
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    font-weight: normal;
+}
+
+.main-heading h5{
+    margin: 0;
+    text-align: right;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.profile-content h1{
+    margin: 16px;
+    color: var(--primary-color);
+    font-size: 36px;
+    font-weight: bold;
+    font-family: 'Poppins',sans-serif;
+}
+
+.profile-details-title h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.profile-details-container{
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    gap: 36px;
+    background: #FFF;
+    border: 3px solid #102699;
+    border-radius: 12px;
+}
+
+.profile-img{
+    width: 326px;
+    height: 300px;
+    display: flex;
+    justify-content: flex-start;
+    border-radius: 50%;
+}
+
+.user-details{
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name h1{
+    display: flex;
+    font-size:45px;
+    font-weight: normal;
+}
+
+#update-details-button{
+    margin-left: 14px;
+    color:var(--primary-color);
+    outline: none;
+    border: 4px solid var(--primary-color);
+    padding: 8px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 23px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.user-details-item h3{
+    font-weight: normal;
+    margin-left: 14px;
+}
+
+.more-action-title h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+
+}
+
+.more-action-box{
+    display: flex;
+    justify-content: space-between;
+    border: 3px solid var(--primary-color);
+    border-radius: 12px;
+    color: var(--primary-color);
+}
+
+.change-password-text h3{
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    margin-left: 8px;
+}
+
+#change-password-button{
+    margin-top: 8px;
+    margin-right: 8px;
+    color:var(--primary-bright-color);
+    outline: none;
+    border: 4px solid var(--primary-bright-color);
+    padding: 8px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 23px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: var(--primary-shade-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+/* #upload-profile-img{
+    background-image: url(../images/upload-button.png);
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border: none;
+} */

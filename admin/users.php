@@ -343,8 +343,8 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                             ($row['Activation_Flag'] == 1 ? 
                             //if the user is the current user, disable the suspend button
                                     
-                                    '<button class="suspend-button" onclick="openSuspendModal(' . $user_id.','. $curr_user_id . ', true)" disabled><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend</button>' : 
-                                    '<button class="activate-button" onclick="openSuspendModal(' . $user_id . ', false)"><i class="fa-solid fa-user-check" disabled></i>&nbsp;&nbsp;Activate</button>') .
+                                    '<button class="disable-button" onclick="openSuspendModal(' . $user_id.','. $curr_user_id . ', true)" disabled><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Suspend</button>' :
+                                    '<button class="disable-button" onclick="openSuspendModal(' . $user_id . ', false)"><i class="fa-solid fa-user-check" disabled></i>&nbsp;&nbsp;Activate</button>') .
                             '</div>
                             </td>
                         </tr>');

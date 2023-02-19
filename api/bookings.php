@@ -40,7 +40,14 @@
         } else if (isset($_GET['customerId'])) {
             $customerId = $_GET['customerId'];
             // Getting all the bookings
-            $sql_get_all_bookings = "select Booking.*, Worker.First_Name AS Worker_First_Name, Worker.Last_Name AS Worker_Last_Name, Customer.First_Name AS Customer_First_Name, Customer.Last_Name AS Customer_Last_Name from Booking inner join User AS Worker ON Booking.Worker_ID = Worker.User_ID inner join User AS Customer ON Booking.Customer_ID = Customer.User_ID where Booking.Customer_ID = $customerId ORDER BY Booking.Created_Date";
+            $sql_get_all_bookings = "select Booking.*, Worker.First_Name AS Worker_First_Name, Worker.Last_Name AS Worker_Last_Name, Customer.First_Name AS Customer_First_Name, Customer.Last_Name AS Customer_Last_Name from Booking inner join User AS Worker ON Booking.Worker_ID = Worker.User_ID inner join User AS Customer ON Booking.Customer_ID = Customer.User_ID where Booking.Customer_ID = $customerId ORDER BY Booking.Created_Date DESC";
+
+            // Check whether bookings amount is defined
+            if(isset($_GET['num'])){
+                $numOfBookings = $_GET['num'];
+
+                $sql_get_all_bookings = $sql_get_all_bookings . " LIMIT $numOfBookings";
+            }
 
             $result = $conn->query($sql_get_all_bookings);
 

@@ -4,6 +4,7 @@
     if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Customer') {
         header("Location: ../login.php");
     }
+    $userId = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,33 +33,31 @@
         <div class="booking-details-title">
             <h1>Current Status of Your <u>Booking</u></h1>
         </div>
-        <div class="status-container">
-            <button type="button" class="status-button">In-Progress</button>
-        </div>
+        <div class="status-container" id="booking-details-status-container"></div>
         <div class="details-container">
             <div class="details-row">
                 <h4>Job type</h4>
-                <h4 class="details-value">Plumber</h4>
+                <h4 class="details-value" id="booking-details-job-type"></h4>
             </div>
             <div class="details-row">
                 <h4>Worker</h4>
-                <h4 class="details-value">Saman Gunawardhana</h4>
+                <h4 class="details-value" id="booking-details-worker-name"></h4>
             </div>
             <div class="details-row">
                 <h4>Start date</h4>
-                <h4 class="details-value">21-Nov-2022</h4>
+                <h4 class="details-value" id="booking-details-start-date"></h4>
             </div>
-            <div class="remaining-time-container">
+            <div class="remaining-time-container" id="remaining-time-container">
                 <h4>This booking will be closed in</h4>
-                <h1 class="countdown-text">12 hrs 3 days</h1>
+                <h1 class="countdown-text" id="booking-details-countdown"></h1>
             </div>
             <div class="payment-method-container">
                 <div class="payment-image-container">
                     <h4>Payment Method</h4>
                     <div class="payment-image-card">
-                        <img class="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
+                        <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
                              alt="payment method"/>
-                        <h4>Online payments</h4>
+                        <h4 id="payment-method-text">Online payments</h4>
                     </div>
                 </div>
                 <div class="payment-details-container">
@@ -229,38 +228,32 @@
                     $customer_id = $customer_id = $_SESSION['user_id'];
                     $sql_get_bookings = "select Booking.*, User.First_Name, User.Last_Name from Booking inner join User on Booking.Worker_ID = User.User_ID where Booking.Customer_ID = $customer_id ORDER BY Booking.Created_Date DESC LIMIT 5";
 
-                    $status = array("Pending","Completed","Rejected","In-Progress");
 
                     $result = $conn->query($sql_get_bookings);
 
                     if($result->num_rows > 0){
                         while($row = $result->fetch_assoc()){
+                            $bookingId = $row['Booking_ID'];
                             $worker_type = $row['Worker_Type'];
                             $worker_name = $row['First_Name'] . " " . $row['Last_Name'];
                             $start_date = date("d M Y", strtotime($row['Start_Date']));
-                            $statusValue = array_rand($status);
+                            $status = $row['Status'];
 
                             $button = '<button class="pending-button">Pending</button>';
-                            // switch($statusValue){
-                            //     case 0:
-                            //         $button = '<button class="pending-button">Pending</button>';
-                            //         break;
-                            //     case 1:
-                            //         $button = '<button class="completed-button">Completed</button>';
-                            //         break;
-                            //     case 2:
-                            //         $button = '<button class="rejected-button">Rejected</button>';
-                            //         break;
-                            //     case 3:
-                            //         $button = '<button class="in-pogress-button">In-Progress</button>';
-                            //         break;
-                            //     default:
-                            //         $button = '<button class="in-pogress-button">In-Progress</button>';
-                            //         break;
-                            // }
+
+                            if($status === 'Pending'){
+                                $button = '<button class="pending-button">Pending</button>';
+                            } else if($status === 'Accepted'){
+                                $button = '<button class="in-pogress-button">Accepted</button>';
+                            } else if($status === 'Completed'){
+                                $button = '<button class="completed-button">Completed</button>';
+                            } else {
+                                $button = '<button class="rejected-button">Rejected</button>';
+                            }
+
 
                             echo "
-                                <div class='booking-card'>
+                                <div class='booking-card' onclick='openBookingDetailsModal($bookingId)'>
                                     <div class='card-text'>
                                         <h3>$worker_type</h3>
                                         <p>Work by</p>
@@ -397,14 +390,14 @@
                             <button type="button" class="payment-amount-button">Rs. 17000.00</button>
                         </div>
                     </div>
-                    <div class="payment-item">
+                    <div class="payment-item-failed">
                         <div class="payment-text">
                             <span class="blue-badge">19 Oct 2022</span>
                             <h3>Rushdha Rasheed</h3>
                             <h4>Dammika Kumara</h4>
                         </div>
                         <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 25000.00</button>
+                            <button type="button" class="payment-amount-button-failed">Rs. 25000.00</button>
                         </div>
                     </div>
                     <div class="payment-item">
@@ -437,6 +430,11 @@
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+<?php
+    echo "<script>
+        let userId = $userId;
+    </script>"
+?>
 <script src="../scripts/modals.js" type="text/javascript"></script>
-<script src="../scripts/customer/bookings.js" type="text/javascript"></script>
+<script src="../scripts/customer/dashboard.js" type="text/javascript"></script>
 </body>

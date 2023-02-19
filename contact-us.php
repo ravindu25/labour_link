@@ -17,6 +17,35 @@
 
 </head>
 <body>
+<div class="message-backdrop" id="message-backdrop">
+</div>
+<div class="success-message-container" id="booking-create-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Message sent successfully</h1>
+</div>
+<div class="failed-message-container" id="booking-create-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Error occurred in sending message!</h1>
+        <h5>Please try again later</h5>
+    </div>
+</div>
+<div class="register-select-modal" id="register-modal">
+</div>
+<div class="register-select-content" id="register-modal-content">
+    <div class="register-select-heading">
+        <img src="./assets/svg/user-check-solid.svg" alt="house icon" class="register-select-icon" />
+        <h1>Select registration type</h1>
+    </div>
+    <div class="reg-type-container">
+        <div class="reg-type-card">
+            <img src="./assets/home-page/job-type/labour-type.svg" alt="worker" class="reg-type-image" />
+            <button type="button" onclick="window.location.href='worker-registration.php'" class="card-button">Worker</button>
+        </div>
+        <div class="reg-type-card">
+            <img src="./assets/home-page/job-type/customer-type.svg" alt="customer" class="reg-type-image" />
+            <button type="button" onclick="window.location.href='customer-registration.php'" class="card-button">Customer</button>
+        </div>
+    </div>
+</div>
 <nav class="nav-bar">
     <div class="nav-bar-items">
         <div class="logo-container">
@@ -227,6 +256,8 @@
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+<script src="./scripts/contact-us.js" type="text/javascript"></script>
+<script src="./scripts/modals.js" type="text/javascript"></script>
 <script src="./scripts/index.js" type="text/javascript"></script>
 </body>
 </html>
@@ -256,9 +287,9 @@
             $mail->Body = "You have received a message from $first_name $last_name. <br> Contact Number: $contact_number <br> Email: $email <br> Message: $message";
 
             if ($mail->send()) {
-                echo 'Email sent';
+                echo '<script>showSucessModal()</script>';
             } else {
-                echo 'Email not sent';
+                echo '<script>showErrorModal()</script>';
             }
 
 
