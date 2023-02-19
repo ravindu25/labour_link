@@ -13,7 +13,6 @@
 
     <!-- CSS files -->
     <link href="../styles/index-page.css" rel="stylesheet"/>
-    <link href="../styles/worker/index.css" rel="stylesheet"/>
     <link href="../styles/worker/view-worker-profile.css" rel="stylesheet"/>
     <title>Workers | LabourLink</title>
 
@@ -119,26 +118,102 @@
     </div>
     <div class="profile-info">
         <h1>Saman Gunawardhana</h1>
-        <div class='worker-card-location-row'>
-            <h3><i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i> Negombo</h3>
+        <div class="worker-card-types-row">
+            Category :
+            <div class="worker-type-badge">
+                <h5>Electrician</h5>
+            </div>
+            <div class="worker-type-badge">
+                <h5>Plumber</h5>
+            </div>
+            <div class='worker-card-location-row'>
+                <h3>Location : <i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i> <b>Negombo</b></h3>
+            </div>
+            <?php
+            $sql_get_workers = "select * from User inner join Worker on User.User_ID = Worker.Worker_ID";
+
+            if($workerType === 'plumber') {
+                $sql_get_workers = $sql_get_workers . " inner join Plumber ON Worker.Worker_ID = Plumber.Plumber_ID";
+            } else if($workerType === 'carpenter'){
+                $sql_get_workers = $sql_get_workers . " inner join Carpenter ON Worker.Worker_ID = Carpenter.Carpenter_ID";
+            } else if($workerType === 'electrician'){
+                $sql_get_workers = $sql_get_workers . " inner join Electrician ON Worker.Worker_ID = Electrician.Electrician_ID";
+            } else if($workerType === 'painter'){
+                $sql_get_workers = $sql_get_workers . " inner join Painter ON Worker.Worker_ID = Painter.Painter_ID";
+            } else if($workerType === 'mason'){
+                $sql_get_workers = $sql_get_workers . " inner join Mason ON Worker.Worker_ID = Mason.Mason_ID";
+            } else if($workerType === 'janitor'){
+                $sql_get_workers = $sql_get_workers . " inner join Janitor ON Worker.Worker_ID = Janitor.Janitor_ID";
+            } else if($workerType === 'mechanic'){
+                $sql_get_workers = $sql_get_workers . " inner join Mechanic ON Worker.Worker_ID = Mechanic.Mechanic_ID";
+            } else if($workerType === 'gardener'){
+                $sql_get_workers = $sql_get_workers . " inner join Gardener ON Worker.Worker_ID = Gardener.Gardener_ID";
+            }
+
+            $sql_get_workers = $sql_get_workers . " ORDER BY Worker.Current_Rating DESC LIMIT 4";
+
+            $result = $conn->query($sql_get_workers);
+
+            if($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    /*
+                     * Creating the worker entity
+                     */
+
+                    $userId = $row['User_ID'];
+                    $fullName = $row['First_Name'] . " " . $row['Last_Name'];
+                    $email = $row['Email'];
+                    $contactNum = $row['Contact_No'];
+                    $nic = $row['NIC'];
+                    $dob = $row['DOB'];
+                    $address = $row['User_Address'];
+                    $city = $row['City'];
+                    $currentRating = $row['Current_Rating'];
+
+                    $imageNumber = rand(1, 4);
+                    $imageUrl = "../assets/worker/profile-images/worker-$imageNumber.jpg";
+
+                    $ratingHtml = null;
+                    $tempRating = 0;
+
+                    while ($tempRating < $currentRating) {
+                        if ($tempRating + 1 <= $currentRating) {
+                            $ratingHtml = $ratingHtml . "<i class='fa-solid fa-star'></i>";
+                            $tempRating += 1;
+                        } else if ($tempRating + 0.5 <= $currentRating) {
+                            $ratingHtml = $ratingHtml . "<i class='fa-solid fa-star-half-stroke'></i>";
+                            $tempRating += 0.5;
+                        } else {
+                            break;
+                        }
+                    }
+
+                    $tempRating = ceil($tempRating);
+
+                    while ($tempRating < 5) {
+                        $ratingHtml = $ratingHtml . "<i class='fa-regular fa-star'></i>";
+                        $tempRating += 1;
+                    }
+                }
+            }
+
+            echo
+            "Rating :
+            <div class='worker-card-star-container'>
+                   $ratingHtml
+                   <b>$currentRating</b> 
+            </div>"
+            ?>
         </div>
-        <p>Experience: 5 years</p>
-    </div>
-    <div class="worker-card-types-row">
-        Category :
-        <div class="worker-type-badge">
-            <h5> Electrician</h5>
-        </div>
-        <div class="worker-type-badge">
-            <h5>Plumber</h5>
-        </div>
-        <div class="rating">
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <p>5.0 (250 reviews)</p>
+        <div class="worker-card-types-row">
+            <div class = worker-description>
+            Description :
+            <p>Saman is an experienced electrician who has been working for more than 15 years in the field.
+                He has successfully completed many tasks on time. sed fermentum ipsum lobortis. Nam laoreet libero vitonsequat tortor at ipsum tincidunt,  </p>
+            </div>
+            <div class="button-container">
+                <button type='button' class='booking-button'>Book now!</button>
+            </div>
         </div>
     </div>
 </div>

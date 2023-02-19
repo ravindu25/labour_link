@@ -21,7 +21,7 @@
 
 h1 {
     margin: 0;
-    font-size: 40px;
+    font-size: 50px;
     font-family: 'Poppins', sans-serif;
     color: #102699;
 }
@@ -31,4 +31,80 @@ p {
     font-size: 18px;
     font-family: Inter;
     color: black;
+}
+
+.worker-card-star-container{
+    width: fit-content;
+    padding: 2px 4px;
+    color: var(--primary-color);
+    border-radius: 4px;
+}
+
+.worker-card-location-row h3{
+    margin: 0px 60;
+    font-weight: 30;
+    font-size: 30px;
+    font-family: 'Inter', sans-serif;
+}
+
+.worker-card-types-row{
+    display: flex;
+    font-size: 30px;
+    color: black;
+    font-weight: normal;
+    font-family: 'Inter', sans-serif;
+    padding-top: 18px;
+}
+
+.worker-type-badge{
+    padding: 4px 12px;
+    margin-left: 8px;
+    margin-right: 4px;
+    border-radius: 6px;
+    background-color: var(--primary-background-color);
+    height: 30px;
+}
+
+.worker-type-badge h5{
+    margin: 0;
+    color: var(--primary-bright-color);
+    font-size: 24px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+}
+
+.button-container{
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.booking-button{
+    outline: none;
+    border: 3px solid var(--primary-color);
+    padding: 12px 18px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: var(--primary-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+    height: 70px;
+    width: 200px;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.booking-button:active, .more-button:active{
+    transform: scale(.96);
+}
+
+.worker-description{
+    height: 50px;
+    width: 800px;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    margin-right: 25px;
 }

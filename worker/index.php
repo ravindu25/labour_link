@@ -225,7 +225,7 @@
                                 "</h1>
                                 <div class='worker-card-star-container'>
                                     $ratingHtml
-                                    &nbsp;&nbsp; $currentRating 
+                                    &nbsp;&nbsp;<b>$currentRating </b> 
                                 </div>
                                 <div class='worker-image'>
                                     <img src='$imageUrl' alt='worker-profile'>
@@ -271,7 +271,7 @@
                     <i class="fa-solid fa-star-half-stroke"></i>
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-regular fa-star"></i>
-                    &nbsp;&nbsp; 2.5
+                    &nbsp;&nbsp;<b>2.5</b>
                 </div>
                 <div class="worker-image">
                     <img src="../assets/worker/profile-images/worker-1.jpg" alt="worker-profile">
