@@ -183,12 +183,12 @@
     </section>
     <section class="main-content">
         <div class="main-heading">
-            <h1>Welcome Back
-                <u>
+            <h1>Your <u>Payment</u> details here!
+                <!-- <u>
                     <?php
                         echo $_SESSION['first_name'] . " " . $_SESSION['last_name']
                     ?>
-                </u>
+                </u> -->
             </h1>
             <?php
                 require_once('../db.php');
@@ -212,9 +212,9 @@
                 echo "<h5>Last accessed $dateInText</h5>";
             ?>
         </div>
-        <div class="overview-content">
+        <!-- <div class="overview-content">
             <h1>Payments</h1>
-        </div>
+        </div> -->
         <!--Due payments section-->
         <div class="due-payments">
             <div class="due-payments-title">
