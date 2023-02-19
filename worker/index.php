@@ -244,7 +244,9 @@
                                     </div>
                                 </div>
                                 <div class='worker-card-button-container'>
+                                    <a href='view-worker-profile.php'
                                     <button type='button' class='view-profile-button'>View Profile</button>
+                                    </a>
                                     <button type='button' class='booking-button'>Book now!</button>
                                 </div>
                             </div>

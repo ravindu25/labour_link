@@ -1,0 +1,33 @@
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px;
+}
+
+.profile-picture img {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    margin-right: 20px;
+    padding: 10px 50px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    margin: 0;
+    font-size: 36px;
+    font-family: 'Poppins', sans-serif;
+    color: #102699;
+}
+
+p {
+    margin: 5px 0;
+    font-size: 18px;
+    font-family: Inter;
+    color: black;
+}
