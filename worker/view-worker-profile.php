@@ -122,6 +122,52 @@
         <p>Experience: 5 years</p>
         <p>Skills: Painting, Electrical</p>
     </div>
+    <div class="rating">
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <span class="star">&#9733;</span>
+        <p>5.0 (250 reviews)</p>
+    </div>
+</div>
+<div class="profile-container">
+    <div class="projects">
+        <h2>Previously Completed Projects</h2>
+        <div class="project">
+            <h3>Project 1</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="project">
+            <h3>Project 2</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+    </div>
+    <div class="feedback">
+        <h2>Customer Feedback</h2>
+        <div class="review">
+            <div class="rating">
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+            </div>
+            <p>"John is a fantastic web developer. He is easy to work with and produces high-quality work. Highly recommend!"</p>
+            <p class="reviewer">- Jane Smith</p>
+        </div>
+        <div class="review">
+            <div class="rating">
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+            </div>
+            <p>"John helped me build a beautiful and functional website for my business. He was able to take my vision and turn it into a reality. I couldn't be happier with the end result."</p>
+            <p class="reviewer">- Bob Johnson</p>
+        </div>
+    </div>
 </div>
 <footer class="footer">
     <div class="footer-row">
