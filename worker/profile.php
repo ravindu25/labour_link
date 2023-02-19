@@ -136,7 +136,7 @@
     </section>
     <section class="main-content">
         <div class="main-heading">
-            <h1>All The settings Of Your <u>Profile</u></h1>
+            <h1>Your <u>Profile</u></h1>
             <?php
                 require_once('../db.php');
                 // Getting the most recent logging attempt of the current user
@@ -167,14 +167,14 @@
             <div class="profile-details-container">
                 <div class="profile-image">
                     <img class="profile-img" src="..\images/profile-image.png"></img>
-                    <button class="more-button" id = "uplaod-profile-img"></button>
+                    <!-- <button class="more-button" id = "uplaod-profile-img">Change Photo</button> -->
                 </div>
                 <div class="user-details">
                     <div class="user-name">
-                        <h1>Saman Gunawardhana</h1>
+                        <h1>Dhananga Deepanjana</h1>
                     </div>
                     <div>
-                        <div class ="user-details-item"><h3>E-mail - samangunawardhana@gmail.com</h3></div>
+                        <div class ="user-details-item"><h3>E-mail - dhananga@gmail.com</h3></div>
                         <div class ="user-details-item"><h3>Mobile Number - 072 - 422 3123</h3></div>
                         <div class ="user-details-item"><h3>Address - No. 570 / A 54,Melder Place,Nugegoda.</h3></div>
                         <div class ="user-details-item"><h3>Date of birth - 05 September 1988</h3></div>
