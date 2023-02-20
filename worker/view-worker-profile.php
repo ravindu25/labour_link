@@ -1,6 +1,6 @@
 <?php
-    include_once('../db.php');
-    $workerType = $_GET['workertype'];
+include_once('../db.php');
+$workerType = $_GET['workertype'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -208,10 +208,10 @@
         </div>
         <div class="worker-card-types-row">
             <div class = worker-description>
-            Description :
-            <p>Saman is an experienced electrician who has been working for more than 15 years in the field.
-                He is also a skilled and dedicated plumber who takes great pride in his work.
-                Saman has a reputation for being reliable, efficient, and always willing to go the extra mile to ensure that clients are satisfied with his plumbing services. </p>
+                Description :
+                <p>Saman is an experienced electrician who has been working for more than 15 years in the field.
+                    He is also a skilled and dedicated plumber who takes great pride in his work.
+                    Saman has a reputation for being reliable, efficient, and always willing to go the extra mile to ensure that clients are satisfied with his plumbing services. </p>
             </div>
             <div class="button-container">
                 <button type='button' class='booking-button'>Book now!</button>
@@ -219,44 +219,44 @@
         </div>
     </div>
 </div>
-    <div class="projects-container">
-        <div class="subheading">PROJECTS COMPLETED</div>
-        <div class="profile-container">
-            <div class="project">
-                <h3>Project 1</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-            <div class="project">
-                <h3>Project 2</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
+<div class="projects-container">
+    <div class="subheading">PROJECTS COMPLETED</div>
+    <div class="profile-container">
+        <div class="project">
+            <h3>Project 1</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="project">
+            <h3>Project 2</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
     </div>
-    <div class="projects-container">
-        <div class="subheading">CUSTOMER FEEDBACK</div>
-        <div class="review">
-            <div class="rating">
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-            </div>
-            <p>"John is a fantastic web developer. He is easy to work with and produces high-quality work. Highly recommend!"</p>
-            <p class="reviewer">- Jane Smith</p>
+</div>
+<div class="projects-container">
+    <div class="subheading">CUSTOMER FEEDBACK</div>
+    <div class="review">
+        <div class="rating">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
         </div>
-        <div class="review">
-            <div class="rating">
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-            </div>
-            <p>"John helped me build a beautiful and functional website for my business. He was able to take my vision and turn it into a reality. I couldn't be happier with the end result."</p>
-            <p class="reviewer">- Bob Johnson</p>
-        </div>
+        <p>"John is a fantastic web developer. He is easy to work with and produces high-quality work. Highly recommend!"</p>
+        <p class="reviewer">- Jane Smith</p>
     </div>
+    <div class="review">
+        <div class="rating">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+        </div>
+        <p>"John helped me build a beautiful and functional website for my business. He was able to take my vision and turn it into a reality. I couldn't be happier with the end result."</p>
+        <p class="reviewer">- Bob Johnson</p>
+    </div>
+</div>
 
 <footer class="footer">
     <div class="footer-row">
