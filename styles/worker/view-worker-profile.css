@@ -3,7 +3,6 @@
     flex-direction: row;
     align-items: center;
     margin: 20px;
-    padding-left: 20px;
 }
 
 .profile-picture img {
@@ -24,6 +23,7 @@ h1 {
     font-size: 50px;
     font-family: 'Poppins', sans-serif;
     color: #102699;
+    margin-bottom: 15px;
 }
 
 p {
@@ -41,7 +41,7 @@ p {
 }
 
 .worker-card-location-row h3{
-    margin: 0px 60;
+    margin: 0px 130;
     font-weight: 30;
     font-size: 30px;
     font-family: 'Inter', sans-serif;
@@ -53,7 +53,23 @@ p {
     color: black;
     font-weight: normal;
     font-family: 'Inter', sans-serif;
-    padding-top: 18px;
+    padding-top: 24px;
+}
+
+.subheading{
+    position: relative;
+    font-size: 20px;
+    font-family: Poppins;
+    color: #9d9d9d;
+}
+
+.subheading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: #30CEF0 2px solid;
 }
 
 .worker-type-badge{
@@ -93,7 +109,7 @@ p {
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
     height: 70px;
     width: 200px;
-    margin-top: 20px;
+    margin-top: 30px;
     margin-left: 40px;
 }
 
@@ -102,9 +118,19 @@ p {
 }
 
 .worker-description{
-    height: 50px;
-    width: 800px;
+    height: 80px;
+    width: 1000px;
     font-family: 'Inter', sans-serif;
     font-size: 20px;
     margin-right: 25px;
+    margin-bottom: 20px;
+}
+
+.projects-container {
+    /*border: 2px solid #102699;*/
+    font-family: 'Inter', sans-serif;
+    padding-right: 100px;
+    padding-left: 70px;
+    padding-top: 20px;
+    margin: 20px;
 }
