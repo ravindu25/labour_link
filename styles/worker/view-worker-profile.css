@@ -24,6 +24,7 @@ h1 {
     font-family: 'Poppins', sans-serif;
     color: #102699;
     margin-bottom: 15px;
+    margin-top: 20px;
 }
 
 p {
@@ -107,7 +108,7 @@ p {
     border-radius: 18px;
     background-color: var(--primary-color);
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
-    height: 70px;
+    height: 60px;
     width: 200px;
     margin-top: 30px;
     margin-left: 40px;
@@ -131,6 +132,6 @@ p {
     font-family: 'Inter', sans-serif;
     padding-right: 100px;
     padding-left: 70px;
-    padding-top: 20px;
+    padding-top: 60px;
     margin: 20px;
 }

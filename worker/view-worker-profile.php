@@ -220,41 +220,33 @@ $workerType = $_GET['workertype'];
     </div>
 </div>
 <div class="projects-container">
-    <div class="subheading">PROJECTS COMPLETED</div>
-    <div class="profile-container">
+    <div class="subheading">PREVIOUSLY COMPLETED PROJECTS</div>
+    <div class="worker-card-types-row">
         <div class="project">
-            <h3>Project 1</h3>
+            Project 1
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
         <div class="project">
-            <h3>Project 2</h3>
+            Project 2
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="project">
+            Project 3
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
     </div>
 </div>
 <div class="projects-container">
     <div class="subheading">CUSTOMER FEEDBACK</div>
-    <div class="review">
-        <div class="rating">
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
+    <div class="worker-card-types-row">
+        <div class="review">
+            "John is a fantastic web developer. He is easy to work with and produces high-quality work. Highly recommend!"
+            <p>- Jane Smith</p>
         </div>
-        <p>"John is a fantastic web developer. He is easy to work with and produces high-quality work. Highly recommend!"</p>
-        <p class="reviewer">- Jane Smith</p>
-    </div>
-    <div class="review">
-        <div class="rating">
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
+        <div class="review">
+            "John helped me build a beautiful and functional website for my business. He was able to take my vision and turn it into a reality. I couldn't be happier with the end result."
+            <p>- Bob Johnson</p>
         </div>
-        <p>"John helped me build a beautiful and functional website for my business. He was able to take my vision and turn it into a reality. I couldn't be happier with the end result."</p>
-        <p class="reviewer">- Bob Johnson</p>
     </div>
 </div>
 
