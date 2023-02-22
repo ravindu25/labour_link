@@ -167,11 +167,9 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                 <h5>Plumber</h5>
             </div>
             <div class='worker-card-location-row'>
-                <h3><?=$city?> : <i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i> <b>Negombo</b></h3>
+                Location : <i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i> <b><?=$city?></b>
             </div>
             <?php
-
-
             echo
             "Rating :
             <div class='worker-card-star-container'>
@@ -197,8 +195,13 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     <div class="subheading">PREVIOUSLY COMPLETED PROJECTS</div>
     <div class="worker-card-types-row">
         <div class="project">
-            Project 1
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="project-img">
+                <img src="../assets/job-card-image/carpentry-image.jpg">
+            </div>
+            <div class="project-description">
+                Project 1
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
         </div>
         <div class="project">
             Project 2
