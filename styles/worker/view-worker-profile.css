@@ -42,7 +42,7 @@ p {
 }
 
 .worker-card-location-row h3{
-    margin: 0px 130;
+    margin: 0px 130px;
     font-weight: 30;
     font-size: 30px;
     font-family: 'Inter', sans-serif;
@@ -134,4 +134,35 @@ p {
     padding-left: 70px;
     padding-top: 60px;
     margin: 20px;
+}
+
+.project {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #102699;
+    padding: 20px;
+    border-radius: 9px;
+    margin-right: 20px;
+}
+
+.project-img {
+    width: 30%;
+    height: auto;
+    margin-right: 20px;
+}
+
+.project-description {
+    width: 50%;
+}
+
+.project-description h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.project-description p {
+    font-size: 1rem;
+    line-height: 1.4;
 }
