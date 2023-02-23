@@ -220,6 +220,10 @@ a{
     color: #FFF;
 }
 
+.nav-links:hover{
+    color: yellow;
+}
+
 .nav-select{
     outline: none;
     border: none;

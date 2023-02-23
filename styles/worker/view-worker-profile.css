@@ -1,0 +1,175 @@
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px;
+}
+
+.profile-picture img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin-right: 70px;
+    padding-left: 30px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    margin: 0;
+    font-size: 50px;
+    font-family: 'Poppins', sans-serif;
+    color: #102699;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+p {
+    margin: 5px 0;
+    font-size: 18px;
+    font-family: Inter;
+    color: black;
+}
+
+.worker-card-star-container{
+    width: fit-content;
+    padding: 2px 4px;
+    color: var(--primary-color);
+    border-radius: 4px;
+}
+
+.worker-card-location-row{
+    margin: 0px 130px;
+    font-weight: 30;
+    font-size: 30px;
+    font-family: 'Inter', sans-serif;
+}
+
+.worker-card-types-row{
+    display: flex;
+    font-size: 30px;
+    color: black;
+    font-weight: normal;
+    font-family: 'Inter', sans-serif;
+    padding-top: 24px;
+}
+
+.subheading{
+    position: relative;
+    font-size: 20px;
+    font-family: Poppins;
+    color: #9d9d9d;
+}
+
+.subheading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: #30CEF0 2px solid;
+}
+
+.worker-type-badge{
+    padding: 4px 12px;
+    margin-left: 8px;
+    margin-right: 4px;
+    border-radius: 6px;
+    background-color: var(--primary-background-color);
+    height: 30px;
+}
+
+.worker-type-badge h5{
+    margin: 0;
+    color: var(--primary-bright-color);
+    font-size: 24px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+}
+
+.button-container{
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.booking-button{
+    outline: none;
+    border: 3px solid var(--primary-color);
+    padding: 12px 18px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: var(--primary-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+    height: 60px;
+    width: 200px;
+    margin-top: 30px;
+    margin-left: 40px;
+}
+
+.booking-button:active, .more-button:active{
+    transform: scale(.96);
+}
+
+.worker-description{
+    height: 80px;
+    width: 1000px;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    margin-right: 25px;
+    margin-bottom: 20px;
+}
+
+.projects-container {
+    /*border: 2px solid #102699;*/
+    font-family: 'Inter', sans-serif;
+    padding-right: 100px;
+    padding-left: 70px;
+    padding-top: 60px;
+    margin: 20px;
+}
+
+.project {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    border: 3px solid #102699;
+    padding: 20px;
+    border-radius: 9px;
+    margin-right: 20px;
+}
+.project-img-container {
+    width: 150px;
+    height: 150px;
+    border: 1px solid black;
+    margin-right: 20px;
+    overflow: hidden; /* This ensures the image doesn't overflow outside the container */
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-description {
+    width: 70%;
+}
+
+.project-description h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.project-description p {
+    font-size: 1rem;
+    line-height: 1.4;
+}

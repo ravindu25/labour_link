@@ -1,33 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="PS-223.8617.59">
+  <component name="dataSourceStorageLocal" created-in="PS-222.4345.15">
     <data-source name="@localhost" uuid="aa1e3063-0d86-4bd5-953e-698cc40769c1">
-      <database-info product="MariaDB" version="10.4.25-MariaDB" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="3.0.7" dbms="MARIADB" exact-version="10.4.25" exact-driver-version="3.0">
-        <extra-name-characters>#@</extra-name-characters>
-        <identifier-quote-string>`</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
-      <secret-storage>master_key</secret-storage>
-      <user-name>root</user-name>
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="schema" negative="1" />
-        </introspection-scope>
-      </schema-mapping>
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MARIADB" exact-version="0" />
+      <secret-storage>forget</secret-storage>
+      <schema-mapping />
     </data-source>
     <data-source name="labour_link@labour-link.c4wgecowfejr.ap-northeast-1.rds.amazonaws.com" uuid="475dfc38-d111-4e38-a823-0a2260e2f5b0">
-      <database-info product="MySQL" version="8.0.28" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.25 (Revision: 08be9e9b4cba6aa115f9b27b215887af40b159e0)" dbms="MYSQL" exact-version="8.0.28" exact-driver-version="8.0">
-        <extra-name-characters>#@</extra-name-characters>
-        <identifier-quote-string>`</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
-      <secret-storage>master_key</secret-storage>
-      <user-name>admin</user-name>
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="schema" qname="@" />
-        </introspection-scope>
-      </schema-mapping>
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
+      <secret-storage>forget</secret-storage>
+      <schema-mapping />
     </data-source>
     <data-source name="@labourlink.cdkspo5cbfve.ap-southeast-1.rds.amazonaws.com" uuid="07bd0199-4fad-437a-a9f5-5559870e9178">
       <database-info product="MySQL" version="8.0.28" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.25 (Revision: 08be9e9b4cba6aa115f9b27b215887af40b159e0)" dbms="MYSQL" exact-version="8.0.28" exact-driver-version="8.0">

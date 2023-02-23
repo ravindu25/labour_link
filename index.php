@@ -120,57 +120,73 @@
         <div class="job-card">
             <img src="./assets/job-card-image/plumbing-image.jpg" alt="Plumbing" class="job-card-image"/>
             <div class="card-text">
-                <p>20+ Labour Available</p>
-                <button type="button" class="card-button">Plumbing</button>
+                <p>20+ Workers Available</p>
+                <a href="worker/index.php?workertype=plumber">
+                    <button type="button" class="card-button">Plumbing</button>
+                </a>
             </div>
         </div>
         <div class="job-card">
             <img src="./assets/job-card-image/carpentry-image.jpg" alt="Carpentry" class="job-card-image"/>
             <div class="card-text">
-                <p>35+ Labour Available</p>
-                <button type="button" class="card-button">Carpentry</button>
+                <p>35+ Workers Available</p>
+                <a href="worker/index.php?workertype=carpenter">
+                    <button type="button" class="card-button">Carpentry</button>
+                </a>
             </div>
         </div>
         <div class="job-card">
             <img src="./assets/job-card-image/electrical-image.jpg" alt="Electrical" class="job-card-image"/>
             <div class="card-text">
-                <p>15+ Labour Available</p>
-                <button type="button" class="card-button">Electrical</button>
+                <p>15+ Workers Available</p>
+                <a href="worker/index.php?workertype=electrician">
+                    <button type="button" class="card-button">Electrical</button>
+                </a>
             </div>
         </div>
         <div class="job-card">
             <img src="./assets/job-card-image/painting-image.jpg" alt="Painting" class="job-card-image"/>
             <div class="card-text">
-                <p>55+ Labour Available</p>
-                <button type="button" class="card-button">Painting</button>
+                <p>55+ Workers Available</p>
+                <a href="worker/index.php?workertype=painter">
+                    <button type="button" class="card-button">Painting</button>
+                </a>
             </div>
         </div>
         <div class="job-card">
             <img src="./assets/job-card-image/masonry-image.jpg" alt="Masonry" class="job-card-image"/>
             <div class="card-text">
-                <p>40+ Labour Available</p>
-                <button type="button" class="card-button">Masonry</button>
+                <p>40+ Workers Available</p>
+                <a href="worker/index.php?workertype=mason">
+                    <button type="button" class="card-button">Masonry</button>
+                </a>
             </div>
         </div>
         <div class="job-card">
             <img src="./assets/job-card-image/janitor-image.jpg" alt="Janitorial" class="job-card-image"/>
             <div class="card-text">
-                <p>60+ Labour Available</p>
-                <button type="button" class="card-button">Janitorial</button>
+                <p>60+ Workers Available</p>
+                <a href="worker/index.php?workertype=janitor">
+                    <button type="button" class="card-button">Janitorial</button>
+                </a>
             </div>
         </div>
         <div class="job-card">
             <img src="./assets/job-card-image/mechanical-image.jpg" alt="Mechanical" class="job-card-image"/>
             <div class="card-text">
-                <p>40+ Labour Available</p>
-                <button type="button" class="card-button">Mechanical</button>
+                <p>40+ Workers Available</p>
+                <a href="worker/index.php?workertype=mechanic">
+                    <button type="button" class="card-button">Mechanical</button>
+                </a>
             </div>
         </div>
         <div class="job-card">
             <img src="./assets/job-card-image/gardening-image.jpg" alt="Gardening" class="job-card-image"/>
             <div class="card-text">
-                <p>20+ Labour Available</p>
-                <button type="button" class="card-button">Gardening</button>
+                <p>20+ Workers Available</p>
+                <a href="worker/index.php?workertype=gardener">
+                    <button type="button" class="card-button">Gardening</button>
+                </a>
             </div>
         </div>
     </div>
@@ -272,7 +288,7 @@
             <p>@labourlink</p>
             <div class="social-container">
                 <a href="#" class="social-link">
-                    <img src="./assets/svg/socials/facebook-f.svg" alt="facebook" class="social-icon" />
+                    <img src="../assets/svg/socials/facebook-f.svg" alt="facebook" class="social-icon" />
                 </a>
                 <a href="#" class="social-link">
                     <img src="./assets/svg/socials/instagram.svg" alt="instagram" class="social-icon" />

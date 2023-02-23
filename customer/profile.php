@@ -136,7 +136,7 @@
     </section>
     <section class="main-content">
         <div class="main-heading">
-            <h1>All The settings Of Your <u>Profile</u></h1>
+            <h1>Your <u>Profile</u></h1>
             <?php
                 require_once('../db.php');
                 // Getting the most recent logging attempt of the current user
@@ -167,7 +167,7 @@
             <div class="profile-details-container">
                 <div class="profile-image">
                     <img class="profile-img" src="..\images/profile-image1.png"></img>
-                    <button class="more-button" id = "uplaod-profile-img"></button>
+                    <!-- <button class="more-button" id = "uplaod-profile-img"></button> -->
                 </div>
                 <div class="user-details">
                     <div class="user-name">
