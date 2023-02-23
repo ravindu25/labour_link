@@ -4,7 +4,7 @@
     top: 50%;
     transform: translate(-50%, -50%) ;
     margin: 16px;
-    min-width: 60vw;
+    min-width: 65vw;
     max-height: 90vh;
     color: #102699;
     background-color: #FFF;
@@ -95,14 +95,14 @@
 }
 
 .question-container-row{
-    display: flex;
-    align-items: center;
-    justify-content: left;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: left;*/
     margin-top: 32px;
 }
 
 .question-container{
-    max-width: 60%;
+    /*max-width: 60%;*/
     text-align: left;
     margin-left: 16px;
 }
@@ -142,7 +142,7 @@
 }
 
 .feedback-answer-container h5{
-    margin: 0;
+    margin: 4px 10px;
     font-size: 24px;
     font-family: 'Inter', sans-serif;
     font-weight: normal;

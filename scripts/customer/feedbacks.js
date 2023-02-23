@@ -2,6 +2,7 @@ let comAndRejBookings = null;
 let currentBookings = [];
 let totalPages = 0;
 let currentPage = 1;
+let choices = [];
 let bookingRating = {'punctuality': 0, 'efficient': 0, 'professionalism': 0};
 
 function showFeedbackContainer(){
@@ -196,18 +197,12 @@ function goNextFeedbackThirdPage(){
     ratingPara.innerHTML = `<b>Please provide rating about ${selectedBooking.workerName.toLowerCase()}.</b>This will assist us in delivering enhanced services.`;
 
     let answers = document.getElementsByName('feedback-answers');
-    const feedbackTextArea = document.getElementById('feedback-textarea');
-    let questionAnswer = 'false';
 
     for(let i = 0; i < answers.length; i++){
         if(answers[i].checked){
-            questionAnswer = answers[i].value;
+            choices.push(answers[i].value);
         }
     }
-
-    const customerFeedback = feedbackTextArea.value;
-
-    console.log(customerFeedback);
 
     secondPage.style.display = 'none';
     thirdPage.style.display = 'block';
@@ -219,6 +214,15 @@ function goBackFeedbackSecondPage(){
 
     secondPage.style.display = 'block';
     thirdPage.style.display = 'none';
+}
+
+function createFeedback(){
+    const feedbackTextArea = document.getElementById('feedback-textarea');
+    const customerFeedback = feedbackTextArea.value;
+
+    const feedbackResult = {'bookingId': currentBookingId, 'starRating': bookingRating, 'choices': choices, 'written-feedback': customerFeedback};
+
+    console.log(feedbackResult);
 }
 
 function loadAllBookings(dataSource){

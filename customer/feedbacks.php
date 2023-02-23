@@ -204,19 +204,25 @@
         </div>
         <div class="question-container-row">
             <div class="question-container">
-                <h5>Have you noticed any behaviors that might suggest that worker is using drugs?</h5>
+                <h5>Did you notice any of the following?</h5>
             </div>
             <div class="question-answer-container">
                 <label>
-                    <input type="radio" name="feedback-answers" value="true" class="feedback-answer-input" />
+                    <input type="checkbox" name="feedback-answers" value="suspect-drug-using" class="feedback-answer-input" />
                     <div class="feedback-answer-container">
-                        <h5>Yes. I have noticed</h5>
+                        <h5>Drug use during work</h5>
                     </div>
                 </label>
                 <label>
-                    <input type="radio" name="feedback-answers" value="false" class="feedback-answer-input" checked/>
+                    <input type="checkbox" name="feedback-answers" value="suspect-mobile-using" class="feedback-answer-input"/>
                     <div class="feedback-answer-container">
-                        <h5>No. I didn't</h5>
+                        <h5>Excessive mobile phone usage</h5>
+                    </div>
+                </label>
+                <label>
+                    <input type="checkbox" name="feedback-answers" value="charged-more" class="feedback-answer-input"/>
+                    <div class="feedback-answer-container">
+                        <h5>Charge more than agreed</h5>
                     </div>
                 </label>
             </div>
@@ -239,7 +245,7 @@
         <div class="create-feedback-button-container">
             <button class="primary-button" id="second-page-next-button" onclick="goBackFeedbackSecondPage()"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back</button>
             <button class="secondary-button" onclick="hideFeedbackContainer()">Cancel</button>
-            <button class="primary-button" id="second-page-next-button" onclick="goNextFeedbackThirdPage()">Submit&nbsp;&nbsp;<i class="fa-solid fa-check"></i></button>
+            <button class="primary-button" id="second-page-next-button" onclick="createFeedback()">Submit&nbsp;&nbsp;<i class="fa-solid fa-check"></i></button>
         </div>
     </div>
 </div>
