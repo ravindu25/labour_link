@@ -63,8 +63,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
 
 </head>
 <body>
-<div class="register-select-modal" id="register-modal">
-</div>
+<div class="register-select-modal" id="register-modal"></div>
 <div class="register-select-content" id="register-modal-content">
     <div class="register-select-heading">
         <img src="../assets/svg/user-check-solid.svg" alt="house icon" class="register-select-icon" />
@@ -195,8 +194,8 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     <div class="subheading">PREVIOUSLY COMPLETED PROJECTS</div>
     <div class="worker-card-types-row">
         <div class="project">
-            <div class="project-img">
-                <img src="../assets/job-card-image/carpentry-image.jpg">
+            <div class="project-img-container">
+                <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
             </div>
             <div class="project-description">
                 Project 1
@@ -204,12 +203,22 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
             </div>
         </div>
         <div class="project">
-            Project 2
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="project-img-container">
+                <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
+            </div>
+            <div class="project-description">
+                Project 2
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
         </div>
         <div class="project">
-            Project 3
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="project-img-container">
+                <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
+            </div>
+            <div class="project-description">
+                Project 3
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
         </div>
     </div>
 </div>
