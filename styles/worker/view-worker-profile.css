@@ -34,11 +34,15 @@ p {
     color: black;
 }
 
-.worker-card-star-container{
+.star-container{
     width: fit-content;
     padding: 2px 4px;
     color: var(--primary-color);
     border-radius: 4px;
+}
+
+.star-container p{
+    font-size: 12px;
 }
 
 .worker-card-location-row{
@@ -48,7 +52,7 @@ p {
     font-family: 'Inter', sans-serif;
 }
 
-.worker-card-types-row{
+.details-row{
     display: flex;
     font-size: 30px;
     color: black;
@@ -59,7 +63,7 @@ p {
 
 .subheading{
     position: relative;
-    font-size: 20px;
+    font-size: 22px;
     font-family: Poppins;
     color: #9d9d9d;
 }
