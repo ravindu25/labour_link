@@ -157,7 +157,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     <div class="profile-info">
         <h1><?=$fullName?></h1>
         <div class="subheading">WORKER BIO</div>
-        <div class="worker-card-types-row">
+        <div class="details-row">
             Category :
             <div class="worker-type-badge">
                 <h5>Electrician</h5>
@@ -171,13 +171,13 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
             <?php
             echo
             "Rating :
-            <div class='worker-card-star-container'>
+            <div class='star-container'>
                    $ratingHtml
                    <b>$currentRating</b> 
             </div>"
             ?>
         </div>
-        <div class="worker-card-types-row">
+        <div class="details-row">
             <div class = worker-description>
                 Description :
                 <p>Saman is an experienced electrician who has been working for more than 15 years in the field.
@@ -192,7 +192,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
 </div>
 <div class="projects-container">
     <div class="subheading">PREVIOUSLY COMPLETED PROJECTS</div>
-    <div class="worker-card-types-row">
+    <div class="details-row">
         <div class="project">
             <div class="project-img-container">
                 <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
@@ -200,6 +200,12 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
             <div class="project-description">
                 Project 1
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div class="star-container">
+                    <p>
+                        <?=$ratingHtml?>
+                        2.7
+                    </p>
+                </div>
             </div>
         </div>
         <div class="project">
@@ -208,7 +214,13 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
             </div>
             <div class="project-description">
                 Project 2
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.                </p>
+                <div class="star-container">
+                    <p>
+                        <?=$ratingHtml?>
+                        2.5
+                    </p>
+                </div>
             </div>
         </div>
         <div class="project">
@@ -218,13 +230,19 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
             <div class="project-description">
                 Project 3
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div class="star-container">
+                    <p>
+                        <?=$ratingHtml?>
+                        2.3
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <div class="projects-container">
     <div class="subheading">CUSTOMER FEEDBACK</div>
-    <div class="worker-card-types-row">
+    <div class="details-row">
         <div class="review">
             "John is a fantastic web developer. He is easy to work with and produces high-quality work. Highly recommend!"
             <p>- Jane Smith</p>
