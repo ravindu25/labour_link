@@ -182,7 +182,8 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                 Description :
                 <p>Saman is an experienced electrician who has been working for more than 15 years in the field.
                     He is also a skilled and dedicated plumber who takes great pride in his work.
-                    Saman has a reputation for being reliable, efficient, and always willing to go the extra mile to ensure that clients are satisfied with his plumbing services. </p>
+                    Saman has a reputation for being reliable, efficient, and always willing to go the extra mile to
+                    ensure that clients are satisfied with his plumbing services. </p>
             </div>
             <div class="button-container">
                 <button type='button' class='booking-button'>Book now!</button>
@@ -191,50 +192,61 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     </div>
 </div>
 <div class="projects-container">
-    <div class="subheading">PREVIOUSLY COMPLETED PROJECTS</div>
+    <div class="subheading"> FEW PREVIOUSLY COMPLETED PROJECTS</div>
     <div class="details-row">
-        <div class="project">
-            <div class="project-img-container">
-                <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
-            </div>
-            <div class="project-description">
-                Project 1
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <div class="star-container">
-                    <p>
-                        <?=$ratingHtml?>
-                        2.7
+        <div class="project-container">
+            Repair of existing systems
+            <div class="project">
+                <div class="project-img-container">
+                    <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
+                </div>
+                <div class="project-description">
+                    <p>This involves identifying and fixing issues with existing plumbing systems, such as leaky pipes, clogged drains, or
+                        malfunctioning fixtures.
                     </p>
+                    <div class="star-container">
+                        <p>
+                            <?=$ratingHtml?>
+                            2.7
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="project">
-            <div class="project-img-container">
-                <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
-            </div>
-            <div class="project-description">
-                Project 2
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.                </p>
-                <div class="star-container">
-                    <p>
-                        <?=$ratingHtml?>
-                        2.5
+        <div class="project-container">
+            Maintenance of  systems
+            <div class="project">
+                <div class="project-img-container">
+                    <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
+                </div>
+                <div class="project-description">
+                    <p>Regular inspections and maintenance to ensure that plumbing systems are functioning properly and to prevent
+                        issues from developing.
                     </p>
+                    <div class="star-container">
+                        <p>
+                            <?=$ratingHtml?>
+                            2.5
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="project">
-            <div class="project-img-container">
-                <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
-            </div>
-            <div class="project-description">
-                Project 3
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <div class="star-container">
-                    <p>
-                        <?=$ratingHtml?>
-                        2.3
+        <div class="project-container">
+            Installation of new systems
+            <div class="project">
+                <div class="project-img-container">
+                    <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
+                </div>
+                <div class="project-description">
+                    <p> Installing pipes, fixtures, and other components to create a new plumbing system in a building.
                     </p>
+                    <div class="star-container">
+                        <p>
+                            <?=$ratingHtml?>
+                            2.7
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
