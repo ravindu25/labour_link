@@ -45,11 +45,11 @@ p {
     font-size: 12px;
 }
 
-.worker-card-location-row{
+.worker-location{
     margin: 0px 130px;
     font-weight: 30;
     font-size: 30px;
-    font-family: 'Inter', sans-serif;
+    font-family: Inter;
 }
 
 .details-row{
@@ -57,7 +57,7 @@ p {
     font-size: 30px;
     color: black;
     font-weight: normal;
-    font-family: 'Inter', sans-serif;
+    font-family: Inter;
     padding-top: 24px;
 }
 
@@ -132,8 +132,6 @@ p {
 }
 
 .projects-container {
-    /*border: 2px solid #102699;*/
-    font-family: 'Inter', sans-serif;
     padding-right: 100px;
     padding-left: 70px;
     padding-top: 60px;
@@ -189,4 +187,36 @@ p {
 .project-description p {
     font-size: 1rem;
     line-height: 1.4;
+}
+
+.feedbacks-container {
+    padding-right: 100px;
+    padding-left: 70px;
+    padding-top: 60px;
+    margin: 20px;
+}
+
+.feedback {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.feedback-body {
+    padding: 10px;
+}
+
+.feedback-footer {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.feedback-footer span {
+    font-size: 16px;
+    color: #0074D9;
+    font-weight: bold;
 }

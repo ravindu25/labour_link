@@ -156,7 +156,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     </div>
     <div class="profile-info">
         <h1><?=$fullName?></h1>
-        <div class="subheading">WORKER BIO</div>
+        <div class="subheading">Worker Bio</div>
         <div class="details-row">
             Category :
             <div class="worker-type-badge">
@@ -165,7 +165,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
             <div class="worker-type-badge">
                 <h5>Plumber</h5>
             </div>
-            <div class='worker-card-location-row'>
+            <div class='worker-location'>
                 Location : <i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i> <b><?=$city?></b>
             </div>
             <?php
@@ -252,16 +252,25 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
         </div>
     </div>
 </div>
-<div class="projects-container">
+<div class="feedbacks-container">
     <div class="subheading">CUSTOMER FEEDBACK</div>
     <div class="details-row">
-        <div class="review">
-            "John is a fantastic web developer. He is easy to work with and produces high-quality work. Highly recommend!"
-            <p>- Jane Smith</p>
+        <div class="feedback">
+            <div class="feedback-body">
+                <p>"John is a fantastic web developer. He is easy to work with and produces high-quality work. Highly recommend!"</p>
+            </div>
+            <div class="feedback-footer">
+                <span> - Jane Smith</span>
+            </div>
         </div>
-        <div class="review">
-            "John helped me build a beautiful and functional website for my business. He was able to take my vision and turn it into a reality. I couldn't be happier with the end result."
-            <p>- Bob Johnson</p>
+        <div class="feedback">
+            <div class="feedback-body">
+                <p>"John helped me build a beautiful and functional website for my business. He was able to take my vision
+                    and turn it into a reality. I couldn't be happier with the end result."</p>
+            </div>
+            <div class="feedback-footer">
+                <span>- Bob Johnson</span>
+            </div>
         </div>
     </div>
 </div>
