@@ -154,26 +154,38 @@
         <div class="worker-card-container" id="top-worker-card-container">
             <?php
                 $sql_get_workers = "select * from User inner join Worker on User.User_ID = Worker.Worker_ID";
+                $sql_get_workers_on_location = "select * from User inner join Worker on User.User_ID = Worker.Worker_ID";
 
                 if($workerType === 'plumber') {
                     $sql_get_workers = $sql_get_workers . " inner join Plumber ON Worker.Worker_ID = Plumber.Plumber_ID";
+                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Plumber ON Worker.Worker_ID = Plumber.Plumber_ID";
                 } else if($workerType === 'carpenter'){
                     $sql_get_workers = $sql_get_workers . " inner join Carpenter ON Worker.Worker_ID = Carpenter.Carpenter_ID";
+                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Carpenter ON Worker.Worker_ID = Carpenter.Carpenter_ID";
                 } else if($workerType === 'electrician'){
                     $sql_get_workers = $sql_get_workers . " inner join Electrician ON Worker.Worker_ID = Electrician.Electrician_ID";
+                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Electrician ON Worker.Worker_ID = Electrician.Electrician_ID";
                 } else if($workerType === 'painter'){
                     $sql_get_workers = $sql_get_workers . " inner join Painter ON Worker.Worker_ID = Painter.Painter_ID";
+                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Painter ON Worker.Worker_ID = Painter.Painter_ID";
                 } else if($workerType === 'mason'){
                     $sql_get_workers = $sql_get_workers . " inner join Mason ON Worker.Worker_ID = Mason.Mason_ID";
+                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Mason ON Worker.Worker_ID = Mason.Mason_ID";
                 } else if($workerType === 'janitor'){
                     $sql_get_workers = $sql_get_workers . " inner join Janitor ON Worker.Worker_ID = Janitor.Janitor_ID";
+                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Janitor ON Worker.Worker_ID = Janitor.Janitor_ID";
                 } else if($workerType === 'mechanic'){
                     $sql_get_workers = $sql_get_workers . " inner join Mechanic ON Worker.Worker_ID = Mechanic.Mechanic_ID";
+                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Mechanic ON Worker.Worker_ID = Mechanic.Mechanic_ID";
                 } else if($workerType === 'gardener'){
                     $sql_get_workers = $sql_get_workers . " inner join Gardener ON Worker.Worker_ID = Gardener.Gardener_ID";
+                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Gardener ON Worker.Worker_ID = Gardener.Gardener_ID";
                 }
 
                 $sql_get_workers = $sql_get_workers . " ORDER BY Worker.Current_Rating DESC LIMIT 4";
+                $sql_get_workers_on_location = $sql_get_workers_on_location . " LIMIT 4";
+
+                
 
                 $result = $conn->query($sql_get_workers);
 
@@ -263,116 +275,93 @@
     <div class="worker-section">
         <h1 class="worker-section-title">Workers nearby</h1>
         <div class="worker-card-container">
-            <div class="worker-card">
-                <h1 class="worker-card-title">Saman Gunawardhana</h1>
-                <div class="worker-card-star-container">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half-stroke"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    &nbsp;&nbsp;<b>2.5</b>
-                </div>
-                <div class="worker-image">
-                    <img src="../assets/worker/profile-images/worker-1.jpg" alt="worker-profile">
-                </div>
-                <div class="worker-card-location-row">
-                    <h3><i class="fa-solid fa-location-dot" style="color: var(--primary-color)"></i>&nbsp;&nbsp;Negombo</h3>
-                </div>
-                <div class="worker-card-types-row">
-                    <div class="worker-type-badge">
-                        <h5>Electrician</h5>
-                    </div>
-                    <div class="worker-type-badge">
-                        <h5>Plumber</h5>
-                    </div>
-                </div>
-                <div class="worker-card-button-container">
-                    <button type="button" class="view-profile-button">View Profile</button>
-                    <button type="button" class="booking-button">Book now!</button>
-                </div>
-            </div>
-            <div class="worker-card">
-                <h1 class="worker-card-title">Sunil Perera</h1>
-                <div class="worker-card-star-container">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half-stroke"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    &nbsp;&nbsp; 2.5
-                </div>
-                <div class="worker-image">
-                    <img src="../assets/worker/profile-images/worker-1.jpg" alt="worker-profile">
-                </div>
-                <div class="worker-card-location-row">
-                    <h3><i class="fa-solid fa-location-dot" style="color: var(--primary-color)"></i>&nbsp;&nbsp;Colombo</h3>
-                </div>
-                <div class="worker-card-types-row">
-                    <div class="worker-type-badge">
-                        <h5>Electrician</h5>
-                    </div>
-                </div>
-                <div class="worker-card-button-container">
-                    <button type="button" class="view-profile-button">Profile</button>
-                    <button type="button" class="booking-button">Book now!</button>
-                </div>
-            </div>
-            <div class="worker-card">
-                <h1 class="worker-card-title">Sunith Hettiarachchi</h1>
-                <div class="worker-card-star-container">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half-stroke"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    &nbsp;&nbsp; 2.5
-                </div>
-                <div class="worker-image">
-                    <img src="../assets/worker/profile-images/worker-1.jpg" alt="worker-profile">
-                </div>
-                <div class="worker-card-location-row">
-                    <h3><i class="fa-solid fa-location-dot" style="color: var(--primary-color)"></i>&nbsp;&nbsp;Matara</h3>
-                </div>
-                <div class="worker-card-types-row">
-                    <div class="worker-type-badge">
-                        <h5>Electrician</h5>
-                    </div>
-                    <div class="worker-type-badge">
-                        <h5>Mason</h5>
-                    </div>
-                </div>
-                <div class="worker-card-button-container">
-                    <button type="button" class="view-profile-button">Profile</button>
-                    <button type="button" class="booking-button">Book now!</button>
-                </div>
-            </div>
-            <div class="worker-card">
-                <h1 class="worker-card-title">Dammika Kumara</h1>
-                <div class="worker-card-star-container">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star-half-stroke"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    &nbsp;&nbsp; 2.5
-                </div>
-                <div class="worker-image">
-                    <img src="../assets/worker/profile-images/worker-1.jpg" alt="worker-profile">
-                </div>
-                <div class="worker-card-location-row">
-                    <h3><i class="fa-solid fa-location-dot" style="color: var(--primary-color)"></i>&nbsp;&nbsp;Kalutara</h3>
-                </div>
-                <div class="worker-card-types-row">
-                    <div class="worker-type-badge">
-                        <h5>Electrician</h5>
-                    </div>
-                </div>
-                <div class="worker-card-button-container">
-                    <button type="button" class="view-profile-button">Profile</button>
-                    <button type="button" class="booking-button">Book now!</button>
-                </div>
-            </div>
+            <?php
+                $result = $conn->query($sql_get_workers_on_location);
+
+                if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()){
+                        /*
+                         * Creating the worker entity
+                         */
+
+                        $userId = $row['User_ID'];
+                        $fullName = $row['First_Name'] . " " . $row['Last_Name'];
+                        $email = $row['Email'];
+                        $contactNum = $row['Contact_No'];
+                        $nic = $row['NIC'];
+                        $dob = $row['DOB'];
+                        $address = $row['User_Address'];
+                        $city = $row['City'];
+                        $currentRating = $row['Current_Rating'];
+
+                        $imageNumber = rand(1, 4);
+                        $imageUrl = "../assets/worker/profile-images/worker-$imageNumber.jpg";
+
+                        $ratingHtml = null;
+                        $tempRating = 0;
+
+                        while($tempRating < $currentRating){
+                            if($tempRating + 1 <= $currentRating){
+                                $ratingHtml = $ratingHtml . "<i class='fa-solid fa-star'></i>";
+                                $tempRating += 1;
+                            } else if ($tempRating + 0.5 <= $currentRating){
+                                $ratingHtml = $ratingHtml . "<i class='fa-solid fa-star-half-stroke'></i>";
+                                $tempRating += 0.5;
+                            } else {
+                                break;
+                            }
+                        }
+
+                        $tempRating = ceil($tempRating);
+
+                        while($tempRating < 5){
+                            $ratingHtml = $ratingHtml . "<i class='fa-regular fa-star'></i>";
+                            $tempRating += 1;
+                        }
+
+                        echo "
+                            <div class='worker-card'>
+                                <h1 class='worker-card-title'>"
+                                    . ucfirst($fullName) .
+                                "</h1>
+                                <div class='worker-card-star-container'>
+                                    $ratingHtml
+                                    &nbsp;&nbsp;<b>$currentRating </b> 
+                                </div>
+                                <div class='worker-image'>
+                                    <img src='$imageUrl' alt='worker-profile'>
+                                </div>
+                                <div class='worker-card-location-row'>
+                                    <h3><i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i>&nbsp;&nbsp;"
+                                        . ucfirst($city) .
+                                    "</h3>
+                                </div> 
+                                <div class='worker-card-types-row'>
+                                    <div class='worker-type-badge'>
+                                        <h5>Electrician</h5>
+                                    </div>
+                                    <div class='worker-type-badge'>
+                                        <h5>Plumber</h5>
+                                    </div>
+                                </div>
+                                <div class='worker-card-button-container'>
+                                    <a href='view-worker-profile.php?workerId=$userId'>
+                                    <button type='button' class='view-profile-button'>View Profile</button>
+                                    </a>
+                                    <button type='button' class='booking-button'>Book now!</button>
+                                </div>
+                            </div>
+                        "; 
+                    }
+                }
+
+                $conn->close();
+
+
+                
+            ?>
+         
+        
         </div>
         <div class="button-container">
             <button type="button" class="more-button">Load more&nbsp;
@@ -444,5 +433,11 @@
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/worker/index.js" type="text/javascript"></script>
+
+<script>
+    //Add location services
+
+    
+</script>
 </body>
 </html>
