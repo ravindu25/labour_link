@@ -14,6 +14,7 @@
       function getLocation() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(showPosition, showError);
+          document.getElementById("curr_location").innerHTML = "Getting your location...";
         } else {
           alert("Geolocation is not supported by this browser.");
         }
@@ -24,9 +25,14 @@
         console.log("Longitude: " + position.coords.longitude);
 
         var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        document.getElementById("curr_location").innerHTML = latLng;
         var geocoder = new google.maps.Geocoder();
-        var location = "7 PM Fernando Mawatha";
+
         
+        var location = "7 PM Fernando Mawatha";
+
+
+
 
         geocoder.geocode({'address': location}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
@@ -34,6 +40,7 @@
             if (results[0]) {
               console.log("Formatted address: ", results[0].formatted_address);
               formatted_location = results[0].formatted_address;
+             
               var moratuwaLatLng = results[0].geometry.location;
               calculateDistance(latLng, moratuwaLatLng);
             } else {
@@ -45,7 +52,11 @@
             alert("Geocoder failed due to: " + status);
           }
         });
+
+
+        
       }
+
 
       function calculateDistance(origin, destination) {
         var distanceService = new google.maps.DistanceMatrixService();
@@ -74,7 +85,7 @@
   </head>
   <body>
     <h1>Get Current Location using Google Maps API</h1>
-    <p>Your current location is:</p>
+    <span>Your current location is: </span><span id="curr_location"></span>
     <p id="location"></p>
   </body>
 </html>
