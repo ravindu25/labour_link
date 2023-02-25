@@ -209,7 +209,7 @@ a{
 .nav-link-container{
     display: flex;
     align-items: center;
-    margin-left: 5%;
+    margin-left: 80px;
 }
 
 .nav-link-items{
@@ -218,6 +218,7 @@ a{
 
 .nav-links{
     color: #FFF;
+    padding-inline: 20px;
 }
 
 .nav-links:hover{

@@ -156,7 +156,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     </div>
     <div class="profile-info">
         <h1><?=$fullName?></h1>
-        <div class="subheading">Worker Bio</div>
+        <div class="subheading">WORKER BIO</div>
         <div class="details-row">
             Category :
             <div class="worker-type-badge">
@@ -270,6 +270,23 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
             </div>
             <div class="feedback-footer">
                 <span>- Bob Johnson</span>
+            </div>
+        </div>
+        <div class="feedback">
+            <div class="feedback-body">
+                <p>"Professional, reliable, and great communication throughout project.!"</p>
+            </div>
+            <div class="feedback-footer">
+                <span> - Ashen Gunarathne</span>
+            </div>
+        </div>
+        <div class="feedback">
+            <div class="feedback-body">
+                <p>"I hired Carpenter Rushin to build custom bookshelves in my living room, and I couldn't be happier with the results.
+                    The craftsmanship is impeccable and the attention to detail is outstanding. ."</p>
+            </div>
+            <div class="feedback-footer">
+                <span>- Heshan Samaranayake</span>
             </div>
         </div>
     </div>
