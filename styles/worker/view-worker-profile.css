@@ -3,6 +3,7 @@
     flex-direction: row;
     align-items: center;
     margin: 20px;
+    padding-bottom: 10px;
 }
 
 .profile-picture img {
@@ -134,7 +135,7 @@ p {
 .projects-container {
     padding-right: 100px;
     padding-left: 70px;
-    padding-top: 60px;
+    padding-top: 50px;
     margin: 20px;
 }
 
@@ -158,6 +159,7 @@ p {
     width: 100%;
     margin-top: 7px;
 }
+
 .project-img-container {
     width: 150px;
     height: 150px;
@@ -198,6 +200,7 @@ p {
     padding-right: 100px;
     padding-left: 70px;
     padding-top: 60px;
+    padding-bottom: 50px;
     margin: 20px;
 }
 
@@ -205,8 +208,9 @@ p {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 300px;
-    margin: 20px;
+    width: 400px;
+    margin-right: 25px;
+    padding: 17px;
     border: 1px solid #ccc;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
@@ -214,16 +218,26 @@ p {
 .feedback-body {
     flex-grow: 1;
     padding: 10px;
+    background-color: #2B3B96;
 }
 
 .feedback-body p {
     margin: 0;
+    font-size: 20px;
+    color: white;
 }
 
 .feedback-footer {
     padding: 10px;
     background-color: #f0f0f0;
     text-align: center;
+    font-size: 18px;
+    color: #102699;
+    border-bottom: 1px solid #102699;
+    border-right: 1px solid #102699;
+    border-left: 1px solid #102699;
+    border-bottom-left-radius: 9px;
+    border-bottom-right-radius: 9px;
 }
 
 
