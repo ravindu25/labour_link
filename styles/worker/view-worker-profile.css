@@ -66,7 +66,7 @@ p {
     position: relative;
     font-size: 22px;
     font-family: Poppins;
-    color: #9d9d9d;
+    color: #7C7C7C;
 }
 
 .subheading::after {
@@ -113,7 +113,7 @@ p {
     border-radius: 18px;
     background-color: var(--primary-color);
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
-    height: 60px;
+    height: 70px;
     width: 200px;
     margin-top: 30px;
     margin-left: 40px;
@@ -191,6 +191,21 @@ p {
     line-height: 1.4;
 }
 
+/* styles for navigation buttons */
+.details-row .nav-button {
+    background-color: #102699;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* hide left button initially */
+.details-row .nav-left-button {
+    display: none;
+}
+
 .feedbacks-container {
     /* display: flex;
     flex-wrap: wrap; */
@@ -204,6 +219,15 @@ p {
     margin: 20px;
 }
 
+/*button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    background-color: #102699;
+    color: white
+}*/
+
 .feedback {
     display: flex;
     flex-direction: column;
@@ -213,6 +237,7 @@ p {
     padding: 17px;
     border: 1px solid #ccc;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    background-color: lightsteelblue;
 }
 
 .feedback-body {

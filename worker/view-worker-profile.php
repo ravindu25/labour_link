@@ -226,7 +226,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     <div class="star-container">
                         <p>
                             <?=$ratingHtml?>
-                            2.5
+                            2.7
                         </p>
                     </div>
                 </div>
@@ -239,7 +239,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
                 </div>
                 <div class="project-description">
-                    <p> Installing pipes, fixtures, and other components to create a new plumbing system in a building.
+                    <p>Installing pipes, fixtures, and other components to create a new plumbing system in a building.
                     </p>
                     <div class="star-container">
                         <p>
@@ -250,6 +250,48 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                 </div>
             </div>
         </div>
+        <div class="project-container">
+            Maintenance of  systems
+            <div class="project">
+                <div class="project-img-container">
+                    <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
+                </div>
+                <div class="project-description">
+                    <p>Regular inspections and maintenance to ensure that plumbing systems are functioning properly and to prevent
+                        issues from developing.
+                    </p>
+                    <div class="star-container">
+                        <p>
+                            <?=$ratingHtml?>
+                            2.7
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-container">
+            Repair of existing systems
+            <div class="project">
+                <div class="project-img-container">
+                    <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
+                </div>
+                <div class="project-description">
+                    <p>This involves identifying and fixing issues with existing plumbing systems, such as leaky pipes, clogged drains, or
+                        malfunctioning fixtures.
+                    </p>
+                    <div class="star-container">
+                        <p>
+                            <?=$ratingHtml?>
+                            2.7
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navigation-container">
+        <button class="arrow-button left-arrow">&lt;</button>
+        <button class="arrow-button right-arrow">&gt;</button>
     </div>
 </div>
 <div class="feedbacks-container">
@@ -291,7 +333,6 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
         </div>
     </div>
 </div>
-
 <footer class="footer">
     <div class="footer-row">
         <div class="footer-column">
@@ -353,5 +394,6 @@ echo "<script>
         let workerID = '$workerID';
     </script>";
 ?>
+<script src="../scripts/worker/view-worker-profile.js" type="text/javascript"></script>
 </body>
 </html>
