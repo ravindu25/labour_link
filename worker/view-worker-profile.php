@@ -192,7 +192,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     </div>
 </div>
 <div class="projects-container">
-    <div class="subheading"> FEW PREVIOUSLY COMPLETED PROJECTS</div>
+    <div class="subheading"> PREVIOUSLY COMPLETED PROJECTS</div>
     <div class="details-row">
         <div class="project-container">
             Repair of existing systems
@@ -394,6 +394,8 @@ echo "<script>
         let workerID = '$workerID';
     </script>";
 ?>
+<script src="../scripts/modals.js" type="text/javascript"></script>
+<script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/worker/view-worker-profile.js" type="text/javascript"></script>
 </body>
 </html>
