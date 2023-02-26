@@ -1,28 +1,30 @@
-const projectContainers = document.querySelectorAll('.project-container');
-const leftButton = document.querySelector('.left-button');
-const rightButton = document.querySelector('.right-button');
-const containerWidth = projectContainers[0].offsetWidth + 20; // 20 is the margin-right for project-container
-const containerMax = projectContainers.length - 1;
-let containerIndex = 0;
+const container = document.querySelector('.details-row');
+const projects = container.querySelectorAll('.project-container');
+const projectWidth = projects[0].offsetWidth;
+const numProjects = projects.length;
 
-function moveContainer(direction) {
-    // hide the leftmost project-container if moving right
-    if (direction === 'right' && containerIndex > 0) {
-        projectContainers[containerIndex - 1].style.display = 'none';
-    }
-    // unhide the leftmost project-container if moving left
-    if (direction === 'left' && containerIndex >= 3) {
-        projectContainers[containerIndex - 3].style.display = 'flex';
-    }
-    // move the project-containers in the desired direction
-    if (direction === 'left' && containerIndex > 0) {
-        containerIndex--;
-        document.querySelector('.details-row').style.transform = `translateX(-${containerIndex * containerWidth}px)`;
-    } else if (direction === 'right' && containerIndex < containerMax) {
-        containerIndex++;
-        document.querySelector('.details-row').style.transform = `translateX(-${containerIndex * containerWidth}px)`;
+let currentIndex = 0;
+
+// Function to handle clicking the left arrow
+function handleLeftArrowClick() {
+    if (currentIndex > 0) {
+        projects[currentIndex + 2].classList.remove('hidden');
+        projects[currentIndex].classList.add('hidden');
+        currentIndex -= 1;
     }
 }
 
-leftButton.addEventListener('click', () => moveContainer('left'));
-rightButton.addEventListener('click', () => moveContainer('right'));
+// Function to handle clicking the right arrow
+function handleRightArrowClick() {
+    if (currentIndex < numProjects - 3) {
+        projects[currentIndex].classList.add('hidden');
+        projects[currentIndex + 3].classList.remove('hidden');
+        currentIndex += 1;
+    }
+}
+
+// Add event listeners to the arrow buttons
+const leftArrow = document.querySelector('.left-arrow');
+const rightArrow = document.querySelector('.right-arrow');
+leftArrow.addEventListener('click', handleLeftArrowClick);
+rightArrow.addEventListener('click', handleRightArrowClick);
