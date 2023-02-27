@@ -350,13 +350,16 @@
                                     </a>
                                     <button type='button' class='booking-button'>Book now!</button>
                                 </div>
+                                
+
+
                             </div>
                         "; 
                     }
                 }
 
                 $conn->close();
-
+                
 
                 
             ?>
@@ -368,6 +371,8 @@
                 <i class="fa-solid fa-spinner"></i></button>
         </div>
     </div>
+    <span id="test-location"></span>
+    
 </section>
 <footer class="footer">
     <div class="footer-row">
@@ -434,10 +439,96 @@
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/worker/index.js" type="text/javascript"></script>
 
-<script>
-    //Add location services
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLM5mz57abPBtltxNRDTnsovOtHYXZyCo&callback=initMap" async defer></script>
+    <script>
+    function get_distance(from_location){
+        var formatted_location = "";
+        var distance_to_return = 0;
+      function initMap() {
+        console.log("Google Maps API loaded");
+        getLocation();
+      }
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        //   document.getElementById("curr_location").innerHTML = "Getting your location...";
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      }
+
+      function showPosition(position) {
+        console.log("Latitude: " + position.coords.latitude);
+        console.log("Longitude: " + position.coords.longitude);
+
+        var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        // document.getElementById("curr_location").innerHTML = latLng;
+        var geocoder = new google.maps.Geocoder();
+
+        
+        var location = from_location;
+
+
+
+
+        geocoder.geocode({'address': location}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            console.log("Geocoder results: ", results);
+            if (results[0]) {
+              console.log("Formatted address: ", results[0].formatted_address);
+              formatted_location = results[0].formatted_address;
+             
+              var moratuwaLatLng = results[0].geometry.location;
+              calculateDistance(latLng, moratuwaLatLng);
+            } else {
+              console.log("No results found");
+              alert("No results found");
+            }
+          } else {
+            console.log("Geocoder failed due to: ", status);
+            alert("Geocoder failed due to: " + status);
+          }
+        });
+
+
+        
+      }
+
+
+      function calculateDistance(origin, destination) {
+        var distanceService = new google.maps.DistanceMatrixService();
+        distanceService.getDistanceMatrix({
+          origins: [origin],
+          destinations: [destination],
+          travelMode: google.maps.TravelMode.DRIVING,
+          unitSystem: google.maps.UnitSystem.METRIC
+        }, function(response, status) {
+          if (status === google.maps.DistanceMatrixStatus.OK) {
+            var distance = response.rows[0].elements[0].distance.value / 1000;
+            console.log("Distance to location: " + distance + " km");
+            document.getElementById("test-location").innerHTML = "Distance to "+ formatted_location +": " + distance + " km";
+            distance_to_return = distance;
+          } else {
+            console.log("Failed to calculate distance due to: ", status);
+            alert("Failed to calculate distance due to: " + status);
+          }
+        });
+      }
+
+      function showError(error) {
+        console.log("Geolocation error: ", error);
+        alert("Geolocation error: " + error.message);
+      }
+      return distance_to_return;
+
+    }
+
+    get_distance("Moratuwa");
     
-</script>
+        </script>
+
+
 </body>
 </html>
