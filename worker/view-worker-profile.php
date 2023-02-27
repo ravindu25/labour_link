@@ -156,7 +156,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     </div>
     <div class="profile-info">
         <h1><?=$fullName?></h1>
-        <div class="subheading">Worker Bio</div>
+        <div class="subheading">WORKER BIO</div>
         <div class="details-row">
             Category :
             <div class="worker-type-badge">
@@ -185,14 +185,14 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     Saman has a reputation for being reliable, efficient, and always willing to go the extra mile to
                     ensure that clients are satisfied with his plumbing services. </p>
             </div>
-            <div class="button-container">
+            <a href='book-worker.php'>
                 <button type='button' class='booking-button'>Book now!</button>
-            </div>
+            </a>
         </div>
     </div>
 </div>
 <div class="projects-container">
-    <div class="subheading"> FEW PREVIOUSLY COMPLETED PROJECTS</div>
+    <div class="subheading"> PREVIOUSLY COMPLETED PROJECTS</div>
     <div class="details-row">
         <div class="project-container">
             Repair of existing systems
@@ -226,7 +226,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     <div class="star-container">
                         <p>
                             <?=$ratingHtml?>
-                            2.5
+                            2.7
                         </p>
                     </div>
                 </div>
@@ -239,7 +239,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
                 </div>
                 <div class="project-description">
-                    <p> Installing pipes, fixtures, and other components to create a new plumbing system in a building.
+                    <p>Installing pipes, fixtures, and other components to create a new plumbing system in a building.
                     </p>
                     <div class="star-container">
                         <p>
@@ -250,7 +250,51 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                 </div>
             </div>
         </div>
+        <!--
+        <div class="project-container">
+            Maintenance of  systems
+            <div class="project">
+                <div class="project-img-container">
+                    <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
+                </div>
+                <div class="project-description">
+                    <p>Regular inspections and maintenance to ensure that plumbing systems are functioning properly and to prevent
+                        issues from developing.
+                    </p>
+                    <div class="star-container">
+                        <p>
+                            <?=$ratingHtml?>
+                            2.7
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="project-container">
+            Repair of existing systems
+            <div class="project">
+                <div class="project-img-container">
+                    <img class="project-img" src="../assets/job-card-image/carpentry-image.jpg"></img>
+                </div>
+                <div class="project-description">
+                    <p>This involves identifying and fixing issues with existing plumbing systems, such as leaky pipes, clogged drains, or
+                        malfunctioning fixtures.
+                    </p>
+                    <div class="star-container">
+                        <p>
+                            <?=$ratingHtml?>
+                            2.7
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
     </div>
+    <!-- for horizontal navigation of project containers-->
+    <!-- <div class="navigation-container">
+        <button class="arrow-button left-arrow">&lt;</button>
+        <button class="arrow-button right-arrow">&gt;</button>
+    </div> -->
 </div>
 <div class="feedbacks-container">
     <div class="subheading">CUSTOMER FEEDBACK</div>
@@ -272,9 +316,25 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                 <span>- Bob Johnson</span>
             </div>
         </div>
+        <div class="feedback">
+            <div class="feedback-body">
+                <p>"Professional, reliable, and great communication throughout project.!"</p>
+            </div>
+            <div class="feedback-footer">
+                <span> - Ashen Gunarathne</span>
+            </div>
+        </div>
+        <div class="feedback">
+            <div class="feedback-body">
+                <p>"I hired Carpenter Rushin to build custom bookshelves in my living room, and I couldn't be happier with the results.
+                    The craftsmanship is impeccable and the attention to detail is outstanding. ."</p>
+            </div>
+            <div class="feedback-footer">
+                <span>- Heshan Samaranayake</span>
+            </div>
+        </div>
     </div>
 </div>
-
 <footer class="footer">
     <div class="footer-row">
         <div class="footer-column">
@@ -336,5 +396,8 @@ echo "<script>
         let workerID = '$workerID';
     </script>";
 ?>
+<script src="../scripts/modals.js" type="text/javascript"></script>
+<script src="../scripts/index.js" type="text/javascript"></script>
+<script src="../scripts/worker/view-worker-profile.js" type="text/javascript"></script>
 </body>
 </html>
