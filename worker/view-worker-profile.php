@@ -185,9 +185,9 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     Saman has a reputation for being reliable, efficient, and always willing to go the extra mile to
                     ensure that clients are satisfied with his plumbing services. </p>
             </div>
-            <div class="button-container">
+            <a href='book-worker.php'>
                 <button type='button' class='booking-button'>Book now!</button>
-            </div>
+            </a>
         </div>
     </div>
 </div>
@@ -250,6 +250,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                 </div>
             </div>
         </div>
+        <!--
         <div class="project-container">
             Maintenance of  systems
             <div class="project">
@@ -269,7 +270,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                 </div>
             </div>
         </div>
-        <div class="project-container">
+         <div class="project-container">
             Repair of existing systems
             <div class="project">
                 <div class="project-img-container">
@@ -287,12 +288,13 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
-    <div class="navigation-container">
+    <!-- for horizontal navigation of project containers-->
+    <!-- <div class="navigation-container">
         <button class="arrow-button left-arrow">&lt;</button>
         <button class="arrow-button right-arrow">&gt;</button>
-    </div>
+    </div> -->
 </div>
 <div class="feedbacks-container">
     <div class="subheading">CUSTOMER FEEDBACK</div>
@@ -394,6 +396,8 @@ echo "<script>
         let workerID = '$workerID';
     </script>";
 ?>
+<script src="../scripts/modals.js" type="text/javascript"></script>
+<script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/worker/view-worker-profile.js" type="text/javascript"></script>
 </body>
 </html>

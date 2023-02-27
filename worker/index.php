@@ -247,7 +247,9 @@
                                     <a href='view-worker-profile.php?workerId=$userId'>
                                     <button type='button' class='view-profile-button'>View Profile</button>
                                     </a>
+                                    <a href='book-worker.php'>
                                     <button type='button' class='booking-button'>Book now!</button>
+                                    </a>
                                 </div>
                             </div>
                         ";
