@@ -1,22 +1,240 @@
+.create-feedback-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) ;
+    margin: 16px;
+    min-width: 65vw;
+    max-height: 90vh;
+    color: #102699;
+    background-color: #FFF;
+    border-radius: 16px;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.create-feedback-page{
+    margin: 32px 48px;
+}
+
+.feedback-cards-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    justify-content: center;
+}
+
+.pagination-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    margin: 4px 8px;
+    color: var(--primary-color);
+    background-color: var(--primary-background-shade-color);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.pagination-card:active{
+    transform: scale(.96);
+}
+
+.pagination-card-disabled{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    margin: 4px 8px;
+    color: var(--grey-color);
+    background-color: var(--grey-color-shade);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+}
+
+.rating-container-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.rating-container-text{
+    text-align: left;
+    margin-left: 16px;
+}
+
+.rating-container-text h5{
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.rating-container-text p{
+    margin: 0;
+    color: var(--dark-color);
+}
+
+.rating-container-rate{
+    display: flex;
+}
+
+.feedback-star-container{
+    font-size: 48px;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.feedback-star-container:active{
+    transform: scale(.96);
+}
+
+.question-container-row{
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: left;*/
+    margin-top: 32px;
+}
+
+.question-container{
+    /*max-width: 60%;*/
+    text-align: left;
+    margin-left: 16px;
+}
+
+.question-container h5{
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0;
+    color: var(--dark-color);
+}
+
+.question-answer-container{
+    display: flex;
+    justify-content: stretch;
+}
+
+.feedback-answer-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 4px 8px;
+    padding: 8px 0;
+    text-align: center;
+    background-color: var(--primary-background-shade-color);
+    border:3px solid var(--primary-background-shade-color);
+    border-radius: 12px;
+}
+
+.feedback-answer-input{
+    display: none;
+}
+
+.feedback-answer-input:checked + .feedback-answer-container{
+    border:3px solid var(--primary-color);
+}
+
+.feedback-answer-container h5{
+    margin: 4px 10px;
+    font-size: 24px;
+    font-family: 'Inter', sans-serif;
+    font-weight: normal;
+}
+
+.written-feedback-row h1{
+    margin: 32px 0;
+    margin-left: 16px;
+    font-weight: normal;
+}
+
+.written-feedback-row textarea{
+    outline: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    resize: none;
+    width: calc(100% - 24px);
+    padding: 12px;
+    border: 3px solid var(--primary-background-color);
+    border-radius: 5px;
+    font-size: 24px;
+    font-family: 'Inter', sans-serif;
+}
+
+.create-feedback-button-container{
+    margin: 24px 0;
+    text-align: center;
+}
+
+.primary-button{
+    outline: none;
+    border: 3px solid var(--primary-color);
+    padding: 12px 18px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: var(--primary-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.secondary-button{
+    outline: none;
+    border: 3px solid var(--primary-color);
+    padding: 12px 18px;
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: white;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+
+.primary-button:active, .secondary-button:active{
+    transform: scale(.96);
+}
+
+.disabled-button{
+    color: var(--grey-color);
+    border: 3px solid var(--grey-color);
+    background-color: white;
+    transition: none;
+}
+
+.disabled-button:active{
+    transform: none;
+}
+
 .main-section{
     background-color: var(--primary-background-shade-color);
 }
 
-.main-heading{
+.main-heading, .create-feedback-title{
     padding: 12px 24px;
     color: var(--primary-color);
     background-color: var(--primary-shade-color);
     border-radius: 12px;
 }
 
-.main-heading h1{
+.main-heading h1, .create-feedback-title h1{
     text-align: center;
     font-family: 'Inter', sans-serif;
     font-size: 40px;
     font-weight: normal;
 }
 
-.main-heading h5 {
+.main-heading h5, .create-feedback-title h5{
     margin: 0;
     text-align: right;
     font-size: 18px;
@@ -36,11 +254,6 @@
     font-weight: normal;
 }
 
-.new-feedback button{
-    color: #FFF;
-    border-color: var(--primary-color);
-    background-color: var(--primary-color);
-}
 
 .recent-feedback h1{
     color: var(--primary-color);
@@ -85,24 +298,47 @@
     border: 3px solid var(--success-color);
 }
 
+.feedback-booking-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 190px;
+    margin: 4px 8px;
+    padding: 24px;
+    color: var(--primary-color);
+    border: 3px solid var(--primary-background-color);
+    background-color: white;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.feedback-booking-card:active{
+    transform: scale(.98);
+}
+
+.feedback-booking-card-selected{
+    border: 3px solid var(--primary-color);
+}
+
 .card-text{
     text-align: left;
 }
 
-.booking-card h3{
+.booking-card, .feedback-booking-card h3{
     margin: 12px 0;
     font-size: 24px;
     text-align: center;
 }
 
-.booking-card p{
+.booking-card, .feedback-booking-card p{
     margin: 0;
     color: var(--dark-color);
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
 }
 
-.booking-card h4{
+.booking-card, .feedback-booking-card h4{
     margin: 8px 0;
     color: var(--dark-color);
     font-size: 24px;

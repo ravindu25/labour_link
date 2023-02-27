@@ -17,7 +17,7 @@
     --warning-color: #FF5B19;
     --warning-dark-color: #9A2D01;
     --grey-color: #978C87;
-    --grey-color-shade: #D0CFCE;
+    --grey-color-shade: #E1E5E8;
 }
 
 body{
@@ -280,6 +280,28 @@ a{
 
 .nav-link-items-button:active{
     transform: scale(.96);
+}
+
+.toolip{
+    position: relative;
+}
+
+.tooltiptext{
+    position: absolute;
+    top: -72px;
+    right: 12px;
+    font-size: 14px;
+    text-align: center;
+    color: var(--primary-color);
+    background-color: white;
+    box-shadow: var(--grey-color-shade) 0px 7px 29px 0px;
+    padding: 8px 4px;
+    border-radius: 8px;
+    visibility: hidden;
+}
+
+.toolip:hover .tooltiptext{
+    visibility: visible;
 }
 
 /* Styling for tables */
