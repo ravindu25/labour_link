@@ -320,6 +320,7 @@
                             $ratingHtml = $ratingHtml . "<i class='fa-regular fa-star'></i>";
                             $tempRating += 1;
                         }
+                     
 
                         echo "
                             <div class='worker-card'>
@@ -352,11 +353,41 @@
                                     </a>
                                     <button type='button' class='booking-button'>Book now!</button>
                                 </div>
+                                <span id='location-$userId'></span>
+                                <script>
+                                    addEventListener('load', function(){
+                                        
+                                        if (navigator.geolocation) {
+                                            navigator.geolocation.getCurrentPosition(function(position) {
+                                              var lat = position.coords.latitude;
+                                              var lng = position.coords.longitude;
+                                
+                                        
+                                              // Send location data to PHP backend
+                                              var xhttp = new XMLHttpRequest();
+                                              xhttp.onreadystatechange = function() {
+                                                if (this.readyState == 4 && this.status == 200) {
+                                                  document.getElementById('location-$userId').innerHTML = this.responseText;
+                                                }
+                                              };
+                                              xhttp.open('POST', 'http://localhost/labour_link/test_location.php', true);
+                                              xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                                              xhttp.send('lat=' + lat + '&lng=' + lng + '&to_location=' + '$city');
+                                            });
+                                          } else {
+                                            console.log('Geolocation is not supported by this browser.');
+                                          }
+                                        
+
+
+                                    });
+                                </script>
                                 
 
 
                             </div>
                         "; 
+                        
                     }
                 }
 
@@ -432,6 +463,7 @@
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+
 <?php
     echo "<script>
         let workerType = '$workerType';
@@ -442,94 +474,6 @@
 <script src="../scripts/worker/index.js" type="text/javascript"></script>
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLM5mz57abPBtltxNRDTnsovOtHYXZyCo&callback=initMap" async defer></script>
-    <script>
-    function get_distance(from_location){
-        var formatted_location = "";
-        var distance_to_return = 0;
-      function initMap() {
-        console.log("Google Maps API loaded");
-        getLocation();
-      }
-
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition, showError);
-        //   document.getElementById("curr_location").innerHTML = "Getting your location...";
-        } else {
-          alert("Geolocation is not supported by this browser.");
-        }
-      }
-
-      function showPosition(position) {
-        console.log("Latitude: " + position.coords.latitude);
-        console.log("Longitude: " + position.coords.longitude);
-
-        var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        // document.getElementById("curr_location").innerHTML = latLng;
-        var geocoder = new google.maps.Geocoder();
-
-        
-        var location = from_location;
-
-
-
-
-        geocoder.geocode({'address': location}, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            console.log("Geocoder results: ", results);
-            if (results[0]) {
-              console.log("Formatted address: ", results[0].formatted_address);
-              formatted_location = results[0].formatted_address;
-             
-              var moratuwaLatLng = results[0].geometry.location;
-              calculateDistance(latLng, moratuwaLatLng);
-            } else {
-              console.log("No results found");
-              alert("No results found");
-            }
-          } else {
-            console.log("Geocoder failed due to: ", status);
-            alert("Geocoder failed due to: " + status);
-          }
-        });
-
-
-        
-      }
-
-
-      function calculateDistance(origin, destination) {
-        var distanceService = new google.maps.DistanceMatrixService();
-        distanceService.getDistanceMatrix({
-          origins: [origin],
-          destinations: [destination],
-          travelMode: google.maps.TravelMode.DRIVING,
-          unitSystem: google.maps.UnitSystem.METRIC
-        }, function(response, status) {
-          if (status === google.maps.DistanceMatrixStatus.OK) {
-            var distance = response.rows[0].elements[0].distance.value / 1000;
-            console.log("Distance to location: " + distance + " km");
-            document.getElementById("test-location").innerHTML = "Distance to "+ formatted_location +": " + distance + " km";
-            distance_to_return = distance;
-          } else {
-            console.log("Failed to calculate distance due to: ", status);
-            alert("Failed to calculate distance due to: " + status);
-          }
-        });
-      }
-
-      function showError(error) {
-        console.log("Geolocation error: ", error);
-        alert("Geolocation error: " + error.message);
-      }
-      return distance_to_return;
-
-    }
-
-    get_distance("Moratuwa");
-    
-        </script>
 
 
 </body>
