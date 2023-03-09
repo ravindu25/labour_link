@@ -80,7 +80,7 @@ function submitHousing(){
 
     for(let i = 0; i < jobElements.length; i++){
         if(jobElements[i].checked){
-            jobSelections.push(jobElements[i].value);
+            jobSelections.push(parseInt(jobElements[i].value));
         }
     }
 
@@ -90,7 +90,8 @@ function submitHousing(){
             body: JSON.stringify({
                 "customerid": userId,
                 "address": address,
-                "verified": "false"
+                "verified": "false",
+                "jobselection": jobSelections
             })
         }
     )

@@ -7,6 +7,7 @@
         $customerId = $postData['customerid'];
         $address = $postData['address'];
         $verified = $postData['verified'];
+        $jobSelection = $postData['jobselection'];
 
         $sql_create_housing = "INSERT INTO House(Customer_ID, Address, Verified) VALUES($customerId, '$address', $verified)";
 
