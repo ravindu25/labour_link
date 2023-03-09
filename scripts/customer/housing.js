@@ -35,7 +35,7 @@ function initAutocomplete(){
     autocomplete = new google.maps.places.Autocomplete(
         document.getElementById('place-autocomplete'),
         {
-            types: ['establishment'],
+            types: ['address'],
             componentRestrictions: {'country': ['LK']},
             fields: ['place_id', 'geometry', 'name']
         });
