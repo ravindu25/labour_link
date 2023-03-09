@@ -175,7 +175,6 @@
     top: 50%;
     transform: translate(-50%, -50%) ;
     padding: 12px 36px;
-    border: 1px solid var(--primary-color);
     color: #102699;
     background-color: #FFF;
     border-radius: 16px;
@@ -193,7 +192,6 @@
     top: 50%;
     transform: translate(-50%, -50%) ;
     padding: 12px 36px;
-    border: 1px solid var(--warning-dark-color);
     color: var(--warning-dark-color);
     background-color: #FFF;
     border-radius: 16px;
@@ -206,11 +204,7 @@
 }
 
 .failed-message-container h5{
-    font-size: 24px;
     font-weight: normal;
-    margin: 0;
-    margin-bottom: 12px;
-    margin-left: 34px;
 }
 
 .delete-booking-container{
