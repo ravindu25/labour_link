@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require_once('../db.php');
     // Check whether customer is logged in
     if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Customer') {
         header("Location: ../login.php");
@@ -48,41 +49,37 @@
     <div class="housing-create-page" id="housing-create-second-page">
         <h1>Select jobs that you need to complete</h1>
         <div class="housing-create-tasks-container">
-            <label>
-                <input type="checkbox" name="job-selection" value="job-1" class="job-selection-input" />
-                <div class="job-selection-container">
-                    <i class="fa-solid fa-1"></i>
-                    <h3>Build the foundation of the house</h3>
-                </div>
-            </label>
-            <label>
-                <input type="checkbox" name="job-selection" value="job-2" class="job-selection-input" />
-                <div class="job-selection-container">
-                    <i class="fa-solid fa-2"></i>
-                    <h3>Constructing the frame of the house, which includes the walls, roof, and floors</h3>
-                </div>
-            </label>
-            <label>
-                <input type="checkbox" name="job-selection" value="job-3" class="job-selection-input" />
-                <div class="job-selection-container">
-                    <i class="fa-solid fa-3"></i>
-                    <h3>Plumbing, electrical, and HVAC</h3>
-                </div>
-            </label>
-            <label>
-                <input type="checkbox" name="job-selection" value="job-4" class="job-selection-input" />
-                <div class="job-selection-container">
-                    <i class="fa-solid fa-4"></i>
-                    <h3>Interior finishes(flooring, cabinets, countertops, and paint)</h3>
-                </div>
-            </label>
-            <label>
-                <input type="checkbox" name="job-selection" value="job-5" class="job-selection-input" />
-                <div class="job-selection-container">
-                    <i class="fa-solid fa-5"></i>
-                    <h3>Exterior finishes(siding, roofing, and landscaping)</h3>
-                </div>
-            </label>
+            <?php
+                $sql_statement = 'SELECT * FROM Job_Type';
+
+                $result = $conn->query($sql_statement);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $jobId = $row['Job_Type_ID'];
+                        $description = $row['Description'];
+                        $numberIcon = '';
+
+                        if($jobId > 9){
+                            $secondDigit = $jobId % 10;
+                            $firstDigit = ($jobId - $secondDigit) / 10;
+                            $numberIcon = "<i class='fa-solid fa-$firstDigit'></i><i class='fa-solid fa-$secondDigit'></i>";
+                        } else {
+                            $numberIcon = "<i class='fa-solid fa-$jobId'></i>";
+                        }
+
+                        echo "
+                        <label>
+                            <input type='checkbox' name='job-selection' value='$jobId' class='job-selection-input' />
+                            <div class='job-selection-container'>
+                                $numberIcon
+                                <h3>$description</h3>
+                            </div>
+                        </label>
+                        ";
+                    }
+                }
+            ?>
         </div>
         <div class="button-container">
             <button class="primary-button" onclick="goToFirstHousingPage()"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back</button>
