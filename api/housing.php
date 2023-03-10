@@ -20,3 +20,4 @@
 
         http_response_code($http_response_code);
     }
+?>
