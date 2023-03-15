@@ -223,6 +223,25 @@ function createFeedback(){
     const feedbackResult = {'bookingId': currentBookingId, 'starRating': bookingRating, 'choices': choices, 'written-feedback': customerFeedback};
 
     console.log(feedbackResult);
+    //Send AJAX call to insert feedback into DB
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+   if (this.readyState == 4 && this.status == 200) {
+         console.log(this.responseText);
+         if(this.responseText.trim() == "Success"){
+                alert('Feedback successfully submitted');
+                
+        }else{
+                alert('Feedback submission failed');
+        }
+    }
+   
+   }
+   xmlhttp.open("POST", "http://localhost/labour_link/customer/insertfeedback.php", true);
+   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xmlhttp.send("bookingId="+currentBookingId+"&starRatingPunctuality="+bookingRating.punctuality+"&starRatingEfficiency="+bookingRating.efficient+"&starRatingProfessionalism="+bookingRating.professionalism+"&choices="+choices+"&writtenFeedback="+customerFeedback);
+    
 }
 
 function loadAllBookings(dataSource){

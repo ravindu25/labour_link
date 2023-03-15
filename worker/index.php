@@ -429,6 +429,7 @@
                             $ratingHtml = $ratingHtml . "<i class='fa-regular fa-star'></i>";
                             $tempRating += 1;
                         }
+                     
 
                         echo "
                             <div class='worker-card'>
@@ -461,11 +462,45 @@
                                     </a>
                                     <button type='button' class='booking-button'>Book now!</button>
                                 </div>
+                                <span id='location-$userId'></span>
+                                <script>
+                                    addEventListener('load', function(){
+                                        
+                                        if (navigator.geolocation) {
+                                            navigator.geolocation.getCurrentPosition(function(position) {
+                                              var lat = position.coords.latitude;
+                                              var lng = position.coords.longitude;
+                                
+                                        
+                                              // Send location data to PHP backend
+                                              var xhttp = new XMLHttpRequest();
+                                              xhttp.onreadystatechange = function() {
+                                                if (this.readyState == 4 && this.status == 200) {
+                                                  document.getElementById('location-$userId').innerHTML = this.responseText;
+                                                }
+                                              };
+                                              xhttp.open('POST', 'http://localhost/labour_link/test_location.php', true);
+                                              xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                                              xhttp.send('lat=' + lat + '&lng=' + lng + '&to_location=' + '$city');
+                                            });
+                                          } else {
+                                            console.log('Geolocation is not supported by this browser.');
+                                          }
+                                        
+
+
+                                    });
+                                </script>
+                                
+
+
                             </div>
                         "; 
+                        
                     }
                 }
                 $conn->close();
+
             ?>
          
         
@@ -475,6 +510,8 @@
                 <i class="fa-solid fa-spinner"></i></button>
         </div>
     </div>
+    <span id="test-location"></span>
+    
 </section>
 <footer class="footer">
     <div class="footer-row">
@@ -532,6 +569,7 @@
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+
 <?php
     echo "<script>
         let workerType = '$workerType';
@@ -540,13 +578,9 @@
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/worker/index.js" type="text/javascript"></script>
-<script src="../scripts/customer/bookings.js" type="text/javascript"></script>
-<script src="../scripts/customer/create-booking-fetch-workers.js" type="text/javascript"></script>
-<script src="../scripts/customer/create-booking.js" type="text/javascript"></script>
-<script>
-    //Add location services
 
-    
-</script>
+
+
+
 </body>
 </html>

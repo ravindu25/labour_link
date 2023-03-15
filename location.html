@@ -1,0 +1,27 @@
+<html>
+
+test
+
+<script>
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+      var to_location = "Reid Avenue"; // Replace with your desired location
+
+      // Send location data to PHP backend
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+        }
+      };
+      xhttp.open("POST", "http://localhost/labour_link/test_location.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("lat=" + lat + "&lng=" + lng + "&to_location=" + to_location);
+    });
+  } else {
+    console.log('Geolocation is not supported by this browser.');
+  }
+</script>
+</html>
