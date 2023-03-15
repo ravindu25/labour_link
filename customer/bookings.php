@@ -106,8 +106,8 @@
         <form id="booking-create-form">
             <div class="form-input-row">
                 <label for="job-type">Job type</label>
-                <select id="job-type" name="job-type">
-                    <option value="Electrician">Electrician</option>
+                <select id="job-type" name="job-type" disabled>
+                    <option value="Electrician" selected>Electrician</option>
                     <option value="Plumber">Plumber</option>
                     <option value="Painter">Painter</option>
                     <option value="Carpenter">Carpenter</option>

@@ -1,9 +1,19 @@
 <?php
 include_once('../db.php');
+
+session_start();
+
 $workerID = null;
+$workerType = null;
 if(isset($_GET['workerId'])){
     $workerID=$_GET['workerId'];
 }
+if(isset($_GET['workerType'])){
+    $workerType=$_GET['workerType'];
+}
+
+echo $workerType;
+
 $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker on User.User_ID = Worker.Worker_ID where Worker_ID=$workerID";
 
             $result = $conn->query($sql_get_workers_details);
@@ -53,6 +63,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     <!-- CSS files -->
     <link href="../styles/index-page.css" rel="stylesheet"/>
     <link href="../styles/worker/view-worker-profile.css" rel="stylesheet"/>
+    <link href="../styles/customer/customer-bookings.css" rel="stylesheet"/>
     <title>Workers | LabourLink</title>
 
     <!--Fontawesome-->
@@ -80,6 +91,112 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
         </div>
     </div>
 </div>
+<div class="create-booking-container" id="create-booking-container">
+    <div class="create-booking-scroll-wrapper">
+        <div class="create-booking-title">
+            <h1>Create new <u>Booking</u></h1>
+        </div>
+        <form id="booking-create-form">
+            <div class="form-input-row">
+                <label for="job-type">Job type</label>
+                <select id="job-type" name="job-type" disabled>
+                    <option value="Electrician" selected>Electrician</option>
+                    <option value="Plumber">Plumber</option>
+                    <option value="Painter">Painter</option>
+                    <option value="Carpenter">Carpenter</option>
+                    <option value="Mason">Mason</option>
+                    <option value="Janitor">Janitor</option>
+                    <option value="Mechanical">Mechanical</option>
+                    <option value="Gardner">Gardner</option>
+                </select>
+            </div>
+            <div class="form-input-row">
+                <label for="worker-id">Worker</label>
+                <select id="worker-id" name="worker-name"></select>
+            </div>
+            <div class="form-input-row">
+                <label for="start-date">Start date</label>
+                <input type="date" id="start-date" name="start-date"/>
+            </div>
+            <div class="form-time-row" id="days-complete-container">
+                <label>
+                    Days needed to complete
+                </label>
+                <div class="time-row">
+                    <label>
+                        <input type="radio" name="time-input" value="1" class="time-card-input"/>
+                        <div class="time-card">
+                            <h3>1</h3>
+                            <h4>Day</h4>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="time-input" value="2" class="time-card-input"/>
+                        <div class="time-card">
+                            <h3>2</h3>
+                            <h4>Days</h4>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="time-input" value="7" class="time-card-input" checked/>
+                        <div class="time-card">
+                            <h3>7</h3>
+                            <h4>Days</h4>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="time-input" value="14" class="time-card-input"/>
+                        <div class="time-card">
+                            <h3>14</h3>
+                            <h4>Days</h4>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="time-input" value="30" class="time-card-input"/>
+                        <div class="time-card">
+                            <h3>30</h3>
+                            <h4>Days</h4>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="form-input-row" id="end-date-container">
+                <label for="end-date">End date</label>
+                <input type="date" id="end-date" name="send-date"/>
+            </div>
+            <div class="form-button-container">
+                <button type="button" class="more-button submit-button" id="change-days-complete-button">Custom date</button>
+            </div>
+            <div class="form-payment-row">
+                <label>Payment method</label>
+                <div class="payment-methods-container">
+                    <label>
+                        <input type="radio" name="payment-method" class="payment-method-radio" value="Manual"/>
+                        <div class="payment-method-card">
+                            <img src="../assets/customer/dashboard/undraw_savings_re_eq4w.svg" alt="manual-payment"
+                                 class="payment-method-image"/>
+                            <h5>Manual payments</h5>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="payment-method" class="payment-method-radio" value="Online" checked/>
+                        <div class="payment-method-card">
+                            <img src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg" alt="online-payment"
+                                 class="payment-method-image"/>
+                            <h5>Online payments</h5>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="form-button-container">
+                <button type="button" class="more-button" id="booking-create-cancel-button">Cancel</button>
+                <button type="submit" class="more-button submit-button" id="booking-create-submit-button">Create
+                    Booking
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 <nav class="nav-bar">
     <div class="nav-bar-items">
         <div class="logo-container">
@@ -96,7 +213,6 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
             <div class="nav-link-items"><a href="../about-us.php" class="nav-links">About</a></div>
             <div class="nav-link-items"><a href="../contact-us.php" class="nav-links">Contact Us</a></div>
             <?php
-            session_start();
             if (!isset($_SESSION['username'])) {
 
                 ?>
@@ -185,7 +301,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     Saman has a reputation for being reliable, efficient, and always willing to go the extra mile to
                     ensure that clients are satisfied with his plumbing services. </p>
             </div>
-            <a href='book-worker.php'>
+            <a href=''>
                 <button type='button' class='booking-button'>Book now!</button>
             </a>
         </div>
@@ -399,5 +515,7 @@ echo "<script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/worker/view-worker-profile.js" type="text/javascript"></script>
+<script src="../scripts/customer/create-booking-fetch-workers.js" type="text/javascript"></script>
+<script src="../scripts/customer/create-booking.js" type="text/javascript"></script>
 </body>
 </html>
