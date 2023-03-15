@@ -104,6 +104,27 @@
         </div>
     </div>
 </nav>
+<div class="container">
+    <h1>Meet our team</h1>
+    <div class="developers">
+        <div class="developer">
+            <img src="./assets/about-us/Ravindu.jpg">
+            <h2>Ravindu Wegiriya</h2>
+        </div>
+        <div class="developer">
+            <img src="./assets/about-us/Izzath.jpeg">
+            <h2>Mohamed Izzath</h2>
+        </div>
+        <div class="developer">
+            <img src="./assets/about-us/Rushdha.jpg">
+            <h2>Rushdha Rasheed</h2>
+        </div>
+        <div class="developer">
+            <img src="./assets/about-us/Dhananga.jpg">
+            <h2>Dhananga Deepanjana</h2>
+        </div>
+    </div>
+</div>
 <footer class="footer">
     <div class="footer-row">
         <div class="footer-column">
