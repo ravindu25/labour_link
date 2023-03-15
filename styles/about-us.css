@@ -6,14 +6,12 @@ body {
     margin: 0;
     padding: 0;
     background-color: #C4DDF2;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
 }
 
-.container {
+.developer-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 50px 20px;
+    padding: 40px 20px;
 }
 
 h1 {
@@ -51,7 +49,8 @@ h1 {
 }
 
 .developer h2 {
-    font-family: Inter;
+    font-family: Poppins;
+    font-weight: normal;
     color: #102699;
     font-size: 24px;
     margin: 0;
@@ -68,3 +67,17 @@ h1 {
         flex-basis: calc(50% - 20px);
     }
 }
+
+.details-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 0px 70px;
+    margin: 0 auto;
+    color: black;
+    font-family: Inter;
+    font-weight: normal;
+    font-size: 18px;
+}
+
