@@ -11,7 +11,7 @@ body {
 .developer-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 20px 20px;
 }
 
 h1 {
@@ -49,7 +49,7 @@ h1 {
 }
 
 .developer h2 {
-    font-family: Poppins;
+    font-family: 'Inter', sans-serif;
     font-weight: normal;
     color: #102699;
     font-size: 24px;
@@ -76,8 +76,36 @@ h1 {
     padding: 0px 70px;
     margin: 0 auto;
     color: black;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 20px;
+    padding-bottom: 30px;
 }
 
+.details-container h3{
+    color: #102699;
+    font-family: Poppins;
+    font-size: 28px;
+}
+
+.left-column {
+    flex: 0 0 50%;
+    padding-right: 20px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.right-column {
+    flex: 0 0 50%;
+    padding-left: 20px;
+    box-sizing: border-box;
+    justify-items: center;
+}
+
+.left-column img{
+    width: 800px;
+    height: 500px;
+    opacity: 0.8;
+    border-radius: 10px;
+    margin: 40px 0px;
+}

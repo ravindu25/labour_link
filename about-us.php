@@ -126,51 +126,61 @@
     </div>
 </div>
 <div class="details-container">
+    <div class="left-column">
+        <h3>About us</h3>
         <p>We are a group of Second Year Computer Science undergraduates from University of Colombo School of Computing
             aspiring to become professionals in the field of Software Development.
-            As computer science undergraduates, we have gained a solid foundation in programming languages, data structures,
-            algorithms, and computer systems. <br><br>
-
-            We have also been exposed to various software development methodologies, such as agile and waterfall, and have
-            worked on projects that involve software design, development, testing, and deployment. <br><br>
-
-            Furthermore, we have participated in various hackathons, coding competitions, and workshops, which have helped us
-            to enhance our problem-solving skills and creativity in software development.
+            We have gained a solid foundation in programming languages, data structures,
+            algorithms, and computer systems. We have also been exposed to various software development methodologies,
+            such as agile and waterfall, and have worked on projects that involve software design, development,
+            testing, and deployment. </p>
+    </div>
+    <div class="right-column">
+        <h3> </h3>
+        <p>
+            Furthermore, participation in various hackathons, coding competitions and workshops,
+            have helped us to enhance our problem-solving skills and creativity in software development.
             We are passionate about building innovative software solutions that solve real-world problems and make a positive
-            impact on society. <br><br>
-
+            impact on society.
             As we continue our education and journey towards becoming professionals in the field of software development,
             we are eager to gain more experience, expand our knowledge and skills, and contribute to the development of cutting-edge
             software applications. We believe that our dedication, hard work, and passion for software development will enable us to
-            achieve our goals and make a difference in the industry.<br><br>
+            achieve our goals and make a difference in the industry.
         </p>
     </div>
+</div>
     <div class="details-container">
-        <p>
-            LABOUR LINK is a software solution that addresses the difficulties people face
-            in finding different types of labour.
-            Whether you are looking for someone to do housekeeping, gardening, plumbing, or
-            electrical work, LABOUR LINK makes it easy for you to find and book a skilled worker.<br><br>
+        <div class="left-column">
+            <img src="./assets/about-us/software-image.jpg">
+        </div>
+        <div class="right-column">
+            <h3>About Labour Link</h3>
+            <p>
+                LABOUR LINK is a software solution that addresses the difficulties people face
+                in finding different types of labour.
+                Whether you are looking for someone to do housekeeping, gardening, plumbing, or
+                electrical work, LABOUR LINK makes it easy for you to find and book a skilled worker.<br>
 
-            Gone are the days of having to go through countless directories, classified ads, or
-            word-of-mouth recommendations to find someone to perform a specific task. With LABOUR LINK,
-            you can browse a list of available labourers, view their profiles, ratings, and reviews,
-            and select the one that best suits your needs.<br><br>
+                Gone are the days of having to go through countless directories, classified ads, or
+                word-of-mouth recommendations to find someone to perform a specific task. With LABOUR LINK,
+                you can browse a list of available labourers, view their profiles, ratings, and reviews,
+                and select the one that best suits your needs.<br>
 
-            Our software is user-friendly, secure, and reliable. We have implemented features
-            'such as real-time tracking, online payments, and customer support to ensure that
-            the entire process of booking a labourer is seamless and hassle-free. <br><br>
+                Our software is user-friendly, secure, and reliable. We have implemented features
+                'such as real-time tracking, online payments, and customer support to ensure that
+                the entire process of booking a labourer is seamless and hassle-free. <br>
 
-            By using LABOUR LINK, you can save time, effort, and money. You no longer have to waste
-            your valuable time searching for labourers or negotiating prices. Our platform offers
-            competitive rates, and you can rest assured that the labourers you book through LABOUR
-            LINK are trustworthy, skilled, and professional. <br><br>
+                By using LABOUR LINK, you can save time, effort, and money. You no longer have to waste
+                your valuable time searching for labourers or negotiating prices. Our platform offers
+                competitive rates, and you can rest assured that the labourers you book through LABOUR
+                LINK are trustworthy, skilled, and professional. <br>
 
-            We are proud of LABOUR LINK and believe that it has the potential to revolutionize
-            the way people book labourers. Whether you are a homeowner, a business owner, or a
-            contractor, LABOUR LINK is the ultimate solution to your labour needs. Try it today
-            and experience the convenience of booking a labourer from the comfort of your own home.<br><br>
-        </p>
+                We are proud of LABOUR LINK and believe that it has the potential to revolutionize
+                the way people book labourers. Whether you are a homeowner, a business owner, or a
+                contractor, LABOUR LINK is the ultimate solution to your labour needs. Try it today
+                and experience the convenience of booking a labourer from the comfort of your own home.<br><br>
+            </p>
+        </div>
     </div>
 </div>
 <footer class="footer">
