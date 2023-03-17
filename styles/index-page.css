@@ -194,7 +194,7 @@ a{
     appearance: none;
     min-width: 400px;
     max-width: 450px;
-    height: 24px;
+    /*height: 24px;*/
     padding: 12px 16px;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
