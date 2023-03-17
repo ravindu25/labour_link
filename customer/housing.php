@@ -217,13 +217,120 @@
         </div>
         <div class="current-projects">
             <h1>Ongoing housing projects</h1>
-            <div class="empty-projects-container">
-                <img src="../assets/customer/housing/undraw_house_searching_re_stk8.svg" alt="housing-projects" />
-                <h5>You don't have any housing projects started</h5>
-            </div>
-            <div class="projects-container">
+            <div class="projects-container" >
 
             </div>
+            <?php
+                $sql_get_customer_housings = "SELECT * FROM House WHERE Customer_ID = $userId";
+
+                $result = $conn->query($sql_get_customer_housings);
+
+                if($result->num_rows > 0){
+                    echo "<div class='projects-container'>";
+                    $numberCount = 0;
+
+                    while($row = $result->fetch_assoc()) {
+                        $address = $row['Address'];
+                        $verified = $row['Verified'];
+                        $houseId = $row['House_ID'];
+                        $jobsContainerId = "project-items-jobs-container-$houseId";
+                        $numberCount += 1;
+
+                        $sql_get_housing_jobs = "SELECT Job_Type.*, Job.* FROM Job_Type INNER JOIN Job On Job_Type.Job_Type_ID = Job.Job_Type_ID WHERE Job.House_ID = $houseId";
+
+                        $numberIcon = '';
+
+                        if($numberCount > 9){
+                            $secondDigit = $numberCount % 10;
+                            $firstDigit = ($numberCount - $secondDigit) / 10;
+                            $numberIcon = "<i class='fa-solid fa-$firstDigit'></i><i class='fa-solid fa-$secondDigit'></i>";
+                        } else {
+                            $numberIcon = "<i class='fa-solid fa-$numberCount'></i>";
+                        }
+
+                        if($verified == 1){
+                            $verifiedDisplay = "
+                                <i class='fa-solid fa-circle-check'></i>
+                                &nbsp;&nbsp;
+                                <h5>Verified</h5>
+                            ";
+                        } else {
+                            $verifiedDisplay = "
+                                <i class='fa-solid fa-circle-xmark'></i>
+                                &nbsp;&nbsp;
+                                <h5>Not verified</h5>
+                            ";
+                        }
+                        echo "
+                        <div class='project-item-container'>
+                            <div class='project-item-header'>
+                                <div class='project-item-header-title'>
+                                <h5>Housing package details</h5>
+                                <h1>
+                                    $address
+                                </h1>
+                                </div>
+                                <div class='project-item-verified-container'>
+                                    $verifiedDisplay
+                                </div>
+                            </div>
+                            <div class='project-item-jobs-container' id='$jobsContainerId'>";
+
+                              $jobsResult = $conn->query($sql_get_housing_jobs);
+                              if($jobsResult->num_rows > 0){
+                                  while($jobsRow = $jobsResult->fetch_assoc()){
+                                    $description = $jobsRow['Description'];
+                                    $completionFlag = $jobsRow['Completion_Flag'];
+                                    $advertisementStatus = $jobsRow['Advertisement_Status'];
+
+                                    $jobStatusBadge = '';
+
+                                    if($completionFlag == 1){
+                                        $jobStatusBadge = "<button class='completed-badge'>
+                                            <i class='fa-solid fa-check'></i>&nbsp;&nbsp;Completed
+                                            </button>";
+                                    } else if($advertisementStatus == 1){
+                                        $jobStatusBadge = "<button class='advertised-badge'>
+                                                <i class='fa-solid fa-chart-simple'></i>&nbsp;&nbsp;Advertised
+                                                </button>";
+                                    } else {
+                                        $jobStatusBadge = "<button class='pending-badge'><i class='fa-solid fa-hourglass-start'></i>&nbsp;&nbsp;Pending</button>";
+                                    }
+
+                                    echo "
+                                        <div class='project-job-item'>
+                                            <h5>$description</h5>
+                                            $jobStatusBadge
+                                        </div>
+                                        ";
+                                  }
+                              }
+
+                            echo "</div>
+                            <div class='project-item-buttons'>
+                                <button type='button' class='secondary-button' id='jobs-load-more-button-$houseId' onclick='showJobs($houseId)'>
+                                    <i class='fa-solid fa-arrow-down'></i>&nbsp;&nbsp;Load jobs
+                                </button>
+                                <a href='housing-project.php?houseId=$houseId'>
+                                    <button type='button' class='primary-button'>
+                                        <i class='fa-solid fa-arrow-right'></i>&nbsp;&nbsp;Show details
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        ";
+                    }
+
+                    echo "</div>";
+                } else {
+                    echo "
+                     <div class='empty-projects-container'>
+                        <img src='../assets/customer/housing/undraw_house_searching_re_stk8.svg' alt='housing-projects' />
+                        <h5>You don't have any housing projects started</h5>
+                    </div>
+                    ";
+                }
+            ?>
         </div>
     </section>
 </main>

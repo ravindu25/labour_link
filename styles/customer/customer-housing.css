@@ -257,6 +257,128 @@
     font-weight: normal;
 }
 
+.project-item-container{
+    width: 40vw;
+    background-color: white;
+    border-radius: 12px;
+    padding: 32px;
+    margin: 16px auto;
+    border: 2px solid var(--primary-color);
+}
+
+.project-item-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-item-header-title{
+    padding: 12px 0;
+    margin-bottom: 12px;
+}
+
+.project-item-header-title h5{
+    margin: 0;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.project-item-header-title h1{
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.project-item-header i{
+    color: var(--primary-color);
+    font-size: 64px;
+    margin-left: 32px;
+    margin-top: 16px;
+}
+
+.project-item-verified-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.project-item-verified-container i{
+    font-size: 32px;
+    margin: 0;
+}
+
+.project-item-verified-container h5{
+    font-weight: normal;
+    margin: 0;
+}
+
+.project-item-title h1{
+    color: var(--dark-color);
+    margin-left: 32px;
+}
+
+.project-item-buttons{
+    text-align: center;
+}
+
+.project-item-jobs-container{
+    display: none;
+}
+
+.project-job-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 12px 0;
+}
+
+.completed-badge{
+    outline: none;
+    width: 160px;
+    border: 3px solid var(--success-color);
+    padding: 12px 18px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: var(--success-color);
+    text-align: center;
+}
+
+.advertised-badge{
+    outline: none;
+    width: 160px;
+    border: 3px solid var(--primary-bright-color);
+    padding: 12px 18px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: var(--primary-bright-color);
+    text-align: center;
+}
+
+.pending-badge{
+    outline: none;
+    width: 160px;
+    border: 3px solid var(--primary-bright-color);
+    padding: 12px 18px;
+    color: var(--primary-bright-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: white;
+    text-align: center;
+}
+
+.project-job-item h5{
+    font-size: 20px;
+    font-weight: normal;
+    margin: 12px 0;
+}
+
 .empty-projects-container{
     text-align: center;
     padding: 48px;

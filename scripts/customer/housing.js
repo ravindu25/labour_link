@@ -125,3 +125,18 @@ function submitHousing(){
         backDrop.style.visibility = 'hidden';
     }, 5000);
 }
+
+function showJobs(houseID){
+    const jobsContainer = document.getElementById(`project-items-jobs-container-${houseID}`);
+    const loadMoreButton = document.getElementById(`jobs-load-more-button-${houseID}`);
+
+    console.log(loadMoreButton.innerHTML);
+
+    if(jobsContainer.style.display == 'none' || jobsContainer.style.display == ''){
+        jobsContainer.style.display = 'block';
+        loadMoreButton.innerHTML = "<i class='fa-solid fa-arrow-up'></i>&nbsp;&nbsp;Show less";
+    } else {
+        jobsContainer.style.display = 'none';
+        loadMoreButton.innerHTML = "<i class='fa-solid fa-arrow-down'></i>&nbsp;&nbsp;Load jobs";
+    }
+}
