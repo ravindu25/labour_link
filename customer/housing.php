@@ -250,13 +250,13 @@
 
                         if($verified == 1){
                             $verifiedDisplay = "
-                                <i class='fa-solid fa-circle-check'></i>
+                                <i class='fa-solid fa-circle-check' style='color: var(--success-color)'></i>
                                 &nbsp;&nbsp;
                                 <h5>Verified</h5>
                             ";
                         } else {
                             $verifiedDisplay = "
-                                <i class='fa-solid fa-circle-xmark'></i>
+                                <i class='fa-solid fa-circle-xmark' style='color: var(--danger-color)'></i>
                                 &nbsp;&nbsp;
                                 <h5>Not verified</h5>
                             ";
