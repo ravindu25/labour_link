@@ -1,3 +1,157 @@
+.mark-done-confirm-container, .mark-done-complete-container, .mark-done-failed-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) ;
+    margin: 16px;
+    padding: 32px 48px;
+    color: var(--success-dark-color);
+    background-color: #FFF;
+    border-radius: 16px;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.mark-done-failed-container{
+    color: var(--warning-dark-color);
+}
+
+.mark-done-failed-container h1{
+    margin: 12px 0;
+}
+
+.mark-done-failed-container h5{
+    margin: 0;
+    margin-left: 32px;
+    color: var(--dark-color);
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.mark-done-primary-button{
+    outline: none;
+    border: 3px solid var(--success-dark-color);
+    padding: 12px 18px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: var(--success-dark-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.mark-done-secondary-button{
+    outline: none;
+    border: 3px solid var(--success-dark-color);
+    padding: 12px 18px;
+    color: var(--success-dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: white;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.mark-done-primary-button:active, .mark-done-secondary-button:active{
+    transform: scale(.96);
+}
+
+.mark-done-button-container{
+    text-align: center;
+}
+
+.create-advertise-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) ;
+    margin: 16px;
+    padding: 32px 48px;
+    color: var(--primary-color);
+    background-color: #FFF;
+    border-radius: 16px;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.create-advertise-container h1{
+    text-align: center;
+}
+
+.advertisement-create-image-container{
+    text-align: center;
+}
+
+.advertisement-create-image-container img{
+    width: 60%;
+    height: auto;
+}
+
+.advertisement-create-image-container h5{
+    font-weight: normal;
+    font-size: 24px;
+    margin: 0;
+}
+
+.create-advertisement-button-container{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.create-advertisement-primary-button, .create-advertisement-secondary-button{
+    outline: none;
+    border: 3px solid var(--primary-color);
+    padding: 12px 18px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: var(--primary-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.create-advertisement-secondary-button{
+    color: var(--primary-color);
+    background-color: white;
+}
+
+.create-advertisement-primary-button:active, .create-advertisement-secondary-button:active{
+    transform: scale(.96);
+}
+
+.advertise-complete-container, .advertise-failed-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) ;
+    margin: 16px;
+    padding: 32px 48px;
+    color: var(--primary-color);
+    background-color: #FFF;
+    border-radius: 16px;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.advertise-failed-container{
+    color: var(--warning-dark-color);
+}
+
+.advertise-failed-container h1{
+    margin: 12px 0;
+}
+
+.advertise-failed-container h5{
+    margin: 0;
+    margin-left: 32px;
+    color: var(--dark-color);
+    font-weight: normal;
+    font-size: 20px;
+}
+
 .main-section{
     background-color: var(--primary-background-shade-color);
 }

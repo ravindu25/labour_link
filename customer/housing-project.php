@@ -48,6 +48,40 @@
     <title>Housing Project | LabourLink</title>
 </head>
 <body>
+<div class="backdrop-modal" id="backdrop-modal">
+</div>
+<div class="mark-done-confirm-container" id="mark-done-confirm-container">
+    <h1>Do you want to mark the job as complete?</h1>
+    <div class="mark-done-button-container">
+        <button class="mark-done-secondary-button" onclick="hideMarkDoneContainer()">Cancel</button>
+        <button class="mark-done-primary-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Mark completed!</button>
+    </div>
+</div>
+<div class="mark-done-complete-container" id="mark-done-complete-container">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;The selected job is marked as completed</h1>
+</div>
+<div class="mark-done-failed-container" id="mark-done-failed-container">
+    <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Marking job as complete failed!</h1>
+    <h5 id=mark-done-fail-text">Your login session outdated. Please login again.</h5>
+</div>
+<div class="create-advertise-container" id="create-advertise-container">
+    <h1>Do you want to place advertisement on the selected job?</h1>
+    <div class="advertisement-create-image-container">
+        <img src="../assets/customer/housing/undraw_Social_sharing_re_pvmr.png" alt="create-advertisement" />
+        <h5>Once advertisement is placed workers can apply for your job!</h5>
+    </div>
+    <div class="create-advertisement-button-container">
+        <button class="create-advertisement-secondary-button" onclick="hideAdvertisementContainer()">Cancel</button>
+        <button class="create-advertisement-primary-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Place advertisement!</button>
+    </div>
+</div>
+<div class="advertise-complete-container" id="advertise-complete-container">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Advertisement placed successfully!</h1>
+</div>
+<div class="advertise-failed-container" id="advertise-failed-container">
+    <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Advertisement placing is failed!</h1>
+    <h5 id=mark-done-fail-text">Your login session outdated. Please login again.</h5>
+</div>
 <nav class="nav-bar">
     <div class="nav-bar-items">
         <div class="logo-container">
@@ -245,6 +279,7 @@
 
                 if($result->num_rows > 0){
                     while($row = $result->fetch_assoc()){
+                        $jobID = $row['Job_Type_ID'];
                         $description = $row['Description'];
                         $completionFlag = $row['Completion_Flag'];
                         $advertisementStatus = $row['Advertisement_Status'];
@@ -267,21 +302,21 @@
                             $buttonHtml = $completionButton;
                         } else {
                             if($advertisementStatus == true && $bookingId != null){
-                                $completionButton = "<button class='mark-complete-button'><i class='fa-solid fa-check'></i>&nbsp;&nbsp;Mark done</button>";
+                                $completionButton = "<button class='mark-complete-button' onclick='showMarkDoneContainer($jobID)'><i class='fa-solid fa-check'></i>&nbsp;&nbsp;Mark done</button>";
 
                                 $bookingButton = "<button class='view-booking-button'><i class='fa-solid fa-arrow-up-right'></i>&nbsp;&nbsp;View Booking</button>";
 
                                 $buttonHtml = $advertisementButton . $bookingButton;
                             } else if($advertisementStatus == true && $bookingId == null) {
-                                $completionButton = "<button class='mark-complete-button'><i class='fa-solid fa-check'></i>&nbsp;&nbsp;Mark done</button>";
+                                $completionButton = "<button class='mark-complete-button' onclick='showMarkDoneContainer($jobID)'><i class='fa-solid fa-check' ></i>&nbsp;&nbsp;Mark done</button>";
 
                                 $advertisementButton = "<button class='advertised-button'><i class='fa-solid fa-chart-simple'></i>&nbsp;&nbsp;Advertised</button>";
 
                                 $buttonHtml = $completionButton . $advertisementButton;
                             } else {
-                                $completionButton = "<button class='mark-complete-button'><i class='fa-solid fa-check'></i>&nbsp;&nbsp;Mark done</button>";
+                                $completionButton = "<button class='mark-complete-button' onclick='showMarkDoneContainer($jobID)'><i class='fa-solid fa-check'></i>&nbsp;&nbsp;Mark done</button>";
 
-                                $advertisementButton = "<button class='advertise-button'><i class='fa-solid fa-chart-simple'></i>&nbsp;&nbsp;Advertise</button>";
+                                $advertisementButton = "<button class='advertise-button' onclick='showAdvertisementContainer($houseId, $jobID)'><i class='fa-solid fa-chart-simple'></i>&nbsp;&nbsp;Advertise</button>";
 
                                 $buttonHtml = $completionButton . $advertisementButton;
                             }
