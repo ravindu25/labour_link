@@ -181,7 +181,7 @@
                         </button>
                     </div>
                     <div class="nav-link-items">
-                        <button type="button" class="nav-link-items-button" onclick="window.location.href='login.php'">
+                        <button type="button" class="nav-link-items-button" onclick="window.location.href='../login.php'">
                             LOGIN
                         </button>
                     </div>

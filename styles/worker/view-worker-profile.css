@@ -53,7 +53,7 @@ p {
     font-family: Inter;
 }
 
-.details-row{
+.detail-row{
     display: flex;
     font-size: 30px;
     color: black;
@@ -231,7 +231,6 @@ p {
 .feedback {
     display: flex;
     flex-direction: column;
-    height: 100%;
     width: 400px;
     margin-right: 25px;
     padding: 17px;

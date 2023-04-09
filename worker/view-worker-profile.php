@@ -223,7 +223,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     </button>
                 </div>
                 <div class="nav-link-items">
-                    <button type="button" class="nav-link-items-button" onclick="window.location.href='login.php'">
+                    <button type="button" class="nav-link-items-button" onclick="window.location.href='../login.php'">
                         LOGIN
                     </button>
                 </div>
@@ -273,7 +273,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     <div class="profile-info">
         <h1><?=$fullName?></h1>
         <div class="subheading">WORKER BIO</div>
-        <div class="details-row">
+        <div class="detail-row">
             Category :
             <div class="worker-type-badge">
                 <h5>Electrician</h5>
@@ -301,7 +301,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     Saman has a reputation for being reliable, efficient, and always willing to go the extra mile to
                     ensure that clients are satisfied with his plumbing services. </p>
             </div>
-            <a href=''>
+            <a href='../customer/create-booking.php'>
                 <button type='button' class='booking-button'>Book now!</button>
             </a>
         </div>
@@ -309,7 +309,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
 </div>
 <div class="projects-container">
     <div class="subheading"> PREVIOUSLY COMPLETED PROJECTS</div>
-    <div class="details-row">
+    <div class="detail-row">
         <div class="project-container">
             Repair of existing systems
             <div class="project">
@@ -414,7 +414,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
 </div>
 <div class="feedbacks-container">
     <div class="subheading">CUSTOMER FEEDBACK</div>
-    <div class="details-row">
+    <div class="detail-row">
         <div class="feedback">
             <div class="feedback-body">
                 <p>"John is a fantastic web developer. He is easy to work with and produces high-quality work. Highly recommend!"</p>
