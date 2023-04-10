@@ -1,0 +1,284 @@
+.main-section{
+    background-color: #ABC3EF;
+}
+
+.main-heading{
+    padding: 12px 24px;
+    color: #FFF;
+    background-color: var(--primary-color);
+    border-radius: 12px;
+}
+
+.main-heading h1{
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    font-weight: normal;
+}
+
+.main-heading h5 {
+    margin: 0;
+    text-align: right;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.overview-content h1{
+    margin: 16px;
+    color: var(--primary-color);
+    font-size: 36px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+.blue-badge{
+    display: inline-block;
+    padding: 6px;
+    color: var(--primary-bright-color);
+    background-color: var(--primary-shade-color);
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.badge-container{
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.new-housing-job-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.new-housing-job-title h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.search-housing-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-housing-title h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.housing-search-input-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.housing-search label{
+    color: var(--dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.housing-search-input-field{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.housing-search-input{
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 0 2px 2px;
+    border-radius: 12px 0 0 12px;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 22px;
+    min-width: 200px;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+}
+
+.housing-search-input:valid,
+.housing-search-input:focus,
+.housing-search-input:active{
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 0 2px 2px;
+    border-radius: 12px 0 0 12px;
+}
+
+.search-icon-small{
+    height: 46px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 2px 2px 0;
+    border-radius: 0 12px 12px 0;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 24px;
+    color: var(--primary-color);
+    background-color: #FFF;
+}
+
+
+.recent-housing-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recent-housing-title h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.recent-housing-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.update-button{
+    outline: none;
+    border: 3px solid var(--success-dark-color);
+    padding: 8px 18px;
+    color: var(--success-dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.update-button:active{
+    transform: scale(.98);
+}
+
+
+.rejected-button{
+    outline: none;
+    border: 3px solid var(--warning-dark-color);
+    padding: 8px 18px;
+    color: var(--warning-dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.rejected-button:active{
+    transform: scale(.98);
+}
+
+.sort-button{
+    height: 48px;
+    width: 48px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+}
+
+.sort-button:active{
+    transform: scale(.98);
+}
+
+.pending-badge{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--dark-shade-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.completed-badge{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--success-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.accepted-badge{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--primary-bright-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.rejected-badge{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--warning-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.pagination-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.pagination-button{
+    height: 40px;
+    width: 40px;
+    outline: none;
+    border: none;
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 4px;
+    background-color: var(--primary-background-shade-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.pagination-button:active {
+    transform: scale(.96);
+}
+
+.pagination-button:disabled,
+.pagination-button[disabled]{
+    transform: none;
+}
+
+.pagination-button-current{
+    height: 48px;
+    width: 48px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: var(--primary-background-shade-color);
+}
