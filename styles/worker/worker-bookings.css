@@ -169,17 +169,6 @@
     background-color: var(--success-color);
 }
 
-.rejected-button {
-    outline: none;
-    border: none;
-    padding: 12px 24px;
-    color: #FFF;
-    font-family: 'Inter', sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    border-radius: 8px;
-    background-color: var(--danger-color);
-}
 
 .pending-button{
     outline: none;
@@ -526,6 +515,10 @@
     background-color: #FFF;
 }
 
+.sort-button:active{
+    transform: scale(.98);
+}
+
 .table-heading-container{
     display: flex;
     justify-content: space-between;
@@ -566,10 +559,28 @@
     display: inline-block;
     padding: 6px;
     color: #FFF;
-    background-color: var(--danger-color);
+    background-color: var(--warning-color);
     border-radius: 4px;
     font-weight: 500;
     font-size: 16px;
+}
+
+
+.rejected-button{
+    outline: none;
+    border: 3px solid var(--warning-dark-color);
+    padding: 8px 18px;
+    color: var(--warning-dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.rejected-button:active{
+    transform: scale(.98);
 }
 
 .update-button{

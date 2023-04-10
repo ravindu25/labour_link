@@ -399,7 +399,7 @@
                         <div class="more-button-container">
                             <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
                             </button>
-                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
                             </button>
                         </div>
                     </td>
@@ -416,7 +416,7 @@
                         <div class="more-button-container">
                             <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
                             </button>
-                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
                             </button>
                         </div>
                     </td>
@@ -433,7 +433,7 @@
                         <div class="more-button-container">
                             <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
                             </button>
-                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
                             </button>
                         </div>
                     </td>
@@ -450,7 +450,7 @@
                         <div class="more-button-container">
                             <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
                             </button>
-                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
                             </button>
                         </div>
                     </td>
@@ -467,7 +467,7 @@
                         <div class="more-button-container">
                             <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
                             </button>
-                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
                             </button>
                         </div>
                     </td>
