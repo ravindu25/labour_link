@@ -245,7 +245,7 @@
                         </td>
                         <td class="main-td">30 Nov 2022</td>
                         <td class="main-td">Rs. 12500.00</td>
-                        <td class="main-td">Faild</td>
+                        <td class="main-td">Failed</td>
                     </tr>
                     <tr class="main-tr">
                         <td class="main-td" style="text-align: left;">Dinesh Attanayaka
