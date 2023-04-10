@@ -185,3 +185,111 @@
     font-weight: normal;
 }
 
+.profile-details-panel{
+    margin-left: 16px;
+}
+
+.edit-item-row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-item-container{
+    display: flex;
+    align-items: center;
+}
+
+.edit-item-container h1{
+    font-size: 36px;
+    font-weight: normal;
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.edit-item-container h3{
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0;
+    color: var(--dark-color);
+}
+
+.update-button{
+    visibility: hidden;
+    outline: none;
+    border: 3px solid var(--primary-background-shade-color);
+    padding: 6px 9px;
+    margin-left: 16px;
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 25%;
+    background-color: var(--primary-background-shade-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.update-button:active{
+    transform: scale(.96);
+}
+
+.details-edit-modal{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) ;
+    padding: 12px 36px;
+    color: #102699;
+    background-color: #FFF;
+    border-radius: 16px;
+    opacity: 1;
+    min-width: 40vw;
+    visibility: hidden;
+}
+
+.edit-modal-header h1{
+    text-align: center;
+    font-size: 36px;
+    margin: 8px;
+    font-weight: normal;
+}
+
+.edit-modal-inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 80%;
+    margin: 16px auto;
+}
+
+.edit-modal-inputs label{
+    font-size: 20px;
+    font-weight: normal;
+    color: var(--dark-color);
+}
+
+.edit-modal-inputs input{
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-radius:12px;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+}
+
+.edit-modal-inputs input:valid,
+.edit-modal-inputs input:focus,
+.edit-modal-inputs input:active{
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
+}
+
+.edit-modal-button-container{
+    text-align: center;
+    margin: 32px 0;
+}

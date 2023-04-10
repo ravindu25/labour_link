@@ -49,7 +49,7 @@
             <button type="button" class="primary-button" id="remove-picture-button" onclick="goNextProfileChangePage()">
                 <i class="fa-solid fa-trash-can"></i>&nbsp;&nbsp;Remove picture
             </button>
-            <button type="button" class="disable-button" id="save-button" onclick="updateProfilePicture()">
+            <button type="button" class="disable-button" id="save-button" onclick="updateProfilePicture()" disabled>
                 <i class="fa-solid fa-arrow-up"></i>&nbsp;&nbsp;Save picture
             </button>
         </div>
@@ -61,6 +61,97 @@
 <div class="failed-message-container" id="profile-update-fail">
     <div class="message-text">
         <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Profile picture update failed!</h1>
+        <h5 id="housing-create-fail-text">Your login session outdated. Please login again.</h5>
+    </div>
+</div>
+<div class="details-edit-modal" id="edit-modal-username">
+    <div class="edit-modal-header">
+        <h1>Edit your account details</h1>
+    </div>
+    <div class="edit-modal-inputs">
+        <label for="firstname-input">First name:</label>
+        <input type="text" id="firstname-input"/>
+    </div>
+    <div class="edit-modal-inputs">
+        <label for="lastname-input">Last name:</label>
+        <input type="text" id="lastname-input" />
+    </div>
+    <div class="edit-modal-button-container">
+        <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-username')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" class="disable-button" id="update-button-username"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+    </div>
+</div>
+<div class="details-edit-modal" id="edit-modal-email">
+    <div class="edit-modal-header">
+        <h1>Edit your account details</h1>
+    </div>
+    <div class="edit-modal-inputs">
+        <label for="email-input">Email address:</label>
+        <input type="email" id="email-input"/>
+    </div>
+    <div class="edit-modal-button-container">
+        <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-email')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" class="disable-button" id="update-button-email"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+    </div>
+</div>
+<div class="details-edit-modal" id="edit-modal-contactnum">
+    <div class="edit-modal-header">
+        <h1>Edit your account details</h1>
+    </div>
+    <div class="edit-modal-inputs">
+        <label for="contactnum-input">Contact number:</label>
+        <input type="text" id="contactnum-input"/>
+    </div>
+    <div class="edit-modal-button-container">
+        <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-contactnum')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" class="disable-button" id="update-button-contactnum"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+    </div>
+</div>
+<div class="details-edit-modal" id="edit-modal-nic">
+    <div class="edit-modal-header">
+        <h1>Edit your account details</h1>
+    </div>
+    <div class="edit-modal-inputs">
+        <label for="nic-input">NIC number:</label>
+        <input type="text" id="nic-input"/>
+    </div>
+    <div class="edit-modal-button-container">
+        <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-nic')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" class="disable-button" id="update-button-nic"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+    </div>
+</div>
+<div class="details-edit-modal" id="edit-modal-dob">
+    <div class="edit-modal-header">
+        <h1>Edit your account details</h1>
+    </div>
+    <div class="edit-modal-inputs">
+        <label for="dob-input">Date of Birth:</label>
+        <input type="date" id="dob-input"/>
+    </div>
+    <div class="edit-modal-button-container">
+        <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-dob')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" class="disable-button" id="update-button-dob"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+    </div>
+</div>
+<div class="details-edit-modal" id="edit-modal-address">
+    <div class="edit-modal-header">
+        <h1>Edit your account details</h1>
+    </div>
+    <div class="edit-modal-inputs">
+        <label for="address-input">Address:</label>
+        <input type="text" id="address-input"/>
+    </div>
+    <div class="edit-modal-button-container">
+        <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-address')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" class="disable-button" id="update-button-address"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+    </div>
+</div>
+<div class="success-message-container" id="account-details-update-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Account details updated!</h1>
+</div>
+<div class="failed-message-container" id="account-details-update-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Account details update failed!</h1>
         <h5 id="housing-create-fail-text">Your login session outdated. Please login again.</h5>
     </div>
 </div>
@@ -226,13 +317,38 @@
                             $email = $row['Email'];
                             $contactNum = $row['Contact_No'];
                             $nic = $row['NIC'];
+                            $dob = $row['DOB'];
                             $address = $row['User_Address'];
-                            $activationFlag = $row['Activation_Flag'];
+                            $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
                         }
                     }
                 ?>
-                <h1><?php echo $username ?></h1>
-                <h3><?php echo $email ?></h3>
+                <div class="edit-item-container" id="edit-item-username">
+                    <h1><?php echo $username ?></h1>
+                    <button type="button" class="update-button" id="button-edit-item-username" onclick="openEditModal('edit-modal-username')"><i class="fa-solid fa-pen-clip"></i></button>
+                </div>
+                <div class="edit-item-container" id="edit-item-email">
+                    <h3>Email address - <?php echo $email ?></h3>
+                    <button type="button" class="update-button" id="button-edit-item-email" onclick="openEditModal('edit-modal-email')"><i class="fa-solid fa-pen-clip"></i></button>
+                </div>
+                <div class="edit-item-row">
+                    <div class="edit-item-container" id="edit-item-contactnum">
+                        <h3>Contact Num - <?php echo $contactNum ?></h3>
+                        <button type="button" class="update-button" id="button-edit-item-contactnum" onclick="openEditModal('edit-modal-contactnum')"><i class="fa-solid fa-pen-clip"></i></button>
+                    </div>
+                    <div class="edit-item-container" id="edit-item-nic">
+                        <h3>NIC number - <?php echo $nic ?></h3>
+                        <button type="button" class="update-button" id="button-edit-item-nic" onclick="openEditModal('edit-modal-nic')"><i class="fa-solid fa-pen-clip"></i></button>
+                    </div>
+                </div>
+                <div class="edit-item-container" id="edit-item-dob">
+                    <h3>DOB - <?php echo $dob ?></h3>
+                    <button type="button" class="update-button" id="button-edit-item-dob" onclick="openEditModal('edit-modal-dob')"><i class="fa-solid fa-pen-clip"></i></button>
+                </div>
+                <div class="edit-item-container" id="edit-item-address">
+                    <h3>Address - <?php echo $address ?></h3>
+                    <button type="button" class="update-button" id="button-edit-item-address" onclick="openEditModal('edit-modal-address')"><i class="fa-solid fa-pen-clip"></i></button>
+                </div>
             </div>
         </div>
     </section>
