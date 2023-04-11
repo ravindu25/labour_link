@@ -196,7 +196,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <td class="main-td" style="text-align: left;">Avinash Sudira
                             <br/>
                         </td>
-                        <td class="main-td">Sunil Perera</td>
+                        <td class="main-td">Kamal Perera</td>
                         <td class="main-td">30 Nov 2022</td>
                         <td class="main-td">Rs. 12500.00</td>
                         <td class="main-td">Failed</td>
@@ -205,7 +205,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <td class="main-td" style="text-align: left;">Dinesh Attanayaka
                             <br/>
                         </td>
-                        <td class="main-td">Sunil Perera</td>
+                        <td class="main-td">Nimal Perera</td>
                         <td class="main-td">01 Nov 2022</td>
                         <td class="main-td">Rs. 1700.00</td>
                         <td class="main-td">Success</td>
@@ -214,7 +214,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <td class="main-td" style="text-align: left;">Kapila Dharmadhasa
                             <br/>
                         </td>
-                        <td class="main-td">Sunil Perera</td>
+                        <td class="main-td">Upul Perera</td>
                         <td class="main-td">19 Nov 2022</td>
                         <td class="main-td">Rs. 12000.00</td>
                         <td class="main-td">Success</td>
@@ -239,5 +239,136 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 </form>
             </div>
         </div>
+        <!-- Search for payments table -->
+        <div class="recent-payments-container">
+            <table class="main-table">
+                <thead>
+                <tr class="main-tr">
+                    <th class="main-th">
+                        <div class="table-heading-container">Customer name&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
+                        </div>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">Amount&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">Status&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
+                    </th>
+                    <th class="main-th">More actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Saman Gunawardhana
+                        <br/>
+                        <span class="blue-badge">19 Nov 2022</span>
+                    </td>
+                    <td class="main-td">Rs. 27000.00</td>
+                    <td class="main-td">Success</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Avinash Sudira
+                        <br/>
+                        <span class="blue-badge">15 Nov 2022</span>
+                    </td>
+                    <td class="main-td">Rs. 12500.00</td>
+                    <td class="main-td">Failed</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Dinesh Attanayaka
+                        <br/>
+                        <span class="blue-badge">10 Nov 2022</span>
+                    </td>
+                    <td class="main-td">Rs. 1700.00</td>
+                    <td class="main-td">Success</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Kapila Dharmadhasa
+                        <br/>
+                        <span class="blue-badge">8 Nov 2022</span>
+                    </td>
+                    <td class="main-td">Rs. 12000.00</td>
+                    <td class="main-td">Success</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Saman Gunawardhana
+                        <br/>
+                        <span class="blue-badge">30 Oct 2022</span>
+                    </td>
+                    <td class="main-td">Rs. 18000.00</td>
+                    <td class="main-td">Success</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Saman Gunawardhana
+                        <br/>
+                        <span class="blue-badge">30 Oct 2022</span>
+                    </td>
+                    <td class="main-td">Rs. 18000.00</td>
+                    <td class="main-td">Failed</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="pagination-container">
+                <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+        </div>
     </section>
 </main>
+<footer class="footer">
+    <div class="footer-row" style="border-top: 1px solid #FFF; padding-top: 16px;">
+        <p>© 2022 Labour Link | All Rights Reserved</p>
+    </div>
+</footer>
+<script src="../scripts/modals.js" type="text/javascript"></script>
+<script src="../scripts/customer/bookings.js" type="text/javascript"></script>
+</body>
