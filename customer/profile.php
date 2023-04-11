@@ -155,6 +155,40 @@
         <h5 id="housing-create-fail-text">Your login session outdated. Please login again.</h5>
     </div>
 </div>
+<div class="change-password-container" id="change-password-container">
+    <div class="change-password-header">
+        <h1>Change your current password</h1>
+    </div>
+    <div class="change-password-row">
+        <label for="change-password-label" id="current-password-input">Current password</label>
+        <input type="password" id="current-password-input" />
+    </div>
+    <div class="change-password-row">
+        <label for="new-password-input">New password</label>
+        <input type="password" id="new-password-input" />
+    </div>
+    <div class="change-password-row">
+        <label for="reenter-new-password-input">Re-enter new password</label>
+        <input type="password" id="reenter-new-password-input" />
+    </div>
+    <div class="change-password-button-container">
+        <button type="button" class="primary-outline-button" onclick="closeChangePasswordModal()">
+            <i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel
+        </button>
+        <button type="button" class="disable-button" id="change-password-button" onclick="updatePassword()" disabled>
+            <i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Change password
+        </button>
+    </div>
+</div>
+<div class="success-message-container" id="password-change-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Password changed!</h1>
+</div>
+<div class="failed-message-container" id="password-change-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Password change failed!</h1>
+        <h5 id="housing-create-fail-text">Your login session outdated. Please login again.</h5>
+    </div>
+</div>
 <nav class="nav-bar">
     <div class="nav-bar-items">
         <div class="logo-container">
@@ -348,6 +382,31 @@
                 <div class="edit-item-container" id="edit-item-address">
                     <h3>Address - <?php echo $address ?></h3>
                     <button type="button" class="update-button" id="button-edit-item-address" onclick="openEditModal('edit-modal-address')"><i class="fa-solid fa-pen-clip"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="quick-action-container">
+            <div class="quick-action-banner">
+                <h1>Quick actions</h1>
+            </div>
+            <div class="quick-action-list">
+                    <div class="quick-action-item">
+                    <h3>Change the password</h3>
+                    <div class="quick-action-item-button-container">
+                        <button type="button" class="primary-button" onclick="showChangePasswordModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Change password</button>
+                    </div>
+                </div>
+                <div class="quick-action-item">
+                    <h3>Hide profile picture</h3>
+                    <div class="quick-action-item-button-container">
+                        <button type="button" class="primary-button"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Hide picture</button>
+                    </div>
+                </div>
+                <div class="quick-action-item">
+                    <h3>Provide feedback to us!</h3>
+                    <div class="quick-action-item-button-container">
+                        <button type="button" class="primary-button"><i class="fa-solid fa-message"></i>&nbsp;&nbsp;Send feedback</button>
+                    </div>
                 </div>
             </div>
         </div>
