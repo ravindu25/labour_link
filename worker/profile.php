@@ -167,7 +167,7 @@
             <div class="profile-details-container">
                 <div class="profile-image">
                     <img class="profile-img" src="..\images/profile-image.png"></img>
-                    <button class="more-button" id = "uplaod-profile-img"></button>
+                    <button class="upload-button"><i class="fa fa-upload"></i></button>
                 </div>
                 <div class="user-details">
                     <div class="user-name">
