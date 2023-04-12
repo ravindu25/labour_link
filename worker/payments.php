@@ -218,7 +218,7 @@
         <!--Due payments section-->
         <div class="due-payments">
             <div class="due-payments-title">
-                <h1>Due Payments</h1>
+                <h1>Payments Due</h1>
             </div>
             <div class="due-payments-container">
                 <table class="main-table">
