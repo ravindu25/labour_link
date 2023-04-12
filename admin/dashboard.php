@@ -360,7 +360,7 @@ session_start();
                         <td class="main-td"><span class="payment-success-failed">Failed</span></td>
                     </tr>
                     <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Rushdha Rasheeda<br/>
+                        <td class="main-td" style="text-align: left;">Rushdha Rasheed<br/>
                             <span class="blue-badge">1 Nov 2022</span>
                         </td>
                         <td class="main-td">

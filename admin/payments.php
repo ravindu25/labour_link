@@ -156,7 +156,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         </div>
         <div class="due-payments">
             <div class="due-payments-title">
-                <h1>Due Payments</h1>
+                <h1>Payments Due</h1>
             </div>
             <div class="due-payments-container">
                 <table class="main-table">
@@ -166,7 +166,6 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <th class="main-th">Worker Name</th>
                         <th class="main-th">Start Date</th>
                         <th class="main-th">Amount</th>
-                        <th class="main-th">Payment Status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -177,7 +176,6 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <td class="main-td">Sunil Perera</td>
                         <td class="main-td">19 Nov 2022</td>
                         <td class="main-td">Rs. 27000.00</td>
-                        <td class="main-td">Success</td>
                     </tr>
                     <tr class="main-tr">
                         <td class="main-td" style="text-align: left;">Avinash Sudira
@@ -186,7 +184,6 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <td class="main-td">Kamal Perera</td>
                         <td class="main-td">30 Nov 2022</td>
                         <td class="main-td">Rs. 12500.00</td>
-                        <td class="main-td">Failed</td>
                     </tr>
                     <tr class="main-tr">
                         <td class="main-td" style="text-align: left;">Dinesh Attanayaka
@@ -195,7 +192,6 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <td class="main-td">Nimal Perera</td>
                         <td class="main-td">01 Nov 2022</td>
                         <td class="main-td">Rs. 1700.00</td>
-                        <td class="main-td">Success</td>
                     </tr>
                     <tr class="main-tr">
                         <td class="main-td" style="text-align: left;">Kapila Dharmadhasa
@@ -204,7 +200,6 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <td class="main-td">Upul Perera</td>
                         <td class="main-td">19 Nov 2022</td>
                         <td class="main-td">Rs. 12000.00</td>
-                        <td class="main-td">Success</td>
                     </tr>
                     </tbody>
                 </table>
@@ -261,7 +256,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     </td>
                     <td class="main-td">Sunil Perera</td>
                     <td class="main-td">Rs. 27000.00</td>
-                    <td class="main-td">Success</td>
+                    <td class="main-td"><span class="payment-success-badge">Success</span></td>
                     <td class="main-td">
                         <div class="more-button-container">
                             <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
@@ -277,7 +272,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     </td>
                     <td class="main-td">Nimal Kumara</td>
                     <td class="main-td">Rs. 12500.00</td>
-                    <td class="main-td">Failed</td>
+                    <td class="main-td"><span class="payment-success-failed">Failed</span></td>
                     <td class="main-td">
                         <div class="more-button-container">
                             <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
@@ -293,7 +288,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     </td>
                     <td class="main-td">Heshan Pasindu</td>
                     <td class="main-td">Rs. 1700.00</td>
-                    <td class="main-td">Success</td>
+                    <td class="main-td"><span class="payment-success-badge">Success</span></td>
                     <td class="main-td">
                         <div class="more-button-container">
                             <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
@@ -309,7 +304,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     </td>
                     <td class="main-td">Sunil Perera</td>
                     <td class="main-td">Rs. 12000.00</td>
-                    <td class="main-td">Success</td>
+                    <td class="main-td"><span class="payment-success-badge">Success</span></td>
                     <td class="main-td">
                         <div class="more-button-container">
                             <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
@@ -325,7 +320,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     </td>
                     <td class="main-td">Saman Gunathilake</td>
                     <td class="main-td">Rs. 18000.00</td>
-                    <td class="main-td">Success</td>
+                    <td class="main-td"><span class="payment-success-badge">Success</span></td>
                     <td class="main-td">
                         <div class="more-button-container">
                             <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
@@ -341,7 +336,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     </td>
                     <td class="main-td">Sunil Perera</td>
                     <td class="main-td">Rs. 18000.00</td>
-                    <td class="main-td">Failed</td>
+                    <td class="main-td"><span class="payment-success-failed">Failed</span></td>
                     <td class="main-td">
                         <div class="more-button-container">
                             <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View

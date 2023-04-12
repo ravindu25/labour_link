@@ -326,3 +326,15 @@
     background-color: #FFF;
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
 }
+
+.payment-success-badge{
+    font-size: 20px;
+    color: var(--success-bright-color);
+    font-weight: bold;
+}
+
+.payment-success-failed{
+    font-size: 20px;
+    color: var(--warning-color);
+    font-weight: bold;
+}
