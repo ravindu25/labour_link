@@ -87,7 +87,26 @@
 .main-content-container{
     display:none;
 }
+.main-heading{
+    padding: 12px 24px;
+    color: #FFF;
+    background-color: var(--primary-color);
+    border-radius: 12px;
+}
 
+.main-heading h1{
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    font-weight: normal;
+}
+
+.main-heading h5{
+    margin: 0;
+    text-align: right;
+    font-size: 18px;
+    font-weight: normal;
+}
 .due-payments-title{
     display: flex;
     justify-content: space-between;

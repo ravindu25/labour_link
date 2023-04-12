@@ -325,7 +325,7 @@ session_start();
         </div>
         <div class="recent-payments">
             <div class="recent-payments-title">
-                <h1>Recently made Feedbacks</h1>
+                <h1>Recently made Payments</h1>
                 <button class="more-button">More Payments</button>
             </div>
             <div class="recent-payments-container">

@@ -29,19 +29,6 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
 </div>
 <div class="backdrop-modal" id="admin-backdrop-modal">
 </div>
-<div class="success-message-container" id="register-success">
-    <h1><i class="fa-solid fa-check"></i></h1>
-    <div class="success-message-text">
-        <h1>Admin Account Created!</h1>
-    </div>
-</div>
-<div class="failed-message-container" id="register-failed">
-    <h1><i class="fa-solid fa-xmark"></i></h1>
-    <div class="failed-message-text">
-        <h1>Account Creation Failed</h1>
-        <h3 id="error-text"></h3>
-    </div>
-</div>
 <nav class="nav-bar">
     <div class="nav-bar-items">
         <div class="logo-container">
@@ -250,6 +237,11 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         </div>
                     </th>
                     <th class="main-th">
+                        <div class="table-heading-container">Worker name&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
+                        </div>
+                    </th>
+                    <th class="main-th">
                         <div class="table-heading-container">Amount&nbsp;<button class="sort-button"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
@@ -267,6 +259,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <br/>
                         <span class="blue-badge">19 Nov 2022</span>
                     </td>
+                    <td class="main-td">Sunil Perera</td>
                     <td class="main-td">Rs. 27000.00</td>
                     <td class="main-td">Success</td>
                     <td class="main-td">
@@ -282,6 +275,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <br/>
                         <span class="blue-badge">15 Nov 2022</span>
                     </td>
+                    <td class="main-td">Nimal Kumara</td>
                     <td class="main-td">Rs. 12500.00</td>
                     <td class="main-td">Failed</td>
                     <td class="main-td">
@@ -297,6 +291,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <br/>
                         <span class="blue-badge">10 Nov 2022</span>
                     </td>
+                    <td class="main-td">Heshan Pasindu</td>
                     <td class="main-td">Rs. 1700.00</td>
                     <td class="main-td">Success</td>
                     <td class="main-td">
@@ -312,6 +307,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <br/>
                         <span class="blue-badge">8 Nov 2022</span>
                     </td>
+                    <td class="main-td">Sunil Perera</td>
                     <td class="main-td">Rs. 12000.00</td>
                     <td class="main-td">Success</td>
                     <td class="main-td">
@@ -327,6 +323,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <br/>
                         <span class="blue-badge">30 Oct 2022</span>
                     </td>
+                    <td class="main-td">Saman Gunathilake</td>
                     <td class="main-td">Rs. 18000.00</td>
                     <td class="main-td">Success</td>
                     <td class="main-td">
@@ -342,6 +339,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <br/>
                         <span class="blue-badge">30 Oct 2022</span>
                     </td>
+                    <td class="main-td">Sunil Perera</td>
                     <td class="main-td">Rs. 18000.00</td>
                     <td class="main-td">Failed</td>
                     <td class="main-td">
