@@ -189,6 +189,19 @@
         <h5 id="housing-create-fail-text">Your login session outdated. Please login again.</h5>
     </div>
 </div>
+<div class="feedback-message-container" id="feedback-message-container">
+    <div class="feedback-message-header">
+        <h1>Submit your feedback</h1>
+    </div>
+    <div class="feedback-input-container">
+        <label for="feedback-text-input">Feedback text</label>
+        <textarea id="feedback-text-input"></textarea>
+    </div>
+    <div class="feedback-input-button-container">
+        <button type="button" class="primary-outline-button" onclick="hideProvideFeedbackModal()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" class="primary-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Submit</button>
+    </div>
+</div>
 <nav class="nav-bar">
     <div class="nav-bar-items">
         <div class="logo-container">
@@ -405,7 +418,7 @@
                 <div class="quick-action-item">
                     <h3>Provide feedback to us!</h3>
                     <div class="quick-action-item-button-container">
-                        <button type="button" class="primary-button"><i class="fa-solid fa-message"></i>&nbsp;&nbsp;Send feedback</button>
+                        <button type="button" class="primary-button" onclick="showProvideFeedbackModal()"><i class="fa-solid fa-message"></i>&nbsp;&nbsp;Send feedback</button>
                     </div>
                 </div>
             </div>

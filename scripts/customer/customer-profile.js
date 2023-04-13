@@ -276,3 +276,19 @@ function closeChangePasswordModal(){
     backdrop.style.visibility = 'hidden';
     changePasswordModal.style.visibility = 'hidden';
 }
+
+function showProvideFeedbackModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const feedbackModal = document.getElementById('feedback-message-container');
+
+    backdrop.style.visibility = 'visible';
+    feedbackModal.style.visibility = 'visible';
+}
+
+function hideProvideFeedbackModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const feedbackModal = document.getElementById('feedback-message-container');
+
+    backdrop.style.visibility = 'hidden';
+    feedbackModal.style.visibility = 'hidden';
+}
