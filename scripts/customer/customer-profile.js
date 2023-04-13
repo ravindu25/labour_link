@@ -128,6 +128,37 @@ document.getElementById('address-input').addEventListener('change', () => {
     }
 });
 
+/* Change password checking */
+document.getElementById('new-password-input').addEventListener('change', () => {
+    checkPasswords();
+});
+
+document.getElementById('reenter-new-password-input').addEventListener('change', () => {
+    checkPasswords();
+});
+
+function checkPasswords(){
+    const newPassword = document.getElementById('new-password-input').value;
+    const reEnterNewPassword = document.getElementById('reenter-new-password-input').value;
+    const changePasswordButton = document.getElementById('change-password-button');
+
+    if(newPassword != '' && newPassword == reEnterNewPassword){
+        changePasswordButton.classList.remove('disable-button');
+        changePasswordButton.classList.add('primary-button');
+        changePasswordButton.disabled = false;
+    } else {
+        changePasswordButton.classList.remove('primary-button');
+        changePasswordButton.classList.add('disable-button');
+    }
+}
+
+function updatePassword(){
+    const newPassword = document.getElementById('new-password-input').value;
+    console.log(newPassword);
+
+    // Password update process
+}
+
 function showEditButton(buttonId){
     const editButton = document.getElementById(buttonId);
 
@@ -228,4 +259,36 @@ function closeEditModal(modalId){
 
     backdrop.style.visibility = 'hidden';
     editModal.style.visibility = 'hidden';
+}
+
+function showChangePasswordModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const changePasswordModal = document.getElementById('change-password-container');
+
+    backdrop.style.visibility = 'visible';
+    changePasswordModal.style.visibility = 'visible';
+}
+
+function closeChangePasswordModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const changePasswordModal = document.getElementById('change-password-container');
+
+    backdrop.style.visibility = 'hidden';
+    changePasswordModal.style.visibility = 'hidden';
+}
+
+function showProvideFeedbackModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const feedbackModal = document.getElementById('feedback-message-container');
+
+    backdrop.style.visibility = 'visible';
+    feedbackModal.style.visibility = 'visible';
+}
+
+function hideProvideFeedbackModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const feedbackModal = document.getElementById('feedback-message-container');
+
+    backdrop.style.visibility = 'hidden';
+    feedbackModal.style.visibility = 'hidden';
 }
