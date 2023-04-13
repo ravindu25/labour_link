@@ -35,24 +35,28 @@
         </div>
         <div class="current-picture-container" id="current-picture-container">
             <?php
-                echo "<img src='../assets/profile-image/customer-$userId.png' alt='profile-image' />";
+                echo "<img src='../assets/profile-image/$userId.jpg' alt='profile-image' />";
             ?>
         </div>
-        <div class="select-image-container" id="select-image-container">
-            <input type="file" class="upload-box" id="picture-upload-input" />
-        </div>
-        <div class="profile-change-button-container">
-            <button type="button" class="primary-button" id="set-default-button">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;Set default
-            </button>
-            <button type="button" class="primary-outline-button" onclick="closeChangeProfileModal()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-            <button type="button" class="primary-button" id="remove-picture-button" onclick="goNextProfileChangePage()">
-                <i class="fa-solid fa-trash-can"></i>&nbsp;&nbsp;Remove picture
-            </button>
-            <button type="button" class="disable-button" id="save-button" onclick="updateProfilePicture()" disabled>
-                <i class="fa-solid fa-arrow-up"></i>&nbsp;&nbsp;Save picture
-            </button>
-        </div>
+        <form method="post" enctype="multipart/form-data" action="">
+            <div class="select-image-container" id="select-image-container">
+                <input type="file" class="upload-box" id="picture-upload-input" name="picture-upload-input"/>
+            </div>
+            <div class="profile-change-button-container">
+                <button type="button" class="primary-button" id="set-default-button">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;Set default
+                </button>
+                <button type="button" class="primary-outline-button" onclick="closeChangeProfileModal()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+                <button type="button" class="primary-button" id="remove-picture-button" onclick="goNextProfileChangePage()">
+                    <i class="fa-solid fa-trash-can"></i>&nbsp;&nbsp;Remove picture
+                </button>
+
+                <input type="submit" class="disable-button" id="save-button" name="save-button" value="Save Picture" disabled>
+                <!-- <button type="button" class="disable-button" id="save-button" onclick="updateProfilePicture()" disabled>
+                    <i class="fa-solid fa-arrow-up"></i>&nbsp;&nbsp;Save picture
+                </button> -->
+            </div>
+        </form>
     </div>
 </div>
 <div class="success-message-container" id="profile-update-success">
@@ -294,7 +298,7 @@
                 <div class="profile-image">
                     <?php
                         echo "
-                            <img src='../assets/profile-image/customer-$userId.png' alt='profile-image' />
+                            <img src='../assets/profile-image/$userId.jpg' alt='profile-image' />
                         ";
                     ?>
                     <div class="profile-change-container">
@@ -363,6 +367,44 @@
         let userId = $userId;
     </script>"
 ?>
+
+<?php
+session_start();
+if(isset($_POST['save-button'])) {
+// Define the directory where the uploaded images will be stored
+$target_dir = "../assets/profile-image/";
+$userid=$_SESSION['user_id'];
+// Get the filename of the uploaded image
+//change file name to what we want
+$target_file = $target_dir . $userid.".jpg";
+
+// Check if the file already exists
+// if (file_exists($target_file)) {
+//     echo "Sorry, the file already exists.";
+//     exit();
+// }
+
+// Check if the uploaded file is an image
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    exit();
+}
+
+// Move the uploaded image to the target directory
+if (move_uploaded_file($_FILES["picture-upload-input"]["tmp_name"], $target_file)) {
+    echo "Successfully Uploaded";
+    header("refresh:1");
+} else {
+    echo "Sorry, there was an error uploading your file.";
+}
+
+}
+
+
+
+?>
+
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/customer/customer-profile.js" type="text/javascript"></script>
 </body>
