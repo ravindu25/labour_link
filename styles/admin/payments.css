@@ -322,9 +322,13 @@
     font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-weight: 500;
-    border-radius: 12px;
+    border-radius: 18px;
     background-color: #FFF;
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.view-button:active{
+    transform: scale(.96);
 }
 
 .payment-success-badge{

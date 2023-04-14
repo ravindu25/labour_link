@@ -259,7 +259,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     <td class="main-td"><span class="payment-success-badge">Success</span></td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -275,7 +275,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     <td class="main-td"><span class="payment-success-failed">Failed</span></td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -291,7 +291,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     <td class="main-td"><span class="payment-success-badge">Success</span></td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -307,7 +307,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     <td class="main-td"><span class="payment-success-badge">Success</span></td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -323,7 +323,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     <td class="main-td"><span class="payment-success-badge">Success</span></td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -339,11 +339,15 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     <td class="main-td"><span class="payment-success-failed">Failed</span></td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
                 </tr>
+                <?php
+                echo '<script src="../scripts/admin/loader.js" type="text/javascript"></script>';
+                echo '<script>closeLoader()</script>';
+                ?>
                 </tbody>
             </table>
             <div class="pagination-container">
@@ -363,5 +367,5 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
     </div>
 </footer>
 <script src="../scripts/modals.js" type="text/javascript"></script>
-<script src="../scripts/admin/users.js" type="text/javascript"></script>
+<script src="../scripts/admin/payments.js" type="text/javascript"></script>
 </body>
