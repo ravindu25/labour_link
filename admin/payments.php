@@ -363,5 +363,5 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
     </div>
 </footer>
 <script src="../scripts/modals.js" type="text/javascript"></script>
-<script src="../scripts/customer/bookings.js" type="text/javascript"></script>
+<script src="../scripts/admin/users.js" type="text/javascript"></script>
 </body>

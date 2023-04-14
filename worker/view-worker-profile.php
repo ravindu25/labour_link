@@ -64,7 +64,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     <link href="../styles/index-page.css" rel="stylesheet"/>
     <link href="../styles/worker/view-worker-profile.css" rel="stylesheet"/>
     <link href="../styles/customer/customer-bookings.css" rel="stylesheet"/>
-    <title>Workers | LabourLink</title>
+    <title>Worker Profile | LabourLink</title>
 
     <!--Fontawesome-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet"/>
