@@ -499,6 +499,8 @@
                         
                     }
                 }
+//                $sql_get_workers = $sql_get_workers . " ORDER BY location-$userId DESC LIMIT 4";
+//                $sql_get_workers_on_location = $sql_get_workers_on_location . " LIMIT 4";
                 $conn->close();
 
             ?>
