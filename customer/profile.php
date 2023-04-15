@@ -441,7 +441,6 @@
 ?>
 
 <?php
-session_start();
 if(isset($_POST['save-button'])) {
 // Define the directory where the uploaded images will be stored
 $target_dir = "../assets/profile-image/";
@@ -459,16 +458,17 @@ $target_file = $target_dir . $userid.".jpg";
 // Check if the uploaded file is an image
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-    exit();
-}
-
-// Move the uploaded image to the target directory
-if (move_uploaded_file($_FILES["picture-upload-input"]["tmp_name"], $target_file)) {
-    echo "Successfully Uploaded";
-    header("refresh:1");
+    echo "<script>failedProfileUpdate('Sorry, only JPG, JPEG, PNG & GIF files are allowed')</script>";
+    // exit();
 } else {
-    echo "Sorry, there was an error uploading your file.";
+
+    // Move the uploaded image to the target directory
+    if (move_uploaded_file($_FILES["picture-upload-input"]["tmp_name"], $target_file)) {
+        echo "<script>successProfileUpdate()</script>";
+        header("refresh:1");
+    } else {
+        echo "<script>failedProfileUpdate('Sorry, there was an error uploading your file')";
+    }
 }
 
 }

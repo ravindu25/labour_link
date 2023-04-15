@@ -229,7 +229,7 @@ function checkFileInput(){
     }
 }
 
-function updateProfilePicture(){
+function successProfileUpdate(){
     const changeProfileModal = document.getElementById('profile-change-modal-container');
     const successMessageContainer = document.getElementById('profile-update-success');
 
@@ -242,6 +242,24 @@ function updateProfilePicture(){
 
         backdrop.style.visibility = 'hidden';
         successMessageContainer.style.visibility = 'hidden';
+    }, 5000);
+}
+
+function failedProfileUpdate(errorMessage){
+    const changeProfileModal = document.getElementById('profile-change-modal-container');
+    const failMessageContainer = document.getElementById('profile-update-fail');
+    const failErrorText = document.getElementById('housing-create-fail-text');
+
+    changeProfileModal.style.visibility = 'hidden';
+    failMessageContainer.style.visibility = 'visible';
+    failErrorText.innerText = errorMessage;
+
+    setTimeout(() => {
+        const backdrop = document.getElementById('backdrop-modal');
+        const failMessageContainer = document.getElementById('profile-update-fail');
+
+        backdrop.style.visibility = 'hidden';
+        failMessageContainer.style.visibility = 'hidden';
     }, 5000);
 }
 
