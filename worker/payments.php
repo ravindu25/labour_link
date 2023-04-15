@@ -152,7 +152,7 @@
             <a href="./bookings.php">
                 <div class="sidebar-item">
                     <i class="fa-solid fa-b sidebar-item-icon"></i>
-                    <h4 class="sidebar-icon-heading">Booking</h4>
+                    <h4 class="sidebar-icon-heading">Bookings</h4>
                 </div>
             </a>
             <a href="./feedbacks.php">
@@ -316,7 +316,7 @@
                     <td class="main-td">Success</td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -331,7 +331,7 @@
                     <td class="main-td">Failed</td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -346,7 +346,7 @@
                     <td class="main-td">Success</td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -361,7 +361,7 @@
                     <td class="main-td">Success</td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -376,7 +376,7 @@
                     <td class="main-td">Success</td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
@@ -391,7 +391,7 @@
                     <td class="main-td">Failed</td>
                     <td class="main-td">
                         <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;View
+                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
                             </button>
                         </div>
                     </td>
