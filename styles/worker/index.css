@@ -8,6 +8,7 @@
 .main-title{
     text-align: center;
     margin: 16px 0;
+    margin-top: 48px;
     font-size: 40px;
     color: var(--primary-color);
 }
@@ -28,14 +29,16 @@
     display: flex;
     flex-wrap: wrap;
     padding: 16px 0;
-    align-items: center;
+    align-items: start;
     justify-content: center;
 }
 
 .worker-card{
     display: flex;
     flex-direction: column;
-    max-width: 20%;
+    justify-content: center;
+    max-width: 21%;
+    height: 540px;
     padding: 28px 16px;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -104,6 +107,9 @@
 }
 
 .worker-card-button-container{
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
     margin-top: 24px;
     text-align: center;
 }
@@ -150,7 +156,7 @@
     border-radius: 18px;
     background-color: white;
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
-    margin-right: 50px;
+    margin-right: 20px;
 }
 
 .view-profile-button:active{
