@@ -119,7 +119,7 @@ session_start();
             <a href="./bookings.php">
                 <div class="sidebar-item">
                     <i class="fa-solid fa-b sidebar-item-icon"></i>
-                    <h4 class="sidebar-icon-heading">Booking</h4>
+                    <h4 class="sidebar-icon-heading">Bookings</h4>
                 </div>
             </a>
             <a href="./feedbacks.php">
