@@ -72,7 +72,8 @@
   $distance = $directions_obj->routes[0]->legs[0]->distance->value / 1000; // Convert distance to kilometers
 
   // Return distance in kilometers to JavaScript
-  echo $distance;
+  header('Content-Type: application/json');
+  echo json_encode(array('distance' => $distance));
 
 
 ?>

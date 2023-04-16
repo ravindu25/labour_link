@@ -261,258 +261,51 @@
 </section>
 <section class="main-content">
     <div class="worker-section">
-        <h1 class="worker-section-title">Top workers</h1>
+        <h1 class="worker-section-title" id="top-worker-section-title">Top workers</h1>
         <div class="worker-card-container" id="top-worker-card-container">
             <?php
-                $sql_get_workers = "select * from User inner join Worker on User.User_ID = Worker.Worker_ID";
-                $sql_get_workers_on_location = "select * from User inner join Worker on User.User_ID = Worker.Worker_ID";
-
-                if($workerType === 'plumber') {
-                    $sql_get_workers = $sql_get_workers . " inner join Plumber ON Worker.Worker_ID = Plumber.Plumber_ID";
-                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Plumber ON Worker.Worker_ID = Plumber.Plumber_ID";
-                } else if($workerType === 'carpenter'){
-                    $sql_get_workers = $sql_get_workers . " inner join Carpenter ON Worker.Worker_ID = Carpenter.Carpenter_ID";
-                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Carpenter ON Worker.Worker_ID = Carpenter.Carpenter_ID";
-                } else if($workerType === 'electrician'){
-                    $sql_get_workers = $sql_get_workers . " inner join Electrician ON Worker.Worker_ID = Electrician.Electrician_ID";
-                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Electrician ON Worker.Worker_ID = Electrician.Electrician_ID";
-                } else if($workerType === 'painter'){
-                    $sql_get_workers = $sql_get_workers . " inner join Painter ON Worker.Worker_ID = Painter.Painter_ID";
-                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Painter ON Worker.Worker_ID = Painter.Painter_ID";
-                } else if($workerType === 'mason'){
-                    $sql_get_workers = $sql_get_workers . " inner join Mason ON Worker.Worker_ID = Mason.Mason_ID";
-                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Mason ON Worker.Worker_ID = Mason.Mason_ID";
-                } else if($workerType === 'janitor'){
-                    $sql_get_workers = $sql_get_workers . " inner join Janitor ON Worker.Worker_ID = Janitor.Janitor_ID";
-                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Janitor ON Worker.Worker_ID = Janitor.Janitor_ID";
-                } else if($workerType === 'mechanic'){
-                    $sql_get_workers = $sql_get_workers . " inner join Mechanic ON Worker.Worker_ID = Mechanic.Mechanic_ID";
-                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Mechanic ON Worker.Worker_ID = Mechanic.Mechanic_ID";
-                } else if($workerType === 'gardener'){
-                    $sql_get_workers = $sql_get_workers . " inner join Gardener ON Worker.Worker_ID = Gardener.Gardener_ID";
-                    $sql_get_workers_on_location = $sql_get_workers_on_location . " inner join Gardener ON Worker.Worker_ID = Gardener.Gardener_ID";
-                }
-
-                $sql_get_workers = $sql_get_workers . " ORDER BY Worker.Current_Rating DESC LIMIT 4";
-                $sql_get_workers_on_location = $sql_get_workers_on_location . " LIMIT 4";
-
-                
-
-                $result = $conn->query($sql_get_workers);
-
-                if($result->num_rows > 0){
-                    while($row = $result->fetch_assoc()){
-                        /*
-                         * Creating the worker entity
-                         */
-
-                        $userId = $row['User_ID'];
-                        $fullName = $row['First_Name'] . " " . $row['Last_Name'];
-                        $email = $row['Email'];
-                        $contactNum = $row['Contact_No'];
-                        $nic = $row['NIC'];
-                        $dob = $row['DOB'];
-                        $address = $row['User_Address'];
-                        $city = $row['City'];
-                        $currentRating = $row['Current_Rating'];
-
-                        $imageNumber = rand(1, 4);
-                        $imageUrl = "../assets/worker/profile-images/worker-$imageNumber.jpg";
-
-                        $ratingHtml = null;
-                        $tempRating = 0;
-
-                        while($tempRating < $currentRating){
-                            if($tempRating + 1 <= $currentRating){
-                                $ratingHtml = $ratingHtml . "<i class='fa-solid fa-star'></i>";
-                                $tempRating += 1;
-                            } else if ($tempRating + 0.5 <= $currentRating){
-                                $ratingHtml = $ratingHtml . "<i class='fa-solid fa-star-half-stroke'></i>";
-                                $tempRating += 0.5;
-                            } else {
-                                break;
-                            }
-                        }
-
-                        $tempRating = ceil($tempRating);
-
-                        while($tempRating < 5){
-                            $ratingHtml = $ratingHtml . "<i class='fa-regular fa-star'></i>";
-                            $tempRating += 1;
-                        }
-
-                        echo "
-                            <div class='worker-card'>
-                                <h1 class='worker-card-title'>"
-                                    . ucfirst($fullName) .
-                                "</h1>
-                                <div class='worker-card-star-container'>
-                                    $ratingHtml
-                                    &nbsp;&nbsp;<b>$currentRating </b> 
-                                </div>
-                                <div class='worker-image'>
-                                    <img src='$imageUrl' alt='worker-profile'>
-                                </div>
-                                <div class='worker-card-location-row'>
-                                    <h3><i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i>&nbsp;&nbsp;"
-                                        . ucfirst($city) .
-                                    "</h3>
-                                </div>
-                                <div class='worker-card-types-row'>
-                                    <div class='worker-type-badge'>
-                                        <h5>Electrician</h5>
-                                    </div>
-                                    <div class='worker-type-badge'>
-                                        <h5>Plumber</h5>
-                                    </div>
-                                </div>
-                                <div class='worker-card-button-container'>
-                                    <a href='view-worker-profile.php?workerId=$userId'>
-                                    <button type='button' class='view-profile-button'>View Profile</button>
-                                    </a>
-                                    <button type='button' class='booking-button' id='booking-create-button'>Book now!</button>
-                                </div>
-                            </div>
-                        ";
-                    }
+                for($i = 0; $i < 4; $i++) {
+                    echo "
+                    <div class='worker-loading-card'>
+                        <div class='worker-loading-card-title'></div>
+                        <div class='worker-loading-card-star-container'></div>
+                        <div class='worker-loading-image'></div>
+                        <div class='worker-loading-card-location-row'></div>
+                        <div class='worker-loading-card-types-row'></div>
+                        <div class='worker-loading-card-button-container'></div>
+                            
+                    </div>";
                 }
             ?>
         </div>
-        <div class="button-container">
-            <button type="button" class="more-button" id="top-workers-button">Load more&nbsp;
-                <i class="fa-solid fa-spinner"></i></button>
+        <div class="button-loading-container" id="top-worker-button-container">
+            <div class="button-loading-state"></div>
         </div>
     </div>
-    <div class="worker-section">
+    <div class="worker-section" id="worker-section">
         <h1 class="worker-section-title">Workers nearby</h1>
-        <div class="worker-card-container">
+        <div class="worker-card-container" id="worker-nearby-card-container">
             <?php
-                $result = $conn->query($sql_get_workers_on_location);
-
-                if($result->num_rows > 0){
-                    while($row = $result->fetch_assoc()){
-                        /*
-                         * Creating the worker entity
-                         */
-
-                        $userId = $row['User_ID'];
-                        $fullName = $row['First_Name'] . " " . $row['Last_Name'];
-                        $email = $row['Email'];
-                        $contactNum = $row['Contact_No'];
-                        $nic = $row['NIC'];
-                        $dob = $row['DOB'];
-                        $address = $row['User_Address'];
-                        $city = $row['City'];
-                        $currentRating = $row['Current_Rating'];
-
-                        $imageNumber = rand(1, 4);
-                        $imageUrl = "../assets/worker/profile-images/worker-$imageNumber.jpg";
-
-                        $ratingHtml = null;
-                        $tempRating = 0;
-
-                        while($tempRating < $currentRating){
-                            if($tempRating + 1 <= $currentRating){
-                                $ratingHtml = $ratingHtml . "<i class='fa-solid fa-star'></i>";
-                                $tempRating += 1;
-                            } else if ($tempRating + 0.5 <= $currentRating){
-                                $ratingHtml = $ratingHtml . "<i class='fa-solid fa-star-half-stroke'></i>";
-                                $tempRating += 0.5;
-                            } else {
-                                break;
-                            }
-                        }
-
-                        $tempRating = ceil($tempRating);
-
-                        while($tempRating < 5){
-                            $ratingHtml = $ratingHtml . "<i class='fa-regular fa-star'></i>";
-                            $tempRating += 1;
-                        }
-                     
-
-                        echo "
-                            <div class='worker-card'>
-                                <h1 class='worker-card-title'>"
-                                    . ucfirst($fullName) .
-                                "</h1>
-                                <div class='worker-card-star-container'>
-                                    $ratingHtml
-                                    &nbsp;&nbsp;<b>$currentRating </b> 
-                                </div>
-                                <div class='worker-image'>
-                                    <img src='$imageUrl' alt='worker-profile'>
-                                </div>
-                                <div class='worker-card-location-row'>
-                                    <h3><i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i>&nbsp;&nbsp;"
-                                        . ucfirst($city) .
-                                    "</h3>
-                                </div> 
-                                <div class='worker-card-types-row'>
-                                    <div class='worker-type-badge'>
-                                        <h5>Electrician</h5>
-                                    </div>
-                                    <div class='worker-type-badge'>
-                                        <h5>Plumber</h5>
-                                    </div>
-                                </div>
-                                <div class='worker-card-button-container'>
-                                    <a href='view-worker-profile.php?workerId=$userId'>
-                                    <button type='button' class='view-profile-button'>View Profile</button>
-                                    </a>
-                                    <button type='button' class='booking-button'>Book now!</button>
-                                </div>
-                                <span id='location-$userId'></span>
-                                <script>
-                                    addEventListener('load', function(){
-                                        
-                                        if (navigator.geolocation) {
-                                            navigator.geolocation.getCurrentPosition(function(position) {
-                                              var lat = position.coords.latitude;
-                                              var lng = position.coords.longitude;
-                                
-                                        
-                                              // Send location data to PHP backend
-                                              var xhttp = new XMLHttpRequest();
-                                              xhttp.onreadystatechange = function() {
-                                                if (this.readyState == 4 && this.status == 200) {
-                                                  document.getElementById('location-$userId').innerHTML = this.responseText;
-                                                }
-                                              };
-                                              xhttp.open('POST', 'http://localhost/labour_link/test_location.php', true);
-                                              xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                                              xhttp.send('lat=' + lat + '&lng=' + lng + '&to_location=' + '$city');
-                                            });
-                                          } else {
-                                            console.log('Geolocation is not supported by this browser.');
-                                          }
-                                        
-
-
-                                    });
-                                </script>
-                                
-
-
-                            </div>
-                        "; 
-                        
-                    }
+                for($i = 0; $i < 4; $i++) {
+                    echo "
+                    <div class='worker-loading-card'>
+                        <div class='worker-loading-card-title'></div>
+                        <div class='worker-loading-card-star-container'></div>
+                        <div class='worker-loading-image'></div>
+                        <div class='worker-loading-card-location-row'></div>
+                        <div class='worker-loading-card-types-row'></div>
+                        <div class='worker-loading-card-button-container'></div>
+                            
+                    </div>";
                 }
-//                $sql_get_workers = $sql_get_workers . " ORDER BY location-$userId DESC LIMIT 4";
-//                $sql_get_workers_on_location = $sql_get_workers_on_location . " LIMIT 4";
-                $conn->close();
-
             ?>
          
         
         </div>
-        <div class="button-container">
-            <button type="button" class="more-button">Load more&nbsp;
-                <i class="fa-solid fa-spinner"></i></button>
+        <div class="button-loading-container" id="nearby-worker-button-container">
+            <div class="button-loading-state"></div>
         </div>
     </div>
-    <span id="test-location"></span>
     
 </section>
 <footer class="footer">
@@ -580,9 +373,6 @@
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/worker/index.js" type="text/javascript"></script>
-
-
-
-
+<?php echo "<script>initialLoad('$workerType')</script>" ?>
 </body>
 </html>

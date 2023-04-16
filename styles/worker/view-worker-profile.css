@@ -102,7 +102,7 @@ p {
     height: 50px;
 }
 
-.booking-button{
+.booking-button, .primary-button{
     outline: none;
     border: 3px solid var(--primary-color);
     padding: 12px 18px;
@@ -119,7 +119,7 @@ p {
     margin-left: 40px;
 }
 
-.booking-button:active, .more-button:active{
+.booking-button:active, .more-button:active, .primary-button:active{
     transform: scale(.96);
 }
 
