@@ -1,6 +1,7 @@
 let allWorkers = null;
 let topWorkersCount = 0;
 let currentTopWorkers = null;
+let currentLocationWorkers = null;
 
 const topWorkersButton = document.getElementById('top-workers-button');
 topWorkersButton.addEventListener('click', () => {
@@ -121,3 +122,60 @@ function loadMoreWorkers(workerType, perPage) {
         })
         .catch(error => console.log(error));
 }
+
+let workerLocations = [];
+const locationTexts = Array.from(document.getElementsByClassName('location-text'));
+let updatedLocations = [];
+
+
+function initialLoad(workerType){
+     fetch(`http://localhost/labour_link/api/workers.php?workerType=${workerType}`, {
+         method: 'GET',
+         headers: { 'Content-Type': 'application/json' }
+     })
+         .then(response => response.json())
+         .then(async (data) => {
+             allWorkers = data;
+
+             let allWorksWithLocation = allWorkers.map(worker => {
+                 return { "userId": worker.userId, "city": worker.city };
+             });
+
+             if (navigator.geolocation) {
+                 navigator.geolocation.getCurrentPosition(function (position) {
+                     const lat = position.coords.latitude;
+                     const lng = position.coords.longitude;
+
+                     const body = {
+                         "latitude": lat,
+                         "longitude": lng,
+                         "data": allWorksWithLocation
+                     }
+
+                     fetch(`http://localhost/labour_link/api/locationservice.php`, {
+                         method: 'POST',
+                         headers: { 'Content-Type': 'application/json' },
+                         body: JSON.stringify(body)
+                     })
+                         .then(response => response.json())
+                         .then(data => {
+                             allWorkers.sort((first, second) => {
+                                 if(first.userId < second.userId) return -1;
+                                 else return 1;
+                             });
+                             data.sort((first, second) => {
+                                 if(first.userId < second.userId) return -1;
+                                 else return 1;
+                             });
+
+                             for(let i = 0; i < allWorkers.length; i++){
+                                 allWorkers[i] = {"distance": data[i].distance,...allWorkers[i]}
+                             }
+                         })
+                 });
+             }
+
+         })
+         .catch(error => console.log(error));
+}
+

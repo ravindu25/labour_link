@@ -114,6 +114,75 @@
     text-align: center;
 }
 
+.worker-loading-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 21%;
+    height: 540px;
+    padding: 28px 16px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    background-color: var(--primary-background-shade-color);
+    border-radius: 12px;
+}
+
+.worker-loading-card-title{
+    width: 75%;
+    height: 35px;
+    background-color: var(--primary-background-color);
+}
+
+.worker-loading-card-star-container{
+    width: 40%;
+    height: 25px;
+    margin: 8px 0px;
+    background-color: var(--primary-background-color);
+}
+
+.worker-loading-image{
+    width: 250px;
+    margin: 8px auto;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--primary-background-color);
+}
+
+.worker-loading-card-location-row{
+    width: 40%;
+    height: 25px;
+    margin: 8px 0px;
+    background-color: var(--primary-background-color);
+}
+
+.worker-loading-card-types-row{
+    width: 60%;
+    height: 25px;
+    margin: 8px 0px;
+    background-color: var(--primary-background-color);
+}
+
+.worker-loading-card-button-container{
+    width: 80%;
+    height: 40px;
+    margin: 8px 0px;
+    background-color: var(--primary-background-color);
+}
+
+.button-loading-container{
+    display: flex;
+    justify-content: center;
+}
+
+.button-loading-state{
+    width: 15%;
+    height: 60px;
+    margin: 8px 0px;
+    border-radius: 12px;
+    background-color: var(--primary-background-color);
+}
+
 .booking-button{
     outline: none;
     border: 3px solid var(--primary-color);
