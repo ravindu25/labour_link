@@ -23,7 +23,7 @@
             } else if($workerType === 'mechanic'){
                 $sql_get_workers = $sql_get_workers . " inner join Mechanic ON Worker.Worker_ID = Mechanic.Mechanic_ID";
             } else if($workerType === 'gardener'){
-                $sql_get_workers = $sql_get_workers . " inner join Gardener ON Worker.Worker_ID = Gardener.Gardener_ID;";
+                $sql_get_workers = $sql_get_workers . " inner join Gardener ON Worker.Worker_ID = Gardener.Gardener_ID";
             }
 
             $sql_get_workers = $sql_get_workers . " order by Worker.Current_Rating desc";

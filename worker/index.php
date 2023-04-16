@@ -261,7 +261,7 @@
 </section>
 <section class="main-content">
     <div class="worker-section">
-        <h1 class="worker-section-title">Top workers</h1>
+        <h1 class="worker-section-title" id="top-worker-section-title">Top workers</h1>
         <div class="worker-card-container" id="top-worker-card-container">
             <?php
                 for($i = 0; $i < 4; $i++) {
@@ -278,13 +278,13 @@
                 }
             ?>
         </div>
-        <div class="button-loading-container">
+        <div class="button-loading-container" id="top-worker-button-container">
             <div class="button-loading-state"></div>
         </div>
     </div>
-    <div class="worker-section">
+    <div class="worker-section" id="worker-section">
         <h1 class="worker-section-title">Workers nearby</h1>
-        <div class="worker-card-container">
+        <div class="worker-card-container" id="worker-nearby-card-container">
             <?php
                 for($i = 0; $i < 4; $i++) {
                     echo "
@@ -302,7 +302,7 @@
          
         
         </div>
-        <div class="button-loading-container">
+        <div class="button-loading-container" id="nearby-worker-button-container">
             <div class="button-loading-state"></div>
         </div>
     </div>

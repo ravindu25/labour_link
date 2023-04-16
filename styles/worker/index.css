@@ -170,6 +170,29 @@
     background-color: var(--primary-background-color);
 }
 
+.empty-worker-card-image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 48px 0;
+}
+
+.empty-worker-card-image-container img{
+    width: 60%;
+    height: auto;
+}
+
+.empty-worker-card-image-container h1{
+    margin: 0;
+    width: 60%;
+    font-size: 28px;
+    font-weight: normal;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    color: var(--primary-color);
+}
+
 .button-loading-container{
     display: flex;
     justify-content: center;
@@ -213,6 +236,20 @@
 .booking-button:active, .more-button:active{
     transform: scale(.96);
 }
+
+.disabled-button{
+    outline: none;
+    border: 3px solid var(--grey-color);
+    padding: 12px 18px;
+    color: var(--grey-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: white;
+    transition: none;
+}
+
 
 .view-profile-button{
     outline: none;
