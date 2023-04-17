@@ -15,5 +15,12 @@
       <jdbc-url>jdbc:mysql://labour-link.c4wgecowfejr.ap-northeast-1.rds.amazonaws.com:3306/labour_link</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="@labourlink.cdkspo5cbfve.ap-southeast-1.rds.amazonaws.com" uuid="07bd0199-4fad-437a-a9f5-5559870e9178">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://labourlink.cdkspo5cbfve.ap-southeast-1.rds.amazonaws.com:3306</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

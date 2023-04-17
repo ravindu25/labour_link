@@ -106,7 +106,7 @@
                         <label for="dob">Date of birth(MM/DD/YY)</label>
                         <br/>
                         <div class="input-container">
-                            <input type="date" id="dob" class="date-input" name="dob"/>
+                            <input type="date" id="dob" class="date-input" name="dob" disabled/>
                             <br/>
                             <span class="input-error-text" id="input-dob-error"></span>
                         </div>

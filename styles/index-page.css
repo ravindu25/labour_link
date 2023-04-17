@@ -17,7 +17,7 @@
     --warning-color: #FF5B19;
     --warning-dark-color: #9A2D01;
     --grey-color: #978C87;
-    --grey-color-shade: #D0CFCE;
+    --grey-color-shade: #E1E5E8;
 }
 
 body{
@@ -194,7 +194,7 @@ a{
     appearance: none;
     min-width: 400px;
     max-width: 450px;
-    height: 24px;
+    /*height: 24px;*/
     padding: 12px 16px;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
@@ -296,7 +296,7 @@ a{
 .nav-link-container{
     display: flex;
     align-items: center;
-    margin-left: 5%;
+    margin-left: 70px;
 }
 
 .nav-link-items{
@@ -305,6 +305,11 @@ a{
 
 .nav-links{
     color: #FFF;
+    padding-inline: 20px;
+}
+
+.nav-links:hover{
+    color: yellow;
 }
 
 .nav-select{
@@ -362,6 +367,28 @@ a{
 
 .nav-link-items-button:active{
     transform: scale(.96);
+}
+
+.toolip{
+    position: relative;
+}
+
+.tooltiptext{
+    position: absolute;
+    top: -72px;
+    right: 12px;
+    font-size: 14px;
+    text-align: center;
+    color: var(--primary-color);
+    background-color: white;
+    box-shadow: var(--grey-color-shade) 0px 7px 29px 0px;
+    padding: 8px 4px;
+    border-radius: 8px;
+    visibility: hidden;
+}
+
+.toolip:hover .tooltiptext{
+    visibility: visible;
 }
 
 /* Styling for tables */

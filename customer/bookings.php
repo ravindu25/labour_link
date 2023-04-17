@@ -4,6 +4,7 @@
     if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Customer') {
         header("Location: ../login.php");
     }
+    $userId = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,8 +35,24 @@
 </div>
 <div class="failed-message-container" id="booking-create-fail">
     <div class="message-text">
-        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking created successfully</h1>
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking creation failed</h1>
         <h5>Your login session outdated. Please login again.</h5>
+    </div>
+</div>
+<div class="delete-booking-container" id="delete-booking-container">
+    <div id="delete-booking-content">
+        <div class="delete-booking-title">
+            <h1 id="delete-booking-text">Do you want to delete selected booking?</h1>
+        </div>
+        <div class="delete-booking-buttons" id="delete-booking-buttons">
+            <button type="button" id="delete-cancel-button" onclick="closeDeleteModal()" class="delete-cancel-button">Cancel</button>
+            <button type="button" id="delete-confirm-button" class="delete-confirm-button">Delete</button>
+        </div>
+    </div>
+    <div class="loader-container" id="loader-container" style="height: 100%; width: 100%">
+        <svg id="spinner" class="spinner" width="50%" height="100%" viewBox="0 0 50 50">
+            <circle class="path" style="stroke: #FF5B19;" cx="25" cy="25" r="20" fill="#FFF" stroke-width="5"></circle>
+        </svg>
     </div>
 </div>
 <div class="booking-details-container" id="booking-details-container">
@@ -43,33 +60,31 @@
         <div class="booking-details-title">
             <h1>Current Status of Your <u>Booking</u></h1>
         </div>
-        <div class="status-container">
-            <button type="button" class="status-button">In-Progress</button>
-        </div>
+        <div class="status-container" id="booking-details-status-container"></div>
         <div class="details-container">
             <div class="details-row">
                 <h4>Job type</h4>
-                <h4 class="details-value">Plumber</h4>
+                <h4 class="details-value" id="booking-details-job-type"></h4>
             </div>
             <div class="details-row">
                 <h4>Worker</h4>
-                <h4 class="details-value">Saman Gunawardhana</h4>
+                <h4 class="details-value" id="booking-details-worker-name"></h4>
             </div>
             <div class="details-row">
                 <h4>Start date</h4>
-                <h4 class="details-value">21-Nov-2022</h4>
+                <h4 class="details-value" id="booking-details-start-date"></h4>
             </div>
-            <div class="remaining-time-container">
+            <div class="remaining-time-container" id="remaining-time-container">
                 <h4>This booking will be closed in</h4>
-                <h1 class="countdown-text">12 hrs 3 days</h1>
+                <h1 class="countdown-text" id="booking-details-countdown"></h1>
             </div>
             <div class="payment-method-container">
                 <div class="payment-image-container">
                     <h4>Payment Method</h4>
                     <div class="payment-image-card">
-                        <img class="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
+                        <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
                              alt="payment method"/>
-                        <h4>Online payments</h4>
+                        <h4 id="payment-method-text">Online payments</h4>
                     </div>
                 </div>
                 <div class="payment-details-container">
@@ -91,8 +106,8 @@
         <form id="booking-create-form">
             <div class="form-input-row">
                 <label for="job-type">Job type</label>
-                <select id="job-type" name="job-type">
-                    <option value="Electrician">Electrician</option>
+                <select id="job-type" name="job-type" disabled>
+                    <option value="Electrician" selected>Electrician</option>
                     <option value="Plumber">Plumber</option>
                     <option value="Painter">Painter</option>
                     <option value="Carpenter">Carpenter</option>
@@ -110,7 +125,7 @@
                 <label for="start-date">Start date</label>
                 <input type="date" id="start-date" name="start-date"/>
             </div>
-            <div class="form-time-row">
+            <div class="form-time-row" id="days-complete-container">
                 <label>
                     Days needed to complete
                 </label>
@@ -152,11 +167,18 @@
                     </label>
                 </div>
             </div>
+            <div class="form-input-row" id="end-date-container">
+                <label for="end-date">End date</label>
+                <input type="date" id="end-date" name="send-date"/>
+            </div>
+            <div class="form-button-container">
+                <button type="button" class="more-button submit-button" id="change-days-complete-button">Custom date</button>
+            </div>
             <div class="form-payment-row">
                 <label>Payment method</label>
                 <div class="payment-methods-container">
                     <label>
-                        <input type="radio" name="payment-method" class="payment-method-radio" value="manual"/>
+                        <input type="radio" name="payment-method" class="payment-method-radio" value="Manual"/>
                         <div class="payment-method-card">
                             <img src="../assets/customer/dashboard/undraw_savings_re_eq4w.svg" alt="manual-payment"
                                  class="payment-method-image"/>
@@ -164,7 +186,7 @@
                         </div>
                     </label>
                     <label>
-                        <input type="radio" name="payment-method" class="payment-method-radio" value="online" checked/>
+                        <input type="radio" name="payment-method" class="payment-method-radio" value="Online" checked/>
                         <div class="payment-method-card">
                             <img src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg" alt="online-payment"
                                  class="payment-method-image"/>
@@ -196,7 +218,7 @@
             <a href="./bookings.php">
                 <div class="sidebar-item sidebar-item-selected">
                     <i class="fa-solid fa-b sidebar-item-icon"></i>
-                    <h4 class="sidebar-icon-heading">Booking</h4>
+                    <h4 class="sidebar-icon-heading">Bookings</h4>
                 </div>
             </a>
             <a href="./feedbacks.php">
@@ -239,7 +261,7 @@
             <div class="recent-bookings-title">
                 <h1>Recently made Bookings</h1>
             </div>
-            <div class="recent-bookings-container">
+            <div class="recent-bookings-container" id="recent-booking-container">
                 <?php
                     require_once('../db.php');
 
@@ -247,38 +269,32 @@
                     $customer_id = $customer_id = $_SESSION['user_id'];
                     $sql_get_bookings = "select Booking.*, User.First_Name, User.Last_Name from Booking inner join User on Booking.Worker_ID = User.User_ID where Booking.Customer_ID = $customer_id ORDER BY Booking.Created_Date DESC LIMIT 5";
 
-                    $status = array("Pending","Completed","Rejected","In-Progress");
 
                     $result = $conn->query($sql_get_bookings);
 
                     if($result->num_rows > 0){
                         while($row = $result->fetch_assoc()){
+                            $bookingId = $row['Booking_ID'];
                             $worker_type = $row['Worker_Type'];
                             $worker_name = $row['First_Name'] . " " . $row['Last_Name'];
                             $start_date = date("d M Y", strtotime($row['Start_Date']));
-                            $statusValue = array_rand($status);
+                            $status = $row['Status'];
 
-                            $button = '';
-                            switch($statusValue){
-                                case 0:
-                                    $button = '<button class="pending-button">Pending</button>';
-                                    break;
-                                case 1:
-                                    $button = '<button class="completed-button">Completed</button>';
-                                    break;
-                                case 2:
-                                    $button = '<button class="rejected-button">Rejected</button>';
-                                    break;
-                                case 3:
-                                    $button = '<button class="in-pogress-button">In-Progress</button>';
-                                    break;
-                                default:
-                                    $button = '<button class="in-pogress-button">In-Progress</button>';
-                                    break;
+                            $button = '<button class="pending-button">Pending</button>';
+
+                            if($status === 'Pending'){
+                                $button = '<button class="pending-button">Pending</button>';
+                            } else if($status === 'Accepted'){
+                                $button = '<button class="in-pogress-button">Accepted</button>';
+                            } else if($status === 'Completed'){
+                                $button = '<button class="completed-button">Completed</button>';
+                            } else {
+                                $button = '<button class="rejected-button">Rejected</button>';
                             }
 
+
                             echo "
-                                <div class='booking-card'>
+                                <div class='booking-card' onclick='openBookingDetailsModal($bookingId)'>
                                     <div class='card-text'>
                                         <h3>$worker_type</h3>
                                         <p>Work by</p>
@@ -305,7 +321,7 @@
                         <label for="booking-search">Search (Worker name etc)</label>
                         <div class="booking-search-input-field">
                             <input type="text" id="booking-search" class="booking-search-input" name="users-search"/>
-                            <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button type="button" class="search-icon-small" id="booking-search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
                 </form>
@@ -316,117 +332,31 @@
                 <thead>
                 <tr class="main-tr">
                     <th class="main-th">
-                        <div class="table-heading-container">Worker name&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">Worker name&nbsp;<button class="sort-button" id="worker-name-sort"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                         </div>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">Start date&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">Start date&nbsp;<button class="sort-button" id="start-date-sort"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">End date&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">End date&nbsp;<button class="sort-button" id="end-date-sort"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
                     <th class="main-th">More actions</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Saman Gunawardhana
-                        <br/>
-                        <span class="pending-badge">Pending</span>
-                    </td>
-                    <td class="main-td">21 Oct 2022</td>
-                    <td class="main-td">27 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Sunil Perera
-                        <br/>
-                        <span class="pending-badge">Pending</span>
-                    </td>
-                    <td class="main-td">12 Oct 2022</td>
-                    <td class="main-td">20 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Sunith Hettiarachchi
-                        <br/>
-                        <span class="rejected-badge">Rejected</span>
-                    </td>
-                    <td class="main-td">1 Oct 2022</td>
-                    <td class="main-td">5 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Dammika Kumara
-                        <br/>
-                        <span class="completed-badge">Completed</span>
-                    </td>
-                    <td class="main-td">23 Oct 2022</td>
-                    <td class="main-td">28 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Dinesh Attanayaka
-                        <br/>
-                        <span class="completed-badge">Completed</span>
-                    </td>
-                    <td class="main-td">10 Oct 2022</td>
-                    <td class="main-td">24 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                <tbody id="bookings-table-body">
                 </tbody>
             </table>
             <div class="pagination-container">
-                <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
+                <button class="pagination-button" id="previous-page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button" id="previous-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current" id="current-page-number"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="next-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
-        </div>
         </div>
     </section>
 </main>
@@ -436,6 +366,11 @@
     </div>
 </footer>
 <script src="../scripts/index.js" type="text/javascript"></script>
+<?php
+    echo "<script>
+        let userId = $userId;
+    </script>"
+?>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/customer/bookings.js" type="text/javascript"></script>
 <script src="../scripts/customer/create-booking-fetch-workers.js" type="text/javascript"></script>

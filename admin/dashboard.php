@@ -22,7 +22,7 @@ session_start();
     <link href="../styles/index-page.css" rel="stylesheet"/>
     <link href="../styles/dashboard.css" rel="stylesheet"/>
     <link href="../styles/admin/admin-dashboard.css" rel="stylesheet"/>
-    <title>Worker Dashboard | LabourLink</title>
+    <title>Admin Dashboard | LabourLink</title>
 </head>
 <body>
 <?php include_once '../components/navbar.php' ?>
@@ -39,7 +39,7 @@ session_start();
             <a href="./bookings.php">
                 <div class="sidebar-item">
                     <i class="fa-solid fa-b sidebar-item-icon"></i>
-                    <h4 class="sidebar-icon-heading">Booking</h4>
+                    <h4 class="sidebar-icon-heading">Bookings</h4>
                 </div>
             </a>
             <a href="./feedbacks.php">
@@ -245,7 +245,7 @@ session_start();
         </div>
         <div class="recent-payments">
             <div class="recent-payments-title">
-                <h1>Recently made Feedbacks</h1>
+                <h1>Recently made Payments</h1>
                 <button class="more-button">More Payments</button>
             </div>
             <div class="recent-payments-container">
@@ -280,7 +280,7 @@ session_start();
                         <td class="main-td"><span class="payment-success-failed">Failed</span></td>
                     </tr>
                     <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Rushdha Rasheeda<br/>
+                        <td class="main-td" style="text-align: left;">Rushdha Rasheed<br/>
                             <span class="blue-badge">1 Nov 2022</span>
                         </td>
                         <td class="main-td">

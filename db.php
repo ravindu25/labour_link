@@ -1,5 +1,5 @@
 <?php
-    $servername = "labourlink.cdkspo5cbfve.ap-southeast-1.rds.amazonaws.com"; 
+    $servername = "labourlink.cdkspo5cbfve.ap-southeast-1.rds.amazonaws.com";
     $username = "admin";
     $password = "LabourLink123*";
     $dbname = "labour_link";

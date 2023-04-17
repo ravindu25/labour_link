@@ -1,0 +1,344 @@
+.main-section{
+    background-color: #ABC3EF;
+}
+
+.sidebar-item-selected{
+    background-color: #ABC3EF;
+}
+
+.spinner {
+    animation: rotate 2s linear infinite;
+    margin: -25px 0 0 -25px;
+    width: 100px;
+    height: 100px;
+}
+
+.path {
+    stroke: hsl(240, 100%, 50%);
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
+}
+
+.success-message-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    transform: translate(-50%, -50%) ;
+    padding: 12px 36px;
+    color: #102699;
+    background-color: #FFF;
+    border-radius: 16px;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.failed-message-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    transform: translate(-50%, -50%) ;
+    padding: 12px 36px;
+    color: #9A2D01;
+    background-color: #FFF;
+    border-radius: 16px;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.success-message-container h1, .failed-message-container h1{
+    margin-bottom: 12px;
+    font-weight: normal;
+}
+
+.success-message-container h3, .failed-message-container h3{
+    margin-top: 0;
+    font-weight: normal;
+}
+
+.success-message-text, .failed-message-text{
+    margin-left: 32px;
+}
+
+.main-content-container{
+    display:none;
+}
+.main-heading{
+    padding: 12px 24px;
+    color: #FFF;
+    background-color: var(--primary-color);
+    border-radius: 12px;
+}
+
+.main-heading h1{
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    font-weight: normal;
+}
+
+.main-heading h5{
+    margin: 0;
+    text-align: right;
+    font-size: 18px;
+    font-weight: normal;
+}
+.due-payments-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.due-payments-title h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.payment-method-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-image-container{
+    width: 50%;
+    text-align: center;
+}
+
+.payment-image-container h4{
+    margin: 0;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+}
+
+.payment-image-card{
+    padding: 24px 12px;
+    text-align: center;
+}
+
+.payment-image{
+    width: 60%;
+}
+
+.payment-image-card h4{
+    text-align: center;
+}
+
+.payment-details-container h3{
+    font-size: 28px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.payment-details-container h2{
+    font-size: 56px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.back-button-container{
+    padding: 12px;
+    text-align: center;
+}
+
+.back-button-container button{
+    min-width: 180px;
+}
+
+.booking-search-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.booking-search-title h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.booking-search-input-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-search-input-container label{
+    color: var(--dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.booking-search-input{
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 0 2px 2px;
+    border-radius: 12px 0 0 12px;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 22px;
+    min-width: 200px;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+}
+
+.booking-search-input:valid,
+.booking-search-input:focus,
+.booking-search-input:active{
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 0 2px 2px;
+    border-radius: 12px 0 0 12px;
+}
+
+.booking-search-input-field{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.search-icon-small{
+    height: 46px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 2px 2px 0;
+    border-radius: 0 12px 12px 0;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 24px;
+    color: var(--primary-color);
+    background-color: #FFF;
+}
+
+.pagination-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.pagination-button{
+    height: 40px;
+    width: 40px;
+    outline: none;
+    border: none;
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 4px;
+    background-color: var(--primary-background-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.pagination-button:active {
+    transform: scale(.96);
+}
+
+.pagination-button-current{
+    height: 48px;
+    width: 48px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: var(--primary-background-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.pagination-button-current:active {
+    transform: scale(.96);
+}
+
+.sort-button{
+    height: 48px;
+    width: 48px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+}
+
+.blue-badge{
+    display: inline-block;
+    padding: 6px;
+    color: var(--primary-bright-color);
+    background-color: var(--primary-shade-color);
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.badge-container{
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.view-button{
+    outline: none;
+    border: 3px solid var(--success-dark-color);
+    padding: 8px 18px;
+    color: var(--success-dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: #FFF;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.view-button:active{
+    transform: scale(.96);
+}
+
+.payment-success-badge{
+    font-size: 20px;
+    color: var(--success-bright-color);
+    font-weight: bold;
+}
+
+.payment-success-failed{
+    font-size: 20px;
+    color: var(--warning-color);
+    font-weight: bold;
+}
