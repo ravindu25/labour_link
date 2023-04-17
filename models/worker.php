@@ -9,8 +9,9 @@
         public $address;
         public $city;
         public $currentRating;
+        public $workerCategories;
 
-        public function __construct($userId, $fullName, $emailAddress, $contactNo, $nic, $dob, $address, $city, $currentRating)
+        public function __construct($userId, $fullName, $emailAddress, $contactNo, $nic, $dob, $address, $city, $currentRating, $workerCategories)
         {
             $this->userId = $userId;
             $this->fullName = $fullName;
@@ -21,6 +22,7 @@
             $this->address = $address;
             $this->city = $city;
             $this->currentRating = $currentRating;
+            $this->workerCategories = $workerCategories;
         }
 
         public function getUserId()
@@ -108,7 +110,15 @@
             $this->currentRating = $currentRating;
         }
 
+        public function getWorkerCategories()
+        {
+            return $this->workerCategories;
+        }
 
+        public function setWorkerCategories($workerCategories)
+        {
+            $this->workerCategories = $workerCategories;
+        }
     }
 
     ?>

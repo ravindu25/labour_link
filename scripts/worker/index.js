@@ -68,6 +68,7 @@ function initialLoad(workerType){
 
 function createCard(worker){
     const currentRating = parseFloat(worker.currentRating);
+    const workerCategories = worker.workerCategories;
     let tempRating = 0;
     let ratingHtml = '';
 
@@ -92,6 +93,13 @@ function createCard(worker){
         tempRating += 1;
     }
 
+    const workerCategoryArray = workerCategories.map(workerCategory => `
+                <div class="worker-type-badge">
+                        <h5>${workerCategory}</h5>
+                  </div>
+    `);
+    const workerCategoryText = workerCategoryArray.toString();
+
     let html = `
         <div class="worker-card">
                 <h1 class="worker-card-title">${worker.fullName}</h1>
@@ -106,15 +114,10 @@ function createCard(worker){
                     <h3><i class="fa-solid fa-location-dot" style="color: var(--primary-color)"></i>&nbsp;&nbsp;${worker.city}</h3>
                 </div>
                 <div class="worker-card-types-row">
-                    <div class="worker-type-badge">
-                        <h5>Electrician</h5>
-                    </div>
-                    <div class="worker-type-badge">
-                        <h5>Plumber</h5>
-                    </div>
+                    ${workerCategoryText}
                 </div>
                 <div class="worker-card-button-container">
-                    <a href='../worker/profile?workerId=${worker.userId}'<button type="button" class="view-profile-button">Profile</button></a>
+                    <a href='../worker/profile.php?workerId=${worker.userId}'<button type="button" class="view-profile-button">Profile</button></a>
                     <button type="button" class="booking-button">Book now!</button>
                 </div>
             </div>
