@@ -66,7 +66,7 @@
             <div class="nav-link-items"><a href="<?php echo $baseUrl . "about-us.php"?>" class="nav-links">About</a></div>
             <div class="nav-link-items"><a href="<?php echo $baseUrl . "contact-us.php"?>" class="nav-links">Contact Us</a></div>
             <?php
-            session_start();
+
             if (!isset($_SESSION['username'])) {
 
                 ?>
@@ -136,7 +136,7 @@
                     document.getElementById("searchResult").innerHTML = this.responseText;
                 }
             }
-            xhttp.open("POST", "components/navbarSearch.php", true);
+            xhttp.open("POST", "/labour_link/components/navbarSearch.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("searchInput="+searchInput);
 

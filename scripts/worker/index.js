@@ -117,7 +117,7 @@ function createCard(worker){
                     ${workerCategoryText}
                 </div>
                 <div class="worker-card-button-container">
-                    <a href='../worker/profile.php?workerId=${worker.userId}'<button type="button" class="view-profile-button">Profile</button></a>
+                    <a href='../worker/view-worker-profile.php?workerId=${worker.userId}'<button type="button" class="view-profile-button">Profile</button></a>
                     <button type="button" class="booking-button">Book now!</button>
                 </div>
             </div>
