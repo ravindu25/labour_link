@@ -10,7 +10,7 @@
 
 ---
 # Meet our team
-* [Ravindu Wegiriya][https://github.com/ravindu25]
-* [Mohamed Izzath][https://github.com/Mohamedizzath]
-* [Rushdha Rasheed][https://github.com/Rushdha20]
-* [Dhananga Deepanjana][https://github.com/DhanangaD]
+* [Ravindu Wegiriya](https://github.com/ravindu25)
+* [Mohamed Izzath](https://github.com/Mohamedizzath)
+* [Rushdha Rasheed](https://github.com/Rushdha20)
+* [Dhananga Deepanjana](https://github.com/DhanangaD)
