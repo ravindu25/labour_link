@@ -155,7 +155,7 @@
         </form>
     </div>
 </div>
-<?php include_once './components/navbar.php' ?>
+<?php include_once '../components/navbar.php' ?>
 <section class="worker-banner" style="background-image: url(
             <?php echo '../assets/worker/worker-type-images/' . $workerType . ".jpg" ?>
         )">
