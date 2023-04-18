@@ -45,6 +45,8 @@
 </div>
 <div class="backdrop-modal" id="backdrop-modal">
 </div>
+<div class="backdrop-modal" id="message-backdrop">
+</div>
 <div class="register-select-content" id="register-modal-content">
     <div class="register-select-heading">
         <img src="../assets/svg/user-check-solid.svg" alt="house icon" class="register-select-icon" />
@@ -87,19 +89,60 @@
             <div class="form-input-row">
                 <label for="job-type">Job type</label>
                 <select id="job-type" name="job-type" disabled>
-                    <option value="Electrician" selected>Electrician</option>
-                    <option value="Plumber">Plumber</option>
-                    <option value="Painter">Painter</option>
-                    <option value="Carpenter">Carpenter</option>
-                    <option value="Mason">Mason</option>
-                    <option value="Janitor">Janitor</option>
-                    <option value="Mechanical">Mechanical</option>
-                    <option value="Gardner">Gardner</option>
+                    <?php
+                        if($workerType == 'electrician'){
+                            echo '<option value="Electrician" selected>Electrician</option>';
+                        } else {
+                            echo '<option value="Electrician">Electrician</option>';
+                        }
+
+                        if($workerType == 'plumber'){
+                            echo '<option value="Plumber" selected>Plumber</option>';
+                        } else {
+                            echo '<option value="Plumber">Plumber</option>';
+                        }
+
+                        if($workerType == 'painter'){
+                            echo '<option value="Painter" selected>Painter</option>';
+                        } else {
+                            echo '<option value="Painter">Painter</option>';
+                        }
+
+                        if($workerType == 'carpenter'){
+                            echo '<option value="Carpenter" selected>Carpenter</option>';
+                        } else {
+                            echo '<option value="Carpenter">Carpenter</option>';
+                        }
+
+                        if($workerType == 'mason'){
+                            echo '<option value="Mason" selected>Mason</option>';
+                        } else {
+                            echo '<option value="Mason">Mason</option>';
+                        }
+
+                        if($workerType == 'janitor'){
+                            echo '<option value="Janitor" selected>Janitor</option>';
+                        } else {
+                            echo '<option value="Janitor">Janitor</option>';
+                        }
+
+                        if($workerType == 'mechanic'){
+                            echo '<option value="Mechanical" selected>Mechanical</option>';
+                        } else {
+                            echo '<option value="Mechanical">Mechanical</option>';
+                        }
+
+                        if($workerType == 'gardener'){
+                            echo '<option value="Gardner" selected>Gardner</option>';
+                        } else {
+                            echo '<option value="Gardner">Gardner</option>';
+                        }
+                    ?>
                 </select>
             </div>
             <div class="form-input-row">
                 <label for="worker-id">Worker</label>
-                <select id="worker-id" name="worker-name"></select>
+                <select id="worker-id" name="worker-name" disabled></select>
             </div>
             <div class="form-input-row">
                 <label for="start-date">Start date</label>
@@ -176,12 +219,21 @@
                 </div>
             </div>
             <div class="form-button-container">
-                <button type="button" class="more-button" id="booking-create-cancel-button">Cancel</button>
+                <button type="button" class="more-button" id="booking-create-cancel-button" onclick="closeBookingModal()">Cancel</button>
                 <button type="submit" class="more-button submit-button" id="booking-create-submit-button">Create
                     Booking
                 </button>
             </div>
         </form>
+    </div>
+</div>
+<div class="success-message-container" id="booking-create-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Booking created successfully</h1>
+</div>
+<div class="failed-message-container" id="booking-create-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking creation failed</h1>
+        <h5>Your login session outdated. Please login again.</h5>
     </div>
 </div>
 <?php include_once '../components/navbar.php' ?>
@@ -335,7 +387,6 @@
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/worker/index.js" type="text/javascript"></script>
-<script src="../scripts/customer/create-booking-fetch-workers.js" type="text/javascript"></script>
 <script src="../scripts/customer/create-booking.js" type="text/javascript"></script>
 <?php echo "<script>initialLoad('$workerType')</script>" ?>
 </body>

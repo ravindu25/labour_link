@@ -95,11 +95,14 @@
                         <div class="dropdown-items" id="dropdown-items">
                             <?php
                                 if($_SESSION['user_type'] == 'Admin'){
-                                    echo '<a href="./admin/dashboard.php">';
+                                    $url = $baseUrl . './admin/dashboard.php';
+                                    echo "<a href='$url'>";
                                 }else if($_SESSION['user_type'] == 'Customer'){
-                                    echo '<a href="./customer/dashboard.php">';
+                                    $url = $baseUrl . './customer/dashboard.php';
+                                    echo "<a href='$url'>";
                                 }else{
-                                    echo '<a href="./worker/dashboard.php">';
+                                    $url = $baseUrl . './worker/dashboard.php';
+                                    echo "<a href='$url'>";
                                 }
                             ?>
                                 <div class="dropdown-item" id="dropdown-item"><i class="fa-solid fa-gauge-high"></i>&nbsp;&nbsp;Dashboard
