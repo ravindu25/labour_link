@@ -3,6 +3,18 @@
 
     session_start();
 
+    $validWorkers = array('plumber', 'carpenter', 'electrician', 'painter', 'mason', 'janitor', 'mechanic', 'gardener');
+    if(!isset($_GET['workertype']) || !in_array($_GET['workertype'], $validWorkers)){
+        header("Location: ../index.php");
+    }
+
+    $logged = 'false';
+    if(isset($_SESSION['user_type'])) {
+        if ($_SESSION['user_type'] == 'Worker' || $_SESSION['user_type'] == 'Customer') {
+            $logged = 'true';
+        }
+    }
+
     $workerType = $_GET['workertype'];
 ?>
 
@@ -47,6 +59,23 @@
             <img src="../assets/home-page/job-type/customer-type.svg" alt="customer" class="reg-type-image" />
             <button type="button" onclick="window.location.href='../customer-registration.php'" class="card-button">Customer</button>
         </div>
+    </div>
+</div>
+<div class="login-container" id="login-container">
+    <div class="login-container-header">
+        <h1>Please login to the to create new booking!</h1>
+    </div>
+    <div class="login-container-image">
+        <img src="../assets/worker/undraw_upload_image_re_svxx.svg" alt="Login to the system" />
+    </div>
+    <div class="login-button-container">
+        <button class="primary-outline-button" onclick="closeLoginModal()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <a href="../login.php">
+            <button class="primary-button"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Login</button>
+        </a>
+    </div>
+    <div class="login-link-container">
+        <p>New to the labourlink. <a href="../customer-registration.php">Register</a></p>
     </div>
 </div>
 <div class="create-booking-container" id="create-booking-container">
@@ -300,11 +329,14 @@
 <?php
     echo "<script>
         let workerType = '$workerType';
+        let logged = $logged;
     </script>";
 ?>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/worker/index.js" type="text/javascript"></script>
+<script src="../scripts/customer/create-booking-fetch-workers.js" type="text/javascript"></script>
+<script src="../scripts/customer/create-booking.js" type="text/javascript"></script>
 <?php echo "<script>initialLoad('$workerType')</script>" ?>
 </body>
 </html>
