@@ -9,6 +9,21 @@ let currentLocationWorkers = null;
 let workerLocations = [];
 let updatedLocations = [];
 
+function openLoginModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const loginModal = document.getElementById('login-container');
+
+    backdrop.style.visibility = 'visible';
+    loginModal.style.visibility = 'visible';
+}
+
+function closeLoginModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const loginModal = document.getElementById('login-container');
+
+    backdrop.style.visibility = 'hidden';
+    loginModal.style.visibility = 'hidden';
+}
 
 function initialLoad(workerType){
      fetch(`http://localhost/labour_link/api/workers.php?workerType=${workerType}`, {
@@ -69,8 +84,10 @@ function initialLoad(workerType){
 function createCard(worker){
     const currentRating = parseFloat(worker.currentRating);
     const workerCategories = worker.workerCategories;
+    const workerID = worker.userId;
     let tempRating = 0;
     let ratingHtml = '';
+    let bookingButtonHtml = '';
 
     const profileId = Math.ceil(Math.random() * 10) % 4 + 1;
 
@@ -100,6 +117,12 @@ function createCard(worker){
     `);
     const workerCategoryText = workerCategoryArray.toString();
 
+    if(logged === false){
+        bookingButtonHtml = '<button type="button" class="booking-button" onclick="openLoginModal()"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Book now!</button>';
+    } else {
+        bookingButtonHtml = `<button type="button" class="booking-button" onclick="openBookingModal(${workerID})"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Book now!</button>`;
+    }
+
     let html = `
         <div class="worker-card">
                 <h1 class="worker-card-title">${worker.fullName}</h1>
@@ -118,7 +141,7 @@ function createCard(worker){
                 </div>
                 <div class="worker-card-button-container">
                     <a href='../worker/view-worker-profile.php?workerId=${worker.userId}'<button type="button" class="view-profile-button">Profile</button></a>
-                    <button type="button" class="booking-button">Book now!</button>
+                    ${bookingButtonHtml}
                 </div>
             </div>
     `;
@@ -297,4 +320,29 @@ function loadNearbyWorkersRow(){
                 </button>
             </div>`;
     }
+}
+
+/*
+ * Booking create process
+ */
+
+function openBookingModal(workerID){
+    const backdrop = document.getElementById('backdrop-modal');
+    const bookingModal = document.getElementById('create-booking-container');
+    const workernameInput = document.getElementById('worker-id');
+    const worker = allWorkers.find(worker => worker.userId == Number(workerID));
+
+    workernameInput.innerHTML = `<option value="${workerID}">${worker.fullName}</option>`
+
+
+    backdrop.style.visibility = 'visible';
+    bookingModal.style.visibility = 'visible';
+}
+
+function closeBookingModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const bookingModal = document.getElementById('create-booking-container');
+
+    backdrop.style.visibility = 'hidden';
+    bookingModal.style.visibility = 'hidden';
 }
