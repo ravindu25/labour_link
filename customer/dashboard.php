@@ -116,7 +116,7 @@
     </section>
     <section class="main-content">
         <div class="main-heading">
-            <h1>Welcome Back
+            <h1>Welcome
                 <u>
                     <?php
                         echo $_SESSION['first_name'] . " " . $_SESSION['last_name']
