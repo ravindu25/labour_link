@@ -96,6 +96,194 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 <h5>Logged as <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></h5>
             </div>
         </div>
+
+        <!-- Recent feedbacks section -->
+        <div class="recent-feedback">
+            <h1>Recent Feedbacks</h1>
+        </div>
+        <div class="recent-feedback-container">
+            <table class="main-table">
+                <thead>
+                <tr class="main-tr">
+                <th class="main-th">
+                        <div class="table-heading-container">Comment&nbsp;
+                        </div>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">Customer name&nbsp;
+                        </div>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">Commented Date&nbsp;
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">Service&nbsp;
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Extremely satisfied with the work done.
+                        <br/>
+                        <span class="blue-badge">Updated 15 days ago</span>
+                    </td>
+                    <td class="main-td">Saman Gunawardhana</td>
+                    <td class="main-td">21 Oct 2022</td>
+                    <td class="main-td">Plumbing</td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Process was neatly done on time
+                        <br/>
+                        <span class="blue-badge">Updated 20 days ago</span>
+                    </td>
+                    <td class="main-td">Kapila Gunawardhana</td>
+                    <td class="main-td">16 Oct 2022</td>
+                    <td class="main-td">Gardening</td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Work not completed on time.Slightly dissappointing.
+                        <br/>
+                        <span class="blue-badge">Updated 27 days ago</span>
+                    </td>
+                    <td class="main-td">Saman Gunathilaka</td>
+                    <td class="main-td">09 Oct 2022</td>
+                    <td class="main-td">Electrical</td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Payment not going through
+                        <br/>
+                        <span class="blue-badge">Updated a month ago</span>
+                    </td>
+                    <td class="main-td">Kapila Dharmadasa</td>
+                    <td class="main-td">05 Oct 2022</td>
+                    <td class="main-td">Mason</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+        <!--Feedbacks search container-->
+        <div class="feedback-search">
+            <div class="feedback-search-title">
+                <h1>Search for Feedbacks</h1>
+                <form action="" method="POST">
+                    <div class="feedback-search-input-container">
+                        <label for="feedback-search">Search (Customer name etc)</label>
+                        <div class="feedback-search-input-field">
+                            <input type="text" id="feedback-search" class="feedback-search-input" name="users-search"/>
+                            <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="recent-payments-container">
+            <table class="main-table">
+                <thead>
+                <tr class="main-tr">
+                    <th class="main-th">
+                        <div class="table-heading-container">Comment&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-down"></i></button>
+                        </div>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">Customer Name&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-down"></i></button>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">Commented Date&nbsp;<button class="sort-button"><i
+                                        class="fa-solid fa-arrow-down"></i></button>
+                    </th>
+                    <th class="main-th">More actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Extremely satisfied with the work done.
+                        <br/>
+                        <span class="blue-badge">Updated 15 days ago</span>
+                    </td>
+                    <td class="main-td">Saman Gunawardhana</td>
+                    <td class="main-td">21 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="view-button"><i class="fa fa-eye"></i>&nbsp;&nbsp;View
+                            </button>
+                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Process was neatly done on time.
+                        <br/>
+                        <span class="blue-badge">Updated 20 days ago</span>
+                    </td>
+                    <td class="main-td">Kapila Gunawardana</td>
+                    <td class="main-td">16 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="view-button"><i class="fa fa-eye"></i>&nbsp;&nbsp;View
+                            </button>
+                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Work not completed on time.Slighlty dissappointing.
+                        <br/>
+                        <span class="blue-badge">Updated 27 days ago</span>
+                    </td>
+                    <td class="main-td">Saman Gunathilaka</td>
+                    <td class="main-td">09 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="view-button"><i class="fa fa-eye"></i>&nbsp;&nbsp;View
+                            </button>
+                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="main-tr">
+                    <td class="main-td" style="text-align: left;">
+                        Payment not going through.
+                        <br/>
+                        <span class="blue-badge">Updated 1 month ago</span>
+                    </td>
+                    <td class="main-td">Kapila Dharmadhasa</td>
+                    <td class="main-td">05 Oct 2022</td>
+                    <td class="main-td">
+                        <div class="more-button-container">
+                            <button class="view-button"><i class="fa fa-eye"></i></i>&nbsp;&nbsp;View
+                            </button>
+                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="pagination-container">
+                <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
+                <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+        </div>
+
         <?php
         echo '<script src="../scripts/admin/loader.js" type="text/javascript"></script>';
         echo '<script>closeLoader()</script>';
