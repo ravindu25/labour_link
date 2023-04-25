@@ -125,6 +125,9 @@
             <button class="secondary-button" onclick="hideFeedbackContainer()">Cancel</button>
             <button class="primary-button" id="first-page-next-button" onclick=" goToNextFeedbackPage()">Next&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
         </div>
+        <div class="create-feedback-page-number">
+            <h3>Page 1 of 3</h3>
+        </div>
     </div>
     <div class="create-feedback-page" id="second-page">
         <div class="create-feedback-title">
@@ -232,6 +235,9 @@
             <button class="secondary-button" onclick="hideFeedbackContainer()">Cancel</button>
             <button class="primary-button" id="second-page-next-button" onclick="goNextFeedbackThirdPage()">Next&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
         </div>
+        <div class="create-feedback-page-number">
+            <h3>Page 2 of 3</h3>
+        </div>
     </div>
     <div class="create-feedback-page" id="third-page">
         <div class="create-feedback-title">
@@ -246,6 +252,9 @@
             <button class="primary-button" id="second-page-next-button" onclick="goBackFeedbackSecondPage()"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back</button>
             <button class="secondary-button" onclick="hideFeedbackContainer()">Cancel</button>
             <button class="primary-button" id="second-page-next-button" onclick="createFeedback()">Submit&nbsp;&nbsp;<i class="fa-solid fa-check"></i></button>
+        </div>
+        <div class="create-feedback-page-number">
+            <h3>Page 3 of 3</h3>
         </div>
     </div>
 </div>

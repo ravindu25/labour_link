@@ -44,6 +44,9 @@
                 <button class="secondary-button" onclick="closeHousingCreateModal()">Cancel</button>
                 <button class="primary-button" id="first-page-next-button" onclick="goToSecondHousingPage()">Next&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
             </div>
+            <div class="housing-create-page-number">
+                <h3>Page 1 of 2</h3>
+            </div>
         </div>
     </div>
     <div class="housing-create-page" id="housing-create-second-page">
@@ -70,10 +73,11 @@
 
                         echo "
                         <label>
-                            <input type='checkbox' name='job-selection' value='$jobId' class='job-selection-input' />
+                            <input type='checkbox' name='job-selection' value='$jobId' class='job-selection-input' id='job-selection-card-$jobId' />
                             <div class='job-selection-container'>
-                                $numberIcon
+                                <div>$numberIcon</div>
                                 <h3>$description</h3>
+                                <div id='job-selection-complete-indicator-$jobId' class='job-selection-complete-indicator'></div>
                             </div>
                         </label>
                         ";
@@ -85,6 +89,9 @@
             <button class="primary-button" onclick="goToFirstHousingPage()"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back</button>
             <button class="secondary-button" onclick="closeHousingCreateModal()">Cancel</button>
             <button class="primary-button" onclick="submitHousing()"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Create</button>
+        </div>
+        <div class="housing-create-page-number">
+            <h3>Page 2 of 2</h3>
         </div>
     </div>
 </div>

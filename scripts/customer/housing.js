@@ -25,6 +25,28 @@ locationInput.addEventListener('change', () => {
     }
 });
 
+function addClickEventsToJobCards(){
+    let jobElements = document.getElementsByName('job-selection');
+
+    for(let i = 0; i < jobElements.length; i++){
+        const cardValue = jobElements[i].value;
+        const jobCard = document.getElementById(`job-selection-card-${cardValue}`);
+
+        jobCard.addEventListener('change', function(){
+            const jobCardIndicator = document.getElementById(`job-selection-complete-indicator-${cardValue}`);
+            if(this.checked){
+                jobCardIndicator.style.color = 'var(--success-color)';
+                jobCardIndicator.innerHTML ="<i class='fa-solid fa-check'></i>&nbsp;&nbsp;<h5>Added to project</h5>";
+            } else {
+                jobCardIndicator.style.color = 'var(--primary-color)';
+                jobCardIndicator.innerHTML ="";
+            }
+        })
+    }
+}
+
+addClickEventsToJobCards();
+
 function onPlaceChanged(){
     let place = autocomplete.getPlace();
 
