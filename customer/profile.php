@@ -40,7 +40,8 @@
         </div>
         <form method="post" enctype="multipart/form-data" action="">
             <div class="select-image-container" id="select-image-container">
-                <input type="file" class="upload-box" id="picture-upload-input" name="picture-upload-input"/>
+            <input type="file" class="upload-box" id="picture-upload-input" name="picture-upload-input" accept="image/png, image/jpeg"/>
+
             </div>
             <div class="profile-change-button-container">
                 <button type="button" class="primary-button" id="set-default-button">
@@ -376,36 +377,36 @@
 
 <?php
 if(isset($_POST['save-button'])) {
-// Define the directory where the uploaded images will be stored
-$target_dir = "../assets/profile-image/";
-$userid=$_SESSION['user_id'];
-// Get the filename of the uploaded image
-//change file name to what we want
-$target_file = $target_dir . $userid.".jpg";
+    // Define the directory where the uploaded images will be stored
+    $target_dir = "../assets/profile-image/";
+    $userid=$_SESSION['user_id'];
+    // Get the filename of the uploaded image
+    //change file name to what we want
+    $target_file = $target_dir . $userid.".jpg";
 
-// Check if the file already exists
-// if (file_exists($target_file)) {
-//     echo "Sorry, the file already exists.";
-//     exit();
-// }
+    // Check if the uploaded file is an image
+    $check = getimagesize($_FILES["picture-upload-input"]["tmp_name"]);
+    if($check !== false) {
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+            echo "<script>failedProfileUpdate('Sorry, only JPG, JPEG, PNG & GIF files are allowed')</script>";
+            // exit();
+        } else {
 
-// Check if the uploaded file is an image
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-    echo "<script>failedProfileUpdate('Sorry, only JPG, JPEG, PNG & GIF files are allowed')</script>";
-    // exit();
-} else {
-
-    // Move the uploaded image to the target directory
-    if (move_uploaded_file($_FILES["picture-upload-input"]["tmp_name"], $target_file)) {
-        echo "<script>successProfileUpdate()</script>";
-        header("refresh:1");
+            // Move the uploaded image to the target directory
+            if (move_uploaded_file($_FILES["picture-upload-input"]["tmp_name"], $target_file)) {
+                echo "<script>successProfileUpdate()</script>";
+                header("refresh:1");
+            } else {
+                echo "<script>failedProfileUpdate('Sorry, there was an error uploading your file')";
+            }
+        }
     } else {
-        echo "<script>failedProfileUpdate('Sorry, there was an error uploading your file')";
+        echo "<script>failedProfileUpdate('Sorry, only image files are allowed')</script>";
     }
 }
 
-}
+
 
 
 
