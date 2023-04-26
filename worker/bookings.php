@@ -406,11 +406,11 @@
                 </tbody>
             </table>
             <div class="pagination-container">
-                <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
+                <button class="pagination-button" id="previous-page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button" id="previous-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current" id="current-page-number"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="next-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
         </div>
@@ -421,6 +421,12 @@
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+<?php
+echo "<script>
+        let userId = $userId;
+    </script>"
+?>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
+<script src="../scripts/worker/bookings.js" type="text/javascript"></script>
 </body>
