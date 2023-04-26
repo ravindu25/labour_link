@@ -152,11 +152,70 @@ function checkPasswords(){
     }
 }
 
-function updatePassword(){
-    const newPassword = document.getElementById('new-password-input').value;
-    console.log(newPassword);
 
-    // Password update process
+function updatePassword(user_id){
+    const enteredCurrPassword = document.getElementById('current-password-input').value;
+    const newPassword = document.getElementById('new-password-input').value;
+    const reEnterNewPassword = document.getElementById('reenter-new-password-input').value;
+
+
+    fetch ('http://localhost/labour_link/customer/changePassword.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user_id: user_id,
+            newPassword: newPassword,
+            reEnterNewPassword: reEnterNewPassword,
+            enteredCurrPassword: enteredCurrPassword
+        })
+
+    }).then(response => response.json())
+    .then(data => {
+        if(data.statusCode == 200){
+            const changePasswordModal = document.getElementById('change-password-container');
+            const successModal = document.getElementById('password-change-success');
+
+            changePasswordModal.style.visibility = 'hidden';
+            successModal.style.visibility = 'visible';
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                location.reload();
+            }, 2000);
+        }else if(data.statusCode == 201){
+            const changePasswordModal = document.getElementById('change-password-container');
+            const failedModal = document.getElementById('password-change-fail');
+            const failedText = document.getElementById('password-update-failed-text');
+            failedText.innerHTML = "Server Error. Please try again later.";
+
+            changePasswordModal.style.visibility = 'hidden';
+            failedModal.style.visibility = 'visible';
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                failedModal.style.visibility = 'hidden';
+                changePasswordModal.style.visibility = 'visible';
+            }, 2000);
+        }else if(data.statusCode == 202){
+            const changePasswordModal = document.getElementById('change-password-container');
+            const failedModal = document.getElementById('password-change-fail');
+            const failedText = document.getElementById('password-update-failed-text');
+            failedText.innerHTML = "Current Password is Incorrect";
+
+            changePasswordModal.style.visibility = 'hidden';
+            failedModal.style.visibility = 'visible';
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                failedModal.style.visibility = 'hidden';
+                changePasswordModal.style.visibility = 'visible';
+            }, 2000);
+            
+        }else{
+            alert("error");
+        }
+    })
+
+    
 }
 
 function showEditButton(buttonId){
