@@ -31,6 +31,15 @@
 .housing-create-banner-container img{
     height: 55vh;
     width: auto;
+    display: block;
+}
+
+.location-map{
+    width: 80%;
+    height: 55vh;
+    margin: 8px auto;
+    border-radius: 12px;
+    display: none;
 }
 
 .housing-create-page-row{

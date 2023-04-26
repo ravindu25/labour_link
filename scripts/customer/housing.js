@@ -1,6 +1,8 @@
 let autocomplete;
 let address = '';
 let jobSelections = [];
+let map = null;
+let marker = null;
 const locationInput = document.getElementById('place-autocomplete');
 const nextButton = document.getElementById('first-page-next-button');
 const housingCreateSecondPage = document.getElementById('housing-create-second-page');
@@ -18,6 +20,8 @@ locationInput.addEventListener('change', () => {
         nextButton.classList.add('primary-button');
         nextButton.classList.remove('disabled-button');
         nextButton.disabled = false;
+
+
     } else {
         nextButton.classList.remove('primary-button');
         nextButton.classList.add('disabled-button');
@@ -47,10 +51,34 @@ function addClickEventsToJobCards(){
 
 addClickEventsToJobCards();
 
-function onPlaceChanged(){
+function onPlaceChanged() {
+    const housingCreateImage = document.getElementById('housing-create-image');
+    const locationDiv = document.getElementById('location-map');
     let place = autocomplete.getPlace();
 
+    marker.setVisible(false);
+
     address = place.name;
+
+    if (!place.geometry || !place.geometry.location) {
+        housingCreateImage.style.display = 'block';
+        locationDiv.style.display = 'none';
+    } else {
+        housingCreateImage.style.display = 'none';
+        locationDiv.style.display = 'block';
+
+        // If the place has a geometry, then present it on a map.
+        if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+        } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(20);
+        }
+
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+    }
+
 }
 
 function initAutocomplete(){
@@ -62,6 +90,18 @@ function initAutocomplete(){
             fields: ['place_id', 'geometry', 'name']
         });
 
+    map = new google.maps.Map(document.getElementById("location-map"), {
+        center: { lat: 40.749933, lng: -73.98633 },
+        zoom: 13,
+        mapTypeControl: false,
+    });
+
+    marker = new google.maps.Marker({
+        map,
+        anchorPoint: new google.maps.Point(0, -29),
+    });
+
+    autocomplete.addListener('change', () => { console.log('Place changed!')});
     autocomplete.addListener('place_changed', () => { onPlaceChanged() });
 }
 
