@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="housing-create-page" id="housing-create-second-page">
-        <h1>Select jobs that you need to complete</h1>
+        <h1>Select the Jobs that you have Completed</h1>
         <div class="housing-create-tasks-container">
             <?php
                 $sql_statement = 'SELECT * FROM Job_Type';

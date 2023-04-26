@@ -40,7 +40,7 @@ function addClickEventsToJobCards(){
             const jobCardIndicator = document.getElementById(`job-selection-complete-indicator-${cardValue}`);
             if(this.checked){
                 jobCardIndicator.style.color = 'var(--success-color)';
-                jobCardIndicator.innerHTML ="<i class='fa-solid fa-check'></i>&nbsp;&nbsp;<h5>Added to project</h5>";
+                jobCardIndicator.innerHTML ="<i class='fa-solid fa-check'></i>&nbsp;&nbsp;<h5>Marked as Complete</h5>";
             } else {
                 jobCardIndicator.style.color = 'var(--primary-color)';
                 jobCardIndicator.innerHTML ="";
