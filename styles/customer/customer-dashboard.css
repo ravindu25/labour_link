@@ -404,7 +404,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
-    padding: 20px;
+    padding: 34px;
     background-color: #FFF;
     border: 2px solid var(--success-color);
     border-radius: 12px;
@@ -415,7 +415,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
-    padding: 20px;
+    padding: 34px;
     background-color: #FFF;
     border: 2px solid var(--warning-dark-color);
     border-radius: 12px;
