@@ -54,7 +54,7 @@
     <h1>Do you want to mark the job as complete?</h1>
     <div class="mark-done-button-container">
         <button class="mark-done-secondary-button" onclick="hideMarkDoneContainer()">Cancel</button>
-        <button class="mark-done-primary-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Mark completed!</button>
+        <button class="mark-done-primary-button" id="mark-done-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Mark completed!</button>
     </div>
 </div>
 <div class="mark-done-complete-container" id="mark-done-complete-container">
@@ -62,7 +62,7 @@
 </div>
 <div class="mark-done-failed-container" id="mark-done-failed-container">
     <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Marking job as complete failed!</h1>
-    <h5 id=mark-done-fail-text">Your login session outdated. Please login again.</h5>
+    <h5 id="mark-done-fail-text">Your login session outdated. Please login again.</h5>
 </div>
 <div class="create-advertise-container" id="create-advertise-container">
     <h1>Do you want to place advertisement on the selected job?</h1>
@@ -302,19 +302,19 @@
                             $buttonHtml = $completionButton;
                         } else {
                             if($advertisementStatus == true && $bookingId != null){
-                                $completionButton = "<button class='mark-complete-button' onclick='showMarkDoneContainer($jobID)'><i class='fa-solid fa-check'></i>&nbsp;&nbsp;Mark done</button>";
+                                $completionButton = "<button class='mark-complete-button' onclick='showMarkDoneContainer($jobID, $houseId)'><i class='fa-solid fa-check'></i>&nbsp;&nbsp;Mark done</button>";
 
                                 $bookingButton = "<button class='view-booking-button'><i class='fa-solid fa-arrow-up-right'></i>&nbsp;&nbsp;View Booking</button>";
 
                                 $buttonHtml = $advertisementButton . $bookingButton;
                             } else if($advertisementStatus == true && $bookingId == null) {
-                                $completionButton = "<button class='mark-complete-button' onclick='showMarkDoneContainer($jobID)'><i class='fa-solid fa-check' ></i>&nbsp;&nbsp;Mark done</button>";
+                                $completionButton = "<button class='mark-complete-button' onclick='showMarkDoneContainer($jobID, $houseId)'><i class='fa-solid fa-check' ></i>&nbsp;&nbsp;Mark done</button>";
 
                                 $advertisementButton = "<button class='advertised-button'><i class='fa-solid fa-chart-simple'></i>&nbsp;&nbsp;Advertised</button>";
 
                                 $buttonHtml = $completionButton . $advertisementButton;
                             } else {
-                                $completionButton = "<button class='mark-complete-button' onclick='showMarkDoneContainer($jobID)'><i class='fa-solid fa-check'></i>&nbsp;&nbsp;Mark done</button>";
+                                $completionButton = "<button class='mark-complete-button' onclick='showMarkDoneContainer($jobID, $houseId)'><i class='fa-solid fa-check'></i>&nbsp;&nbsp;Mark done</button>";
 
                                 $advertisementButton = "<button class='advertise-button' onclick='showAdvertisementContainer($houseId, $jobID)'><i class='fa-solid fa-chart-simple'></i>&nbsp;&nbsp;Advertise</button>";
 

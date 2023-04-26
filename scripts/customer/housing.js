@@ -39,7 +39,6 @@ function initAutocomplete(){
             componentRestrictions: {'country': ['LK']},
             fields: ['place_id', 'geometry', 'name']
         });
-
     autocomplete.addListener('place_changed', () => { onPlaceChanged() });
 }
 
