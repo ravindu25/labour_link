@@ -1,9 +1,10 @@
 <?php
     session_start();
-    // Check whether customer is logged in
+    // Check whether worker is logged in
     if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Worker') {
         header("Location: ../login.php");
     }
+$userId = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -234,7 +235,6 @@
         <div class="recent-bookings">
             <div class="recent-bookings-title">
                 <h1>Recent Bookings</h1>
-                <button class="more-button">More Bookings</button>
             </div>
             <div class="recent-bookings-container">
             <?php
@@ -242,28 +242,26 @@
 
                 // $sql = "SELECT First_Name,Last_Name ,Start_Date , Completion_Flag FROM user INNER JOIN booking ON user.User_ID = booking.Customer_ID INNER JOIN confirmed_booking ON booking.Booking_ID = confirmed_booking.Booking_ID";
 
-                $sql = "SELECT First_Name,Last_Name ,Start_Date, Worker_Type, Created_Date FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} ORDER BY Created_Date DESC LIMIT 5";
+                $sql_get_status = "SELECT First_Name,Last_Name ,Start_Date, Worker_Type, Created_Date ,Status FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} ORDER BY Created_Date DESC LIMIT 5";
 
-                // $array1 = array("Plumbing","Carpentry","Electrical","Painting","Masonry","Janitorial","Mechanical","Gardening");
-                $array2 = array("Pending","Completed","Rejected","In-Progress");
 
-                $result = $conn->query($sql);
+                $result = $conn->query($sql_get_status);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
 
-                        $arrValue = array_rand($array2,1);
-                        if($arrValue == 0){
-                            $btn = "<button class='pending-button'>Pending</button>";  
-                        }
-                        else if($arrValue == 1){
-                            $btn = "<button class='completed-button'>Completed</button>";
-                        }
-                        else if($arrValue == 2){
-                            $btn = "<button class='rejected-button'>Rejected</button>";
-                        }
-                        else {
-                            $btn = "<button class='in-pogress-button'>In-Progress</button>";  
-                        }
+                        $status = $row['Status'];
+
+                            $button = '<button class="pending-button">Pending</button>';
+
+                            if($status === 'Pending'){
+                                $button = '<button class="pending-button">Pending</button>';
+                            } else if($status === 'Accepted'){
+                                $button = '<button class="in-pogress-button">Accepted</button>';
+                            } else if($status === 'Completed'){
+                                $button = '<button class="completed-button">Completed</button>';
+                            } else {
+                                $button = '<button class="rejected-button">Rejected</button>';
+                            }
                         echo('
                         <div class="booking-card"
                             <div class="card-text">
@@ -274,7 +272,7 @@
                                 <div class="badge-container">
                                     <div class="blue-badge">' . date("d M Y", strtotime($row['Start_Date'])) . '</div> 
                                 </div>
-                                '. $btn .'
+                                '. $button .'
                             </div>
                         </div>
 
@@ -409,11 +407,11 @@
                 </tbody>
             </table>
             <div class="pagination-container">
-                <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
+                <button class="pagination-button" id="previous-page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button" id="previous-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current" id="current-page-number"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="next-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
         </div>
@@ -424,6 +422,12 @@
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+<?php
+echo "<script>
+        let userId = $userId;
+    </script>"
+?>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
+<script src="../scripts/worker/bookings.js" type="text/javascript"></script>
 </body>

@@ -108,7 +108,7 @@
         <div class="recent-bookings">
             <div class="recent-bookings-title">
                 <h1>Recent Bookings</h1>
-                <button class="more-button">More Bookings</button>
+                <button class="more-button" onclick="window.location.href='bookings.php'">More Bookings</button>
             </div>
             <div class="recent-bookings-container">
             <?php
@@ -163,7 +163,7 @@
         <div class="recent-feedbacks">
             <div class="recent-feedbacks-title">
                 <h1>Recent Feedbacks</h1>
-                <button class="more-button">More Feedbacks</button>
+                <button class="more-button" onclick="window.location.href='feedbacks.php'">More Feedbacks</button>
             </div>
             <div class="recent-feedbacks-container">
                 <table class="main-table">

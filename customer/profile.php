@@ -40,7 +40,8 @@
         </div>
         <form method="post" enctype="multipart/form-data" action="">
             <div class="select-image-container" id="select-image-container">
-                <input type="file" class="upload-box" id="picture-upload-input" name="picture-upload-input"/>
+            <input type="file" class="upload-box" id="picture-upload-input" name="picture-upload-input" accept="image/png, image/jpeg"/>
+
             </div>
             <div class="profile-change-button-container">
                 <button type="button" class="primary-button" id="set-default-button">
@@ -68,17 +69,38 @@
         <h5 id="housing-create-fail-text">Your login session outdated. Please login again.</h5>
     </div>
 </div>
+<?php
+                    require_once('../db.php');
+
+                    $sql_get_details = "SELECT * FROM User WHERE User_ID = $userId";
+                    $result = $conn->query($sql_get_details);
+
+                       $row = $result->fetch_assoc();
+                            $username = $row['First_Name'] . ' ' . $row['Last_Name'];
+                            $email = $row['Email'];
+                            $contactNum = $row['Contact_No'];
+                            $nic = $row['NIC'];
+                            $dob = $row['DOB'];
+                            $address = $row['User_Address'];
+                            $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
+                        
+                    
+                ?>
 <div class="details-edit-modal" id="edit-modal-username">
     <div class="edit-modal-header">
         <h1>Edit your account details</h1>
     </div>
     <div class="edit-modal-inputs">
         <label for="firstname-input">First name:</label>
-        <input type="text" id="firstname-input"/>
+        <?php
+            echo ('<input type="text" id="firstname-input" value="'.$row['First_Name'].'"/>');
+        ?>
     </div>
     <div class="edit-modal-inputs">
         <label for="lastname-input">Last name:</label>
-        <input type="text" id="lastname-input" />
+        <?php
+            echo ('<input type="text" id="lastname-input" value="'.$row['Last_Name'].'"/>');
+        ?>
     </div>
     <div class="edit-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-username')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
@@ -104,7 +126,9 @@
     </div>
     <div class="edit-modal-inputs">
         <label for="contactnum-input">Contact number:</label>
-        <input type="text" id="contactnum-input"/>
+        <?php
+            echo ('<input type="text" id="contactnum-input" value="'.$row['Contact_No'].'"/>');
+        ?>
     </div>
     <div class="edit-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-contactnum')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
@@ -117,7 +141,9 @@
     </div>
     <div class="edit-modal-inputs">
         <label for="nic-input">NIC number:</label>
-        <input type="text" id="nic-input"/>
+        <?php
+            echo ('<input type="text" id="nic-input" value="'.$row['NIC'].'"/>');
+        ?>
     </div>
     <div class="edit-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-nic')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
@@ -130,7 +156,9 @@
     </div>
     <div class="edit-modal-inputs">
         <label for="dob-input">Date of Birth:</label>
-        <input type="date" id="dob-input"/>
+        <?php
+            echo ('<input type="date" id="dob-input" value="'.$row['DOB'].'"/>');
+        ?>
     </div>
     <div class="edit-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-dob')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
@@ -143,7 +171,9 @@
     </div>
     <div class="edit-modal-inputs">
         <label for="address-input">Address:</label>
-        <input type="text" id="address-input"/>
+        <?php
+            echo ('<input type="text" id="address-input" value="'.$row['User_Address'].'"/>');
+        ?>
     </div>
     <div class="edit-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-address')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
@@ -164,7 +194,7 @@
         <h1>Change your current password</h1>
     </div>
     <div class="change-password-row">
-        <label for="change-password-label" id="current-password-input">Current password</label>
+        <label for="change-password-label">Current password</label>
         <input type="password" id="current-password-input" />
     </div>
     <div class="change-password-row">
@@ -179,9 +209,11 @@
         <button type="button" class="primary-outline-button" onclick="closeChangePasswordModal()">
             <i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel
         </button>
-        <button type="button" class="disable-button" id="change-password-button" onclick="updatePassword()" disabled>
+        <?php
+        echo('<button type="button" class="disable-button" id="change-password-button" onclick="updatePassword('.$userId.')" disabled>
             <i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Change password
-        </button>
+        </button>');
+        ?>
     </div>
 </div>
 <div class="success-message-container" id="password-change-success">
@@ -190,7 +222,7 @@
 <div class="failed-message-container" id="password-change-fail">
     <div class="message-text">
         <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Password change failed!</h1>
-        <h5 id="housing-create-fail-text">Your login session outdated. Please login again.</h5>
+        <h5 id="password-update-failed-text">Your login session outdated. Please login again.</h5>
     </div>
 </div>
 <div class="feedback-message-container" id="feedback-message-container">
@@ -290,24 +322,7 @@
                 </div>
             </div>
             <div class="profile-details-panel">
-                <?php
-                    require_once('../db.php');
 
-                    $sql_get_details = "SELECT * FROM User WHERE User_ID = $userId";
-                    $result = $conn->query($sql_get_details);
-
-                    if($result->num_rows > 0){
-                        while($row = $result->fetch_assoc()) {
-                            $username = $row['First_Name'] . ' ' . $row['Last_Name'];
-                            $email = $row['Email'];
-                            $contactNum = $row['Contact_No'];
-                            $nic = $row['NIC'];
-                            $dob = $row['DOB'];
-                            $address = $row['User_Address'];
-                            $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
-                        }
-                    }
-                ?>
                 <div class="edit-item-container" id="edit-item-username">
                     <h1><?php echo $username ?></h1>
                     <button type="button" class="update-button" id="button-edit-item-username" onclick="openEditModal('edit-modal-username')"><i class="fa-solid fa-pen-clip"></i></button>
@@ -376,36 +391,36 @@
 
 <?php
 if(isset($_POST['save-button'])) {
-// Define the directory where the uploaded images will be stored
-$target_dir = "../assets/profile-image/";
-$userid=$_SESSION['user_id'];
-// Get the filename of the uploaded image
-//change file name to what we want
-$target_file = $target_dir . $userid.".jpg";
+    // Define the directory where the uploaded images will be stored
+    $target_dir = "../assets/profile-image/";
+    $userid=$_SESSION['user_id'];
+    // Get the filename of the uploaded image
+    //change file name to what we want
+    $target_file = $target_dir . $userid.".jpg";
 
-// Check if the file already exists
-// if (file_exists($target_file)) {
-//     echo "Sorry, the file already exists.";
-//     exit();
-// }
+    // Check if the uploaded file is an image
+    $check = getimagesize($_FILES["picture-upload-input"]["tmp_name"]);
+    if($check !== false) {
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+            echo "<script>failedProfileUpdate('Sorry, only JPG, JPEG, PNG & GIF files are allowed')</script>";
+            // exit();
+        } else {
 
-// Check if the uploaded file is an image
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-    echo "<script>failedProfileUpdate('Sorry, only JPG, JPEG, PNG & GIF files are allowed')</script>";
-    // exit();
-} else {
-
-    // Move the uploaded image to the target directory
-    if (move_uploaded_file($_FILES["picture-upload-input"]["tmp_name"], $target_file)) {
-        echo "<script>successProfileUpdate()</script>";
-        header("refresh:1");
+            // Move the uploaded image to the target directory
+            if (move_uploaded_file($_FILES["picture-upload-input"]["tmp_name"], $target_file)) {
+                echo "<script>successProfileUpdate()</script>";
+                header("refresh:1");
+            } else {
+                echo "<script>failedProfileUpdate('Sorry, there was an error uploading your file')";
+            }
+        }
     } else {
-        echo "<script>failedProfileUpdate('Sorry, there was an error uploading your file')";
+        echo "<script>failedProfileUpdate('Sorry, only image files are allowed')</script>";
     }
 }
 
-}
+
 
 
 

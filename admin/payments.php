@@ -106,43 +106,36 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     <tr class="main-tr">
                         <th class="main-th">Customer Name</th>
                         <th class="main-th">Worker Name</th>
-                        <th class="main-th">Start Date</th>
-                        <th class="main-th">Amount</th>
+                        <th class="main-th">Due Date</th>
+                        <th class="main-th">Due Amount</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Saman Gunawardhana
-                            <br/>
-                        </td>
-                        <td class="main-td">Sunil Perera</td>
-                        <td class="main-td">19 Nov 2022</td>
-                        <td class="main-td">Rs. 27000.00</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Avinash Sudira
-                            <br/>
-                        </td>
-                        <td class="main-td">Kamal Perera</td>
-                        <td class="main-td">30 Nov 2022</td>
-                        <td class="main-td">Rs. 12500.00</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Dinesh Attanayaka
-                            <br/>
-                        </td>
-                        <td class="main-td">Nimal Perera</td>
-                        <td class="main-td">01 Nov 2022</td>
-                        <td class="main-td">Rs. 1700.00</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Kapila Dharmadhasa
-                            <br/>
-                        </td>
-                        <td class="main-td">Upul Perera</td>
-                        <td class="main-td">19 Nov 2022</td>
-                        <td class="main-td">Rs. 12000.00</td>
-                    </tr>
+                    <?php
+                        require_once "../db.php";
+                        $sql = "SELECT * FROM Payments_Due INNER JOIN Booking ON Payments_Due.Booking_ID = Booking.Booking_ID INNER JOIN User ON Booking.Worker_ID = User.User_ID";
+                        $result = $conn->query($sql);
+                        if($result->num_rows > 0){
+                            while($row = $result->fetch_assoc()){
+                                $sql_get_customer_name = "SELECT * FROM User WHERE User_ID = ".$row['Customer_ID'];
+                                $result_get_customer_name = $conn->query($sql_get_customer_name);
+                                $row_get_customer_name = $result_get_customer_name->fetch_assoc();
+                                $customer_name = $row_get_customer_name['First_Name'].' '.$row_get_customer_name['Last_Name'];
+                                $date = date_create($row['Due_Date']);
+                                $dateInText = date_format($date, 'dS F Y');
+                                echo(' <tr class="main-tr">
+                                <td class="main-td" style="text-align: left;">'.$customer_name.'   
+                                </td>
+                                <td class="main-td">
+                                '.$row['First_Name'].' '.$row['Last_Name'].'
+                                </td>
+                                <td class="main-td">'.$dateInText.'</td>
+                                <td class="main-td">Rs. '.$row['Due_Amount'].'.00</td>
+                                </tr>');
+                            }
+                        }
+                    ?>
+                   
                     </tbody>
                 </table>
             </div>
@@ -190,102 +183,45 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Saman Gunawardhana
-                        <br/>
-                        <span class="blue-badge">19 Nov 2022</span>
-                    </td>
-                    <td class="main-td">Sunil Perera</td>
-                    <td class="main-td">Rs. 27000.00</td>
-                    <td class="main-td"><span class="payment-success-badge">Success</span></td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Avinash Sudira
-                        <br/>
-                        <span class="blue-badge">15 Nov 2022</span>
-                    </td>
-                    <td class="main-td">Nimal Kumara</td>
-                    <td class="main-td">Rs. 12500.00</td>
-                    <td class="main-td"><span class="payment-success-failed">Failed</span></td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Dinesh Attanayaka
-                        <br/>
-                        <span class="blue-badge">10 Nov 2022</span>
-                    </td>
-                    <td class="main-td">Heshan Pasindu</td>
-                    <td class="main-td">Rs. 1700.00</td>
-                    <td class="main-td"><span class="payment-success-badge">Success</span></td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Kapila Dharmadhasa
-                        <br/>
-                        <span class="blue-badge">8 Nov 2022</span>
-                    </td>
-                    <td class="main-td">Sunil Perera</td>
-                    <td class="main-td">Rs. 12000.00</td>
-                    <td class="main-td"><span class="payment-success-badge">Success</span></td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Saman Gunawardhana
-                        <br/>
-                        <span class="blue-badge">30 Oct 2022</span>
-                    </td>
-                    <td class="main-td">Saman Gunathilake</td>
-                    <td class="main-td">Rs. 18000.00</td>
-                    <td class="main-td"><span class="payment-success-badge">Success</span></td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Saman Gunawardhana
-                        <br/>
-                        <span class="blue-badge">30 Oct 2022</span>
-                    </td>
-                    <td class="main-td">Sunil Perera</td>
-                    <td class="main-td">Rs. 18000.00</td>
-                    <td class="main-td"><span class="payment-success-failed">Failed</span></td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                <?php
+                        require_once "../db.php";
+                        $sql = "SELECT * FROM Payments_Log INNER JOIN Booking ON Payments_Log.Booking_ID = Booking.Booking_ID INNER JOIN User ON Booking.Worker_ID = User.User_ID ORDER BY Timestamp";
+                        $result = $conn->query($sql);
+                        if($result->num_rows > 0){
+                            while($row = $result->fetch_assoc()){
+                                $sql_get_customer_name = "SELECT * FROM User WHERE User_ID = ".$row['Customer_ID'];
+                                $result_get_customer_name = $conn->query($sql_get_customer_name);
+                                $row_get_customer_name = $result_get_customer_name->fetch_assoc();
+                                $customer_name = $row_get_customer_name['First_Name'].' '.$row_get_customer_name['Last_Name'];
+                                $date = date_create($row['Timestamp']);
+                                $dateInText = date_format($date, 'dS F Y');
+                                echo(' <tr class="main-tr">
+                                <td class="main-td" style="text-align: left;">'.$customer_name.'<br/>
+                                    <span class="blue-badge">'.$dateInText.'</span>
+                                </td>
+                                <td class="main-td">
+                                '.$row['First_Name'].' '.$row['Last_Name'].'
+                                </td>
+                                <td class="main-td">Rs. '.$row['Amount'].'.00</td>
+                                ');
+                                if($row['Success_Flag'] == 2){
+                                    echo('<td class="main-td"><span class="payment-success-badge">Success</span></td>');
+                                }else{
+                                    echo('<td class="main-td"><span class="payment-success-failed">Failed</span></td>');
+                                }
+                            echo('<td class="main-td">
+                            <div class="more-button-container">
+                                <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
+                                </button>
+                            </div>
+                        </td>
+                    </tr>');
+                            }
+                        }
+                    ?>
+             
+                
+                
                 <?php
                 echo '<script src="../scripts/admin/loader.js" type="text/javascript"></script>';
                 echo '<script>closeLoader()</script>';

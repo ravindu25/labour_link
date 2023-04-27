@@ -1,8 +1,55 @@
 let taskListShowAll = false;
 
-function showMarkDoneContainer(taskId){
+
+
+function showMarkDoneContainer(taskId, houseID){
     const backdrop = document.getElementById('backdrop-modal');
     const markDoneContainer = document.getElementById('mark-done-confirm-container');
+
+    //add event listener to mark done button
+
+    const markDoneButton = document.getElementById('mark-done-button');
+    markDoneButton.addEventListener('click', () => {
+        fetch("http://localhost/labour_link/customer/markJobComplete.php", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "taskID": taskId,
+                "houseID": houseID
+            })
+        })
+            .then(() => {
+                const confirmModal = document.getElementById('mark-done-confirm-container');
+                const successModal = document.getElementById('mark-done-complete-container');
+
+                confirmModal.style.visibility = 'hidden';
+                successModal.style.visibility = 'visible';
+                //set 2 seconds timeout and then hide the success modal
+                setTimeout(() => {
+                    successModal.style.visibility = 'hidden';
+                    backdrop.style.visibility = 'hidden';
+                    window.location.reload();
+                }
+                , 2000);
+            })
+            .catch(error => {
+                const confirmModal = document.getElementById('mark-done-confirm-container');
+                const failedModal = document.getElementById('mark-done-failed-container');
+
+                confirmModal.style.visibility = 'hidden';
+                failedModal.style.visibility = 'visible';
+                //set 2 seconds timeout and then hide the success modal
+                setTimeout(() => {
+                    failedModal.style.visibility = 'hidden';
+                    backdrop.style.visibility = 'hidden';
+                    window.location.reload();
+                }
+                , 2000);
+            });
+    
+    });
+   
+        
 
     backdrop.addEventListener('click', () => {
         hideMarkDoneContainer();

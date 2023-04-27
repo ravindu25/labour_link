@@ -102,7 +102,6 @@ function initAutocomplete(){
     });
 
     autocomplete.addListener('change', () => { console.log('Place changed!')});
-    autocomplete.addListener('place_changed', () => { onPlaceChanged() });
 }
 
 function openHousingCreateModal(){

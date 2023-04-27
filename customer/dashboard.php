@@ -314,46 +314,42 @@
             <div class="payments-dash-content">
                 <h1>Payments</h1>
                 <div class="payments-list">
-                    <div class="payment-item">
-                        <div class="payment-text">
-                            <span class="blue-badge">21 Oct 2022</span>
-                            <h3>Rushdha Rasheed</h3>
-                            <h4>Saman Gunawardhana</h4>
+                    <?php
+
+                        require_once "../db.php";
+                        $sql = "SELECT * FROM Payments_Log INNER JOIN Booking ON Payments_Log.Booking_id = Booking.Booking_id INNER JOIN User ON Booking.Worker_ID = User.User_ID WHERE Booking.Customer_ID = '$userId'";
+                        $result = mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_assoc($result)){
+                            if($row['Success_Flag'] == 2){
+                                echo(' <div class="payment-item">
+                            <div class="payment-text">
+                                <span class="blue-badge">21 Oct 2022</span>
+                                <h3>'.$row['First_Name']." ".$row['Last_Name'].'</h3>
+                            </div>
+                            <div class="payment-button">
+                                <button type="button" class="payment-amount-button">'."Rs. ".$row['Amount'].".00".'</button>
+                            </div>
                         </div>
-                        <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 17000.00</button>
+                       ');
+                            }else{
+                                echo(' <div class="payment-item-failed">
+                            <div class="payment-text">
+                                <span class="blue-badge">21 Oct 2022</span>
+                                <h3>'.$row['First_Name']." ".$row['Last_Name'].'</h3>
+                            </div>
+                            <div class="payment-button">
+                                <button type="button" class="payment-amount-button-failed">'."Rs. ".$row['Amount'].".00".'</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="payment-item-failed">
-                        <div class="payment-text">
-                            <span class="blue-badge">19 Oct 2022</span>
-                            <h3>Rushdha Rasheed</h3>
-                            <h4>Dammika Kumara</h4>
-                        </div>
-                        <div class="payment-button">
-                            <button type="button" class="payment-amount-button-failed">Rs. 25000.00</button>
-                        </div>
-                    </div>
-                    <div class="payment-item">
-                        <div class="payment-text">
-                            <span class="blue-badge">21 Oct 2022</span>
-                            <h3>Rushdha Rasheed</h3>
-                            <h4>Dinesh Attanayaka</h4>
-                        </div>
-                        <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 31500.00</button>
-                        </div>
-                    </div>
-                    <div class="payment-item">
-                        <div class="payment-text">
-                            <span class="blue-badge">19 Oct 2022</span>
-                            <h3>Rushdha Rasheed</h3>
-                            <h4>Kapila Dharmadhasa</h4>
-                        </div>
-                        <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 19000.00</button>
-                        </div>
-                    </div>
+                       ');
+                            }
+                            
+
+                        }
+                    ?>
+                   
+                   
+                   
                 </div>
             </div>
         </div>
