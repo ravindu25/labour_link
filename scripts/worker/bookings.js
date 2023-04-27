@@ -361,7 +361,7 @@ function getBookings(dataSource){
         .catch(error => console.log(error));
 }
 
-getBookings(`http://localhost/labour_link/api/bookings.php?customerId=${userId}`);
+getBookings(`http://localhost/labour_link/api/bookings.php?workerId=${userId}`);
 
 /*
     Purpose - Perform searching in booking tables

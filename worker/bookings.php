@@ -1,9 +1,10 @@
 <?php
     session_start();
-    // Check whether customer is logged in
+    // Check whether worker is logged in
     if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Worker') {
         header("Location: ../login.php");
     }
+$userId = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
