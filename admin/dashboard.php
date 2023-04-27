@@ -252,53 +252,45 @@ session_start();
                 <table class="main-table">
                     <thead>
                     <tr class="main-tr">
-                        <th class="main-th">Customer name/Date</th>
+                        <th class="main-th">Customer Name/Date</th>
                         <th class="main-th">Worker name</th>
                         <th class="main-th">Amount</th>
                         <th class="main-th">Status</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Dhananga Deepanjana<br/>
-                            <span class="blue-badge">19 Nov 2022</span>
-                        </td>
-                        <td class="main-td">
-                            Saman Gunawardhana
-                        </td>
-                        <td class="main-td">Rs. 27000.00</td>
-                        <td class="main-td"><span class="payment-success-badge">Success</span></td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Ravindu Wegiriya<br/>
-                            <span class="blue-badge">30 Nov 2022</span>
-                        </td>
-                        <td class="main-td">
-                            Avinash Sudira
-                        </td>
-                        <td class="main-td">Rs. 12500.00</td>
-                        <td class="main-td"><span class="payment-success-failed">Failed</span></td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Rushdha Rasheed<br/>
-                            <span class="blue-badge">1 Nov 2022</span>
-                        </td>
-                        <td class="main-td">
-                            Dinesh Attanayaka
-                        </td>
-                        <td class="main-td">Rs. 1700.00</td>
-                        <td class="main-td"><span class="payment-success-badge">Success</span></td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Mohamed Izzath<br/>
-                            <span class="blue-badge">19 Nov 2022</span>
-                        </td>
-                        <td class="main-td">
-                            Kapila Dharmadhasa
-                        </td>
-                        <td class="main-td">Rs. 12000.00</td>
-                        <td class="main-td"><span class="payment-success-badge">Success</span></td>
-                    </tr>
+                    <?php
+                        require_once "../db.php";
+                        $sql = "SELECT * FROM Payments_Log INNER JOIN Booking ON Payments_Log.Booking_ID = Booking.Booking_ID INNER JOIN User ON Booking.Worker_ID = User.User_ID ORDER BY Timestamp DESC LIMIT 5";
+                        $result = $conn->query($sql);
+                        if($result->num_rows > 0){
+                            while($row = $result->fetch_assoc()){
+                                $sql_get_customer_name = "SELECT * FROM User WHERE User_ID = ".$row['Customer_ID'];
+                                $result_get_customer_name = $conn->query($sql_get_customer_name);
+                                $row_get_customer_name = $result_get_customer_name->fetch_assoc();
+                                $customer_name = $row_get_customer_name['First_Name'].' '.$row_get_customer_name['Last_Name'];
+                                $date = date_create($row['Timestamp']);
+                                $dateInText = date_format($date, 'dS F Y');
+                                echo(' <tr class="main-tr">
+                                <td class="main-td" style="text-align: left;">'.$customer_name.'<br/>
+                                    <span class="blue-badge">'.$dateInText.'</span>
+                                </td>
+                                <td class="main-td">
+                                '.$row['First_Name'].' '.$row['Last_Name'].'
+                                </td>
+                                <td class="main-td">Rs. '.$row['Amount'].'.00</td>
+                                ');
+                                if($row['Success_Flag'] == 2){
+                                    echo('<td class="main-td"><span class="payment-success-badge">Success</span></td>');
+                                }else{
+                                    echo('<td class="main-td"><span class="payment-success-failed">Failed</span></td>');
+                                }
+                            echo('</tr>');
+                            }
+                        }
+                    ?>
+                   
+                   
                     </tbody>
                 </table>
             </div>
