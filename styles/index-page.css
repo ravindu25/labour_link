@@ -538,7 +538,7 @@ a{
 .housing-section{
     display: flex;
     align-items: stretch;
-    height: max-content;
+    height: 65vh;
     margin-top: 48px;
 }
 
@@ -552,17 +552,14 @@ a{
 
 .right-panel{
     width: 50vw;
-    height: max-content;
-    background-color: #8BC6EC;
-    background-image: url("../assets/home-page/housing-package-gradient-2.jpeg");
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--primary-color);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-}
-
-.housing-heading{
-    padding: 12px 24px;
-    background-color: #102699;
 }
 
 .housing-content{
@@ -574,53 +571,43 @@ a{
     padding: 96px 64px;
 }
 
-.housing-heading h1{
+.housing-content h1{
     margin: 0;
-    color: #FFF;
+    color: white;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     font-size: 40px;
     text-align: center;
 }
 
-.housing-content-first{
-    color: #FFF;
+.housing-content h3{
+    margin: 16px 0;
+    color: white;
     font-family: 'Inter', sans-serif;
+    font-weight: normal;
     font-size: 24px;
     text-align: center;
 }
 
-.housing-content-second{
-    color: #FFF;
-    font-family: 'Inter', sans-serif;
-    font-size: 34px;
-    text-align: center;
-    margin: 24px 12px;
+.housing-content-button-container{
+    margin: 16px 0;
 }
 
-.housing-content-button{
-    display: flex;
-    align-items: center;
-    min-width: 120px;
+.housing-content-button-container button{
     outline: none;
-    border: 4px solid #2B3B96;
-    padding: 8px 32px;
-    color: #354BC0;
+    border: 3px solid white;
+    padding: 12px 18px;
+    color: var(--primary-color);
     font-family: 'Inter', sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 16px;
-    background-color: #FFF;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: white;
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
 }
 
-.housing-content-button:active{
+.housing-content-button-container button:active{
     transform: scale(.96);
-}
-
-.housing-content-button-image{
-    height: 32px;
-    width: 32px;
 }
 
 .feedback-section{
