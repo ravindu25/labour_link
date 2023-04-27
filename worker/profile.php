@@ -21,6 +21,7 @@
 
     <!-- CSS files -->
     <link href="../styles/index-page.css" rel="stylesheet"/>
+    <link href="../styles/dashboard.css" rel="stylesheet"/>
     <link href="../styles/worker-dashboard.css" rel="stylesheet"/>
     <link href="../styles/worker/worker-profile.css" rel="stylesheet"/>
     <title>Worker Profile | LabourLink</title>
