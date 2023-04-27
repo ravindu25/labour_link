@@ -110,18 +110,12 @@
 <section class="housing-section">
     <div class="left-panel"></div>
     <div class="right-panel">
-        <div class="housing-heading">
-            <h1>Housing packages</h1>
-        </div>
         <div class="housing-content">
-            <div class="housing-content-first">
-                <p>Looking for appropriate labour to build your dream house?</p>
-                <p>In need of efficient technicians for successful completion a house built halfway through?</p>
+            <h1>Looking for appropriate labour to build your dream house?</h1>
+            <h3>Labour Link provides housing construction packages to fulfill your needs</h3>
+            <div class="housing-content-button-container">
+                <button class="primary-button" type="button"><i class="fa-solid fa-house-user"></i>&nbsp;&nbsp;Learn More</button>
             </div>
-            <div class="housing-content-second">
-                <p><b>Labour Link</b> provides housing construction packages to fulfill your needs.</p>
-            </div>
-            <button type="button" class="housing-content-button">Learn more&nbsp;&nbsp;<img src="./assets/svg/house-user-solid.svg" alt="housing" class="housing-content-button-image"/></button>
         </div>
     </div>
 </section>
