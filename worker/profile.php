@@ -1,5 +1,10 @@
 <?php
     session_start();
+    // Check whether worker is logged in
+    if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Worker') {
+    header("Location: ../login.php");
+}
+    $userId = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +26,191 @@
     <title>Worker Profile | LabourLink</title>
 </head>
 <body>
+<div class="backdrop-modal" id="backdrop-modal">
+</div>
+<div class="profile-change-modal-container" id="profile-change-modal-container">
+    <div class="change-profile-page">
+        <div class="change-profile-banner">
+            <h1>Change your  profile picture now!</h1>
+        </div>
+        <div class="current-picture-container" id="current-picture-container">
+            <?php
+            echo "<img src='../assets/profile-image/$userId.jpg' alt='profile-image' />";
+            ?>
+        </div>
+        <form method="post" enctype="multipart/form-data" action="">
+            <div class="select-image-container" id="select-image-container">
+                <input type="file" class="upload-box" id="picture-upload-input" name="picture-upload-input" accept="image/png, image/jpeg"/>
+
+            </div>
+            <div class="profile-change-button-container">
+                <button type="button" class="primary-button" id="set-default-button">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;Set default
+                </button>
+                <button type="button" class="primary-outline-button" onclick="closeChangeProfileModal()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+                <button type="button" class="primary-button" id="remove-picture-button" onclick="goNextProfileChangePage()">
+                    <i class="fa-solid fa-trash-can"></i>&nbsp;&nbsp;Remove picture
+                </button>
+
+                <input type="submit" class="disable-button" id="save-button" name="save-button" value="Save Picture" disabled>
+                <!-- <button type="button" class="disable-button" id="save-button" onclick="updateProfilePicture()" disabled>
+                    <i class="fa-solid fa-arrow-up"></i>&nbsp;&nbsp;Save picture
+                </button> -->
+            </div>
+        </form>
+    </div>
+</div>
+<div class="success-message-container" id="profile-update-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Profile picture updated!</h1>
+</div>
+<div class="failed-message-container" id="profile-update-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Profile picture update failed!</h1>
+        <h5 id="housing-create-fail-text">Your login session outdated. Please login again.</h5>
+    </div>
+</div>
+<?php
+require_once('../db.php');
+
+$sql_get_details = "SELECT * FROM User WHERE User_ID = $userId";
+$result = $conn->query($sql_get_details);
+
+$row = $result->fetch_assoc();
+$username = $row['First_Name'] . ' ' . $row['Last_Name'];
+$email = $row['Email'];
+$contactNum = $row['Contact_No'];
+$nic = $row['NIC'];
+$dob = $row['DOB'];
+$address = $row['User_Address'];
+$activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
+?>
+<div class="details-edit-modal" id="edit-modal-username">
+    <div class="edit-modal-header">
+        <h1>Edit your account details</h1>
+    </div>
+    <div class="edit-modal-inputs">
+        <label for="firstname-input">First name:</label>
+        <?php
+        echo ('<input type="text" id="firstname-input" value="'.$row['First_Name'].'"/>');
+        ?>
+    </div>
+    <div class="edit-modal-inputs">
+        <label for="lastname-input">Last name:</label>
+        <?php
+        echo ('<input type="text" id="lastname-input" value="'.$row['Last_Name'].'"/>');
+        ?>
+    </div>
+    <div class="edit-modal-button-container">
+        <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-username')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" class="disable-button" id="update-button-username"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+    </div>
+</div>
+<div class="details-edit-modal" id="edit-modal-email">
+<div class="details-edit-modal" id="edit-modal-contactnum">
+        <div class="edit-modal-header">
+            <h1>Edit your account details</h1>
+        </div>
+        <div class="edit-modal-inputs">
+            <label for="contactnum-input">Contact number:</label>
+            <?php
+            echo ('<input type="text" id="contactnum-input" value="'.$row['Contact_No'].'"/>');
+            ?>
+        </div>
+        <div class="edit-modal-button-container">
+            <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-contactnum')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+            <button type="button" class="disable-button" id="update-button-contactnum"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+        </div>
+    </div>
+<div class="details-edit-modal" id="edit-modal-nic">
+        <div class="edit-modal-header">
+            <h1>Edit your account details</h1>
+        </div>
+        <div class="edit-modal-inputs">
+            <label for="nic-input">NIC number:</label>
+            <?php
+            echo ('<input type="text" id="nic-input" value="'.$row['NIC'].'"/>');
+            ?>
+        </div>
+        <div class="edit-modal-button-container">
+            <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-nic')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+            <button type="button" class="disable-button" id="update-button-nic"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+        </div>
+    </div>
+<div class="details-edit-modal" id="edit-modal-dob">
+        <div class="edit-modal-header">
+            <h1>Edit your account details</h1>
+        </div>
+        <div class="edit-modal-inputs">
+            <label for="dob-input">Date of Birth:</label>
+            <?php
+            echo ('<input type="date" id="dob-input" value="'.$row['DOB'].'"/>');
+            ?>
+        </div>
+        <div class="edit-modal-button-container">
+            <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-dob')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+            <button type="button" class="disable-button" id="update-button-dob"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+        </div>
+    </div>
+<div class="details-edit-modal" id="edit-modal-address">
+        <div class="edit-modal-header">
+            <h1>Edit your account details</h1>
+        </div>
+        <div class="edit-modal-inputs">
+            <label for="address-input">Address:</label>
+            <?php
+            echo ('<input type="text" id="address-input" value="'.$row['User_Address'].'"/>');
+            ?>
+        </div>
+        <div class="edit-modal-button-container">
+            <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-address')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+            <button type="button" class="disable-button" id="update-button-address"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+        </div>
+    </div>
+<div class="success-message-container" id="account-details-update-success">
+        <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Account details updated!</h1>
+    </div>
+<div class="failed-message-container" id="account-details-update-fail">
+        <div class="message-text">
+            <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Account details update failed!</h1>
+            <h5 id="housing-create-fail-text">Your login session outdated. Please login again.</h5>
+        </div>
+    </div>
+<div class="change-password-container" id="change-password-container">
+        <div class="change-password-header">
+            <h1>Change your current password</h1>
+        </div>
+        <div class="change-password-row">
+            <label for="change-password-label">Current password</label>
+            <input type="password" id="current-password-input" />
+        </div>
+        <div class="change-password-row">
+            <label for="new-password-input">New password</label>
+            <input type="password" id="new-password-input" />
+        </div>
+        <div class="change-password-row">
+            <label for="reenter-new-password-input">Re-enter new password</label>
+            <input type="password" id="reenter-new-password-input" />
+        </div>
+        <div class="change-password-button-container">
+            <button type="button" class="primary-outline-button" onclick="closeChangePasswordModal()">
+                <i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel
+            </button>
+            <?php
+            echo('<button type="button" class="disable-button" id="change-password-button" onclick="updatePassword('.$userId.')" disabled>
+            <i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Change password
+        </button>');
+            ?>
+        </div>
+    </div>
+<div class="success-message-container" id="password-change-success">
+        <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Password changed!</h1>
+    </div>
+<div class="failed-message-container" id="password-change-fail">
+        <div class="message-text">
+            <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Password change failed!</h1>
+            <h5 id="password-update-failed-text">Your login session outdated. Please login again.</h5>
+        </div>
+    </div>
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">
@@ -66,7 +256,7 @@
     </section>
     <section class="main-content">
         <div class="main-heading">
-            <h1>All The settings Of Your <u>Profile</u></h1>
+            <h1>The settings Of Your <u>Profile!</u></h1>
             <?php
                 require_once('../db.php');
                 // Getting the most recent logging attempt of the current user
@@ -89,36 +279,74 @@
                 echo "<h5>Last accessed $dateInText</h5>";
             ?>
         </div>
-        <!-- profile details section -->
-        <div class="profile-content">
-            <div class="profile-details-title">
-                <h1>Profile details</h1>
-            </div>
-            <div class="profile-details-container">
+        <div class="profile-details-container">
+            <div class="profile-image-container">
                 <div class="profile-image">
-                    <img class="profile-img" src="..\images/profile-image.png"></img>
-                    <button class="upload-button"><i class="fa fa-upload"></i></button>
+                    <?php
+                    echo "
+                            <img src='../assets/profile-image/$userId.jpg' alt='profile-image' />
+                        ";
+                    ?>
+                    <div class="profile-change-container">
+                        <button type="button" id="profile-change-button" class="primary-button" onclick="openChangeProfileModal()">
+                            <i class="fa-solid fa-shuffle"></i>&nbsp;Change profile
+                        </button>
+                    </div>
                 </div>
-                <div class="user-details">
-                    <div class="user-name">
-                        <h1>Saman Gunawardhana</h1>
+            </div>
+            <div class="profile-details-panel">
+
+                <div class="edit-item-container" id="edit-item-username">
+                    <h1><?php echo $username ?></h1>
+                    <button type="button" class="update-button" id="button-edit-item-username" onclick="openEditModal('edit-modal-username')"><i class="fa-solid fa-pen-clip"></i></button>
+                </div>
+                <div class="edit-item-container" id="edit-item-email">
+                    <h3>Email address - <?php echo $email ?></h3>
+                    <button type="button" class="update-button" id="button-edit-item-email" onclick="openEditModal('edit-modal-email')"><i class="fa-solid fa-pen-clip"></i></button>
+                </div>
+                <div class="edit-item-row">
+                    <div class="edit-item-container" id="edit-item-contactnum">
+                        <h3>Contact Num - <?php echo $contactNum ?></h3>
+                        <button type="button" class="update-button" id="button-edit-item-contactnum" onclick="openEditModal('edit-modal-contactnum')"><i class="fa-solid fa-pen-clip"></i></button>
                     </div>
-                    <div>
-                        <div class ="user-details-item"><h3>E-mail - samangunawardhana@gmail.com</h3></div>
-                        <div class ="user-details-item"><h3>Mobile Number - 072 - 422 3123</h3></div>
-                        <div class ="user-details-item"><h3>Address - No. 570 / A 54,Melder Place,Nugegoda.</h3></div>
-                        <div class ="user-details-item"><h3>Date of birth - 05 September 1988</h3></div>
-                        <div><button class= "more-button" id="update-details-button">Update Details</button></div>
+                    <div class="edit-item-container" id="edit-item-nic">
+                        <h3>NIC number - <?php echo $nic ?></h3>
+                        <button type="button" class="update-button" id="button-edit-item-nic" onclick="openEditModal('edit-modal-nic')"><i class="fa-solid fa-pen-clip"></i></button>
                     </div>
+                </div>
+                <div class="edit-item-container" id="edit-item-dob">
+                    <h3>DOB - <?php echo $dob ?></h3>
+                    <button type="button" class="update-button" id="button-edit-item-dob" onclick="openEditModal('edit-modal-dob')"><i class="fa-solid fa-pen-clip"></i></button>
+                </div>
+                <div class="edit-item-container" id="edit-item-address">
+                    <h3>Address - <?php echo $address ?></h3>
+                    <button type="button" class="update-button" id="button-edit-item-address" onclick="openEditModal('edit-modal-address')"><i class="fa-solid fa-pen-clip"></i></button>
                 </div>
             </div>
         </div>
-        <!-- more action section -->
-        <div>
-            <div class="more-action-title"><h1>More actions</h1></div>
-            <div class="more-action-box">
-                <div class="change-password-text"><h3>Do you want to change password?</h3></div>
-                <div><button class="more-button" id="change-password-button">Change Password</button></div>
+        <div class="quick-action-container">
+            <div class="quick-action-banner">
+                <h1>Quick actions</h1>
+            </div>
+            <div class="quick-action-list">
+                <div class="quick-action-item">
+                    <h3>Change the password</h3>
+                    <div class="quick-action-item-button-container">
+                        <button type="button" class="primary-button" onclick="showChangePasswordModal()"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Change password</button>
+                    </div>
+                </div>
+                <div class="quick-action-item">
+                    <h3>Hide profile picture</h3>
+                    <div class="quick-action-item-button-container">
+                        <button type="button" class="primary-button"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Hide picture</button>
+                    </div>
+                </div>
+                <div class="quick-action-item">
+                    <h3>Provide feedback to us!</h3>
+                    <div class="quick-action-item-button-container">
+                        <button type="button" class="primary-button" onclick="showProvideFeedbackModal()"><i class="fa-solid fa-message"></i>&nbsp;&nbsp;Send feedback</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -128,6 +356,43 @@
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+<?php
+    echo "<script>
+        let userId = $userId;
+    </script>"
+?>
+<?php
+    if(isset($_POST['save-button'])) {
+        // Define the directory where the uploaded images will be stored
+        $target_dir = "../assets/profile-image/";
+        $userid=$_SESSION['user_id'];
+        // Get the filename of the uploaded image
+        //change file name to what we want
+        $target_file = $target_dir . $userid.".jpg";
+
+        // Check if the uploaded file is an image
+        $check = getimagesize($_FILES["picture-upload-input"]["tmp_name"]);
+        if($check !== false) {
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+                echo "<script>failedProfileUpdate('Sorry, only JPG, JPEG, PNG & GIF files are allowed')</script>";
+                // exit();
+            } else {
+
+                // Move the uploaded image to the target directory
+                if (move_uploaded_file($_FILES["picture-upload-input"]["tmp_name"], $target_file)) {
+                    echo "<script>successProfileUpdate()</script>";
+                    header("refresh:1");
+                } else {
+                    echo "<script>failedProfileUpdate('Sorry, there was an error uploading your file')";
+                }
+            }
+        } else {
+            echo "<script>failedProfileUpdate('Sorry, only image files are allowed')</script>";
+        }
+    }
+?>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
+<script src="../scripts/worker/profile.js" type="text/javascript"></script>
 </body>
