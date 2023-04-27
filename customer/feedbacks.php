@@ -125,6 +125,9 @@
             <button class="secondary-button" onclick="hideFeedbackContainer()">Cancel</button>
             <button class="primary-button" id="first-page-next-button" onclick=" goToNextFeedbackPage()">Next&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
         </div>
+        <div class="create-feedback-page-number">
+            <h3>Page 1 of 3</h3>
+        </div>
     </div>
     <div class="create-feedback-page" id="second-page">
         <div class="create-feedback-title">
@@ -232,6 +235,9 @@
             <button class="secondary-button" onclick="hideFeedbackContainer()">Cancel</button>
             <button class="primary-button" id="second-page-next-button" onclick="goNextFeedbackThirdPage()">Next&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
         </div>
+        <div class="create-feedback-page-number">
+            <h3>Page 2 of 3</h3>
+        </div>
     </div>
     <div class="create-feedback-page" id="third-page">
         <div class="create-feedback-title">
@@ -246,6 +252,9 @@
             <button class="primary-button" id="second-page-next-button" onclick="goBackFeedbackSecondPage()"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back</button>
             <button class="secondary-button" onclick="hideFeedbackContainer()">Cancel</button>
             <button class="primary-button" id="second-page-next-button" onclick="createFeedback()">Submit&nbsp;&nbsp;<i class="fa-solid fa-check"></i></button>
+        </div>
+        <div class="create-feedback-page-number">
+            <h3>Page 3 of 3</h3>
         </div>
     </div>
 </div>
@@ -338,68 +347,7 @@
             <h1>Recent Feedbacks</h1>
         </div>
         <div class="recent-feedback-container">
-            <table class="main-table">
-                <thead>
-                <tr class="main-tr">
-                <th class="main-th">
-                        <div class="table-heading-container">Comment&nbsp;
-                        </div>
-                    </th>
-                    <th class="main-th">
-                        <div class="table-heading-container">Worker name&nbsp;
-                        </div>
-                    </th>
-                    <th class="main-th">
-                        <div class="table-heading-container">Commented Date&nbsp;
-                    </th>
-                    <th class="main-th">
-                        <div class="table-heading-container">Service&nbsp;
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Extremely satisfied with the work done.
-                        <br/>
-                        <span class="blue-badge">Updated 15 days ago</span>
-                    </td>
-                    <td class="main-td">Saman Gunawardhana</td>
-                    <td class="main-td">21 Oct 2022</td>
-                    <td class="main-td">Plumbing</td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Process was neatly done on time
-                        <br/>
-                        <span class="blue-badge">Updated 20 days ago</span>
-                    </td>
-                    <td class="main-td">Kapila Gunawardhana</td>
-                    <td class="main-td">16 Oct 2022</td>
-                    <td class="main-td">Gardening</td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Work not completed on time.Slightly dissappointing.
-                        <br/>
-                        <span class="blue-badge">Updated 27 days ago</span>
-                    </td>
-                    <td class="main-td">Saman Gunathilaka</td>
-                    <td class="main-td">09 Oct 2022</td>
-                    <td class="main-td">Electrical</td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Payment not going through
-                        <br/>
-                        <span class="blue-badge">Updated a month ago</span>
-                    </td>
-                    <td class="main-td">Kapila Dharmadasa</td>
-                    <td class="main-td">05 Oct 2022</td>
-                    <td class="main-td">Mason</td>
-                </tr>
-                </tbody>
-            </table>
+
         </div>
         </div>
 
