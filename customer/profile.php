@@ -104,7 +104,9 @@
     </div>
     <div class="edit-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-username')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-        <button type="button" class="disable-button" id="update-button-username"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+        <?php
+        echo('<button type="button" class="disable-button" id="update-button-name" onclick="updateName('.$userId.')"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>');
+        ?>
     </div>
 </div>
 <div class="details-edit-modal" id="edit-modal-email">
@@ -132,7 +134,9 @@
     </div>
     <div class="edit-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-contactnum')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-        <button type="button" class="disable-button" id="update-button-contactnum"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+        <?php
+        echo('<button type="button" class="disable-button" id="update-button-contactnum" onclick="updateContactNum('.$userId.')"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>');
+        ?>
     </div>
 </div>
 <div class="details-edit-modal" id="edit-modal-nic">
@@ -147,7 +151,9 @@
     </div>
     <div class="edit-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-nic')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-        <button type="button" class="disable-button" id="update-button-nic"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+        <?php
+        echo('<button type="button" class="disable-button" id="update-button-nic" onclick="updateNIC('.$userId.')"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>');
+        ?>
     </div>
 </div>
 <div class="details-edit-modal" id="edit-modal-dob">
@@ -162,7 +168,9 @@
     </div>
     <div class="edit-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-dob')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-        <button type="button" class="disable-button" id="update-button-dob"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+        <?php
+        echo('<button type="button" class="disable-button" id="update-button-dob" onclick="updateDOB('.$userId.')"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>');
+        ?>
     </div>
 </div>
 <div class="details-edit-modal" id="edit-modal-address">
@@ -177,7 +185,9 @@
     </div>
     <div class="edit-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-address')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-        <button type="button" class="disable-button" id="update-button-address"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+        <?php
+        echo('<button type="button" class="disable-button" id="update-button-address" onclick="updateAddress('.$userId.')"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>');
+        ?>
     </div>
 </div>
 <div class="success-message-container" id="account-details-update-success">
