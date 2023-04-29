@@ -617,3 +617,51 @@ function updateName(user_id){
     })
 
 }
+
+function sendFeedback(user_id){
+    alert('feedback sent');
+    const feedbackInput = document.getElementById('feedback-text-input');
+    const feedback = feedbackInput.value;
+
+    //fetch request to send feedback email to admin
+
+    fetch ('http://localhost/labour_link/customer/sendSystemFeedback.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user_id: user_id,
+            feedback: feedback
+        })
+
+    }).then(response => response.json())
+    .then(data => {
+        if(data.statusCode == 200){
+            const feedbackModal = document.getElementById('feedback-message-container');
+            const successModal = document.getElementById('feedback-submit-success');
+
+            feedbackModal.style.visibility = 'hidden';
+            successModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                successModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }else if(data.statusCode == 201){
+            const feedbackModal = document.getElementById('feedback-message-container');
+            const failedModal = document.getElementById('feedback-submit-fail');
+
+            feedbackModal.style.visibility = 'hidden';
+            failedModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                failedModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }
+    })
+
+}

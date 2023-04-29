@@ -245,7 +245,19 @@
     </div>
     <div class="feedback-input-button-container">
         <button type="button" class="primary-outline-button" onclick="hideProvideFeedbackModal()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-        <button type="button" class="primary-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Submit</button>
+        <?php
+            echo('<button type="button" class="primary-button" onclick="sendFeedback('.$userId.')"><i class="fa-solid fa-check""></i>&nbsp;&nbsp;Submit</button>')
+        ?>
+       
+    </div>
+</div>
+<div class="success-message-container" id="feedback-submit-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Feedback Submitted!</h1>
+</div>
+<div class="failed-message-container" id="feedback-submit-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Feedback Submit Failed!</h1>
+        <h5 id="feedback-submit-failed-text">Your login session outdated. Please login again.</h5>
     </div>
 </div>
 <?php include_once '../components/navbar.php' ?>
