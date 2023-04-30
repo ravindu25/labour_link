@@ -302,7 +302,7 @@ $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
                     ?>
                     <div class="profile-change-container">
                         <button type="button" id="profile-change-button" class="primary-button" onclick="openChangeProfileModal()">
-                            <i class="fa-solid fa-shuffle"></i>&nbsp;Change profile
+                            <i class="fa-solid fa-camera"></i> Change
                         </button>
                     </div>
                 </div>
@@ -314,7 +314,7 @@ $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
                 </div>
                 <div class="edit-item-container" id="edit-item-contactnum">
                     <div class="edit-item-header">
-                        Contact Number -
+                        Phone -
                     </div>
                     <div class="edit-item-value">
                         <?php echo $contactNum ?>
@@ -323,7 +323,7 @@ $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
                 </div>
                 <div class="edit-item-container" id="edit-item-email">
                     <div class="edit-item-header">
-                        Email address -
+                        Email -
                     </div>
                     <div class="edit-item-value">
                         <?php echo $email ?>

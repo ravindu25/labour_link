@@ -352,6 +352,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
+    width: 900px;
 }
 
 .edit-item-container h1{
@@ -378,9 +379,9 @@
     font-family: 'Inter', sans-serif;
     color: #102699;
     font-size: 20px;
-    width: calc(100% - 140px);
+    width: calc(100% - 120px);
     background-color: #E7F2FF;
-    border: 1px solid #ddd;
+    border: 1px solid #102699;
     border-radius: 15px;
     padding: 10px;
 }
@@ -388,7 +389,7 @@
 .update-button{
     visibility: hidden;
     outline: none;
-    border: 3px solid var(--primary-background-shade-color);
+    border: 1px solid #ABC3EF;
     padding: 6px 9px;
     margin-left: 16px;
     color: var(--primary-color);
@@ -396,7 +397,7 @@
     font-size: 20px;
     font-weight: 500;
     border-radius: 25%;
-    background-color: var(--primary-background-shade-color);
+    background-color: #ABC3EF;
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
 }
 
@@ -493,6 +494,7 @@
     padding-bottom: 32px;
     margin: 12px 16px;
     border-radius: 12px;
+    border: 2px solid #102699;
     background-color: var(--primary-background-shade-color);
 }
 
