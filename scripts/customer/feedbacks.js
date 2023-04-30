@@ -259,3 +259,71 @@ function loadAllBookings(dataSource){
 
 
 loadAllBookings(`http://localhost/labour_link/api/bookings.php?customerId=${userId}`);
+
+function showFeedbackDetails(feedbackToken){
+    const backdrop = document.getElementById('backdrop-modal');
+    const feedbackDetailsContainer = document.getElementById('feedback-details-container');
+
+    fetch(`http://localhost/labour_link/api/feedbacks.php?feedbackToken=${feedbackToken}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    }).then(response => response.json())
+        .then(data => {
+            /*
+             * Setting up the worker details
+             */
+            document.getElementById('feedback-details-worker-image').src = `../assets/profile-image/${data.workerId}.jpg`;
+            document.getElementById('feedback-details-worker-name').innerText = data.workerName;
+            document.getElementById('feedback-details-booking-date').innerText = data.createdTimestamp.split(' ')[0];
+            document.getElementById('feedback-details-worker-details-link').href = `http://localhost/labour_link/worker/view-worker-profile.php?workerId=${data.workerId}`;
+
+            updateStarContainer('update-star-punctuality', 1, 5, parseInt(data.ratingPunctuality));
+            updateStarContainer('update-star-efficient', 1, 5, parseInt(data.ratingEfficiency));
+            updateStarContainer('update-star-professionalism', 1, 5, parseInt(data.ratingProfessionalism));
+
+            if(data.writtenFeedback === '' || data.writtenFeedback === null){
+                document.getElementById('feedback-details-comment-container').style.display = 'none';
+            } else {
+                document.getElementById('feedback-details-comment-container').style.display = 'block';
+                document.getElementById('feedback-details-comment-text').innerText = data.writtenFeedback;
+            }
+
+            let extraObservations = '';
+
+            if(data.extraObservations.length == 0){
+                document.getElementById('feedback-details-extra-observations-container').style.display = 'none';
+            } else {
+                document.getElementById('feedback-details-extra-observations-container').style.display = 'block';
+            }
+
+            for(let i = 0; i < data.extraObservations.length; i++){
+                extraObservations += `<span class="red-badge">${data.extraObservations[i]}</span>`;
+            }
+            document.getElementById('feedback-details-extra-observations').innerHTML = extraObservations;
+
+            backdrop.style.visibility = 'visible';
+            feedbackDetailsContainer.style.visibility = 'visible';
+        })
+        .catch(error => console.log(error));
+
+
+}
+
+function updateStarContainer(starId, startIndex, endIndex, fillEndIndex){
+    // First paint the filled stars
+    for(let i = startIndex; i <= fillEndIndex; i++){
+        document.getElementById(`${starId}-${i}`).innerHTML = '<i class="fa-solid fa-star"></i>';
+    }
+    // Second paint the not filled starts
+    for(let i = fillEndIndex + 1; i <= endIndex; i++) {
+        document.getElementById(`${starId}-${i}`).innerHTML = '<i class="fa-regular fa-star"></i>';
+    }
+}
+
+function hideFeedbackDetails(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const feedbackDetailsContainer = document.getElementById('feedback-details-container');
+
+    backdrop.style.visibility = 'hidden';
+    feedbackDetailsContainer.style.visibility = 'hidden';
+}

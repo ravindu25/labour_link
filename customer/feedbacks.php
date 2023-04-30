@@ -268,6 +268,110 @@
         <h5>Your login session outdated. Please login again.</h5>
     </div>
 </div>
+<div class="feedback-details-container" id="feedback-details-container">
+    <div class="feedback-details-header">
+        <h1>All the details about the feedback</h1>
+    </div>
+    <div class="feedback-details-content">
+        <div class="feedback-details-worker-details">
+            <div class="feedback-worker-details-profile">
+                <div class='recent-feedback-image-container'>
+                    <img src='../assets/worker/profile-images/worker-1.jpg' id="feedback-details-worker-image" alt='worker-profile' />
+                </div>
+                <div>
+                    <h1 id="feedback-details-worker-name">Chaminda Gunathilaka</h1>
+                    <span class="blue-badge" id="feedback-details-booking-date">2023-04-25</span>
+                </div>
+            </div>
+            <div>
+                <a href="#" id="feedback-details-worker-details-link">
+                    <i class="fa-solid fa-user"></i>&nbsp;&nbsp;Worker Profile
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="feedback-details-rating-container">
+        <div class="feedback-details-rating-header">
+            <h1>Worker rating</h1>
+        </div>
+        <div class="feedback-details-rating-content">
+            <div class="feedback-details-rating-item">
+                <div class="rating-container-rate">
+                    <div class="feedback-star-container" id="update-star-punctuality-1">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="update-star-punctuality-2">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="update-star-punctuality-3">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="update-star-punctuality-4">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="update-star-punctuality-5" >
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                </div>
+                <h3>Punctuality</h3>
+            </div>
+            <div class="feedback-details-rating-item">
+                <div class="rating-container-rate">
+                    <div class="feedback-star-container" id="update-star-efficient-1">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="update-star-efficient-2">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="update-star-efficient-3">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="update-star-efficient-4">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="update-star-efficient-5" >
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                </div>
+                <h3>Efficient</h3>
+            </div>
+            <div class="feedback-details-rating-item">
+                <div class="rating-container-rate">
+                    <div class="feedback-star-container" id="update-star-professionalism-1">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="update-star-professionalism-2">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="update-star-professionalism-3">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="update-star-professionalism-4">
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="feedback-star-container" id="update-star-professionalism-5" >
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                </div>
+                <h3>Professionalism</h3>
+            </div>
+        </div>
+    </div>
+    <div class="feedback-details-comment-container" id="feedback-details-comment-container">
+        <h1>Written feedback</h1>
+        <p id="feedback-details-comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad cupiditate eos ipsa magnam maiores saepe, sequi tempore! At autem dolore fuga laboriosam molestias necessitatibus, nemo omnis qui suscipit temporibus, voluptas.</p>
+    </div>
+    <div class="feedback-details-extra-observations-container" id="feedback-details-extra-observations-container">
+        <h1>Extra observations</h1>
+        <div class="feedback-details-extra-observations" id="feedback-details-extra-observations">
+        </div>
+    </div>
+    <div class="feedback-details-button-container">
+        <button class="primary-button"><i class="fa-solid fa-pen-nib"></i>&nbsp;&nbsp;Edit feedback</button>
+        <button class="primary-outline-button" onclick="hideFeedbackDetails()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Close</button>
+        <button class="primary-button"><i class="fa-solid fa-arrow-turn-up"></i>&nbsp;&nbsp;View booking</button>
+    </div>
+</div>
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">
@@ -346,8 +450,86 @@
         <div class="recent-feedback">
             <h1>Recent Feedbacks</h1>
         </div>
-        <div class="recent-feedback-container">
+        <div class="recent-feedbacks-container">
+            <?php
+                require_once('../db.php');
 
+                $sql_get_most_recent_feedbacks = "SELECT Feedback.*, Booking.*, Worker.First_Name, Worker.Last_Name FROM Feedback INNER JOIN Booking ON Feedback.Booking_ID = Booking.Booking_ID INNER JOIN User AS Worker ON Booking.Worker_ID = Worker.User_ID WHERE Booking.Customer_ID = $customerId ORDER BY Feedback.Timestamp DESC LIMIT 4";
+
+                $result = $conn->query($sql_get_most_recent_feedbacks);
+
+                if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()){
+                        $feedbackId = $row['Feedback_Token'];
+                        $bookingId = $row['Booking_ID'];
+                        $workerName = $row['First_Name'] . ' ' . $row['Last_Name'];
+                        $workerId = $row['Worker_ID'];
+                        $timestamp = strtotime($row['Timestamp']);
+                        $date = date('Y-m-d', $timestamp);
+
+                        $ratingPun = $row['Star_Punctuality'];
+                        $ratingPunProgress = $ratingPun * 20;
+                        $ratingEfficiency = $row['Star_Efficiency'];
+                        $ratingEfficiencyProgress = $ratingEfficiency * 20;
+                        $ratingProf = $row['Star_Professionalism'];
+                        $ratingProfProgress = $ratingProf * 20;
+
+                        $writtenFeedback = '';
+                        if($row['Written_Feedback'] != ''){
+                            $writtenFeedback = "<p><i>\"$writtenFeedback\"</i></p>";
+                        }
+
+
+                        /*
+                         * Generating random worker image
+                         */
+                        $imageId = rand(1, 4) % 5;
+
+                        echo "
+                            <div class='recent-feedback-item' onclick='showFeedbackDetails($feedbackId)'>
+                                <div class='recent-feedback-item-heading'>
+                                    <div class='recent-feedback-image-container'>
+                                        <img src='../assets/worker/profile-images/worker-$imageId.jpg' alt='worker-profile' />
+                                    </div>
+                                    <div class='recent-feedback-profile-details'>                    
+                                        <h3>$workerName</h3>
+                                        <span class='blue-badge'>$date</span>
+                                    </div>
+                                </div>
+                                <div class='recent-feedback-ratings'>
+                                    <div class='recent-feedback-rating-item'>
+                                        <div class='recent-feedback-rating-header'>
+                                            <h3>Punctuality</h3>
+                                            <h3>$ratingPun out of 5</h3>
+                                        </div>
+                                        <div class='recent-feedback-rating-bar'>
+                                            <div class='recent-feedback-rating-bar-progress' style='width: calc($ratingPunProgress%)'></div>
+                                        </div>
+                                    </div>
+                                    <div class='recent-feedback-rating-item'>
+                                        <div class='recent-feedback-rating-header'>
+                                            <h3>Effeciency</h3>
+                                            <h3>$ratingEfficiency out of 5</h3>
+                                        </div>
+                                        <div class='recent-feedback-rating-bar'>
+                                            <div class='recent-feedback-rating-bar-progress' style='width: calc($ratingEfficiencyProgress%)'></div>
+                                        </div>
+                                    </div>
+                                    <div class='recent-feedback-rating-item'>
+                                        <div class='recent-feedback-rating-header'>
+                                            <h3>Professionalism</h3>
+                                            <h3>$ratingProf out of 5</h3>
+                                        </div>
+                                        <div class='recent-feedback-rating-bar'>
+                                            <div class='recent-feedback-rating-bar-progress' style='width: calc($ratingProfProgress%)'></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ";
+                    }
+                }
+            ?>
         </div>
         </div>
 
