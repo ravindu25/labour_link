@@ -30,7 +30,7 @@
     <div class="create-feedback-page" id="first-page">
         <div class="create-feedback-title">
             <h1>Provide feedback about workers!</h1>
-            <h5 style="text-align: center"><b>Please select booking to continue.</b>This will assist us in delivering enhanced services.</h5>
+            <h5 style="text-align: center"><b>Please select a booking to continue.</b> This will assist us in delivering enhanced services.</h5>
         </div>
         <div class="feedback-cards-container" id="create-feedback-bookings-container">
             <div class="pagination-card-disabled" id="create-feedback-bookings-previous">
@@ -132,7 +132,7 @@
     <div class="create-feedback-page" id="second-page">
         <div class="create-feedback-title">
             <h1 id="create-feedback-third-title">Feedback about workers!</h1>
-            <h5 id="create-feedback-third-paragraph" style="text-align: center"><b>Please provide rating about worker.</b>This will assist us in delivering enhanced services.</h5>
+            <h5 id="create-feedback-third-paragraph" style="text-align: center"><b>Please provide rating about worker.</b> This will assist us in delivering enhanced services.</h5>
         </div>
         <div class="rating-container">
             <div class="rating-container-row">
@@ -508,7 +508,7 @@
                                     </div>
                                     <div class='recent-feedback-rating-item'>
                                         <div class='recent-feedback-rating-header'>
-                                            <h3>Effeciency</h3>
+                                            <h3>Efficiency</h3>
                                             <h3>$ratingEfficiency out of 5</h3>
                                         </div>
                                         <div class='recent-feedback-rating-bar'>

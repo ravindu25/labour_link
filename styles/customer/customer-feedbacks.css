@@ -305,6 +305,7 @@
     border-radius: 16px;
     background-color: white;
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+    border: 1px solid #102699;
 }
 
 .recent-feedback-item:active{
@@ -449,7 +450,7 @@
 }
 
 .recent-feedback-rating-item{
-    margin: 0 4px;
+    margin: 16px 4px;
 }
 
 .recent-feedback-rating-header{
@@ -461,6 +462,7 @@
     margin: 8px 0;
     font-weight: normal;
     color: var(--dark-shade-color);
+    font-family: 'Inter', sans-serif;
 }
 
 .recent-feedback-rating-bar{

@@ -221,7 +221,7 @@
         </button>
         <?php
         echo('<button type="button" class="disable-button" id="change-password-button" onclick="updatePassword('.$userId.')" disabled>
-            <i class="fa-solid fa-gear"></i>&nbsp;&nbsp;Change password
+            <i class="fa-solid fa-unlock-keyhole"></i>&nbsp;&nbsp;Change password
         </button>');
         ?>
     </div>
@@ -407,7 +407,7 @@
                     </div>
                 </div>
                 <div class="quick-action-item">
-                    <h3>Unlock premium features and take your experience to the next level</h3>
+                    <h3>Unlock premium features and take your experience to the next level!</h3>
                     <div class="quick-action-item-button-container">
                         <button type="button" class="primary-button"><i class="fa-solid fa-circle-up"></i>&nbsp;&nbsp;Upgrade now</button>
                     </div>
