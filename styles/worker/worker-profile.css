@@ -88,17 +88,18 @@
 }
 
 .profile-image-container{
-    width: 30%;
+    width: 400px;
     margin-left: 36px;
 }
 
 .profile-image{
-    width: 100%;
+    width: 300px;
 }
 
 .profile-image img{
-    width: 100%;
+    width: 300px;
     height: auto;
+    border-radius: 50%;
 }
 
 .user-details{
@@ -348,21 +349,40 @@
 
 .edit-item-container{
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    padding: 10px 0;
 }
 
 .edit-item-container h1{
-    font-size: 36px;
-    font-weight: normal;
+    font-size: 50px;
+    font-weight: bold;
     margin: 0;
     color: var(--primary-color);
 }
 
-.edit-item-container h3{
+.edit-item-header{
     font-size: 20px;
     font-weight: normal;
     margin: 0;
     color: var(--dark-color);
+    font-family: 'Inter', sans-serif;
+    margin-right: 20px;
+    width: 250px;
+    text-align: left;
+}
+
+.edit-item-value{
+    margin: 0;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    color: #102699;
+    font-size: 20px;
+    width: calc(100% - 140px);
+    background-color: #E7F2FF;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 10px;
 }
 
 .update-button{

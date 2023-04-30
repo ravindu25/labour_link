@@ -258,6 +258,11 @@ function closeChangeProfileModal(){
     saveButton.style.display = 'none';
 }
 
+function setDefaultProfile() {
+    img.onerror = null;
+    img.src = "../assets/profile-image/default.jpg";
+}
+
 function goNextProfileChangePage(){
     const currentPictureContainer = document.getElementById('current-picture-container');
     const selectImageContainer = document.getElementById('select-image-container');

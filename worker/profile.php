@@ -45,7 +45,7 @@
 
             </div>
             <div class="profile-change-button-container">
-                <button type="button" class="primary-button" id="set-default-button">
+                <button type="button" class="primary-button" id="set-default-button" onclick="setDefaultProfile()">
                     <i class="fa-solid fa-arrow-up-from-bracket"></i>&nbsp;&nbsp;Set default
                 </button>
                 <button type="button" class="primary-outline-button" onclick="closeChangeProfileModal()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
@@ -107,6 +107,18 @@ $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
     </div>
 </div>
 <div class="details-edit-modal" id="edit-modal-email">
+    <div class="edit-modal-header">
+        <h1>Edit your account details</h1>
+    </div>
+    <div class="edit-modal-inputs">
+        <label for="email-input">Email address:</label>
+        <input type="email" id="email-input"/>
+    </div>
+    <div class="edit-modal-button-container">
+        <button type="button" class="primary-outline-button" onclick="closeEditModal('edit-modal-email')"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" class="disable-button" id="update-button-email"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+    </div>
+</div>
 <div class="details-edit-modal" id="edit-modal-contactnum">
         <div class="edit-modal-header">
             <h1>Edit your account details</h1>
@@ -257,7 +269,7 @@ $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
     </section>
     <section class="main-content">
         <div class="main-heading">
-            <h1>The settings Of Your <u>Profile!</u></h1>
+            <h1>The Settings Of Your <u>Profile!</u></h1>
             <?php
                 require_once('../db.php');
                 // Getting the most recent logging attempt of the current user
@@ -296,32 +308,54 @@ $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
                 </div>
             </div>
             <div class="profile-details-panel">
-
                 <div class="edit-item-container" id="edit-item-username">
                     <h1><?php echo $username ?></h1>
                     <button type="button" class="update-button" id="button-edit-item-username" onclick="openEditModal('edit-modal-username')"><i class="fa-solid fa-pen-clip"></i></button>
                 </div>
+                <div class="edit-item-container" id="edit-item-contactnum">
+                    <div class="edit-item-header">
+                        Contact Number -
+                    </div>
+                    <div class="edit-item-value">
+                        <?php echo $contactNum ?>
+                    </div>
+                    <button type="button" class="update-button" id="button-edit-item-contactnum" onclick="openEditModal('edit-modal-contactnum')"><i class="fa-solid fa-pen-clip"></i></button>
+                </div>
                 <div class="edit-item-container" id="edit-item-email">
-                    <h3>Email address - <?php echo $email ?></h3>
+                    <div class="edit-item-header">
+                        Email address -
+                    </div>
+                    <div class="edit-item-value">
+                        <?php echo $email ?>
+                    </div>
                     <button type="button" class="update-button" id="button-edit-item-email" onclick="openEditModal('edit-modal-email')"><i class="fa-solid fa-pen-clip"></i></button>
                 </div>
-                <div class="edit-item-row">
-                    <div class="edit-item-container" id="edit-item-contactnum">
-                        <h3>Contact Num - <?php echo $contactNum ?></h3>
-                        <button type="button" class="update-button" id="button-edit-item-contactnum" onclick="openEditModal('edit-modal-contactnum')"><i class="fa-solid fa-pen-clip"></i></button>
+                <div class="edit-item-container" id="edit-item-address">
+                    <div class="edit-item-header">
+                        Residence -
                     </div>
-                    <div class="edit-item-container" id="edit-item-nic">
-                        <h3>NIC number - <?php echo $nic ?></h3>
-                        <button type="button" class="update-button" id="button-edit-item-nic" onclick="openEditModal('edit-modal-nic')"><i class="fa-solid fa-pen-clip"></i></button>
+                    <div class="edit-item-value">
+                        <?php echo $address ?>
                     </div>
+                    <button type="button" class="update-button" id="button-edit-item-address" onclick="openEditModal('edit-modal-address')"><i class="fa-solid fa-pen-clip"></i></button>
                 </div>
                 <div class="edit-item-container" id="edit-item-dob">
-                    <h3>DOB - <?php echo $dob ?></h3>
+                    <div class="edit-item-header">
+                        Date of Birth -
+                    </div>
+                    <div class="edit-item-value">
+                        <?php echo $dob ?>
+                    </div>
                     <button type="button" class="update-button" id="button-edit-item-dob" onclick="openEditModal('edit-modal-dob')"><i class="fa-solid fa-pen-clip"></i></button>
                 </div>
-                <div class="edit-item-container" id="edit-item-address">
-                    <h3>Address - <?php echo $address ?></h3>
-                    <button type="button" class="update-button" id="button-edit-item-address" onclick="openEditModal('edit-modal-address')"><i class="fa-solid fa-pen-clip"></i></button>
+                <div class="edit-item-container" id="edit-item-nic">
+                    <div class="edit-item-header">
+                        NIC number -
+                    </div>
+                    <div class="edit-item-value">
+                        <?php echo $nic ?>
+                    </div>
+                    <button type="button" class="update-button" id="button-edit-item-nic" onclick="openEditModal('edit-modal-nic')"><i class="fa-solid fa-pen-clip"></i></button>
                 </div>
             </div>
         </div>
@@ -340,12 +374,6 @@ $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
                     <h3>Hide profile picture</h3>
                     <div class="quick-action-item-button-container">
                         <button type="button" class="primary-button"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Hide picture</button>
-                    </div>
-                </div>
-                <div class="quick-action-item">
-                    <h3>Provide feedback to us!</h3>
-                    <div class="quick-action-item-button-container">
-                        <button type="button" class="primary-button" onclick="showProvideFeedbackModal()"><i class="fa-solid fa-message"></i>&nbsp;&nbsp;Send feedback</button>
                     </div>
                 </div>
             </div>
