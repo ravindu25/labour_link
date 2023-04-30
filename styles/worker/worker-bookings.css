@@ -302,7 +302,7 @@
     background-color: #FFF;
     border-radius: 16px;
     opacity: 1;
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 

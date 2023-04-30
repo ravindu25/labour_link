@@ -26,7 +26,7 @@ $userId = $_SESSION['user_id'];
     <title>Bookings | LabourLink</title>
 </head>
 <body>
-<div class="backdrop-modal" id="backdrop-modal">
+    <div class="backdrop-modal" id="backdrop-modal">
 </div>
 <div class="message-backdrop" id="message-backdrop">
 </div>
@@ -37,6 +37,45 @@ $userId = $_SESSION['user_id'];
     <div class="message-text">
         <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking created successfully</h1>
         <h5>Your login session outdated. Please login again.</h5>
+    </div>
+</div>
+<div class="booking-details-container" id="booking-details-container">
+    <div class="booking-details-scroll-wrapper">
+        <div class="booking-details-title">
+            <h1>Current Status of Your <u>Booking</u></h1>
+        </div>
+        <div class="status-container" id="booking-details-status-container"></div>
+        <div class="details-container">
+            <div class="details-row">
+                <h4>Job type</h4>
+                <h4 class="details-value" id="booking-details-job-type"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Customer</h4>
+                <h4 class="details-value" id="booking-details-customer-name"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Start date</h4>
+                <h4 class="details-value" id="booking-details-start-date"></h4>
+            </div>
+            <div class="remaining-time-container" id="remaining-time-container">
+                <h4>This booking will be closed in</h4>
+                <h1 class="countdown-text" id="booking-details-countdown"></h1>
+            </div>
+            <div class="payment-method-container">
+                <div class="payment-image-container">
+                    <h4>Payment Method</h4>
+                    <div class="payment-image-card">
+                        <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
+                             alt="payment method"/>
+                        <h4 id="payment-method-text">Online payments</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="back-button-container">
+                <button type="button" class="more-button" id="back-button">Back</button>
+            </div>
+        </div>
     </div>
 </div>
 <div class="booking-details-container" id="booking-details-container">
