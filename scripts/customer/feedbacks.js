@@ -272,7 +272,7 @@ function showFeedbackDetails(feedbackToken){
             /*
              * Setting up the worker details
              */
-            document.getElementById('feedback-details-worker-image').src = `../assets/profile-image/${data.workerId}.jpg`;
+            document.getElementById('feedback-details-worker-image').src = `../assets/worker/profile-images/worker-3.jpg`;
             document.getElementById('feedback-details-worker-name').innerText = data.workerName;
             document.getElementById('feedback-details-booking-date').innerText = data.createdTimestamp.split(' ')[0];
             document.getElementById('feedback-details-worker-details-link').href = `http://localhost/labour_link/worker/view-worker-profile.php?workerId=${data.workerId}`;
@@ -281,8 +281,9 @@ function showFeedbackDetails(feedbackToken){
             updateStarContainer('update-star-efficient', 1, 5, parseInt(data.ratingEfficiency));
             updateStarContainer('update-star-professionalism', 1, 5, parseInt(data.ratingProfessionalism));
 
+
             if(data.writtenFeedback === '' || data.writtenFeedback === null){
-                document.getElementById('feedback-details-comment-container').style.display = 'none';
+                document.getElementById('feedback-details-comment-container').innerHTML = '<h1 style="color: var(--dark-shade-color)">No written feedbacks</h1>';
             } else {
                 document.getElementById('feedback-details-comment-container').style.display = 'block';
                 document.getElementById('feedback-details-comment-text').innerText = data.writtenFeedback;
@@ -300,6 +301,11 @@ function showFeedbackDetails(feedbackToken){
                 extraObservations += `<span class="red-badge">${data.extraObservations[i]}</span>`;
             }
             document.getElementById('feedback-details-extra-observations').innerHTML = extraObservations;
+
+            document.getElementById('feedback-details-booking-button').addEventListener('click', () => {
+                hideFeedbackDetails();
+                openBookingDetailsModal(data.bookingId);
+            });
 
             backdrop.style.visibility = 'visible';
             feedbackDetailsContainer.style.visibility = 'visible';
@@ -324,6 +330,87 @@ function hideFeedbackDetails(){
     const backdrop = document.getElementById('backdrop-modal');
     const feedbackDetailsContainer = document.getElementById('feedback-details-container');
 
+    document.getElementById('feedback-details-booking-button').removeEventListener('click', () => { showBookingDetails(data.bookingId) });
+
     backdrop.style.visibility = 'hidden';
     feedbackDetailsContainer.style.visibility = 'hidden';
+}
+
+function openBookingDetailsModal(bookingId){
+    const backdropModal = document.getElementById("backdrop-modal");
+    const bookingDetails = document.getElementById("booking-details-container");
+
+    fetch(`http://localhost/labour_link/api/bookings.php?bookingId=${bookingId}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    }).then(response => response.json())
+        .then(data => {
+            const currentBooking = data;
+
+            let bookingStatusButton = null;
+            if(currentBooking.status === 'Pending'){
+                bookingStatusButton = '<button class="pending-button">Pending</button>';
+            } else if(currentBooking.status === 'Accepted'){
+                bookingStatusButton = '<button class="in-pogress-button">Accepted</button>';
+            } else if(currentBooking.status === 'Completed'){
+                bookingStatusButton = '<button class="completed-button">Completed</button>';
+            } else {
+                bookingStatusButton = '<button class="rejected-button">Rejected</button>';
+            }
+
+            const bookingStatusContainer = document.getElementById('booking-details-status-container');
+            bookingStatusContainer.innerHTML = bookingStatusButton;
+
+            document.getElementById('booking-details-job-type').innerText = currentBooking.workerType;
+            document.getElementById('booking-details-worker-name').innerText = currentBooking.workerName;
+            document.getElementById('booking-details-start-date').innerText = currentBooking.startDate;
+
+            if(currentBooking.status === 'Pending' || currentBooking.status === 'Accepted') {
+                const startDate = new Date();
+                const endDate = new Date(currentBooking.endDate);
+
+                let difference = endDate - startDate;
+                const bookingCountDown = document.getElementById('booking-details-countdown');
+
+                if(difference >= 0) {
+                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                    difference -= days * (1000 * 60 * 60 * 24);
+                    const hours = Math.floor(difference / (1000 * 60 * 60));
+                    const remainingText = `${days} days and ${hours} hours`;
+
+                    bookingCountDown.style.color = 'var(--primary-color)';
+                    bookingCountDown.innerText = remainingText;
+                } else {
+                    bookingCountDown.style.color = 'var(--danger-color)';
+                    bookingCountDown.innerText = 'The booking has expired';
+                }
+            } else {
+                document.getElementById('remaining-time-container').style.display = 'none';
+            }
+
+            const paymentImage = document.getElementById('payment-image');
+            const paymentImageText = document.getElementById('payment-method-text');
+
+            if(currentBooking.paymentMethod === 'Manual'){
+                paymentImage.src = '../assets/customer/dashboard/undraw_savings_re_eq4w.svg';
+                paymentImageText.innerText = 'Manual payments';
+            } else {
+                paymentImage.src = '../assets/customer/dashboard/undraw_credit_card_re_blml.svg';
+                paymentImageText.innerText = 'Online payments';
+            }
+
+            backdropModal.style.visibility = 'visible';
+            bookingDetails.style.visibility = 'visible';
+        })
+        .catch(error => console.log(error));
+
+
+}
+
+function closeBookingDetailsModal(){
+    const backdropModal = document.getElementById("backdrop-modal");
+    const bookingDetails = document.getElementById("booking-details-container");
+
+    backdropModal.style.visibility = 'hidden';
+    bookingDetails.style.visibility = 'hidden';
 }
