@@ -4,6 +4,62 @@ let totalPages = 0;
 let currentPage = 1;
 let choices = [];
 let bookingRating = {'punctuality': 0, 'efficient': 0, 'professionalism': 0};
+let feedbackPageNumber = 0;
+let maxFeedbackPages = null;
+let allFeedbacks = null;
+let allTempFeedbacks = null;
+let currentViewingFeedbacks = [];
+let sortingDetails = { 'writtenFeedback': null, 'workerName': null, 'createdTimestamp': null };
+const feedbackSearchButton = document.getElementById('feedback-search-input-button');
+
+feedbackSearchButton.addEventListener('click', () => {
+    allFeedbacks = allTempFeedbacks;
+    const paginationContainer = document.getElementById('feedback-details-pagination-container');
+    const searchTerm = document.getElementById('feedback-search').value.toLowerCase();
+
+    if(searchTerm == '') {
+        allFeedbacks = allTempFeedbacks;
+        maxFeedbackPages = Math.ceil(allFeedbacks.length / 5);
+
+        feedbackPageNumber = 1;
+        updateFeedbackTable(allFeedbacks, feedbackPageNumber);
+        updateFeedbackTablePagination(feedbackPageNumber, maxFeedbackPages);
+        paginationContainer.style.display = 'flex' ;
+    } else {
+        let tempSearchFeedbacks = [];
+
+        allFeedbacks.forEach(feedback => {
+            if (feedback.writtenFeedback.toLowerCase().includes(searchTerm)) {
+                tempSearchFeedbacks.push(feedback);
+            } else if (feedback.workerName.toLowerCase().includes(searchTerm)) {
+                tempSearchFeedbacks.push(feedback);
+            }
+        });
+
+        if(tempSearchFeedbacks.length == 0) {
+            const tableBody = document.getElementById('feedback-details-body-table');
+
+            tableBody.innerHTML = `
+            <tr class='empty-table-body-tr'>
+                <td colspan='5' class='empty-table-body-td'>
+                    <img src="../../labour_link/assets/empty-search.svg" alt="empty search" class="empty-table-body-image">
+                    <h3>No results found!</h3>
+                </td>
+            </tr>
+            `;
+
+            paginationContainer.style.display = 'none' ;
+        } else {
+            allFeedbacks = tempSearchFeedbacks;
+            maxFeedbackPages = Math.ceil(allFeedbacks.length / 5);
+
+            feedbackPageNumber = 1;
+            updateFeedbackTable(allFeedbacks, feedbackPageNumber);
+            updateFeedbackTablePagination(feedbackPageNumber, maxFeedbackPages);
+            paginationContainer.style.display = 'flex' ;
+        }
+    }
+});
 
 function showFeedbackContainer(){
     const createFeedbackContainer = document.getElementById('create-feedback-container');
@@ -260,6 +316,197 @@ function loadAllBookings(dataSource){
 
 loadAllBookings(`http://localhost/labour_link/api/bookings.php?customerId=${userId}`);
 
+function getAllFeedbacks(customerId){
+    fetch(`http://localhost/labour_link/api/feedbacks.php?customerId=${customerId}`, {
+        method: 'GET',
+        contentType: 'application/json'
+    })
+    .then(response => response.json())
+        .then(data => {
+            allFeedbacks = data;
+            allTempFeedbacks = allFeedbacks;
+
+            if(allFeedbacks.length == 0){
+                const recentFeedbacksContainar = document.getElementById('recent-feedbacks-container');
+                const feedbackSearchInput = document.getElementById('feedback-search-container');
+                const feedbackTableContainer = document.getElementById('feedback-search-table-container');
+
+                recentFeedbacksContainar.innerHTML = `
+                    <div class='empty-feedback-container'>
+                        <img src="../../labour_link/assets/customer/feedbacks/empty-feedbacks.svg" alt="Empty Feedbacks" class="empty-feedback-image">
+                        <h3>You haven't provided any feedback yet</h3>
+                    </div>
+                `
+
+                feedbackSearchInput.style.display = 'none';
+                feedbackTableContainer.style.display = 'none';
+            } else {
+
+                maxFeedbackPages = Math.ceil(allFeedbacks.length / 5);
+
+                feedbackPageNumber += 1;
+                updateFeedbackTable(allFeedbacks, feedbackPageNumber);
+                updateFeedbackTablePagination(feedbackPageNumber, maxFeedbackPages);
+            }
+        }).catch(error => {
+            const backdrop = document.getElementById('backdrop-modal');
+            const errorMessageContainer = document.getElementById('error-message-container');
+
+            console.log(error);
+
+            backdrop.style.visibility = 'visible';
+            errorMessageContainer.style.visibility = 'visible';
+    });
+}
+
+function updateFeedbackTable(feedbacks, currentPage){
+    const startIndex = (currentPage - 1) * 5;
+    const endIndex = ((currentPage ) * 5) <= feedbacks.length ? (currentPage) * 5 : feedbacks.length;
+    let currentFeedbacks = [];
+    const feedbackTableBody = document.getElementById('feedback-details-body-table');
+    let feedbackTableInnerHtml = '';
+
+    for(let i = startIndex; i < endIndex; i++){
+        currentFeedbacks.push(feedbacks[i]);
+        feedbackTableInnerHtml += getFeedbackRow(feedbacks[i]);
+    }
+
+    feedbackTableBody.innerHTML = feedbackTableInnerHtml;
+    currentViewingFeedbacks = currentFeedbacks;
+}
+
+function getFeedbackRow(feedback){
+    let feedbackComment = feedback.writtenFeedback === null || feedback.writtenFeedback === '' ? '<span style="color: #A6A6A6">No written Comment</span>' : feedback.writtenFeedback;
+
+    if(feedbackComment.length > 80){
+        feedbackComment = feedbackComment.substring(0, 80) + '...';
+    }
+
+    const observationsArray = feedback.extraObservations.map(observation => `<span class='red-badge'>${observation}</span>`);
+    const observationText = observationsArray.join(' ');
+
+    const feedbackRow = `
+        <tr class="main-tr">
+            <td class="main-td" style="text-align: left;">
+                ${feedbackComment}
+                <br/>
+                ${observationText}
+            </td>
+            <td class="main-td">
+                <a href="http://localhost/labour_link/worker/view-worker-profile.php?workerId=${feedback.workerId}">
+                ${feedback.workerName}
+            </td>
+            <td class="main-td">${feedback.createdTimestamp.split(' ')[0]}</td>
+            <td class="main-td">
+                <div class="more-button-container">
+                    <button class="update-button" onclick="showFeedbackDetails(${feedback.feedbackToken})"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;&nbsp;View
+                    </button>
+                    <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                    </button>
+                </div>
+            </td>
+        </tr>
+    `;
+
+    return feedbackRow;
+}
+
+function updateFeedbackTablePagination(currentPage, maximumPages){
+    const backButton = document.getElementById('feedback-back-button');
+    const backNumberButton = document.getElementById('feedback-back-number-button');
+    const currentNumberButton = document.getElementById('feedback-current-number-button');
+    const nextNumberButton = document.getElementById('feedback-next-number-button');
+    const nextButton = document.getElementById('feedback-next-button');
+
+    if(currentPage === 1){
+        backButton.disabled = true;
+        backButton.style.color = 'var(--primary-shade-color)';
+        backButton.style.transition = 'none';
+
+        backNumberButton.style.display = 'none';
+    } else {
+        backButton.disabled = false;
+        backButton.style.color = 'var(--primary-color)';
+        backButton.style.transition = 'box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s';
+
+        backNumberButton.style.display = 'block';
+        backNumberButton.innerHTML = `<i class="fa-solid fa-${currentPage - 1}"></i>`;
+    }
+
+    currentNumberButton.innerHTML = `<i class="fa-solid fa-${currentPage}"></i>`;
+
+    if(currentPage === maximumPages){
+        nextButton.disabled = true;
+        nextButton.style.color = 'var(--primary-shade-color)';
+        nextButton.style.transition = 'none';
+
+        nextNumberButton.style.display = 'none';
+    } else {
+        nextButton.disabled = false;
+        nextButton.style.color = 'var(--primary-color)';
+        nextButton.style.transition = 'box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s';
+
+        nextNumberButton.style.display = 'block';
+        nextNumberButton.innerHTML = `<i class="fa-solid fa-${currentPage + 1}"></i>`;
+    }
+
+}
+
+function reRenderFeedbackTable(feedbacks){
+    let currentFeedbacks = [];
+    const feedbackTableBody = document.getElementById('feedback-details-body-table');
+    let feedbackTableInnerHtml = '';
+
+    for(let i = 0; i < feedbacks.length; i++){
+        currentFeedbacks.push(feedbacks[i]);
+        feedbackTableInnerHtml += getFeedbackRow(feedbacks[i]);
+    }
+
+    feedbackTableBody.innerHTML = feedbackTableInnerHtml;
+    currentViewingFeedbacks = currentFeedbacks;
+}
+
+getAllFeedbacks(userId);
+
+function goToPreviousFeedbackTablePage(){
+    feedbackPageNumber -= 1;
+    updateFeedbackTable(allFeedbacks, feedbackPageNumber);
+    updateFeedbackTablePagination(feedbackPageNumber, maxFeedbackPages);
+}
+
+function goToNextFeedbackTablePage(){
+    feedbackPageNumber += 1;
+    updateFeedbackTable(allFeedbacks, feedbackPageNumber);
+    updateFeedbackTablePagination(feedbackPageNumber, maxFeedbackPages);
+}
+
+function sortFeedbacks(field){
+
+    const sortingButton = document.getElementById(`sort-${field}-button`);
+    if(sortingDetails[field] === 'DSC' || sortingDetails[field] === null) {
+        console.log(field);
+        // Perform ascending sort
+        currentViewingFeedbacks = currentViewingFeedbacks.sort((a, b) => {
+            if(a[`${field}`] < b[`${field}`]) return 1;
+            else return -1;
+        });
+
+        reRenderFeedbackTable(currentViewingFeedbacks);
+        sortingDetails[field] = 'ASC';
+        sortingButton.innerHTML = `<i class="fa-solid fa-arrow-down"></i>`;
+    } else if(sortingDetails[field] === 'ASC'){
+        // Perform decending sort
+        currentViewingFeedbacks = currentViewingFeedbacks.sort((a, b) => {
+            if(a[`${field}`] > b[`${field}`]) return 1;
+            else return -1;
+        });
+
+        reRenderFeedbackTable(currentViewingFeedbacks);
+        sortingDetails[field] = 'DSC';
+        sortingButton.innerHTML = `<i class="fa-solid fa-arrow-up"></i>`;
+    }
+}
+
 function showFeedbackDetails(feedbackToken){
     const backdrop = document.getElementById('backdrop-modal');
     const feedbackDetailsContainer = document.getElementById('feedback-details-container');
@@ -310,7 +557,15 @@ function showFeedbackDetails(feedbackToken){
             backdrop.style.visibility = 'visible';
             feedbackDetailsContainer.style.visibility = 'visible';
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            const backdrop = document.getElementById('backdrop-modal');
+            const errorMessageContainer = document.getElementById('error-message-container');
+
+            console.log(error);
+
+            backdrop.style.visibility = 'visible';
+            errorMessageContainer.style.visibility = 'visible';
+        });
 
 
 }
@@ -402,7 +657,15 @@ function openBookingDetailsModal(bookingId){
             backdropModal.style.visibility = 'visible';
             bookingDetails.style.visibility = 'visible';
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            const backdrop = document.getElementById('backdrop-modal');
+            const errorMessageContainer = document.getElementById('error-message-container');
+
+            console.log(error);
+
+            backdrop.style.visibility = 'visible';
+            errorMessageContainer.style.visibility = 'visible';
+        });
 
 
 }

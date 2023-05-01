@@ -26,6 +26,14 @@
 </head>
 <body>
 <div class="backdrop-modal" id="backdrop-modal"></div>
+<div class="error-message-container" id="error-message-container">
+    <div class="error-message-heading">
+        <h1>Sorry, an unexpected error has occurred. Please try again later or contact customer support for assistance</h1>
+    </div>
+    <div class="error-message-image">
+        <img src="../assets/error-image.png" alt="error-image" />
+    </div>
+</div>
 <div class="create-feedback-container" id="create-feedback-container">
     <div class="create-feedback-page" id="first-page">
         <div class="create-feedback-title">
@@ -493,7 +501,7 @@
         <div class="recent-feedback">
             <h1>Recent Feedbacks</h1>
         </div>
-        <div class="recent-feedbacks-container">
+        <div class="recent-feedbacks-container" id="recent-feedbacks-container">
             <?php
                 require_once('../db.php');
 
@@ -574,10 +582,9 @@
                 }
             ?>
         </div>
-        </div>
 
         <!--Feedbacks search container-->
-        <div class="feedback-search">
+        <div class="feedback-search" id="feedback-search-container">
             <div class="feedback-search-title">
                 <h1>Search for Feedbacks</h1>
                 <form action="" method="POST">
@@ -585,109 +592,70 @@
                         <label for="feedback-search">Search (Worker name etc)</label>
                         <div class="feedback-search-input-field">
                             <input type="text" id="feedback-search" class="feedback-search-input" name="users-search"/>
-                            <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button type="button" class="search-icon-small" id="feedback-search-input-button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="recent-payments-container">
+        <div class="recent-payments-container" id="feedback-search-table-container">
             <table class="main-table">
                 <thead>
                 <tr class="main-tr">
-                    <th class="main-th">
-                        <div class="table-heading-container">Comment&nbsp;<button class="sort-button"><i
+                    <th class="main-th" style="width: 40%;">
+                        <div class="table-heading-container">Comment&nbsp;<button class="sort-button" id="sort-writtenFeedback-button" onclick="sortFeedbacks('writtenFeedback')"><i
                                         class="fa-solid fa-arrow-down"></i></button>
                         </div>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">Worker Name&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">Worker Name&nbsp;<button class="sort-button" id="sort-workerName-button" onclick="sortFeedbacks('workerName')"><i
                                         class="fa-solid fa-arrow-down"></i></button>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">Commented Date&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">Commented Date&nbsp;<button class="sort-button" id="sort-createdTimestamp-button" onclick="sortFeedbacks('createdTimestamp')"><i
                                         class="fa-solid fa-arrow-down"></i></button>
                     </th>
                     <th class="main-th">More actions</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Extremely satisfied with the work done.
-                        <br/>
-                        <span class="blue-badge">Updated 15 days ago</span>
+                <tbody id="feedback-details-body-table">
+
+                <?php
+                    for($i = 0; $i < 5; $i++){
+                        echo "
+                        <tr class='main-tr'>
+                    <td class='main-td' style='text-align: left;'>
+                        <div class='loading-div' style='width: 75%; height: 20px;'></div>
+                        <br />
+                        <div class='loading-div' style='width: 50%; height: 20px;'></div>
                     </td>
-                    <td class="main-td">Saman Gunawardhana</td>
-                    <td class="main-td">21 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
+                    <td class='main-td'>
+                        <div class='loading-div' style='width: 50%; height: 40px;'></div>
+                    </td>
+                    <td class='main-td'>
+                        <div class='loading-div' style='width: 50%; height: 40px;'></div>
+                    </td>
+                    <td class='main-td'>
+                        <div class='more-button-container'>
+                            <div class='loading-div' style='width: 30%; height: 40px;'></div>
+                            &nbsp;&nbsp;
+                            <div class='loading-div' style='width: 30%; height: 40px;'></div>
                         </div>
                     </td>
                 </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Process was neatly done on time.
-                        <br/>
-                        <span class="blue-badge">Updated 20 days ago</span>
-                    </td>
-                    <td class="main-td">Kapila Gunawardana</td>
-                    <td class="main-td">16 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Work not completed on time.Slighlty dissappointing.
-                        <br/>
-                        <span class="blue-badge">Updated 27 days ago</span>
-                    </td>
-                    <td class="main-td">Saman Gunathilaka</td>
-                    <td class="main-td">09 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Payment not going through.
-                        <br/>
-                        <span class="blue-badge">Updated 1 month ago</span>
-                    </td>
-                    <td class="main-td">Kapila Dharmadhasa</td>
-                    <td class="main-td">05 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="disable-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                        ";
+                    }
+                ?>
+
+
                 </tbody>
             </table>
-            <div class="pagination-container">
-                <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
+            <div class="pagination-container" id="feedback-details-pagination-container">
+                <button class="pagination-button" id="feedback-back-button" onclick="goToPreviousFeedbackTablePage()"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button" id="feedback-back-number-button"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current" id="feedback-current-number-button"><i class="fa-solid fa-2"></i></button>
+                <button class="pagination-button" id="feedback-next-number-button"><i class="fa-solid fa-3"></i></button>
+                <button class="pagination-button" id="feedback-next-button" onclick="goToNextFeedbackTablePage()"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
         </div>
@@ -699,6 +667,7 @@
     </div>
 </footer>
 <?php
+    $firstBookingId = $firstBookingId ? $firstBookingId : 0;
     echo "<script>
         let userId = $customerId;
         let currentBookingId = $firstBookingId;

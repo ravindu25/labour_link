@@ -41,6 +41,36 @@ a{
     visibility: hidden;
 }
 
+.error-message-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) ;
+    padding: 32px;
+    color: var(--warning-dark-color);
+    background-color: #FFF;
+    border-radius: 24px;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.error-message-heading h1{
+    text-align: center;
+    font-size: 28px;
+    margin: 8px;
+    font-weight: normal;
+}
+
+.error-message-image{
+    width: 100%;
+    text-align: center;
+}
+
+.error-message-image img{
+    width: 50%;
+    height: auto;
+}
+
 .message-backdrop{
     position: fixed;
     width: 100vw;
@@ -406,7 +436,7 @@ a{
 .main-th{
     margin: 4px 0;
     padding: 10px;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: normal;
     font-family: 'Poppins', sans-serif;
     color: #FFF;
@@ -436,6 +466,33 @@ a{
 .main-td .blue-badge{
     margin-top: 6px;
     font-size: 12px;
+}
+
+.main-td .red-badge{
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+.empty-table-body-tr{
+    text-align: center;
+    margin: 16px auto;
+    width: 100%;
+}
+
+.empty-table-body-td{
+    padding: 16px 0;
+}
+
+.empty-table-body-td img{
+    width: 20%;
+    height: auto;
+}
+
+.empty-table-body-td h3{
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    color: var(--primary-color);
 }
 
 .banner{

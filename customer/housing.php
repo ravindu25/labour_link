@@ -33,7 +33,7 @@
     <div class="housing-create-page" id="housing-create-first-page">
         <div class="housing-create-banner-container">
             <h1>Start you're own housing project</h1>
-            <img src="../assets/customer/housing/housing-project-create.png" id="housing-create-image" alt="housing-banner" />
+            <img src="../assets/customer/housing/housing-project-create.png" id="housing-create-image" alt="housing-banner" style="margin: 0 auto;" />
             <div class="location-map" id="location-map"></div>
         </div>
         <div class="housing-create-page-container">
