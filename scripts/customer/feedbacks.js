@@ -298,7 +298,16 @@ function showFeedbackDetails(feedbackToken){
             }
 
             for(let i = 0; i < data.extraObservations.length; i++){
-                extraObservations += `<span class="red-badge">${data.extraObservations[i]}</span>`;
+                
+                if(data.extraObservations[i] == 'suspect-drug-using'){
+                    extraObservations += `<span class="red-badge">Drug Usage during Work</span>`;
+                }else if(data.extraObservations[i] == 'charged-more'){
+                    extraObservations += `<span class="red-badge">Charged More than Agreed</span>`;
+                }else if(data.extraObservations[i] == 'suspect-mobile-using'){
+                    extraObservations += `<span class="red-badge">Excess Mobile Phone Usage</span>`;
+               }else{
+                    extraObservations += `<span class="red-badge">${data.extraObservations[i]}</span>`;
+                }
             }
             document.getElementById('feedback-details-extra-observations').innerHTML = extraObservations;
 
