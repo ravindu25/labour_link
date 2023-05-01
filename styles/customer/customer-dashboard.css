@@ -464,5 +464,61 @@
 }
 
 .upgrade-banner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #102699;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 20px 0;
+    width: 100%;
+}
 
+.upgrade-icon{
+    color: #ffffff;
+    margin: 5px 50px 5px 90px;
+    width: auto;
+    height: auto;
+    font-size: 100px;
+}
+
+.upgrade-caption{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 10px;
+    width: 950px;
+}
+
+.upgrade-caption h3{
+    color: white;
+    font-family: Poppins;
+    font-size: 38px;
+    text-align: center;
+    margin: auto;
+    font-weight: bold;
+}
+
+.upgrade-caption p{
+    color: white;
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+.upgrade-button{
+    background-color: #354BC0;
+    color: white;
+    /*border: 3px solid #3D3BEE;*/
+    border-radius: 30px;
+    padding: 15px 20px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: auto;
+}
+
+.upgrade-button:hover {
+    background-color: #fff;
+    color: #102699;
+    border: 2px solid #102699;
 }

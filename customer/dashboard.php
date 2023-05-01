@@ -205,6 +205,17 @@
                 ?>
             </div>
         </div>
+        <!--Upgrade to premum banner-->
+        <div class="upgrade-banner">
+            <div class="upgrade-icon">
+                <i class="fa-solid fa-angles-up"></i>
+            </div>
+            <div class="upgrade-caption">
+                <h3>Upgrade to Premium for exclusive benefits</h3>
+                <p>From housing packages to discounted services and much more!</p>
+            </div>
+            <button class="upgrade-button">Upgrade Now</button>
+        </div>
         <!--Recent feedbacks section-->
         <div class="recent-feedbacks">
             <div class="recent-feedbacks-title">
@@ -217,7 +228,7 @@
                     <tr class="main-tr">
                         <th class="main-th">Comment</th>
                         <th class="main-th">Worker name</th>
-                        <th class="main-th">Commented date</th>
+                        <th class="main-th">Date</th>
                         <th class="main-th">Service</th>
                     </tr>
                     </thead>
