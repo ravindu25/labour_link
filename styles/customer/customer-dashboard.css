@@ -511,9 +511,9 @@
     /*border: 3px solid #3D3BEE;*/
     border-radius: 30px;
     padding: 15px 20px;
-    font-size: 30px;
+    font-size: 25px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
     margin: auto;
 }
 
@@ -522,3 +522,25 @@
     color: #102699;
     border: 2px solid #102699;
 }
+
+@keyframes pulse {
+    0% {
+        /* Start with initial size */
+        transform: scale(1);
+    }
+    50% {
+        /* Enlarge button */
+        transform: scale(1.2);
+    }
+    100% {
+        /* Return to initial size */
+        transform: scale(1);
+    }
+}
+                                                                                                                                                                                                                                                                   Now, when you load the page with this button, it will automatically start pulsing without requiring any user interaction. You can adjust the duration of the animation or the scale of the button by modifying the keyframes in the pulse animation.
+
+
+
+
+
+
