@@ -430,6 +430,71 @@
     min-width: 180px;
 }
 
+.reject-button-container{
+    padding: 12px;
+    text-align: center;
+}
+
+.reject-button-container button{
+    min-width: 180px;
+}
+
+.accept-button-container{
+    padding: 12px;
+    text-align: center;
+}
+
+.accept-button-container button{
+    min-width: 180px;
+}
+
+.pending-button-container{
+    padding: 12px;
+    text-align: center;
+}
+
+.pending-button-container button{
+    min-width: 180px;
+}
+
+.worker-input-button{
+    outline: none;
+    padding: 20px 35px;
+    font-family: 'Inter',sans-serif;
+    font-size:20px;
+    font-weight: 500;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    border-width: 3px;
+    color: #ffffff;
+}
+
+#reject-button {
+    background-color: #ca0707;
+}
+
+/* #pending-button {
+    border-color: var(--primary-color);
+    background-color: #ABC3EF;
+    color: #3D3BEE;
+    margin-left: 13px;
+    margin-right: 13px;
+} */
+
+#accept-button {
+    background-color: #0000ff;
+}
+
+.status-button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.worker-input-button:active{
+    transform: scale(.96);
+}
+
 .booking-search-title{
     display: flex;
     justify-content: space-between;
