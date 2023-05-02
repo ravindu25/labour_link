@@ -520,17 +520,24 @@ function showFeedbackDetails(feedbackToken){
              * Setting up the worker details
              */
             document.getElementById('feedback-details-worker-image').src = `../assets/worker/profile-images/worker-3.jpg`;
-            document.getElementById('feedback-details-worker-name').innerText = data.workerName;
-            document.getElementById('feedback-details-booking-date').innerText = data.createdTimestamp.split(' ')[0];
+            document.getElementById('feedback-details-worker-name').innerHTML = `${data.workerName}&nbsp;&nbsp;<i class="fa-solid fa-arrow-up-right-from-square"></i>`;
+            document.getElementById('feedback-details-booking-date').innerText = `Feedback created date ${data.createdTimestamp.split(' ')[0]}`;
             document.getElementById('feedback-details-worker-details-link').href = `http://localhost/labour_link/worker/view-worker-profile.php?workerId=${data.workerId}`;
 
-            updateStarContainer('update-star-punctuality', 1, 5, parseInt(data.ratingPunctuality));
-            updateStarContainer('update-star-efficient', 1, 5, parseInt(data.ratingEfficiency));
-            updateStarContainer('update-star-professionalism', 1, 5, parseInt(data.ratingProfessionalism));
+            const punWidth = parseInt(data.ratingProfessionalism) * 20;
+            document.getElementById('feedback-details-progress-bar-punctuality').style.width = `${punWidth}%`;
+            document.getElementById('feedback-details-progress-bar-punctuality-text').innerText = `${data.ratingProfessionalism} out of 5`;
 
+            const effeWidth = parseInt(data.ratingEfficiency) * 20;
+            document.getElementById('feedback-details-progress-bar-efficiency').style.width = `${effeWidth}%`;
+            document.getElementById('feedback-details-progress-bar-efficiency-text').innerText = `${data.ratingEfficiency} out of 5`;
+
+            const proffWidth = parseInt(data.ratingProfessionalism) * 20;
+            document.getElementById('feedback-details-progress-bar-professionalism').style.width = `${proffWidth}%`;
+            document.getElementById('feedback-details-progress-bar-professionalism-text').innerText = `${data.ratingProfessionalism} out of 5`;
 
             if(data.writtenFeedback === '' || data.writtenFeedback === null){
-                document.getElementById('feedback-details-comment-container').innerHTML = '<h1 style="color: var(--dark-shade-color)">No written feedbacks</h1>';
+                document.getElementById('feedback-details-comment-container').innerHTML = '<h1 style="color: var(--danger-color); text-align: center">No written feedbacks</h1>';
             } else {
                 document.getElementById('feedback-details-comment-container').style.display = 'block';
                 document.getElementById('feedback-details-comment-text').innerText = data.writtenFeedback;

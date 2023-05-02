@@ -281,87 +281,54 @@
         <h1>All the details about the feedback</h1>
     </div>
     <div class="feedback-details-content">
-        <div class="feedback-details-worker-details">
-            <div class="feedback-worker-details-profile">
-                <div class='recent-feedback-image-container'>
-                    <img src='../assets/worker/profile-images/worker-1.jpg' id="feedback-details-worker-image" alt='worker-profile' />
-                </div>
-                <div>
-                    <h1 id="feedback-details-worker-name">Chaminda Gunathilaka</h1>
-                    <span class="blue-badge" id="feedback-details-booking-date">2023-04-25</span>
-                </div>
-            </div>
-            <div>
-                <a href="#" id="feedback-details-worker-details-link">
-                    <i class="fa-solid fa-user"></i>&nbsp;&nbsp;Worker Profile
+        <div class="feedback-details-profile-details">
+            <div class="feedback-details-profile-container">
+                <img src='../assets/worker/profile-images/worker-1.jpg' id="feedback-details-worker-image" alt='worker-profile' />
+                <a href="#" id="feedback-details-worker-details-link" style="cursor: pointer">
+                    <h1 id="feedback-details-worker-name">Chaminda Gunathilaka&nbsp;&nbsp;<i class="fa-solid fa-arrow-up-right-from-square"></i></h1>
                 </a>
+                <span class="blue-badge" id="feedback-details-booking-date">Feedback created date 2023-04-25</span>
             </div>
         </div>
-    </div>
-    <div class="feedback-details-rating-container">
-        <div class="feedback-details-rating-header">
-            <h1>Worker rating</h1>
-        </div>
-        <div class="feedback-details-rating-content">
-            <div class="feedback-details-rating-item">
-                <div class="rating-container-rate">
-                    <div class="feedback-star-container" id="update-star-punctuality-1">
-                        <i class="fa-regular fa-star"></i>
+        <div class="feedback-details-rating-observations">
+            <div class="feedback-details-rating-container">
+                <div class="feedback-details-rating-header">
+                    <h1>Worker rating</h1>
+                </div>
+                <div class="feedback-details-rating-content">
+                    <div class="feedback-details-rating-item">
+                        <div class="feedback-details-rating-item-header">
+                            <h3>Punctuality</h3>
+                            <h3 id="feedback-details-progress-bar-punctuality-text" style="color: #A6A6A6">3 out of 5</h3>
+                        </div>
+                        <div class="recent-feedback-rating-bar">
+                            <div class='recent-feedback-rating-bar-progress' id="feedback-details-progress-bar-punctuality" style='width: calc(50%)'></div>
+                        </div>
                     </div>
-                    <div class="feedback-star-container" id="update-star-punctuality-2">
-                        <i class="fa-regular fa-star"></i>
+                    <div class="feedback-details-rating-item">
+                        <div class="feedback-details-rating-item-header">
+                            <h3>Efficiency</h3>
+                            <h3 id="feedback-details-progress-bar-efficiency-text" style="color: #A6A6A6">3 out of 5</h3>
+                        </div>
+                        <div class="recent-feedback-rating-bar">
+                            <div class='recent-feedback-rating-bar-progress' id="feedback-details-progress-bar-efficiency" style='width: calc(50%)'></div>
+                        </div>
                     </div>
-                    <div class="feedback-star-container" id="update-star-punctuality-3">
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <div class="feedback-star-container" id="update-star-punctuality-4">
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <div class="feedback-star-container" id="update-star-punctuality-5" >
-                        <i class="fa-regular fa-star"></i>
+                    <div class="feedback-details-rating-item">
+                        <div class="feedback-details-rating-item-header">
+                            <h3>Professionalism</h3>
+                            <h3 id="feedback-details-progress-bar-professionalism-text" style="color: #A6A6A6">3 out of 5</h3>
+                        </div>
+                        <div class="recent-feedback-rating-bar">
+                            <div class='recent-feedback-rating-bar-progress' id="feedback-details-progress-bar-professionalism" style='width: calc(50%)'></div>
+                        </div>
                     </div>
                 </div>
-                <h3>Punctuality</h3>
             </div>
-            <div class="feedback-details-rating-item">
-                <div class="rating-container-rate">
-                    <div class="feedback-star-container" id="update-star-efficient-1">
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <div class="feedback-star-container" id="update-star-efficient-2">
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <div class="feedback-star-container" id="update-star-efficient-3">
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <div class="feedback-star-container" id="update-star-efficient-4">
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <div class="feedback-star-container" id="update-star-efficient-5" >
-                        <i class="fa-regular fa-star"></i>
-                    </div>
+            <div class="feedback-details-observations-container">
+                <h1>Extra observations</h1>
+                <div class="feedback-details-extra-observations" id="feedback-details-extra-observations">
                 </div>
-                <h3>Efficient</h3>
-            </div>
-            <div class="feedback-details-rating-item">
-                <div class="rating-container-rate">
-                    <div class="feedback-star-container" id="update-star-professionalism-1">
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <div class="feedback-star-container" id="update-star-professionalism-2">
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <div class="feedback-star-container" id="update-star-professionalism-3">
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <div class="feedback-star-container" id="update-star-professionalism-4">
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                    <div class="feedback-star-container" id="update-star-professionalism-5" >
-                        <i class="fa-regular fa-star"></i>
-                    </div>
-                </div>
-                <h3>Professionalism</h3>
             </div>
         </div>
     </div>
@@ -370,9 +337,7 @@
         <p id="feedback-details-comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad cupiditate eos ipsa magnam maiores saepe, sequi tempore! At autem dolore fuga laboriosam molestias necessitatibus, nemo omnis qui suscipit temporibus, voluptas.</p>
     </div>
     <div class="feedback-details-extra-observations-container" id="feedback-details-extra-observations-container">
-        <h1>Extra observations</h1>
-        <div class="feedback-details-extra-observations" id="feedback-details-extra-observations">
-        </div>
+
     </div>
     <div class="feedback-details-button-container">
         <button class="primary-button"><i class="fa-solid fa-pen-nib"></i>&nbsp;&nbsp;Edit feedback</button>
