@@ -302,7 +302,7 @@
     background-color: #FFF;
     border-radius: 16px;
     opacity: 1;
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
 
@@ -422,12 +422,14 @@
 }
 
 .back-button-container{
+    display: flex;
+    justify-content: flex-end;
     padding: 12px;
     text-align: center;
 }
 
 .back-button-container button{
-    min-width: 180px;
+    min-width: 80px;
 }
 
 .reject-button-container{
@@ -436,7 +438,7 @@
 }
 
 .reject-button-container button{
-    min-width: 180px;
+    min-width: 220px;
 }
 
 .accept-button-container{
@@ -445,7 +447,7 @@
 }
 
 .accept-button-container button{
-    min-width: 180px;
+    min-width: 220px;
 }
 
 .pending-button-container{
