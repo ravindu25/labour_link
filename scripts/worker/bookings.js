@@ -99,7 +99,7 @@ function updateBookingStatus(bookingId, status) {
             status: status
         })
     })
-    // .then(response => response.json())
+    .then(response => response.json())
     .then(data => {
         // Handle the response from the server
         closeBookingDetailsModal();
