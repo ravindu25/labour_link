@@ -29,6 +29,14 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
 </div>
 <div class="backdrop-modal" id="admin-backdrop-modal">
 </div>
+<div class="error-message-container" id="error-message-container">
+    <div class="error-message-heading">
+        <h1>Sorry, an unexpected error has occurred. Please try again later or contact customer support for assistance</h1>
+    </div>
+    <div class="error-message-image">
+        <img src="../assets/error-image.png" alt="error-image" />
+    </div>
+</div>
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">
@@ -103,7 +111,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         </div>
         <div class="recent-feedback-charts-container">
             <div class="recent-feedback-chart-container">
-                <canvas id="all-feedbacks"></canvas>
+                <canvas id="chart-all-feedbacks"></canvas>
             </div>
             <div class="recent-feedback-chart-container">
 
@@ -123,7 +131,9 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
-<script src="../scripts/admin/payments.js" type="text/javascript"></script>
+<script src="../scripts/admin/feedbacks/feedbacks.js" type="text/javascript"></script>
+<script src="../scripts/admin/feedbacks/feedbacks-charts.js" type="text/javascript"></script>
 </body>
