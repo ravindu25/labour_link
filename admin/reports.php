@@ -98,9 +98,13 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
             <div class="booking-reports">
                 <h1>Booking reports</h1>
                 <div class="type-based-bookings">
-                    <div class="most-popular-type">
+                    <div class="popular-booking-types-graph">
                         <h1>Popularity of booking type</h1>
-                        <canvas id="most-popular-booking-type"></canvas>
+                        <canvas id="popular-booking-types"></canvas>
+                    </div>
+                    <div class="monthly-booking-types-graph">
+                        <h1>Booking count based on worker types</h1>
+                        <canvas id="monthly-booking-types"></canvas>
                     </div>
                 </div>
             </div>
