@@ -14,15 +14,14 @@ a{
 .main-container{
     display: flex;
     min-height: 100vh;
-    background: rgb(131,241,249);
-    background: linear-gradient(90deg, rgba(131,241,249,1) 0%, rgba(61,222,247,1) 100%);
+    background-color: #E7F2FF;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .left-panel{
-    width: 40vw;
+    width: 45vw;
     background-image: url("../assets/admin-login.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -30,11 +29,12 @@ a{
 }
 
 .right-panel{
-    width: 60vw;
+    width: 55vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: var(--primary-background-shade-color);
 }
 
 .logo-container{
@@ -59,8 +59,8 @@ a{
     margin: 128px 42px;
     flex-direction: column;
     background-color: #FFF;
-    border: 5px solid #2B3B96;
     border-radius: 25px;
+    border: 1px solid #354bc0;
 }
 
 .form-container h4{

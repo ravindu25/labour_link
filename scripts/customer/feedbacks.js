@@ -10,7 +10,11 @@ let allFeedbacks = null;
 let allTempFeedbacks = null;
 let currentViewingFeedbacks = [];
 let sortingDetails = { 'writtenFeedback': null, 'workerName': null, 'createdTimestamp': null };
+let currentUpdatingFeedback = null;
+let tempUpdatingFeedback = null;
 const feedbackSearchButton = document.getElementById('feedback-search-input-button');
+
+const extraObservationButton = document.getElementById('extra-observation-button');
 
 feedbackSearchButton.addEventListener('click', () => {
     allFeedbacks = allTempFeedbacks;
@@ -536,37 +540,66 @@ function showFeedbackDetails(feedbackToken){
             document.getElementById('feedback-details-progress-bar-professionalism').style.width = `${proffWidth}%`;
             document.getElementById('feedback-details-progress-bar-professionalism-text').innerText = `${data.ratingProfessionalism} out of 5`;
 
+            const feedbackRatingUpdateButton = document.getElementById('feedback-rating-update');
+            feedbackRatingUpdateButton.addEventListener('click', () => {
+                currentUpdatingFeedback = data;
+                tempUpdatingFeedback = {...currentUpdatingFeedback};
+                hideFeedbackDetails(data);
+                showRatingUpdateModal(data.feedbackToken);
+            });
+
             if(data.writtenFeedback === '' || data.writtenFeedback === null){
-                document.getElementById('feedback-details-comment-container').innerHTML = '<h1 style="color: var(--danger-color); text-align: center">No written feedbacks</h1>';
+                const feedbackCommentHeader = document.getElementById('feedback-details-comment-header');
+
+                feedbackCommentHeader.innerHTML = '<h1 id="feedback-details-comment-heading" style="color: var(--danger-color); text-align: center">No written feedbacks</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-rating-update" style="color: var(--danger-color)"><i class="fa-solid fa-pen-nib"></i></button>';
+                feedbackCommentHeader.style.justifyContent = 'center';
+
+                document.getElementById('feedback-details-comment-text').innerText = '';
             } else {
                 document.getElementById('feedback-details-comment-container').style.display = 'block';
+                const feedbackCommentHeader = document.getElementById('feedback-details-comment-header');
+
+                feedbackCommentHeader.innerHTML = '<h1 id="feedback-details-comment-heading" style="color: var(--primary-color); text-align: left">Written feedback</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-rating-update" style="color: var(--primary-color)"><i class="fa-solid fa-pen-nib"></i></button>';
+                feedbackCommentHeader.style.justifyContent = 'start';
+
                 document.getElementById('feedback-details-comment-text').innerText = data.writtenFeedback;
             }
 
             let extraObservations = '';
 
-            if(data.extraObservations.length == 0){
-                document.getElementById('feedback-details-extra-observations-container').style.display = 'none';
-            } else {
-                document.getElementById('feedback-details-extra-observations-container').style.display = 'block';
-            }
+            if(data.extraObservations.length === 0 || (data.extraObservations.length === 1 && data.extraObservations[0] === '')){
+                const extraObservationHeading = document.getElementById('feedback-details-observations-header');
+                const extraObservationContainer = document.getElementById('feedback-details-extra-observations');
+                const extraObservationButton = document.getElementById('feedback-observation-update');
 
-            for(let i = 0; i < data.extraObservations.length; i++){
-                
-                if(data.extraObservations[i] == 'suspect-drug-using'){
-                    extraObservations += `<span class="red-badge">Drug Usage during Work</span>`;
-                }else if(data.extraObservations[i] == 'charged-more'){
-                    extraObservations += `<span class="red-badge">Charged More than Agreed</span>`;
-                }else if(data.extraObservations[i] == 'suspect-mobile-using'){
-                    extraObservations += `<span class="red-badge">Excess Mobile Phone Usage</span>`;
-               }else{
-                    extraObservations += `<span class="red-badge">${data.extraObservations[i]}</span>`;
+                extraObservationHeading.innerText = 'No extra observations';
+                extraObservationHeading.style.color = 'var(--danger-color)';
+                extraObservationContainer.innerText = '';
+                extraObservationButton.style.color = 'var(--danger-color)';
+            } else {
+                const extraObservationHeading = document.getElementById('feedback-details-observations-header');
+                const extraObservationButton = document.getElementById('feedback-observation-update');
+
+                extraObservationHeading.innerText = 'Extra observations';
+                extraObservationHeading.style.color = 'var(--primary-color)';
+                extraObservationButton.style.color = 'var(--primary-color)';
+
+                for(let i = 0; i < data.extraObservations.length; i++){
+                    if(data.extraObservations[i] == 'suspect-drug-using'){
+                        extraObservations += `<span class="red-badge">Drug Usage during Work</span>`;
+                    }else if(data.extraObservations[i] == 'charged-more'){
+                        extraObservations += `<span class="red-badge">Charged More than Agreed</span>`;
+                    }else if(data.extraObservations[i] == 'suspect-mobile-using'){
+                        extraObservations += `<span class="red-badge">Excess Mobile Phone Usage</span>`;
+                    }else{
+                        extraObservations += `<span class="red-badge">${data.extraObservations[i]}</span>`;
+                    }
                 }
+                document.getElementById('feedback-details-extra-observations').innerHTML = extraObservations;
             }
-            document.getElementById('feedback-details-extra-observations').innerHTML = extraObservations;
 
             document.getElementById('feedback-details-booking-button').addEventListener('click', () => {
-                hideFeedbackDetails();
+                hideFeedbackDetails(data);
                 openBookingDetailsModal(data.bookingId);
             });
 
@@ -597,11 +630,14 @@ function updateStarContainer(starId, startIndex, endIndex, fillEndIndex){
     }
 }
 
-function hideFeedbackDetails(){
+function hideFeedbackDetails(feedback){
     const backdrop = document.getElementById('backdrop-modal');
     const feedbackDetailsContainer = document.getElementById('feedback-details-container');
+    const feedbackRatingUpdateButton = document.getElementById('feedback-rating-update');
 
     document.getElementById('feedback-details-booking-button').removeEventListener('click', () => { showBookingDetails(data.bookingId) });
+    feedbackRatingUpdateButton.removeEventListener('click', () => { showRatingUpdateModal(feedback.feedbackToken) });
+
 
     backdrop.style.visibility = 'hidden';
     feedbackDetailsContainer.style.visibility = 'hidden';
@@ -692,4 +728,112 @@ function closeBookingDetailsModal(){
 
     backdropModal.style.visibility = 'hidden';
     bookingDetails.style.visibility = 'hidden';
+}
+
+function showRatingUpdateModal(feedbackToken){
+    const backdropModal = document.getElementById("backdrop-modal");
+    const ratingUpdateModal = document.getElementById("feedback-rating-update-container");
+    const feedback = allFeedbacks.find(feedback => feedback.feedbackToken === feedbackToken);
+
+    if(feedback === null){
+        const backdrop = document.getElementById('backdrop-modal');
+        const errorMessageContainer = document.getElementById('error-message-container');
+
+        console.log(error);
+
+        backdrop.style.visibility = 'visible';
+        errorMessageContainer.style.visibility = 'visible';
+    } else {
+        editStarRating('ratingPunctuality', parseInt(feedback.ratingPunctuality));
+        editStarRating('ratingEfficiency', parseInt(feedback.ratingEfficiency));
+        editStarRating('ratingProfessionalism', parseInt(feedback.ratingProfessionalism));
+
+        backdropModal.style.visibility = 'visible';
+        ratingUpdateModal.style.visibility = 'visible';
+    }
+}
+
+function hideRatingUpdateModal(){
+    const backdropModal = document.getElementById("backdrop-modal");
+    const ratingUpdateModal = document.getElementById("feedback-rating-update-container");
+
+    backdropModal.style.visibility = 'hidden';
+    ratingUpdateModal.style.visibility = 'hidden';
+}
+
+function editStarRating(text, ratingAmount){
+    currentUpdatingFeedback[text] = ratingAmount;
+    const ratingmeasures = ['ratingPunctuality', 'ratingEfficiency', 'ratingProfessionalism'];
+    let ratingChanged = false;
+
+    ratingmeasures.forEach(measure => {
+        console.log(`${measure} ${parseInt(currentUpdatingFeedback[measure])} ${parseInt(tempUpdatingFeedback[measure])}`);
+        if(parseInt(currentUpdatingFeedback[measure]) !== parseInt(tempUpdatingFeedback[measure])){
+            ratingChanged = true;
+        }
+    });
+
+    const updateButton = document.getElementById('feedback-rating-update-button');
+    const ratingUpdateButton = document.getElementById('feedback-rating-update-button');
+    if(ratingChanged){
+        updateButton.addEventListener('click', () => {
+            updateFeedbackDetails(currentUpdatingFeedback);
+        });
+
+        ratingUpdateButton.disabled = false;
+        ratingUpdateButton.classList.remove('disabled-button');
+        ratingUpdateButton.classList.add('primary-button');
+    } else {
+        updateButton.removeEventListener('click', () => {
+            updateFeedbackDetails(currentUpdatingFeedback);
+        });
+
+        ratingUpdateButton.disabled = true;
+        ratingUpdateButton.classList.remove('primary-button');
+        ratingUpdateButton.classList.add('disabled-button');
+    }
+
+    for(let i = 1; i <= 5; i++){
+        const starContainer = document.getElementById(`star-edit-${text}-${i}`);
+
+        if(i <= ratingAmount) {
+            starContainer.innerHTML = `<i class="fa-solid fa-star"></i>`;
+        } else {
+            starContainer.innerHTML = `<i class="fa-regular fa-star"></i>`;
+        }
+    }
+}
+
+function showObservationUpdateModal(){
+    console.log(currentUpdatingFeedback);
+}
+
+function updateFeedbackDetails(newFeedback){
+    fetch(`http://localhost/labour_link/api/feedbacks.php`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newFeedback)
+    }).then(response => response.json())
+        .then(data => {
+           const backdropModal = document.getElementById("backdrop-modal");
+           const successMessageContainer = document.getElementById('feedback-update-success');
+
+            hideRatingUpdateModal();
+           backdropModal.style.visibility = 'visible';
+          successMessageContainer.style.visibility = 'visible';
+          setTimeout(() => {
+              backdropModal.style.visibility = 'hidden';
+              successMessageContainer.style.visibility = 'hidden';
+              location.reload();
+          }, 5000);
+        })
+        .catch(error => {
+            const backdrop = document.getElementById('backdrop-modal');
+            const errorMessageContainer = document.getElementById('feedback-update-fail');
+
+            hideRatingUpdateModal();
+            backdrop.style.visibility = 'visible';
+            errorMessageContainer.style.visibility = 'visible';
+            location.reload();
+        });
 }

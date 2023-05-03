@@ -293,7 +293,7 @@
         <div class="feedback-details-rating-observations">
             <div class="feedback-details-rating-container">
                 <div class="feedback-details-rating-header">
-                    <h1>Worker rating</h1>
+                    <h1>Worker rating</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-rating-update"><i class="fa-solid fa-pen-nib"></i></button>
                 </div>
                 <div class="feedback-details-rating-content">
                     <div class="feedback-details-rating-item">
@@ -326,18 +326,20 @@
                 </div>
             </div>
             <div class="feedback-details-observations-container">
-                <h1>Extra observations</h1>
+                <div class="feedback-details-observations-header">
+                <h1 id="feedback-details-observations-header">Extra observations</h1>
+                    &nbsp;&nbsp;<button class="icon-button" id="feedback-observation-update" onclick="showObservationUpdateModal()"><i class="fa-solid fa-pen-nib"></i></button>
+                </div>
                 <div class="feedback-details-extra-observations" id="feedback-details-extra-observations">
                 </div>
             </div>
         </div>
     </div>
     <div class="feedback-details-comment-container" id="feedback-details-comment-container">
-        <h1>Written feedback</h1>
-        <p id="feedback-details-comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad cupiditate eos ipsa magnam maiores saepe, sequi tempore! At autem dolore fuga laboriosam molestias necessitatibus, nemo omnis qui suscipit temporibus, voluptas.</p>
-    </div>
-    <div class="feedback-details-extra-observations-container" id="feedback-details-extra-observations-container">
-
+        <div class="feedback-details-comment-header" id="feedback-details-comment-header">
+            <h1 id="feedback-details-comment-heading">Written feedback</h1>
+        </div>
+        <p id="feedback-details-comment-text"></p>
     </div>
     <div class="feedback-details-button-container">
         <button class="primary-button"><i class="fa-solid fa-pen-nib"></i>&nbsp;&nbsp;Edit feedback</button>
@@ -388,6 +390,96 @@
         </div>
     </div>
 </div>
+<div class="feedback-rating-update-container" id="feedback-rating-update-container">
+    <div class="feedback-rating-update-header">
+        <h1>Update rating of the feedback!</h1>
+    </div>
+    <div class="rating-container">
+        <div class="rating-container-row">
+            <div class="rating-container-text">
+                <h5>Punctuality</h5>
+                <p>How good the worker is in communicating</p>
+            </div>
+            <div class="rating-container-rate">
+                <div class="feedback-star-container" id="star-edit-ratingPunctuality-1" onclick="editStarRating('ratingPunctuality', 1);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="feedback-star-container" id="star-edit-ratingPunctuality-2" onclick="editStarRating('ratingPunctuality', 2);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="feedback-star-container" id="star-edit-ratingPunctuality-3" onclick="editStarRating('ratingPunctuality', 3);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="feedback-star-container" id="star-edit-ratingPunctuality-4" onclick="editStarRating('ratingPunctuality', 4);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="feedback-star-container" id="star-edit-ratingPunctuality-5"  onclick="editStarRating('ratingPunctuality', 5);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+            </div>
+        </div>
+        <div class="rating-container-row">
+            <div class="rating-container-text">
+                <h5>Efficient</h5>
+                <p>How quickly and accurately does the worker complete tasks</p>
+            </div>
+            <div class="rating-container-rate">
+                <div class="feedback-star-container" id="star-edit-ratingEfficiency-1" onclick="editStarRating('ratingEfficiency', 1);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="feedback-star-container" id="star-edit-ratingEfficiency-2" onclick="editStarRating('ratingEfficiency', 2);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="feedback-star-container" id="star-edit-ratingEfficiency-3" onclick="editStarRating('ratingEfficiency', 3);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="feedback-star-container" id="star-edit-ratingEfficiency-4" onclick="editStarRating('ratingEfficiency', 4);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="feedback-star-container" id="star-edit-ratingEfficiency-5"  onclick="editStarRating('ratingEfficiency', 5);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+            </div>
+        </div>
+        <div class="rating-container-row">
+            <div class="rating-container-text">
+                <h5>Professionalism</h5>
+                <p>How polite is the worker when doing the job done</p>
+            </div>
+            <div class="rating-container-rate">
+                <div class="feedback-star-container" id="star-edit-ratingProfessionalism-1" onclick="editStarRating('ratingProfessionalism', 1);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="feedback-star-container" id="star-edit-ratingProfessionalism-2" onclick="editStarRating('ratingProfessionalism', 2);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="feedback-star-container" id="star-edit-ratingProfessionalism-3" onclick="editStarRating('ratingProfessionalism', 3);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="feedback-star-container" id="star-edit-ratingProfessionalism-4" onclick="editStarRating('ratingProfessionalism', 4);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+                <div class="feedback-star-container" id="star-edit-ratingProfessionalism-5"  onclick="editStarRating('ratingProfessionalism', 5);">
+                    <i class="fa-regular fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="feedback-rating-button-container">
+        <button class="primary-outline-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button class="primary-button" id="feedback-rating-update-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update</button>
+    </div>
+</div>
+<div class="success-message-container" id="feedback-update-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Feedback updated successfully!</h1>
+</div>
+<div class="failed-message-container" id="feedback-update-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Error occured when updating the feedback!</h1>
+        <h5>Your login session outdated. Please login again.</h5>
+    </div>
+</div>
+
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">

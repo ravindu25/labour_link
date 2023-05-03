@@ -75,4 +75,35 @@
 
             echo json_encode($feedbacks);
         }
+    } else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+        /*
+         * Creating a feedback
+         */
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        $feedbackToken = $data['feedbackToken'];
+        $bookingId = $data['bookingId'];
+        $customerId = $data['customerId'];
+        $customerName = $data['customerName'];
+        $workerId = $data['workerId'];
+        $workerName = $data['workerName'];
+        $createdTimestamp = $data['createdTimestamp'];
+        $ratingPunctuality = $data['ratingPunctuality'];
+        $ratingEfficiency = $data['ratingEfficiency'];
+        $ratingProfessionalism = $data['ratingProfessionalism'];
+        $writtenFeedback = $data['writtenFeedback'];
+        $extraObservations = join(',',$data['extraObservations']);
+
+        $feedback = new Feedback($feedbackToken, $bookingId, $customerId, $customerName, $workerId, $workerName,
+            $createdTimestamp, $ratingPunctuality, $ratingEfficiency, $ratingProfessionalism, $writtenFeedback, $extraObservations);
+
+        $sql_update_feedback = "UPDATE Feedback SET Star_Punctuality = $ratingPunctuality, Star_Efficiency = $ratingEfficiency, Star_Professionalism = $ratingProfessionalism, Written_Feedback = '$writtenFeedback', Extra_Observations = '$extraObservations' WHERE Feedback_Token = $feedbackToken";
+
+        if($result = $conn->query($sql_update_feedback)){
+            http_response_code(200);
+            echo json_encode(array("status"=>"success", "feedbackToken"=> $bookingId));
+        } else {
+            http_response_code(500);
+            echo json_encode(array("status"=>"failed"));
+        }
     }
