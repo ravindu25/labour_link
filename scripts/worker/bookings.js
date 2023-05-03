@@ -1,3 +1,36 @@
+function openBookingDetailsModal(bookingId){
+    const backdropModal = document.getElementById("backdrop-modal");
+    const bookingDetails = document.getElementById("booking-details-container");
+
+    backdropModal.style.visibility = 'visible';
+    bookingDetails.style.visibility = 'visible';
+}
+
+function closeBookingDetailsModal(){
+    const backdropModal = document.getElementById("backdrop-modal");
+    const bookingDetails = document.getElementById("booking-details-container");
+
+    backdropModal.style.visibility = 'hidden';
+    bookingDetails.style.visibility = 'hidden';
+}
+
+// Booking create form
+function openCreateBookingModal(){
+    const backdropModal = document.getElementById("backdrop-modal");
+    const bookingDetailsContainer = document.getElementById("booking-details-container");
+
+    backdropModal.style.visibility = 'visible';
+    bookingDetailsContainer.style.visibility = 'visible';
+}
+
+function closeCreateBookingModal(){
+    const backdropModal = document.getElementById("backdrop-modal");
+    const bookingDetailsContainer = document.getElementById("booking-details-container");
+
+    backdropModal.style.visibility = 'hidden';
+    bookingDetailsContainer.style.visibility = 'hidden';
+}
+
 // Get the accept and reject buttons
 const acceptButton = document.getElementById('accept-button');
 const rejectButton = document.getElementById('reject-button');

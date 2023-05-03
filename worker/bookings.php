@@ -39,8 +39,12 @@ $userId = $_SESSION['user_id'];
         <h5>Your login session outdated. Please login again.</h5>
     </div>
 </div>
+<!-- pop-up booking details container -->
 <div class="booking-details-container" id="booking-details-container">
     <div class="booking-details-scroll-wrapper">
+        <div class="back-button-container">
+                <button type="button" class="more-button" id="back-button" onclick="closeBookingDetailsModal()"><i class='fa-solid fa-xmark'></i></button>
+        </div>
         <div class="booking-details-title">
             <h1>Current Status of Your <u>Booking</u></h1>
         </div>
@@ -90,9 +94,6 @@ $userId = $_SESSION['user_id'];
                 <div class="accept-button-container">
                     <button type="button" class="worker-input-button" id="accept-button"><i class="fa fa-check"></i> Accept</button>
                 </div>
-            </div>
-            <div class="back-button-container">
-                <button type="button" class="more-button" id="back-button">Back</button>
             </div>
         </div>
     </div>
@@ -255,12 +256,14 @@ $userId = $_SESSION['user_id'];
 
                 // $sql = "SELECT First_Name,Last_Name ,Start_Date , Completion_Flag FROM user INNER JOIN booking ON user.User_ID = booking.Customer_ID INNER JOIN confirmed_booking ON booking.Booking_ID = confirmed_booking.Booking_ID";
 
-                $sql_get_status = "SELECT First_Name,Last_Name ,Start_Date, Worker_Type, Created_Date ,Status FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} ORDER BY Created_Date DESC LIMIT 5";
+                $sql_get_status = "SELECT Booking.*, First_Name,Last_Name ,Start_Date, Worker_Type, Created_Date ,Status FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} ORDER BY Created_Date DESC LIMIT 5";
 
 
                 $result = $conn->query($sql_get_status);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
+                        $bookingId = $row['Booking_ID'];
+                    
 
                         $status = $row['Status'];
 
@@ -276,11 +279,12 @@ $userId = $_SESSION['user_id'];
                                 $button = '<button class="rejected-button">Rejected</button>';
                             }
                         echo('
-                        <div class="booking-card"
+                        <div class="booking-card" onclick="openBookingDetailsModal('.$bookingId.')">
                             <div class="card-text">
                                 <h3>'.$row['Worker_Type'].'</h3>
                                 <p>Customer</p>
                                 <h4>' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</h4>
+                            </div>
                             <div class="booking-card-button-row">
                                 <div class="badge-container">
                                     <div class="blue-badge">' . date("d M Y", strtotime($row['Start_Date'])) . '</div> 
@@ -288,7 +292,7 @@ $userId = $_SESSION['user_id'];
                                 '. $button .'
                             </div>
                         </div>
-
+                
                     ');
                     }
                 }
