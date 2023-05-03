@@ -39,8 +39,13 @@ $userId = $_SESSION['user_id'];
         <h5>Your login session outdated. Please login again.</h5>
     </div>
 </div>
+<<<<<<< Updated upstream
 <!-- pop-up booking details container -->
+=======
+//pop-up booking card
+>>>>>>> Stashed changes
 <div class="booking-details-container" id="booking-details-container">
+    <div><i class="fa fa-close"></i></div>
     <div class="booking-details-scroll-wrapper">
         <div class="back-button-container">
                 <button type="button" class="more-button" id="back-button" onclick="closeBookingDetailsModal()"><i class='fa-solid fa-xmark'></i></button>
