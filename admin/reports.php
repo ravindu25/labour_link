@@ -95,6 +95,15 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 <h1>Control panel for generating <u>Reports</u></h1>
                 <h5>Logged as <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></h5>
             </div>
+            <div class="booking-reports">
+                <h1>Booking reports</h1>
+                <div class="type-based-bookings">
+                    <div class="most-popular-type">
+                        <h1>Popularity of booking type</h1>
+                        <canvas id="most-popular-booking-type"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
         <?php
         echo '<script src="../scripts/admin/loader.js" type="text/javascript"></script>';
@@ -109,5 +118,6 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/admin/payments.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
