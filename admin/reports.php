@@ -117,6 +117,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
 </footer>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
+<script src="../scripts/admin/reports.js" type="text/javascript"></script>
 <script src="../scripts/admin/payments.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
