@@ -302,7 +302,7 @@
     background-color: #FFF;
     border-radius: 16px;
     opacity: 1;
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
 
@@ -422,12 +422,14 @@
 }
 
 .back-button-container{
+    display: flex;
+    justify-content: flex-end;
     padding: 12px;
     text-align: center;
 }
 
 .back-button-container button{
-    min-width: 180px;
+    min-width: 80px;
 }
 
 .reject-button-container{
@@ -436,7 +438,7 @@
 }
 
 .reject-button-container button{
-    min-width: 180px;
+    min-width: 220px;
 }
 
 .accept-button-container{
@@ -445,7 +447,7 @@
 }
 
 .accept-button-container button{
-    min-width: 180px;
+    min-width: 220px;
 }
 
 .pending-button-container{
@@ -459,14 +461,19 @@
 
 .worker-input-button{
     outline: none;
-    padding: 20px 35px;
-    font-family: 'Inter',sans-serif;
-    font-size:20px;
+    border: 3px solid var(--primary-color);
+    padding: 12px 18px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
     font-weight: 500;
-    border-radius: 15px;
-    margin-bottom: 30px;
-    border-width: 3px;
-    color: #ffffff;
+    border-radius: 18px;
+    background-color: var(--primary-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.worker-input-button:active{
+    transform: scale(.96);
 }
 
 #reject-button {
@@ -481,8 +488,14 @@
     margin-right: 13px;
 } */
 
-#accept-button {
-    background-color: #0000ff;
+.accept-button{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--primary-bright-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
 }
 
 .status-button-container{

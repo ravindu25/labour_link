@@ -357,4 +357,299 @@ function closeChangePasswordModal(){
 
     backdrop.style.visibility = 'hidden';
     changePasswordModal.style.visibility = 'hidden';
+
+}
+
+
+
+function updateContactNum(user_id){
+    const contactNumInput = document.getElementById('contactnum-input');
+    const contactNum = contactNumInput.value;
+
+    //fetch request to update contact number
+    
+    fetch ('http://localhost/labour_link/customer/changeDetails.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user_id: user_id,
+            newValue: contactNum,
+            field: 'Contact_No'
+        })
+
+    }).then(response => response.json())
+    .then(data => {
+        if(data.statusCode == 200){
+            const changeModal = document.getElementById('edit-modal-contactnum');
+            const successModal = document.getElementById('account-details-update-success');
+
+            changeModal.style.visibility = 'hidden';
+            successModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                successModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }else if(data.statusCode == 201){
+            const changeModal = document.getElementById('edit-modal-contactnum');
+            const failedModal = document.getElementById('account-details-update-fail');
+
+            changeModal.style.visibility = 'hidden';
+            failedModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                failedModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }
+    })
+
+}
+
+function updateNIC(user_id){
+    const nicInput = document.getElementById('nic-input');
+    const nic = nicInput.value;
+
+    //fetch request to update contact number
+    
+    fetch ('http://localhost/labour_link/customer/changeDetails.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user_id: user_id,
+            newValue: nic,
+            field: 'NIC'
+        })
+
+    }).then(response => response.json())
+    .then(data => {
+        if(data.statusCode == 200){
+            const changeModal = document.getElementById('edit-modal-nic');
+            const successModal = document.getElementById('account-details-update-success');
+
+            changeModal.style.visibility = 'hidden';
+            successModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                successModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }else if(data.statusCode == 201){
+            const changeModal = document.getElementById('edit-modal-nic');
+            const failedModal = document.getElementById('account-details-update-fail');
+
+            changeModal.style.visibility = 'hidden';
+            failedModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                failedModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }
+    })
+
+}
+
+function updateDOB(user_id){
+    const dobInput = document.getElementById('dob-input');
+    const dob = dobInput.value;
+
+    //fetch request to update contact number
+    
+    fetch ('http://localhost/labour_link/customer/changeDetails.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user_id: user_id,
+            newValue: dob,
+            field: 'DOB'
+        })
+
+    }).then(response => response.json())
+    .then(data => {
+        if(data.statusCode == 200){
+            const changeModal = document.getElementById('edit-modal-dob');
+            const successModal = document.getElementById('account-details-update-success');
+
+            changeModal.style.visibility = 'hidden';
+            successModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                successModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }else if(data.statusCode == 201){
+            const changeModal = document.getElementById('edit-modal-dob');
+            const failedModal = document.getElementById('account-details-update-fail');
+
+            changeModal.style.visibility = 'hidden';
+            failedModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                failedModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }
+    })
+
+}
+
+function updateAddress(user_id){
+    const addressInput = document.getElementById('address-input');
+    const address = addressInput.value;
+
+    //fetch request to update contact number
+    
+    fetch ('http://localhost/labour_link/customer/changeDetails.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user_id: user_id,
+            newValue: address,
+            field: 'User_Address'
+        })
+
+    }).then(response => response.json())
+    .then(data => {
+        if(data.statusCode == 200){
+            const changeModal = document.getElementById('edit-modal-address');
+            const successModal = document.getElementById('account-details-update-success');
+
+            changeModal.style.visibility = 'hidden';
+            successModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                successModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }else if(data.statusCode == 201){
+            const changeModal = document.getElementById('edit-modal-address');
+            const failedModal = document.getElementById('account-details-update-fail');
+
+            changeModal.style.visibility = 'hidden';
+            failedModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                failedModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }
+    })
+
+}
+
+function updateName(user_id){
+    const firstNameInput = document.getElementById('firstname-input');
+    const firstName = firstNameInput.value;
+
+    const lastNameInput = document.getElementById('lastname-input');
+    const lastName = lastNameInput.value;
+
+    //fetch request to update contact number
+    
+    fetch ('http://localhost/labour_link/customer/changeDetails.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user_id: user_id,
+            newFirstName: firstName,
+            newLastName: lastName,
+            field: 'Name'
+        })
+
+    }).then(response => response.json())
+    .then(data => {
+        if(data.statusCode == 200){
+            const changeModal = document.getElementById('edit-modal-username');
+            const successModal = document.getElementById('account-details-update-success');
+
+            changeModal.style.visibility = 'hidden';
+            successModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                successModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }else if(data.statusCode == 201){
+            const changeModal = document.getElementById('edit-modal-username');
+            const failedModal = document.getElementById('account-details-update-fail');
+
+            changeModal.style.visibility = 'hidden';
+            failedModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                failedModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }
+    })
+
+}
+
+function sendFeedback(user_id){
+    alert('feedback sent');
+    const feedbackInput = document.getElementById('feedback-text-input');
+    const feedback = feedbackInput.value;
+
+    //fetch request to send feedback email to admin
+
+    fetch ('http://localhost/labour_link/customer/sendSystemFeedback.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user_id: user_id,
+            feedback: feedback
+        })
+
+    }).then(response => response.json())
+    .then(data => {
+        if(data.statusCode == 200){
+            const feedbackModal = document.getElementById('feedback-message-container');
+            const successModal = document.getElementById('feedback-submit-success');
+
+            feedbackModal.style.visibility = 'hidden';
+            successModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                successModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }else if(data.statusCode == 201){
+            const feedbackModal = document.getElementById('feedback-message-container');
+            const failedModal = document.getElementById('feedback-submit-fail');
+
+            feedbackModal.style.visibility = 'hidden';
+            failedModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                failedModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }
+    })
+
 }
