@@ -918,6 +918,31 @@
     margin: 16px 0;
 }
 
+.feedback-observation-update-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    min-width: 50vw;
+    transform: translate(-50%, -50%) ;
+    padding: 12px 36px;
+    color: #102699;
+    background-color: #FFF;
+    border-radius: 16px;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.feedback-observation-update-container h1{
+    text-align: center;
+    font-size: 36px;
+    font-weight: normal;
+}
+
+.feedback-observation-button-container{
+    text-align: center;
+    margin: 16px 0;
+}
+
 .feedback-search-title{
     display: flex;
     justify-content: space-between;

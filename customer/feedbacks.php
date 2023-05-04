@@ -328,7 +328,7 @@
             <div class="feedback-details-observations-container">
                 <div class="feedback-details-observations-header">
                 <h1 id="feedback-details-observations-header">Extra observations</h1>
-                    &nbsp;&nbsp;<button class="icon-button" id="feedback-observation-update" onclick="showObservationUpdateModal()"><i class="fa-solid fa-pen-nib"></i></button>
+                    &nbsp;&nbsp;<button class="icon-button" id="feedback-observation-update"><i class="fa-solid fa-pen-nib"></i></button>
                 </div>
                 <div class="feedback-details-extra-observations" id="feedback-details-extra-observations">
                 </div>
@@ -342,7 +342,6 @@
         <p id="feedback-details-comment-text"></p>
     </div>
     <div class="feedback-details-button-container">
-        <button class="primary-button"><i class="fa-solid fa-pen-nib"></i>&nbsp;&nbsp;Edit feedback</button>
         <button class="primary-outline-button" onclick="hideFeedbackDetails()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Close</button>
         <button class="primary-button" id="feedback-details-booking-button"><i class="fa-solid fa-arrow-turn-up"></i>&nbsp;&nbsp;View booking</button>
     </div>
@@ -466,8 +465,39 @@
         </div>
     </div>
     <div class="feedback-rating-button-container">
-        <button class="primary-outline-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button class="primary-outline-button" onclick="hideRatingUpdateModal()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
         <button class="primary-button" id="feedback-rating-update-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update</button>
+    </div>
+</div>
+<div class="feedback-observation-update-container" id="feedback-observation-update-container">
+    <div class="feedback-observation-update-header">
+        <h1>Update observation of the feedback!</h1>
+    </div>
+    <div class="question-container-row">
+        <div class="question-answer-container">
+            <label>
+                <input type="checkbox" name="feedback-update-answers" value="suspect-drug-using" class="feedback-answer-input" />
+                <div class="feedback-answer-container">
+                    <h5>Drug use during work</h5>
+                </div>
+            </label>
+            <label>
+                <input type="checkbox" name="feedback-update-answers" value="suspect-mobile-using" class="feedback-answer-input"/>
+                <div class="feedback-answer-container">
+                    <h5>Excessive mobile phone usage</h5>
+                </div>
+            </label>
+            <label>
+                <input type="checkbox" name="feedback-update-answers" value="charged-more" class="feedback-answer-input"/>
+                <div class="feedback-answer-container">
+                    <h5>Charge more than agreed</h5>
+                </div>
+            </label>
+        </div>
+    </div>
+    <div class="feedback-observation-button-container">
+        <button class="primary-outline-button" onclick="hideObservationUpdateModal()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button class="primary-button" id="feedback-observation-update-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update</button>
     </div>
 </div>
 <div class="success-message-container" id="feedback-update-success">

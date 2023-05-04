@@ -107,14 +107,16 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
 
         <!-- Recent feedbacks section -->
         <div class="recent-feedback">
-            <h1>Recent Feedbacks</h1>
+            <h1>Feedbacks trends</h1>
         </div>
         <div class="recent-feedback-charts-container">
             <div class="recent-feedback-chart-container">
                 <canvas id="chart-all-feedbacks"></canvas>
+                <h3>Number of feedbacks with respect to date(current month)</h3>
             </div>
             <div class="recent-feedback-chart-container">
-
+                <canvas id="chart-feedback-skipping"></canvas>
+                <h3>Customers feedback skipping rate</h3>
             </div>
         </div>
 
