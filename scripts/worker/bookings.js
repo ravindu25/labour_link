@@ -75,11 +75,11 @@ function closeCreateBookingModal(){
 // Get the accept and reject buttons
 const acceptButton = document.getElementById('accept-button');
 const rejectButton = document.getElementById('reject-button');
-=======
+
 // // Get the accept and reject buttons
 // const acceptButton = document.getElementById('accept-button');
 // const rejectButton = document.getElementById('reject-button');
->>>>>>> Stashed changes
+
 
 
 
