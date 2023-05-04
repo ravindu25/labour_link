@@ -48,33 +48,31 @@ $userId = $_SESSION['user_id'];
         <div class="booking-details-title">
             <h1>Current Status of Your <u>Booking</u></h1>
         </div>
-        <div class="status-container">
-            <button type="button" class="status-button">In-Progress</button>
-        </div>
+        <div class="status-container" id="booking-details-status-container"></div>
         <div class="details-container">
             <div class="details-row">
                 <h4>Job type</h4>
-                <h4 class="details-value">Plumber</h4>
+                <h4 class="details-value" id="booking-details-job-type"></h4>
             </div>
             <div class="details-row">
-                <h4>Customer</h4>
-                <h4 class="details-value">Rvindu Wegiriya</h4>
+                <h4>Worker</h4>
+                <h4 class="details-value" id="booking-details-worker-name"></h4>
             </div>
             <div class="details-row">
                 <h4>Start date</h4>
-                <h4 class="details-value">21-Nov-2022</h4>
+                <h4 class="details-value" id="booking-details-start-date"></h4>
             </div>
-            <div class="remaining-time-container">
+            <div class="remaining-time-container" id="remaining-time-container">
                 <h4>This booking will be closed in</h4>
-                <h1 class="countdown-text">12 hrs 3 days</h1>
+                <h1 class="countdown-text" id="booking-details-countdown"></h1>
             </div>
             <div class="payment-method-container">
                 <div class="payment-image-container">
                     <h4>Payment Method</h4>
                     <div class="payment-image-card">
-                        <img class="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
+                        <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
                              alt="payment method"/>
-                        <h4>Online payments</h4>
+                        <h4 id="payment-method-text">Online payments</h4>
                     </div>
                 </div>
                 <div class="payment-details-container">
@@ -289,7 +287,9 @@ $userId = $_SESSION['user_id'];
                                 <div class="badge-container">
                                     <div class="blue-badge">' . date("d M Y", strtotime($row['Start_Date'])) . '</div> 
                                 </div>
+                                <div id="booking-card-status-'.$bookingId.'">
                                 '. $button .'
+                                </div>
                             </div>
                         </div>
                 
