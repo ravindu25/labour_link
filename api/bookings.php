@@ -81,7 +81,7 @@
         else if (isset($_GET['workerId'])) {
             $workerId = $_GET['workerId'];
             // Getting all the bookings
-            $sql_get_all_bookings = "select Booking.*, Worker.First_Name AS Worker_First_Name, Worker.Last_Name AS Worker_Last_Name, Customer.First_Name AS Customer_First_Name, Customer.Last_Name AS Customer_Last_Name from Booking inner join User AS Worker ON Booking.Worker_ID = Worker.User_ID inner join User AS Customer ON Booking.Customer_ID = Customer.User_ID where Booking.Worker_ID = $bookingId ORDER BY Booking.Created_Date DESC";
+            $sql_get_all_bookings = "select Booking.*, Worker.First_Name AS Worker_First_Name, Worker.Last_Name AS Worker_Last_Name, Customer.First_Name AS Customer_First_Name, Customer.Last_Name AS Customer_Last_Name from Booking inner join User AS Worker ON Booking.Worker_ID = Worker.User_ID inner join User AS Customer ON Booking.Customer_ID = Customer.User_ID where Booking.Worker_ID = $workerId ORDER BY Booking.Created_Date DESC";
 
             // Check whether bookings amount is defined
             if(isset($_GET['num'])){
