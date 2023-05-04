@@ -14,7 +14,11 @@ let currentUpdatingFeedback = null;
 let tempUpdatingFeedback = null;
 const feedbackSearchButton = document.getElementById('feedback-search-input-button');
 
-const extraObservationButton = document.getElementById('extra-observation-button');
+const extraObservationButton = document.getElementById('feedback-observation-update');
+extraObservationButton.addEventListener('click', () => {
+    hideFeedbackDetails();
+    showObservationUpdateModal();
+});
 
 feedbackSearchButton.addEventListener('click', () => {
     allFeedbacks = allTempFeedbacks;
@@ -523,6 +527,8 @@ function showFeedbackDetails(feedbackToken){
             /*
              * Setting up the worker details
              */
+            currentUpdatingFeedback = data;
+
             document.getElementById('feedback-details-worker-image').src = `../assets/worker/profile-images/worker-3.jpg`;
             document.getElementById('feedback-details-worker-name').innerHTML = `${data.workerName}&nbsp;&nbsp;<i class="fa-solid fa-arrow-up-right-from-square"></i>`;
             document.getElementById('feedback-details-booking-date').innerText = `Feedback created date ${data.createdTimestamp.split(' ')[0]}`;
@@ -805,7 +811,83 @@ function editStarRating(text, ratingAmount){
 }
 
 function showObservationUpdateModal(){
-    console.log(currentUpdatingFeedback);
+    const backdrop = document.getElementById('backdrop-modal');
+    const observationUpdateModal = document.getElementById('feedback-observation-update-container');
+    const observationElements = document.getElementsByName('feedback-update-answers');
+    const currentExtraObservations = currentUpdatingFeedback.extraObservations;
+    tempUpdatingFeedback = currentUpdatingFeedback;
+
+    for(let i = 0; i < observationElements.length; i++){
+        if(currentExtraObservations.includes(observationElements[i].value)){
+            observationElements[i].checked = true;
+        } else {
+            observationElements[i].checked = false;
+        }
+
+        observationElements[i].addEventListener('change', () => {
+            checkExtraObservationValidity();
+        })
+    }
+
+    backdrop.style.visibility = 'visible';
+    observationUpdateModal.style.visibility = 'visible';
+}
+
+function hideObservationUpdateModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const observationUpdateModal = document.getElementById('feedback-observation-update-container');
+    const observationElements = document.getElementsByName('feedback-update-answers');
+
+    for(let i = 0; i < observationElements.length; i++){
+        observationElements[i].removeEventListener('change', () =>{
+            checkExtraObservationValidity();
+        })
+    }
+
+    backdrop.style.visibility = 'hidden';
+    observationUpdateModal.style.visibility = 'hidden';
+}
+
+function checkExtraObservationValidity(){
+    const observationElements = document.getElementsByName('feedback-update-answers');
+    let currentCheckedObservations = [];
+    let observationsUpdated = false;
+    const updateButton = document.getElementById('feedback-observation-update-button');
+
+    for(let i = 0; i < observationElements.length; i++){
+        if(observationElements[i].checked){
+            currentCheckedObservations.push(observationElements[i].value);
+        }
+    }
+
+    console.log(tempUpdatingFeedback);
+
+    if(tempUpdatingFeedback.extraObservations.length !== observationsUpdated.length){
+        observationsUpdated = true;
+    } else {
+        tempUpdatingFeedback.extraObservations.forEach(observation => {
+            if(!currentCheckedObservations.includes(observation)){
+                observationsUpdated = true;
+            }
+        })
+    }
+
+    if(observationsUpdated){
+        currentUpdatingFeedback.extraObservations = currentCheckedObservations;
+        updateButton.addEventListener('click', () => {
+            updateFeedbackDetails(currentUpdatingFeedback);
+        });
+
+        updateButton.classList.add('primary-button');
+        updateButton.classList.remove('disabled-button');
+    } else {
+        updateButton.removeEventListener('click', () => {
+            updateFeedbackDetails(currentUpdatingFeedback);
+        });
+
+        updateButton.classList.add('disabled-button');
+        updateButton.classList.remove('primary-button');
+    }
 }
 
 function updateFeedbackDetails(newFeedback){
@@ -818,9 +900,10 @@ function updateFeedbackDetails(newFeedback){
            const backdropModal = document.getElementById("backdrop-modal");
            const successMessageContainer = document.getElementById('feedback-update-success');
 
+           hideObservationUpdateModal();
             hideRatingUpdateModal();
            backdropModal.style.visibility = 'visible';
-          successMessageContainer.style.visibility = 'visible';
+            successMessageContainer.style.visibility = 'visible';
           setTimeout(() => {
               backdropModal.style.visibility = 'hidden';
               successMessageContainer.style.visibility = 'hidden';
