@@ -461,14 +461,19 @@
 
 .worker-input-button{
     outline: none;
-    padding: 20px 35px;
-    font-family: 'Inter',sans-serif;
-    font-size:20px;
+    border: 3px solid var(--primary-color);
+    padding: 12px 18px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
     font-weight: 500;
-    border-radius: 15px;
-    margin-bottom: 30px;
-    border-width: 3px;
-    color: #ffffff;
+    border-radius: 18px;
+    background-color: var(--primary-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.worker-input-button:active{
+    transform: scale(.96);
 }
 
 #reject-button {
