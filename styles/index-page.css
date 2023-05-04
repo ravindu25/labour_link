@@ -16,7 +16,7 @@
     --danger-shade-color: #F2D49B;
     --warning-color: #FF5B19;
     --warning-dark-color: #9A2D01;
-    --grey-color: #978C87;
+    --grey-color: #A6A6A6;
     --grey-color-shade: #E1E5E8;
 }
 
@@ -469,6 +469,11 @@ a{
 }
 
 .main-td .red-badge{
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+.main-td .green-badge{
     margin-top: 6px;
     font-size: 12px;
 }

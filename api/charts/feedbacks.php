@@ -29,7 +29,7 @@
             header('Content-Type: application/json');
             echo json_encode($resultArray);
         } else if(isset($_GET['term']) && $_GET['term'] == 'getSkippingFeedback'){
-            $sql_get_skipping_feedback = "SELECT SUM(CASE WHEN Feedback_Token IS null THEN 1 ELSE 0 END) AS FeedbackCount , User.First_Name AS CustomerFirstname, User.Last_Name AS CustomerLastname FROM Booking LEFT JOIN Feedback F on Booking.Booking_ID = F.Booking_ID INNER JOIN User ON Booking.Customer_ID = User.User_ID GROUP BY Booking.Customer_ID ORDER BY FeedbackCount DESC LIMIT 20";
+            $sql_get_skipping_feedback = "SELECT SUM(CASE WHEN Feedback_Token IS null THEN 1 ELSE 0 END) AS FeedbackCount , User.First_Name AS CustomerFirstname, User.Last_Name AS CustomerLastname FROM Booking LEFT JOIN Feedback F on Booking.Booking_ID = F.Booking_ID INNER JOIN User ON Booking.Customer_ID = User.User_ID WHERE Booking.Status LIKE 'Completed' GROUP BY Booking.Customer_ID ORDER BY FeedbackCount DESC LIMIT 20";
 
             $result = $conn->query($sql_get_skipping_feedback);
             $resultArray = array();

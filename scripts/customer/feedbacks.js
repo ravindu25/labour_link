@@ -20,6 +20,7 @@ extraObservationButton.addEventListener('click', () => {
     showObservationUpdateModal();
 });
 
+
 feedbackSearchButton.addEventListener('click', () => {
     allFeedbacks = allTempFeedbacks;
     const paginationContainer = document.getElementById('feedback-details-pagination-container');
@@ -390,13 +391,21 @@ function getFeedbackRow(feedback){
         feedbackComment = feedbackComment.substring(0, 80) + '...';
     }
 
-    const observationsArray = feedback.extraObservations.map(observation => `<span class='red-badge'>${observation}</span>`);
-    
-    for (let i = 0; i < observationsArray.length; i++) {
-        observationsArray[i] = observationsArray[i].replace("suspect-mobile-using", "Excess Mobile Phone Usage");
-        observationsArray[i] = observationsArray[i].replace("charged-more", "Charge More than Agreed");
-        observationsArray[i] = observationsArray[i].replace("suspect-drug-using", "Drug Usage during Work");
-    }
+    let observationsArray = feedback.extraObservations.map(observation => {
+        if(observation === "suspect-mobile-using"){
+          observation = "Excess Mobile Phone Usage";
+        } else if(observation === "charged-more"){
+          observation = "Charge More than Agreed";
+        } else if(observation === "suspect-drug-using"){
+          observation = "Drug Usage during Work";
+        }
+        
+        if(observation === ''){
+            return `<span class='green-badge'>No observations</span>`;
+        } else {
+            return `<span class='red-badge'>${observation}</span>`
+        }
+    });
     const observationText = observationsArray.join(' ');
 
     
@@ -652,16 +661,28 @@ function showFeedbackDetails(feedbackToken){
             if(data.writtenFeedback === '' || data.writtenFeedback === null){
                 const feedbackCommentHeader = document.getElementById('feedback-details-comment-header');
 
-                feedbackCommentHeader.innerHTML = '<h1 id="feedback-details-comment-heading" style="color: var(--danger-color); text-align: center">No written feedbacks</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-rating-update" style="color: var(--danger-color)"><i class="fa-solid fa-pen-nib"></i></button>';
+                feedbackCommentHeader.innerHTML = '<h1 id="feedback-details-comment-heading" style="color: var(--danger-color); text-align: center">No written feedbacks</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-comment-update" style="color: var(--danger-color)"><i class="fa-solid fa-pen-nib"></i></button>';
                 feedbackCommentHeader.style.justifyContent = 'center';
+
+                const commentUpdateButton = document.getElementById('feedback-comment-update');
+                commentUpdateButton.addEventListener('click', () => {
+                    hideFeedbackDetails();
+                    showCommentUpdateModal();
+                });
 
                 document.getElementById('feedback-details-comment-text').innerText = '';
             } else {
                 document.getElementById('feedback-details-comment-container').style.display = 'block';
                 const feedbackCommentHeader = document.getElementById('feedback-details-comment-header');
 
-                feedbackCommentHeader.innerHTML = '<h1 id="feedback-details-comment-heading" style="color: var(--primary-color); text-align: left">Written feedback</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-rating-update" style="color: var(--primary-color)"><i class="fa-solid fa-pen-nib"></i></button>';
+                feedbackCommentHeader.innerHTML = '<h1 id="feedback-details-comment-heading" style="color: var(--primary-color); text-align: left">Written feedback</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-comment-update" style="color: var(--primary-color)"><i class="fa-solid fa-pen-nib"></i></button>';
                 feedbackCommentHeader.style.justifyContent = 'start';
+
+                const commentUpdateButton = document.getElementById('feedback-comment-update');
+                commentUpdateButton.addEventListener('click', () => {
+                    hideFeedbackDetails();
+                    showCommentUpdateModal();
+                });
 
                 document.getElementById('feedback-details-comment-text').innerText = data.writtenFeedback;
             }
@@ -910,7 +931,7 @@ function showObservationUpdateModal(){
     const observationUpdateModal = document.getElementById('feedback-observation-update-container');
     const observationElements = document.getElementsByName('feedback-update-answers');
     const currentExtraObservations = currentUpdatingFeedback.extraObservations;
-    tempUpdatingFeedback = currentUpdatingFeedback;
+    tempUpdatingFeedback = {...currentUpdatingFeedback};
 
     for(let i = 0; i < observationElements.length; i++){
         if(currentExtraObservations.includes(observationElements[i].value)){
@@ -955,9 +976,7 @@ function checkExtraObservationValidity(){
         }
     }
 
-    console.log(tempUpdatingFeedback);
-
-    if(tempUpdatingFeedback.extraObservations.length !== observationsUpdated.length){
+    if(tempUpdatingFeedback.extraObservations.length !== currentCheckedObservations.length){
         observationsUpdated = true;
     } else {
         tempUpdatingFeedback.extraObservations.forEach(observation => {
@@ -973,6 +992,7 @@ function checkExtraObservationValidity(){
             updateFeedbackDetails(currentUpdatingFeedback);
         });
 
+        updateButton.disabled = false;
         updateButton.classList.add('primary-button');
         updateButton.classList.remove('disabled-button');
     } else {
@@ -980,8 +1000,57 @@ function checkExtraObservationValidity(){
             updateFeedbackDetails(currentUpdatingFeedback);
         });
 
+        updateButton.disabled = true;
         updateButton.classList.add('disabled-button');
         updateButton.classList.remove('primary-button');
+    }
+}
+
+function showCommentUpdateModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const commentUpdateModal = document.getElementById('feedback-comment-update-container');
+    const commentTextArea = document.getElementById('feedback-comment-textarea');
+    tempUpdatingFeedback = {...currentUpdatingFeedback};
+
+    commentTextArea.value = currentUpdatingFeedback.writtenFeedback;
+    commentTextArea.addEventListener('change', checkCommentTextValidity);
+
+    backdrop.style.visibility = 'visible';
+    commentUpdateModal.style.visibility = 'visible';
+}
+
+function hideCommentUpdateModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const commentUpdateModal = document.getElementById('feedback-comment-update-container');
+
+    backdrop.style.visibility = 'hidden';
+    commentUpdateModal.style.visibility = 'hidden';
+}
+
+function checkCommentTextValidity(){
+    const commentTextArea = document.getElementById('feedback-comment-textarea');
+    const updateButton = document.getElementById('feedback-comment-update-button');
+
+    console.log('checkCommentTextValidity');
+
+    if(commentTextArea.value !== tempUpdatingFeedback.writtenFeedback){
+        currentUpdatingFeedback.writtenFeedback = commentTextArea.value;
+
+        updateButton.addEventListener('click', () => {
+            updateFeedbackDetails(currentUpdatingFeedback);
+        });
+
+        updateButton.classList.add('primary-button');
+        updateButton.classList.remove('disabled-button');
+        updateButton.disabled = false;
+    } else {
+        updateButton.removeEventListener('click', () => {
+            updateFeedbackDetails(currentUpdatingFeedback);
+        });
+
+        updateButton.classList.add('primary-button');
+        updateButton.classList.remove('disabled-button');
+        updateButton.disabled = false;
     }
 }
 
@@ -997,6 +1066,7 @@ function updateFeedbackDetails(newFeedback){
 
            hideObservationUpdateModal();
             hideRatingUpdateModal();
+            hideCommentUpdateModal();
            backdropModal.style.visibility = 'visible';
             successMessageContainer.style.visibility = 'visible';
           setTimeout(() => {
