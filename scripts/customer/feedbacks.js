@@ -413,7 +413,7 @@ function getFeedbackRow(feedback){
                 <div class="more-button-container">
                     <button class="update-button" onclick="showFeedbackDetails(${feedback.feedbackToken})"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;&nbsp;View
                     </button>
-                    <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                    <button class="delete-button" onclick="openDeleteModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
                     </button>
                 </div>
             </td>
@@ -421,6 +421,76 @@ function getFeedbackRow(feedback){
     `;
 
     return feedbackRow;
+}
+
+function openDeleteModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const deleteModal = document.getElementById('delete-feedback-container');
+
+    backdrop.style.visibility = 'visible';
+    deleteModal.style.visibility = 'visible';
+
+    //Add event listener to the delete button
+    const deleteButton = document.getElementById('delete-confirm-button');
+    deleteButton.addEventListener('click', deleteFeedback);
+
+
+}
+
+function deleteFeedback(){
+    const successMessageContainer = document.getElementById('feedback-delete-success');
+
+    
+    fetch ('http://localhost/labour_link/customer/deleteFeedback.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            feedbackToken : currentViewingFeedbacks[0].feedbackToken
+        })
+
+    }).then(response => response.json())
+    .then(data => {
+        if(data.statusCode == 200){
+            const deleteModal = document.getElementById('delete-feedback-container');
+            const successModal = document.getElementById('feedback-delete-success');
+
+            deleteModal.style.visibility = 'hidden';
+            successModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                successModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }else if(data.statusCode == 201){
+            const deleteModal = document.getElementById('delete-feedback-container');
+            const failedModal = document.getElementById('feedback-delete-fail');
+
+            deleteModal.style.visibility = 'hidden';
+            failedModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                failedModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }
+    })
+
+
+
+
+
+}
+
+function closeDeleteModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const deleteModal = document.getElementById('delete-feedback-container');
+
+    backdrop.style.visibility = 'hidden';
+    deleteModal.style.visibility = 'hidden';
 }
 
 function updateFeedbackTablePagination(currentPage, maximumPages){

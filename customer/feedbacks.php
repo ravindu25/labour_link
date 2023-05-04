@@ -715,6 +715,32 @@
                 <button class="pagination-button" id="feedback-next-button" onclick="goToNextFeedbackTablePage()"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
+        <div class="delete-feedback-container" id="delete-feedback-container">
+            <div id="delete-feedback-content">
+                <div class="delete-feedback-title">
+                    <h1 id="delete-feedback-text">Do you want to delete selected Feedback?</h1>
+                </div>
+                <div class="delete-feedback-buttons" id="delete-feedback-buttons">
+                    <button type="button" id="delete-cancel-button" onclick="closeDeleteModal()" class="delete-cancel-button">Cancel</button>
+                    <button type="button" id="delete-confirm-button" class="delete-confirm-button">Delete</button>
+                </div>
+            </div>
+            <!-- <div class="loader-container" id="loader-container" style="height: 100%; width: 100%">
+                <svg id="spinner" class="spinner" width="50%" height="100%" viewBox="0 0 50 50">
+                    <circle class="path" style="stroke: #FF5B19;" cx="25" cy="25" r="20" fill="#FFF" stroke-width="5"></circle>
+                </svg>
+            </div> -->
+        </div>
+
+        <div class="success-message-container" id="feedback-delete-success">
+            <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Feedback Deleted successfully</h1>
+        </div>
+        <div class="failed-message-container" id="feedback-delete-fail">
+            <div class="message-text">
+                <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Feedback Deletion failed</h1>
+                <h5>Your login session outdated. Please login again.</h5>
+            </div>
+        </div>
         </div>
     </section>
 </main>
