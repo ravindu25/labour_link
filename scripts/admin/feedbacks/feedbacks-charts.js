@@ -6,10 +6,11 @@ function showFeedbackCount(allFeedbackCount, year, month) {
      * Fill the array with number of days in the month
      */
     const numberOfDays = new Date(year, month, 0).getDate();
+    const currentDate = new Date().getDate();
     let xAxisLabels = [];
     let yAxisValues = [];
 
-    for(let i = 1; i <= numberOfDays; i++){
+    for(let i = 1; i <= currentDate; i++){
         const monthText = month < 10 ? `0${month}` : month;
         const dayText = i < 10 ? `0${i}` : i;
         xAxisLabels.push(`${year}-${monthText}-${dayText}`);
@@ -39,6 +40,7 @@ function showFeedbackCount(allFeedbackCount, year, month) {
             responsive: true,
             scales: {
                 y: {
+                    beginAtZero: true,
                     ticks: {
                         stepSize: 1
                     }

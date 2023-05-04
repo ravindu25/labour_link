@@ -337,7 +337,7 @@
     </div>
     <div class="feedback-details-comment-container" id="feedback-details-comment-container">
         <div class="feedback-details-comment-header" id="feedback-details-comment-header">
-            <h1 id="feedback-details-comment-heading">Written feedback</h1>
+            <h1 id="feedback-details-comment-heading">Written feedback</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-comment-update" style="color: var(--primary-color)"><i class="fa-solid fa-pen-nib"></i></button>
         </div>
         <p id="feedback-details-comment-text"></p>
     </div>
@@ -505,11 +505,11 @@
         <h1>Update comment of the feedback!</h1>
     </div>
     <div class="feedback-comment-update-content">
-        <textarea id="feedback-comment-textarea"></textarea>
+        <textarea id="feedback-comment-textarea" rows="5"></textarea>
     </div>
     <div class="feedback-comment-update-button-container">
         <button type="button" class="primary-outline-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-        <button type="button" class="primary-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update</button>
+        <button type="button" id="feedback-comment-update-button" class="disabled-button" disabled><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update</button>
     </div>
 </div>
 <div class="success-message-container" id="feedback-update-success">

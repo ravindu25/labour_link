@@ -20,6 +20,7 @@ extraObservationButton.addEventListener('click', () => {
     showObservationUpdateModal();
 });
 
+
 feedbackSearchButton.addEventListener('click', () => {
     allFeedbacks = allTempFeedbacks;
     const paginationContainer = document.getElementById('feedback-details-pagination-container');
@@ -563,16 +564,28 @@ function showFeedbackDetails(feedbackToken){
             if(data.writtenFeedback === '' || data.writtenFeedback === null){
                 const feedbackCommentHeader = document.getElementById('feedback-details-comment-header');
 
-                feedbackCommentHeader.innerHTML = '<h1 id="feedback-details-comment-heading" style="color: var(--danger-color); text-align: center">No written feedbacks</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-rating-update" style="color: var(--danger-color)"><i class="fa-solid fa-pen-nib"></i></button>';
+                feedbackCommentHeader.innerHTML = '<h1 id="feedback-details-comment-heading" style="color: var(--danger-color); text-align: center">No written feedbacks</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-comment-update" style="color: var(--danger-color)"><i class="fa-solid fa-pen-nib"></i></button>';
                 feedbackCommentHeader.style.justifyContent = 'center';
+
+                const commentUpdateButton = document.getElementById('feedback-comment-update');
+                commentUpdateButton.addEventListener('click', () => {
+                    hideFeedbackDetails();
+                    showCommentUpdateModal();
+                });
 
                 document.getElementById('feedback-details-comment-text').innerText = '';
             } else {
                 document.getElementById('feedback-details-comment-container').style.display = 'block';
                 const feedbackCommentHeader = document.getElementById('feedback-details-comment-header');
 
-                feedbackCommentHeader.innerHTML = '<h1 id="feedback-details-comment-heading" style="color: var(--primary-color); text-align: left">Written feedback</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-rating-update" style="color: var(--primary-color)"><i class="fa-solid fa-pen-nib"></i></button>';
+                feedbackCommentHeader.innerHTML = '<h1 id="feedback-details-comment-heading" style="color: var(--primary-color); text-align: left">Written feedback</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-comment-update" style="color: var(--primary-color)"><i class="fa-solid fa-pen-nib"></i></button>';
                 feedbackCommentHeader.style.justifyContent = 'start';
+
+                const commentUpdateButton = document.getElementById('feedback-comment-update');
+                commentUpdateButton.addEventListener('click', () => {
+                    hideFeedbackDetails();
+                    showCommentUpdateModal();
+                });
 
                 document.getElementById('feedback-details-comment-text').innerText = data.writtenFeedback;
             }
@@ -875,7 +888,7 @@ function checkExtraObservationValidity(){
             }
         })
     }
-    
+
     if(observationsUpdated){
         currentUpdatingFeedback.extraObservations = currentCheckedObservations;
         updateButton.addEventListener('click', () => {
@@ -896,6 +909,54 @@ function checkExtraObservationValidity(){
     }
 }
 
+function showCommentUpdateModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const commentUpdateModal = document.getElementById('feedback-comment-update-container');
+    const commentTextArea = document.getElementById('feedback-comment-textarea');
+    tempUpdatingFeedback = {...currentUpdatingFeedback};
+
+    commentTextArea.value = currentUpdatingFeedback.writtenFeedback;
+    commentTextArea.addEventListener('change', checkCommentTextValidity);
+
+    backdrop.style.visibility = 'visible';
+    commentUpdateModal.style.visibility = 'visible';
+}
+
+function hideCommentUpdateModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const commentUpdateModal = document.getElementById('feedback-comment-update-container');
+
+    backdrop.style.visibility = 'hidden';
+    commentUpdateModal.style.visibility = 'hidden';
+}
+
+function checkCommentTextValidity(){
+    const commentTextArea = document.getElementById('feedback-comment-textarea');
+    const updateButton = document.getElementById('feedback-comment-update-button');
+
+    console.log('checkCommentTextValidity');
+
+    if(commentTextArea.value !== tempUpdatingFeedback.writtenFeedback){
+        currentUpdatingFeedback.writtenFeedback = commentTextArea.value;
+
+        updateButton.addEventListener('click', () => {
+            updateFeedbackDetails(currentUpdatingFeedback);
+        });
+
+        updateButton.classList.add('primary-button');
+        updateButton.classList.remove('disabled-button');
+        updateButton.disabled = false;
+    } else {
+        updateButton.removeEventListener('click', () => {
+            updateFeedbackDetails(currentUpdatingFeedback);
+        });
+
+        updateButton.classList.add('primary-button');
+        updateButton.classList.remove('disabled-button');
+        updateButton.disabled = false;
+    }
+}
+
 function updateFeedbackDetails(newFeedback){
     fetch(`http://localhost/labour_link/api/feedbacks.php`, {
         method: 'PUT',
@@ -908,6 +969,7 @@ function updateFeedbackDetails(newFeedback){
 
            hideObservationUpdateModal();
             hideRatingUpdateModal();
+            hideCommentUpdateModal();
            backdropModal.style.visibility = 'visible';
             successMessageContainer.style.visibility = 'visible';
           setTimeout(() => {

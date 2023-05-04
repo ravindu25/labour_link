@@ -3,8 +3,8 @@ let feedbackSkippingRate = null;
 
 function initialLoad(){
     const currentYear = new Date().getFullYear();
-    // const currentMonth = new Date().getMonth() + 1;
-    const currentMonth = 4;
+    const currentMonth = new Date().getMonth() + 1;
+    // const currentMonth = 4;
 
     fetch(`http://localhost/labour_link/api/charts/feedbacks.php?term=getFeedbackCount&year=${currentYear}&month=${currentMonth}`, {
         method: 'GET',
