@@ -390,7 +390,13 @@ function getFeedbackRow(feedback){
         feedbackComment = feedbackComment.substring(0, 80) + '...';
     }
 
-    const observationsArray = feedback.extraObservations.map(observation => `<span class='red-badge'>${observation}</span>`);
+    const observationsArray = feedback.extraObservations.map(observation => {
+        if(observation === ''){
+            return `<span class='green-badge'>No observations</span>`;
+        } else {
+            return `<span class='red-badge'>${observation}</span>`
+        }
+    });
     const observationText = observationsArray.join(' ');
 
     const feedbackRow = `
@@ -815,7 +821,7 @@ function showObservationUpdateModal(){
     const observationUpdateModal = document.getElementById('feedback-observation-update-container');
     const observationElements = document.getElementsByName('feedback-update-answers');
     const currentExtraObservations = currentUpdatingFeedback.extraObservations;
-    tempUpdatingFeedback = currentUpdatingFeedback;
+    tempUpdatingFeedback = {...currentUpdatingFeedback};
 
     for(let i = 0; i < observationElements.length; i++){
         if(currentExtraObservations.includes(observationElements[i].value)){
@@ -860,9 +866,7 @@ function checkExtraObservationValidity(){
         }
     }
 
-    console.log(tempUpdatingFeedback);
-
-    if(tempUpdatingFeedback.extraObservations.length !== observationsUpdated.length){
+    if(tempUpdatingFeedback.extraObservations.length !== currentCheckedObservations.length){
         observationsUpdated = true;
     } else {
         tempUpdatingFeedback.extraObservations.forEach(observation => {
@@ -871,13 +875,14 @@ function checkExtraObservationValidity(){
             }
         })
     }
-
+    
     if(observationsUpdated){
         currentUpdatingFeedback.extraObservations = currentCheckedObservations;
         updateButton.addEventListener('click', () => {
             updateFeedbackDetails(currentUpdatingFeedback);
         });
 
+        updateButton.disabled = false;
         updateButton.classList.add('primary-button');
         updateButton.classList.remove('disabled-button');
     } else {
@@ -885,6 +890,7 @@ function checkExtraObservationValidity(){
             updateFeedbackDetails(currentUpdatingFeedback);
         });
 
+        updateButton.disabled = true;
         updateButton.classList.add('disabled-button');
         updateButton.classList.remove('primary-button');
     }

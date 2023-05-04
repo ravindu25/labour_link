@@ -497,7 +497,19 @@
     </div>
     <div class="feedback-observation-button-container">
         <button class="primary-outline-button" onclick="hideObservationUpdateModal()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-        <button class="primary-button" id="feedback-observation-update-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update</button>
+        <button class="disabled-button" id="feedback-observation-update-button" disabled><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update</button>
+    </div>
+</div>
+<div class="feedback-comment-update-container" id="feedback-comment-update-container">
+    <div class="feedback-comment-update-header">
+        <h1>Update comment of the feedback!</h1>
+    </div>
+    <div class="feedback-comment-update-content">
+        <textarea id="feedback-comment-textarea"></textarea>
+    </div>
+    <div class="feedback-comment-update-button-container">
+        <button type="button" class="primary-outline-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" class="primary-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update</button>
     </div>
 </div>
 <div class="success-message-container" id="feedback-update-success">

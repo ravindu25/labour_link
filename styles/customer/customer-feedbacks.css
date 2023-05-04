@@ -657,6 +657,15 @@
     font-weight: 500;
 }
 
+.green-badge{
+    display: inline-block;
+    padding: 6px;
+    color: var(--success-color);
+    background-color: var(--success-shade-color);
+    border-radius: 4px;
+    font-weight: 500;
+}
+
 .badge-container{
     text-align: left;
     margin-bottom: 8px;
