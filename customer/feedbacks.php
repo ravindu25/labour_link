@@ -292,7 +292,7 @@
         </div>
         <div class="feedback-details-rating-observations">
             <div class="feedback-details-rating-container">
-                <div class="feedback-details-rating-header">
+                <div id="feedback-details-rating-header" class="feedback-details-rating-header">
                     <h1>Worker rating</h1>&nbsp;&nbsp;<button class="icon-button" id="feedback-rating-update"><i class="fa-solid fa-pen-nib"></i></button>
                 </div>
                 <div class="feedback-details-rating-content">

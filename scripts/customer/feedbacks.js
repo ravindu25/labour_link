@@ -597,6 +597,9 @@ function showFeedbackDetails(feedbackToken){
     const backdrop = document.getElementById('backdrop-modal');
     const feedbackDetailsContainer = document.getElementById('feedback-details-container');
 
+    //Get the date of creation of the feedback from DB
+
+
     fetch(`http://localhost/labour_link/api/feedbacks.php?feedbackToken=${feedbackToken}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
@@ -605,6 +608,26 @@ function showFeedbackDetails(feedbackToken){
             /*
              * Setting up the worker details
              */
+
+            //If the feedback was set earlier than 14 days, dont allow the user to edit the feedback
+            const feedbackDate = new Date(data.createdTimestamp.split(' ')[0]);
+            const currentDate = new Date();
+            const timeDifference = currentDate.getTime() - feedbackDate.getTime();
+            const daysDifference = timeDifference / (1000 * 3600 * 24);
+            if(daysDifference > 14){
+
+                document.getElementById('feedback-details-rating-header').innerHTML="<h1>Worker rating</h1>&nbsp;&nbsp;";
+            }else{
+                document.getElementById('feedback-details-rating-header').innerHTML="  <h1>Worker rating</h1>&nbsp;&nbsp;<button class=\"icon-button\" id=\"feedback-rating-update\"><i class=\"fa-solid fa-pen-nib\"></i></button>";
+                const feedbackRatingUpdateButton = document.getElementById('feedback-rating-update');
+                feedbackRatingUpdateButton.addEventListener('click', () => {
+                    currentUpdatingFeedback = data;
+                    tempUpdatingFeedback = {...currentUpdatingFeedback};
+                    hideFeedbackDetails(data);
+                    showRatingUpdateModal(data.feedbackToken);
+                });
+            }
+
             currentUpdatingFeedback = data;
 
             document.getElementById('feedback-details-worker-image').src = `../assets/worker/profile-images/worker-3.jpg`;
@@ -624,13 +647,7 @@ function showFeedbackDetails(feedbackToken){
             document.getElementById('feedback-details-progress-bar-professionalism').style.width = `${proffWidth}%`;
             document.getElementById('feedback-details-progress-bar-professionalism-text').innerText = `${data.ratingProfessionalism} out of 5`;
 
-            const feedbackRatingUpdateButton = document.getElementById('feedback-rating-update');
-            feedbackRatingUpdateButton.addEventListener('click', () => {
-                currentUpdatingFeedback = data;
-                tempUpdatingFeedback = {...currentUpdatingFeedback};
-                hideFeedbackDetails(data);
-                showRatingUpdateModal(data.feedbackToken);
-            });
+
 
             if(data.writtenFeedback === '' || data.writtenFeedback === null){
                 const feedbackCommentHeader = document.getElementById('feedback-details-comment-header');
