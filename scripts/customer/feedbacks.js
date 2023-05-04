@@ -387,7 +387,15 @@ function getFeedbackRow(feedback){
     }
 
     const observationsArray = feedback.extraObservations.map(observation => `<span class='red-badge'>${observation}</span>`);
+    
+    for (let i = 0; i < observationsArray.length; i++) {
+        observationsArray[i] = observationsArray[i].replace("suspect-mobile-using", "Excess Mobile Phone Usage");
+        observationsArray[i] = observationsArray[i].replace("charged-more", "Charge More than Agreed");
+        observationsArray[i] = observationsArray[i].replace("suspect-drug-using", "Drug Usage during Work");
+    }
     const observationText = observationsArray.join(' ');
+
+    
 
     const feedbackRow = `
         <tr class="main-tr">
