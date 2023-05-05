@@ -391,7 +391,15 @@ function getFeedbackRow(feedback){
         feedbackComment = feedbackComment.substring(0, 80) + '...';
     }
 
-    const observationsArray = feedback.extraObservations.map(observation => {
+    let observationsArray = feedback.extraObservations.map(observation => {
+        if(observation === "suspect-mobile-using"){
+          observation = "Excess Mobile Phone Usage";
+        } else if(observation === "charged-more"){
+          observation = "Charge More than Agreed";
+        } else if(observation === "suspect-drug-using"){
+          observation = "Drug Usage during Work";
+        }
+        
         if(observation === ''){
             return `<span class='green-badge'>No observations</span>`;
         } else {
@@ -399,6 +407,8 @@ function getFeedbackRow(feedback){
         }
     });
     const observationText = observationsArray.join(' ');
+
+    
 
     const feedbackRow = `
         <tr class="main-tr">
@@ -416,7 +426,7 @@ function getFeedbackRow(feedback){
                 <div class="more-button-container">
                     <button class="update-button" onclick="showFeedbackDetails(${feedback.feedbackToken})"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;&nbsp;View
                     </button>
-                    <button class="delete-button" onclick="openResetModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                    <button class="delete-button" onclick="openDeleteModal()"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
                     </button>
                 </div>
             </td>
@@ -424,6 +434,76 @@ function getFeedbackRow(feedback){
     `;
 
     return feedbackRow;
+}
+
+function openDeleteModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const deleteModal = document.getElementById('delete-feedback-container');
+
+    backdrop.style.visibility = 'visible';
+    deleteModal.style.visibility = 'visible';
+
+    //Add event listener to the delete button
+    const deleteButton = document.getElementById('delete-confirm-button');
+    deleteButton.addEventListener('click', deleteFeedback);
+
+
+}
+
+function deleteFeedback(){
+    const successMessageContainer = document.getElementById('feedback-delete-success');
+
+    
+    fetch ('http://localhost/labour_link/customer/deleteFeedback.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            feedbackToken : currentViewingFeedbacks[0].feedbackToken
+        })
+
+    }).then(response => response.json())
+    .then(data => {
+        if(data.statusCode == 200){
+            const deleteModal = document.getElementById('delete-feedback-container');
+            const successModal = document.getElementById('feedback-delete-success');
+
+            deleteModal.style.visibility = 'hidden';
+            successModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                successModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }else if(data.statusCode == 201){
+            const deleteModal = document.getElementById('delete-feedback-container');
+            const failedModal = document.getElementById('feedback-delete-fail');
+
+            deleteModal.style.visibility = 'hidden';
+            failedModal.style.visibility = 'visible';
+            
+            //timeout 2 seconds then reload page
+            setTimeout(function(){
+                failedModal.style.visibility = 'hidden';
+                location.reload();
+            }, 2000);
+        }
+    })
+
+
+
+
+
+}
+
+function closeDeleteModal(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const deleteModal = document.getElementById('delete-feedback-container');
+
+    backdrop.style.visibility = 'hidden';
+    deleteModal.style.visibility = 'hidden';
 }
 
 function updateFeedbackTablePagination(currentPage, maximumPages){
@@ -526,6 +606,9 @@ function showFeedbackDetails(feedbackToken){
     const backdrop = document.getElementById('backdrop-modal');
     const feedbackDetailsContainer = document.getElementById('feedback-details-container');
 
+    //Get the date of creation of the feedback from DB
+
+
     fetch(`http://localhost/labour_link/api/feedbacks.php?feedbackToken=${feedbackToken}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
@@ -534,6 +617,26 @@ function showFeedbackDetails(feedbackToken){
             /*
              * Setting up the worker details
              */
+
+            //If the feedback was set earlier than 14 days, dont allow the user to edit the feedback
+            const feedbackDate = new Date(data.createdTimestamp.split(' ')[0]);
+            const currentDate = new Date();
+            const timeDifference = currentDate.getTime() - feedbackDate.getTime();
+            const daysDifference = timeDifference / (1000 * 3600 * 24);
+            if(daysDifference > 14){
+
+                document.getElementById('feedback-details-rating-header').innerHTML="<h1>Worker rating</h1>&nbsp;&nbsp;";
+            }else{
+                document.getElementById('feedback-details-rating-header').innerHTML="  <h1>Worker rating</h1>&nbsp;&nbsp;<button class=\"icon-button\" id=\"feedback-rating-update\"><i class=\"fa-solid fa-pen-nib\"></i></button>";
+                const feedbackRatingUpdateButton = document.getElementById('feedback-rating-update');
+                feedbackRatingUpdateButton.addEventListener('click', () => {
+                    currentUpdatingFeedback = data;
+                    tempUpdatingFeedback = {...currentUpdatingFeedback};
+                    hideFeedbackDetails(data);
+                    showRatingUpdateModal(data.feedbackToken);
+                });
+            }
+
             currentUpdatingFeedback = data;
 
             document.getElementById('feedback-details-worker-image').src = `../assets/worker/profile-images/worker-3.jpg`;
@@ -553,13 +656,7 @@ function showFeedbackDetails(feedbackToken){
             document.getElementById('feedback-details-progress-bar-professionalism').style.width = `${proffWidth}%`;
             document.getElementById('feedback-details-progress-bar-professionalism-text').innerText = `${data.ratingProfessionalism} out of 5`;
 
-            const feedbackRatingUpdateButton = document.getElementById('feedback-rating-update');
-            feedbackRatingUpdateButton.addEventListener('click', () => {
-                currentUpdatingFeedback = data;
-                tempUpdatingFeedback = {...currentUpdatingFeedback};
-                hideFeedbackDetails(data);
-                showRatingUpdateModal(data.feedbackToken);
-            });
+
 
             if(data.writtenFeedback === '' || data.writtenFeedback === null){
                 const feedbackCommentHeader = document.getElementById('feedback-details-comment-header');

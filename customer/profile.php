@@ -364,7 +364,7 @@
                     <div class="edit-item-value">
                         <?php echo $email ?>
                     </div>
-                    <button type="button" class="update-button" id="button-edit-item-email" onclick="openEditModal('edit-modal-email')"><i class="fa-solid fa-pen-clip"></i></button>
+                    <button type="button" class="update-button" style="visibility: hidden" id="button-edit-item-email"><i class="fa-solid fa-pen-clip"></i></button>
                 </div>
                 <div class="edit-item-container" id="edit-item-address">
                     <div class="edit-item-header">

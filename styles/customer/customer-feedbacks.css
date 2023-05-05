@@ -1415,3 +1415,73 @@
     border-radius: 12px;
     background-color: var(--primary-background-shade-color);
 }
+
+
+.delete-feedback-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    min-width: 30vw;
+    transform: translate(-50%, -50%) ;
+    padding: 32px;
+    color: #102699;
+    background-color: #FFF;
+    border-radius: 24px;
+    opacity: 1;
+    visibility: hidden;
+    text-align: center;
+}
+
+
+.delete-feedback-title{
+    color: var(--warning-color);
+    text-align: center;
+}
+
+.delete-feedback-text h1{
+    font-weight: normal;
+    font-size: 32px;
+}
+
+.delete-booking-buttons{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.delete-cancel-button{
+    min-width: 120px;
+    outline: none;
+    border: 4px solid var(--danger-color);
+    padding: 10px 5px;
+    margin-right: 24px;
+    color: var(--danger-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 16px;
+    background-color: var(--danger-shade-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.delete-cancel-button:active{
+    transform: scale(.96)
+}
+
+.delete-confirm-button{
+    min-width: 120px;
+    outline: none;
+    border: 4px solid var(--warning-dark-color);
+    padding: 10px 5px;
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 16px;
+    background-color: var(--warning-dark-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.delete-confirm-button:active{
+    transform: scale(.96)
+}

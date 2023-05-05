@@ -1,14 +1,20 @@
 <?php
-$bookingId = $_POST['booking_id'];
-$status = $_POST['status'];
+    require_once('../db.php');
+    $data = json_decode(file_get_contents('php://input'), true);
 
-$connection = mysqli_connect('localhost', 'username', 'password', 'database');
-$query = "UPDATE bookings SET status='$status' WHERE id=$bookingId";
-$result = mysqli_query($connection, $query);
+    $bookingId = $data['booking_id'];
+    $status = $data['status'];
 
-if ($result) {
-    echo json_encode(['success' => true]);
-} else {
-    echo json_encode(['success' => false, 'error' => 'Failed to update booking status']);
-}
+    // $connection = mysqli_connect('localhost', 'username', 'password', 'database');
+    $query = "UPDATE Booking SET Status='$status' WHERE Booking_ID=$bookingId";
+    $result = $conn->query($query);
+
+    header('Content-Type: application/json');
+    if ($result) {
+        http_response_code(200);
+        echo json_encode(array('success' => true));
+    } else {
+        http_response_code(500);
+        echo json_encode(array('success' => false, 'error' => 'Failed to update booking status'));
+    }
 ?>

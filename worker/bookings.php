@@ -40,37 +40,39 @@ $userId = $_SESSION['user_id'];
     </div>
 </div>
 <div class="booking-details-container" id="booking-details-container">
+    <div><i class="fa fa-close"></i></div>
     <div class="booking-details-scroll-wrapper">
+        <div class="back-button-container">
+                <button type="button" class="more-button" id="back-button" onclick="closeBookingDetailsModal()"><i class='fa-solid fa-xmark'></i></button>
+        </div>
         <div class="booking-details-title">
             <h1>Current Status of Your <u>Booking</u></h1>
         </div>
-        <div class="status-container">
-            <button type="button" class="status-button">In-Progress</button>
-        </div>
+        <div class="status-container" id="booking-details-status-container"></div>
         <div class="details-container">
             <div class="details-row">
                 <h4>Job type</h4>
-                <h4 class="details-value">Plumber</h4>
+                <h4 class="details-value" id="booking-details-job-type"></h4>
             </div>
             <div class="details-row">
-                <h4>Customer</h4>
-                <h4 class="details-value">Rvindu Wegiriya</h4>
+                <h4>Worker</h4>
+                <h4 class="details-value" id="booking-details-worker-name"></h4>
             </div>
             <div class="details-row">
                 <h4>Start date</h4>
-                <h4 class="details-value">21-Nov-2022</h4>
+                <h4 class="details-value" id="booking-details-start-date"></h4>
             </div>
-            <div class="remaining-time-container">
+            <div class="remaining-time-container" id="remaining-time-container">
                 <h4>This booking will be closed in</h4>
-                <h1 class="countdown-text">12 hrs 3 days</h1>
+                <h1 class="countdown-text" id="booking-details-countdown"></h1>
             </div>
             <div class="payment-method-container">
                 <div class="payment-image-container">
                     <h4>Payment Method</h4>
                     <div class="payment-image-card">
-                        <img class="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
+                        <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
                              alt="payment method"/>
-                        <h4>Online payments</h4>
+                        <h4 id="payment-method-text">Online payments</h4>
                     </div>
                 </div>
                 <div class="payment-details-container">
@@ -90,9 +92,6 @@ $userId = $_SESSION['user_id'];
                 <div class="accept-button-container">
                     <button type="button" class="worker-input-button" id="accept-button"><i class="fa fa-check"></i> Accept</button>
                 </div>
-            </div>
-            <div class="back-button-container">
-                <button type="button" class="more-button" id="back-button">Back</button>
             </div>
         </div>
     </div>
@@ -255,12 +254,14 @@ $userId = $_SESSION['user_id'];
 
                 // $sql = "SELECT First_Name,Last_Name ,Start_Date , Completion_Flag FROM user INNER JOIN booking ON user.User_ID = booking.Customer_ID INNER JOIN confirmed_booking ON booking.Booking_ID = confirmed_booking.Booking_ID";
 
-                $sql_get_status = "SELECT First_Name,Last_Name ,Start_Date, Worker_Type, Created_Date ,Status FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} ORDER BY Created_Date DESC LIMIT 5";
+                $sql_get_status = "SELECT Booking.*, First_Name,Last_Name ,Start_Date, Worker_Type, Created_Date ,Status FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} ORDER BY Created_Date DESC LIMIT 5";
 
 
                 $result = $conn->query($sql_get_status);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
+                        $bookingId = $row['Booking_ID'];
+                    
 
                         $status = $row['Status'];
 
@@ -276,19 +277,22 @@ $userId = $_SESSION['user_id'];
                                 $button = '<button class="rejected-button">Rejected</button>';
                             }
                         echo('
-                        <div class="booking-card"
+                        <div class="booking-card" onclick="openBookingDetailsModal('.$bookingId.')">
                             <div class="card-text">
                                 <h3>'.$row['Worker_Type'].'</h3>
                                 <p>Customer</p>
                                 <h4>' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</h4>
+                            </div>
                             <div class="booking-card-button-row">
                                 <div class="badge-container">
                                     <div class="blue-badge">' . date("d M Y", strtotime($row['Start_Date'])) . '</div> 
                                 </div>
+                                <div id="booking-card-status-'.$bookingId.'">
                                 '. $button .'
+                                </div>
                             </div>
                         </div>
-
+                
                     ');
                     }
                 }
