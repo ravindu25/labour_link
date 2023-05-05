@@ -1,3 +1,17 @@
+<?php
+    include_once('./db.php');
+
+    session_start();
+
+    $validWorkers = array('plumber', 'carpenter', 'electrician', 'painter', 'mason', 'janitor', 'mechanical', 'gardner');
+    if($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (!isset($_GET['workertype']) || !in_array($_GET['workertype'], $validWorkers)) {
+            header("Location: ../index.php");
+        }
+    }
+
+    $workerType = $_GET['workertype'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -173,8 +187,35 @@ if(isset($_POST['register-button'])){
     $user_id = $row['User_ID'];
     $sql3 = "INSERT INTO Worker (Worker_ID, City) VALUES ('$user_id', '$city')";
     $result3 = mysqli_query($conn, $sql3);
+    $sql4 = null;
+    $result4 = null;
 
-    if($result1 && $result3){
+    if($workerType === 'plumber'){
+        $sql4 = "INSERT INTO Plumber (Plumber_ID) VALUES ('$user_id')";
+        $result4 = mysqli_query($conn, $sql4);
+    } else if($workerType === 'carpenter'){
+        $sql4 = "INSERT INTO Carpenter (Carpenter_ID) VALUES ('$user_id')";
+        $result4 = mysqli_query($conn, $sql4);
+    } else if($workerType === 'electrician'){
+        $sql4 = "INSERT INTO Electrician (Electrician_ID) VALUES ('$user_id')";
+        $result4 = mysqli_query($conn, $sql4);
+    } else if($workerType === 'mason'){
+        $sql4 = "INSERT INTO Mason (Mason_ID) VALUES ('$user_id')";
+        $result4 = mysqli_query($conn, $sql4);
+    }else if($workerType === 'painter'){
+        $sql4 = "INSERT INTO Painter (Painter_ID) VALUES ('$user_id')";
+        $result4 = mysqli_query($conn, $sql4);
+    } else if($workerType === 'gardener'){
+        $sql4 = "INSERT INTO Gardener (Gardener_ID) VALUES ('$user_id')";
+        $result4 = mysqli_query($conn, $sql4);
+    } else if($workerType === 'mechanical'){
+        $sql4 = "INSERT INTO Mechanic (Mechanic_ID) VALUES ('$user_id')";
+        $result4 = mysqli_query($conn, $sql4);
+    } else if($workerType === 'janitor'){
+        $sql4 = "INSERT INTO Janitor (Janitor_ID) VALUES ('$user_id')";
+        $result4 = mysqli_query($conn, $sql4);
+    }
+    if($result1 && $result3 && $result4){
         echo("Successfully Registered");
         //send email
         require_once 'mailconfiguration.php';
@@ -191,10 +232,5 @@ if(isset($_POST['register-button'])){
     }else{
         echo '<script>showFailMessage("We are having trouble with registration process. Please try again later.");</script>';
     }
-
-   
 }
-
-
-
 ?>
