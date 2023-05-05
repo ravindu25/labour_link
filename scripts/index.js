@@ -8,10 +8,27 @@ const registerModal = document.getElementById("register-modal");
 const searchBackdrop = document.getElementById("search-backdrop");
 const searchBar = document.getElementById("search-bar-input");
 
+const workerRegisterButton = document.getElementById("worker-register-button");
+const workerTypeSelectButton = document.getElementById("worker-type-select-button");
+
 if(registerButton != null) registerButton.addEventListener('click',() => { openModal() });
 registerModal.addEventListener('click', () => { closeModal() });
 searchBar.addEventListener('click', () => { openSearchContainer() });
 searchBackdrop.addEventListener('click', () => { closeSearchContainer() });
+workerRegisterButton.addEventListener('click', () => {
+    closeModal();
+    openWorkerTypeModal()
+});
+
+workerTypeSelectButton.addEventListener('click', () => {
+   const radioButtons = document.getElementsByName("job-type-select");
+   for(let i = 0; i < radioButtons.length; i++){
+       if(radioButtons[i].checked){
+           window.location.href = "/labour_link/worker-registration.php?workertype=" + radioButtons[i].value;
+           break;
+       }
+   }
+});
 
 function openModal(){
     const registerModal = document.getElementById("register-modal");
@@ -19,6 +36,16 @@ function openModal(){
 
     registerModal.style.visibility = 'visible';
     registerModalContent.style.visibility = 'visible';
+}
+
+function openWorkerTypeModal(){
+    const registerModal = document.getElementById("register-modal");
+    const registerModalContent = document.getElementById("register-modal-content");
+    const workerTypeModal = document.getElementById("worker-type-modal");
+
+    registerModal.style.visibility = 'visible';
+    registerModalContent.style.visibility = 'hidden';
+    workerTypeModal.style.visibility = 'visible';
 }
 
 function closeModal(){

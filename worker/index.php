@@ -47,22 +47,6 @@
 </div>
 <div class="backdrop-modal" id="message-backdrop">
 </div>
-<div class="register-select-content" id="register-modal-content">
-    <div class="register-select-heading">
-        <img src="../assets/svg/user-check-solid.svg" alt="house icon" class="register-select-icon" />
-        <h1>Select registration type</h1>
-    </div>
-    <div class="reg-type-container">
-        <div class="reg-type-card">
-            <img src="../assets/home-page/job-type/labour-type.svg" alt="worker" class="reg-type-image" />
-            <button type="button" onclick="window.location.href='../worker-registration.php'" class="card-button">Worker</button>
-        </div>
-        <div class="reg-type-card">
-            <img src="../assets/home-page/job-type/customer-type.svg" alt="customer" class="reg-type-image" />
-            <button type="button" onclick="window.location.href='../customer-registration.php'" class="card-button">Customer</button>
-        </div>
-    </div>
-</div>
 <div class="login-container" id="login-container">
     <div class="login-container-header">
         <h1>Please login to the to create new booking!</h1>

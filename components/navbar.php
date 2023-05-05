@@ -11,12 +11,111 @@
     <div class="reg-type-container">
         <div class="reg-type-card">
             <img src="<?php echo $baseUrl . "/assets/home-page/job-type/labour-type.svg"?>" alt="worker" class="reg-type-image" />
-            <button type="button" onclick="window.location.href='<?php echo $baseUrl. 'worker-registration.php'?>'" class="card-button">Worker</button>
+            <button type="button" id="worker-register-button" class="card-button">Worker</button>
         </div>
         <div class="reg-type-card">
             <img src="<?php echo $baseUrl . "/assets/home-page/job-type/customer-type.svg"?>" alt="customer" class="reg-type-image" />
             <button type="button" onclick="window.location.href='<?php echo $baseUrl. 'customer-registration.php'?>'" class="card-button">Customer</button>
         </div>
+    </div>
+</div>
+<div class="worker-type-modal" id="worker-type-modal">
+    <div class="worker-type-modal-header">
+        <h1>The worker category you want to register!</h1>
+    </div>
+    <div class="worker-type-modal-cards-container">
+        <div class="worker-type-modal-card">
+            <label>
+                <input type='radio' name='job-type-select' value='plumber' class='job-type-select' id='job-type-select-plumber' checked />
+                <div class='job-type-card-container'>
+                    <div class="job-type-image-container">
+                        <img src="<?php echo $baseUrl . "/assets/job-card-image/plumbing-image.jpg"?>" alt="plumber" class="job-type-image" />
+                    </div>
+                    <h3>Plumber</h3>
+                </div>
+            </label>
+        </div>
+        <div class="worker-type-modal-card">
+            <label>
+                <input type='radio' name='job-type-select' value='carpenter' class='job-type-select' id='job-type-select-carpenter' />
+                <div class='job-type-card-container'>
+                    <div class="job-type-image-container">
+                        <img src="<?php echo $baseUrl . "/assets/job-card-image/carpentry-image.jpg"?>" alt="carpenter" class="job-type-image" />
+                    </div>
+                    <h3>Carpenter</h3>
+                </div>
+            </label>
+        </div>
+        <div class="worker-type-modal-card">
+            <label>
+                <input type='radio' name='job-type-select' value='electrician' class='job-type-select' id='job-type-select-electrician' />
+                <div class='job-type-card-container'>
+                    <div class="job-type-image-container">
+                        <img src="<?php echo $baseUrl . "/assets/job-card-image/electrical-image.jpg"?>" alt="electrician" class="job-type-image" />
+                    </div>
+                    <h3>Electrician</h3>
+                </div>
+            </label>
+        </div>
+        <div class="worker-type-modal-card">
+            <label>
+                <input type='radio' name='job-type-select' value='painter' class='job-type-select' id='job-type-select-painter' />
+                <div class='job-type-card-container'>
+                    <div class="job-type-image-container">
+                        <img src="<?php echo $baseUrl . "/assets/job-card-image/painting-image.jpg"?>" alt="painter" class="job-type-image" />
+                    </div>
+                    <h3>Painter</h3>
+                </div>
+            </label>
+        </div>
+        <div class="worker-type-modal-card">
+            <label>
+                <input type='radio' name='job-type-select' value='mason' class='job-type-select' id='job-type-select-mason' />
+                <div class='job-type-card-container'>
+                    <div class="job-type-image-container">
+                        <img src="<?php echo $baseUrl . "/assets/job-card-image/masonry-image.jpg"?>" alt="painter" class="job-type-image" />
+                    </div>
+                    <h3>Mason</h3>
+                </div>
+            </label>
+        </div>
+        <div class="worker-type-modal-card">
+            <label>
+                <input type='radio' name='job-type-select' value='janitor' class='job-type-select' id='job-type-select-janitor' />
+                <div class='job-type-card-container'>
+                    <div class="job-type-image-container">
+                        <img src="<?php echo $baseUrl . "/assets/job-card-image/janitor-image.jpg"?>" alt="janitor" class="job-type-image" />
+                    </div>
+                    <h3>Janitor</h3>
+                </div>
+            </label>
+        </div>
+        <div class="worker-type-modal-card">
+            <label>
+                <input type='radio' name='job-type-select' value='mechanical' class='job-type-select' id='job-type-select-mechanical' />
+                <div class='job-type-card-container'>
+                    <div class="job-type-image-container">
+                        <img src="<?php echo $baseUrl . "/assets/job-card-image/mechanical-image.jpg"?>" alt="janitor" class="job-type-image" />
+                    </div>
+                    <h3>Mechanical</h3>
+                </div>
+            </label>
+        </div>
+        <div class="worker-type-modal-card">
+            <label>
+                <input type='radio' name='job-type-select' value='gardner' class='job-type-select' id='job-type-select-gardner' />
+                <div class='job-type-card-container'>
+                    <div class="job-type-image-container">
+                        <img src="<?php echo $baseUrl . "/assets/job-card-image/gardening-image.jpg"?>" alt="gardner" class="job-type-image" />
+                    </div>
+                    <h3>Gardner</h3>
+                </div>
+            </label>
+        </div>
+    </div>
+    <div class="worker-type-modal-button-container">
+        <button type="button" class="primary-outline-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" id="worker-type-select-button" class="primary-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Confirm</button>
     </div>
 </div>
 
