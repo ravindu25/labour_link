@@ -30,23 +30,6 @@
         </div>
         <div class="search-items">
            <span id="searchResult">
-
-           <!-- <div class="search-item search-item-selected">
-                <i class="fa-solid fa-wrench"></i>
-                <h3>Saman Gunawardhana</h3>
-            </div>
-            <div class="search-item">
-                <i class="fa-solid fa-wrench"></i>
-                <h3>Saman Perera</h3>
-            </div>
-            <div class="search-item">
-                <i class="fa-solid fa-wrench"></i>
-                <h3>Saman Fernando</h3>
-            </div>
-            <div class="search-item">
-                <i class="fa-solid fa-wrench"></i>
-                <h3>Kapila Saman Gunawardhana</h3>
-            </div> -->
            </span>
             
         </div>

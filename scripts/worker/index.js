@@ -6,8 +6,38 @@ let maxPageCount = null;
 let currentTopWorkers = null;
 let currentLocationWorkers = null;
 
+let currentWorkerSection = 'top-workers';
 let workerLocations = [];
 let updatedLocations = [];
+
+document.getElementById('top-worker-section').style.display = 'none';
+document.getElementById('nearby-worker-section').style.display = 'none';
+
+function switchWorkerSection(currentState){
+    const workerSelectDropdown = document.getElementById('worker-select-dropdown-items');
+    const workerSectionSelectButton = document.getElementById('worker-section-select-button');
+    const initialWorkerSection = document.getElementById('initial-worker-section');
+    const topWorkerSection = document.getElementById('top-worker-section');
+    const nearbyWorkerSection = document.getElementById('nearby-worker-section');
+
+    workerSelectDropdown.style.display = 'none';
+
+    if(currentState === 'top-workers'){
+        currentWorkerSection = 'top-workers';
+        workerSectionSelectButton.innerHTML = 'Top workers&nbsp;&nbsp;<i class="fa-solid fa-arrow-down"></i>';
+
+        initialWorkerSection.style.display = 'none';
+        topWorkerSection.style.display = 'block';
+        nearbyWorkerSection.style.display = 'none';
+    } else {
+        currentWorkerSection = 'nearby-workers';
+        workerSectionSelectButton.innerHTML = 'Nearby workers&nbsp;&nbsp;<i class="fa-solid fa-arrow-down"></i>';
+
+        initialWorkerSection.style.display = 'none';
+        topWorkerSection.style.display = 'none';
+        nearbyWorkerSection.style.display = 'block';
+    }
+}
 
 function openLoginModal(){
     const backdrop = document.getElementById('backdrop-modal');
@@ -26,6 +56,10 @@ function closeLoginModal(){
 }
 
 function initialLoad(workerType){
+    const workerSectionSelectButton = document.getElementById('worker-section-select-button');
+    workerSectionSelectButton.style.backgroundColor = 'var(--grey-color-shade)';
+    workerSectionSelectButton.style.color = 'var(--grey-color)';
+
      fetch(`http://localhost/labour_link/api/workers.php?workerType=${workerType}`, {
          method: 'GET',
          headers: { 'Content-Type': 'application/json' }
@@ -73,10 +107,27 @@ function initialLoad(workerType){
                              maxPageCount = pageCount;
 
                              initialWorkerLoad(allWorkers);
+
+                             const workerSectionSelectButton = document.getElementById('worker-section-select-button');
+                             workerSectionSelectButton.addEventListener('click', () => {
+                                 const workerSelectDropdown = document.getElementById('worker-select-dropdown-items');
+
+                                 if(workerSelectDropdown.style.display === 'block'){
+                                     workerSelectDropdown.style.display = 'none';
+                                 } else {
+                                     workerSelectDropdown.style.display = 'block';
+                                 }
+                             });
+
+                             document.getElementById('worker-select-dropdown-top-workers').addEventListener('click', () => { switchWorkerSection('top-workers') });
+                             document.getElementById('worker-select-dropdown-nearby-workers').addEventListener('click', () => { switchWorkerSection('nearby-workers') });
+
+                             workerSectionSelectButton.style.backgroundColor = 'var(--primary-color)';
+                             workerSectionSelectButton.style.color = 'white';
+                             switchWorkerSection('top-workers');
                          })
                  });
              }
-
          })
          .catch(error => console.log(error));
 }
