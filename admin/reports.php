@@ -4,6 +4,11 @@ session_start();
 if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
     header("Location: admin-login.php");
 }
+if($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['term']) && $_GET['term'] == 'getBookingCount') {
+        $sql_get_ongoing_bookings = "SELECT COUNT(Booking_ID) AS BookingCount, Status AS Status FROM Booking WHERE Status = 'Pending' || Status = 'Accepted'";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,10 +112,19 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <canvas id="monthly-booking-types"></canvas>
                     </div>
                 </div>
-                <div class="total-booking-details-graph">
-                    <h1>Total bookings every month</h1>
-                    <canvas id="total-bookings"></canvas>
+                <div class="overall-bookings">
+                    <div class="total-booking-details-graph">
+                        <h1>Total bookings every month</h1>
+                        <canvas id="total-bookings"></canvas>
+                    </div>
+                    <div class="ongoing-bookings">
+                        <h1>Ongoing bookings</h1>
+                        <canvas id ="ongoing-bookings"></canvas>
+                    </div>
                 </div>
+            </div>
+            <div class="feedback-reports">
+                <h1>Feedback report</h1>
             </div>
         </div>
         <?php
@@ -129,4 +143,3 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
 <script src="../scripts/admin/payments.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
-

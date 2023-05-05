@@ -49,7 +49,7 @@
 </div>
 <div class="login-container" id="login-container">
     <div class="login-container-header">
-        <h1>Please login to the to create new booking!</h1>
+        <h1>Please login to create a new booking!</h1>
     </div>
     <div class="login-container-image">
         <img src="../assets/worker/undraw_upload_image_re_svxx.svg" alt="Login to the system" />

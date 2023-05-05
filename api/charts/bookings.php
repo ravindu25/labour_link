@@ -50,8 +50,21 @@
                 }
             }
 
+            $sql_get_ongoing_bookings_divided = "SELECT COUNT(Booking_ID) AS BookingCount, Status AS Status FROM Booking WHERE Status = 'Pending' || Status = 'Accepted' GROUP BY Status";
+
+            $result = $conn->query($sql_get_ongoing_bookings_divided);
+            $fourthResult = array();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $bookingCount = $row['BookingCount'];
+                    $status = $row['Status'];
+                    array_push($fourthResult, array('bookingCount' => $bookingCount, 'status' => $status));
+                }
+            }
+
             header('Content-Type: application/json');
-            echo json_encode(array('firstResult' => $firstResult, 'secondResult' => $secondResult, 'thirdResult' => $thirdResult));
+            echo json_encode(array('firstResult' => $firstResult, 'secondResult' => $secondResult, 'thirdResult' => $thirdResult, 'fourthResult' => $fourthResult));
         }
     }
 

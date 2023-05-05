@@ -1,6 +1,7 @@
 const popularBookingTypes = document.getElementById('popular-booking-types');
 const monthlyBookingTypes = document.getElementById('monthly-booking-types');
 const totalBookings = document.getElementById('total-bookings');
+const ongoingBookings = document.getElementById('ongoing-bookings');
 
 function initialLoad(){
     const currentYear = new Date().getFullYear();
@@ -14,6 +15,7 @@ function initialLoad(){
             loadPopularBookings(popularBookingTypes, data.firstResult);
             loadMonthlyBookings(monthlyBookingTypes, data.secondResult);
             loadTotalBookings(totalBookings, data.thirdResult);
+            loadOngoingBookings(ongoingBookings, data.fourthResult);
         })
         .catch(error => {
             console.log(error);
@@ -45,6 +47,13 @@ function loadPopularBookings(popularBookingTypes, data){
             plugins: {
                 legend: {
                     position: 'bottom',
+                    labels: {
+                        font: {
+                            family: 'Inter',
+                            size: 18,
+                        },
+                        color: 'black'
+                    }
                 },
             }
         }
@@ -102,11 +111,27 @@ function loadMonthlyBookings(monthlyBookingTypes, data){
                     ticks: {
                         min: 0,
                     }
-                }]
+                }],
+                x: {
+                    ticks: {
+                        font: {
+                            family: 'Inter',
+                            size: 20,
+                        },
+                        color: 'black'
+                    }
+                }
             },
             plugins: {
                 legend: {
                     position: 'bottom',
+                    labels: {
+                        font: {
+                            family: 'Inter',
+                            size: 17,
+                        },
+                        color: 'black'
+                    }
                 },
             }
         },
@@ -136,6 +161,45 @@ function loadTotalBookings(totalBookings, data){
                 ticks: {
                     min: 0,
                 }
+            }],
+            x:{
+                ticks: {
+                    font: {
+                        family: 'Inter',
+                        size: 20,
+                    },
+                    color: 'black'
+                }
+            }
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            family: 'Inter',
+                            size: 17,
+                        },
+                        color: 'black'
+                    }
+                },
+            }
+        },
+    });
+}
+
+function loadOngoingBookings(ongoingBookings, data){
+    const chartData = data.map(element => element.bookingCount);
+    const labels = data.map(element => element.status);
+
+    var myDoughnutChart = new Chart(ongoingBookings,{
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: chartData
             }]
         },
         options: {
@@ -143,8 +207,16 @@ function loadTotalBookings(totalBookings, data){
             plugins: {
                 legend: {
                     position: 'bottom',
+                    labels: {
+                        font: {
+                            family: 'Inter',
+                            size: 17,
+                        },
+                        color: 'black'
+                    }
                 },
-            }
+            },
+            radius: [180, 450]
         },
-    });
+    })
 }
