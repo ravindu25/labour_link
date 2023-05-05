@@ -78,7 +78,36 @@ function onPlaceChanged() {
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
     }
+    //Make the pointer draggable
+    marker.setDraggable(true);
 
+    //Update new position of marker when it is dragged to the text input field
+    google.maps.event.addListener(marker, 'dragend', function() {
+        const geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'location': marker.getPosition()}, function(results, status) {
+                    if (status === 'OK') {
+                        if (results[0]) {
+                            // map.setZoom(14);
+                            map.setCenter(marker.getPosition());
+                            updateLocationField(results[0].formatted_address);
+                        } else {
+                            window.alert('No results found');
+                        }
+                    } else {
+                        window.alert('Geocoder failed due to: ' + status);
+                    }
+                });
+    }
+    );
+
+
+
+
+
+}
+
+function updateLocationField(value) {
+    document.getElementById('place-autocomplete').value = value;
 }
 
 function initAutocomplete(){
