@@ -96,7 +96,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 <h5>Logged as <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></h5>
             </div>
             <div class="booking-reports">
-                <h1>Booking reports</h1>
+                <h1>Booking report</h1>
                 <div class="type-based-bookings">
                     <div class="popular-booking-types-graph">
                         <h1>Popularity of booking type</h1>
@@ -106,6 +106,10 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                         <h1>Booking count based on worker types</h1>
                         <canvas id="monthly-booking-types"></canvas>
                     </div>
+                </div>
+                <div class="total-booking-details-graph">
+                    <h1>Total bookings every month</h1>
+                    <canvas id="total-bookings"></canvas>
                 </div>
             </div>
         </div>

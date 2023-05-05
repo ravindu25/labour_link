@@ -1,5 +1,6 @@
 const popularBookingTypes = document.getElementById('popular-booking-types');
 const monthlyBookingTypes = document.getElementById('monthly-booking-types');
+const totalBookings = document.getElementById('total-bookings');
 
 function initialLoad(){
     const currentYear = new Date().getFullYear();
@@ -10,11 +11,9 @@ function initialLoad(){
     })
         .then(response => response.json())
         .then(data => {
-            const labels = data.firstResult.map(element => element.workerType);
-            const pieData = data.firstResult.map(element => element.bookingCount);
-
-            loadPopularBookings(popularBookingTypes, labels, pieData);
-            loadMonthlyBookings(monthlyBookingTypes, data.secondResult)
+            loadPopularBookings(popularBookingTypes, data.firstResult);
+            loadMonthlyBookings(monthlyBookingTypes, data.secondResult);
+            loadTotalBookings(totalBookings, data.thirdResult);
         })
         .catch(error => {
             console.log(error);
@@ -23,8 +22,10 @@ function initialLoad(){
 
 initialLoad();
 
-function loadPopularBookings(popularBookingTypes, labels, pieData){
+function loadPopularBookings(popularBookingTypes, data){
     console.log('Inside the loadPopularBookings ');
+    const labels = data.map(element => element.workerType);
+    const pieData = data.map(element => element.bookingCount);
     new Chart(popularBookingTypes, {
         type: 'pie',
         data: {
@@ -40,6 +41,11 @@ function loadPopularBookings(popularBookingTypes, labels, pieData){
                 y: {
                     beginAtZero: true
                 }
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
             }
         }
     });
@@ -97,7 +103,48 @@ function loadMonthlyBookings(monthlyBookingTypes, data){
                         min: 0,
                     }
                 }]
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
             }
-        }
+        },
+    });
+}
+
+function loadTotalBookings(totalBookings, data){
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    const chartData = data.map(element => element.bookingCount);
+    const labels = data.map(element => monthNames[parseInt(element.month) - 1]);
+
+    var myLineChart = new Chart(totalBookings,{
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Number of bookings',
+                data: chartData,
+                borderWidth: 1
+            }
+            ]
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                }
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+            }
+        },
     });
 }

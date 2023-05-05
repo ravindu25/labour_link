@@ -112,3 +112,21 @@
     font-size: 28px;
     font-weight: normal;
 }
+
+.total-booking-details-graph{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 15px;
+    border: 1px #102699 solid;
+    border-radius: 15px;
+    margin: 10px;
+    width: 60%;
+}
+
+.total-booking-details-graph h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}

@@ -19,9 +19,9 @@
             }
 
             $currentYear = $_GET['year'];
-            $sql_get_montly_booking_count = "SELECT COUNT(Booking_ID) AS BookingCount, MONTH(Start_Date) AS Month, Worker_Type FROM Booking WHERE YEAR(Start_Date) = $currentYear GROUP BY MONTH(Start_Date), Worker_Type ";
+            $sql_get_monthly_booking_count_per_type = "SELECT COUNT(Booking_ID) AS BookingCount, MONTH(Start_Date) AS Month, Worker_Type FROM Booking WHERE YEAR(Start_Date) = $currentYear GROUP BY MONTH(Start_Date), Worker_Type ";
 
-            $result = $conn->query($sql_get_montly_booking_count);
+            $result = $conn->query($sql_get_monthly_booking_count_per_type);
             $secondResult = array();
 
             if ($result->num_rows > 0) {
@@ -37,9 +37,21 @@
                 }
             }
 
+            $sql_get_total_booking_count = "SELECT COUNT(Booking_ID) AS BookingCount, MONTH(Start_Date) AS Month FROM Booking WHERE YEAR(Start_Date) = $currentYear GROUP BY MONTH(Start_Date) ORDER BY MONTH(Start_Date) ASC";
+
+            $result = $conn->query($sql_get_total_booking_count);
+            $thirdResult = array();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $bookingCount = $row['BookingCount'];
+                    $monthNumber = $row['Month'];
+                    array_push($thirdResult, array('month' => $monthNumber, 'bookingCount' => $bookingCount));
+                }
+            }
+
             header('Content-Type: application/json');
-            // echo json_encode('Hello');
-            echo json_encode(array('firstResult' => $firstResult, 'secondResult' => $secondResult));
+            echo json_encode(array('firstResult' => $firstResult, 'secondResult' => $secondResult, 'thirdResult' => $thirdResult));
         }
     }
 
