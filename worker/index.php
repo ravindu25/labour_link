@@ -10,7 +10,7 @@
 
     $logged = 'false';
     if(isset($_SESSION['user_type'])) {
-        if ($_SESSION['user_type'] == 'Worker' || $_SESSION['user_type'] == 'Customer') {
+        if ($_SESSION['user_type'] == 'Customer') {
             $logged = 'true';
         }
     }
@@ -274,11 +274,143 @@
 </section>
 <section class="main-content">
     <div class="worker-section">
-        <h1 class="worker-section-title" id="top-worker-section-title">Top workers</h1>
-        <div class="worker-card-container" id="top-worker-card-container">
-            <?php
-                for($i = 0; $i < 4; $i++) {
+        <div class="worker-section-header">
+<!--            <h1 class="worker-section-title" id="worker-section-title"></h1>-->
+            <div class="dropdown" id="dropdown">
+                <button type="button" class="worker-section-select-button" id="worker-section-select-button">Top workers&nbsp;&nbsp;<i class="fa-solid fa-arrow-down"></i></button>
+                <div class="dropdown-items" id="worker-select-dropdown-items">
+                    <div class="dropdown-item" id="worker-select-dropdown-top-workers"><i class="fa-solid fa-star"></i>&nbsp;&nbsp;Top workers
+                    </div>
+                    <div class="dropdown-item" id="worker-select-dropdown-nearby-workers"><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;Nearby workers
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="worker-section" id="initial-worker-section">
+            <div class="worker-card-container" id="initial-worker-card-container">
+                <?php
+                    require_once('../db.php');
+                    $sql_get_workers = "select * from User inner join Worker on User.User_ID = Worker.Worker_ID";
+
+                    if($workerType === 'plumber') {
+                        $sql_get_workers = $sql_get_workers . " inner join Plumber ON Worker.Worker_ID = Plumber.Plumber_ID";
+                    } else if($workerType === 'carpenter'){
+                        $sql_get_workers = $sql_get_workers . " inner join Carpenter ON Worker.Worker_ID = Carpenter.Carpenter_ID";
+                    } else if($workerType === 'electrician'){
+                        $sql_get_workers = $sql_get_workers . " inner join Electrician ON Worker.Worker_ID = Electrician.Electrician_ID";
+                    } else if($workerType === 'painter'){
+                        $sql_get_workers = $sql_get_workers . " inner join Painter ON Worker.Worker_ID = Painter.Painter_ID";
+                    } else if($workerType === 'mason'){
+                        $sql_get_workers = $sql_get_workers . " inner join Mason ON Worker.Worker_ID = Mason.Mason_ID";
+                    } else if($workerType === 'janitor'){
+                        $sql_get_workers = $sql_get_workers . " inner join Janitor ON Worker.Worker_ID = Janitor.Janitor_ID";
+                    } else if($workerType === 'mechanic'){
+                        $sql_get_workers = $sql_get_workers . " inner join Mechanic ON Worker.Worker_ID = Mechanic.Mechanic_ID";
+                    } else if($workerType === 'gardener'){
+                        $sql_get_workers = $sql_get_workers . " inner join Gardener ON Worker.Worker_ID = Gardener.Gardener_ID";
+                    }
+
+                    $sql_get_workers = $sql_get_workers . " order by Worker.Current_Rating desc limit 4";
+
+                    $result = $conn->query($sql_get_workers);
+                    $resultCount = $result->num_rows;
+
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+                            $workerId = $row['User_ID'];
+                            $fullName = $row['First_Name'] . " " . $row['Last_Name'];
+                            $email = $row['Email'];
+                            $contactNum = $row['Contact_No'];
+                            $nic = $row['NIC'];
+                            $dob = $row['DOB'];
+                            $address = $row['User_Address'];
+                            $city = $row['City'];
+                            $currentRating = $row['Current_Rating'];
+
+                            $workerCategories = getAllCategories($conn, $workerId);
+                            $workerCatergoriesHtml = "";
+
+                            for($i = 0; $i < count($workerCategories); $i++){
+                                $workerCatergoriesHtml .= "
+                                <div class='worker-type-badge'>
+                                    <h5>$workerCategories[$i]</h5>
+                                </div>";
+                            }
+
+
+                            $profileId = rand(1, 3) + 1;
+
+                            $tempRating = 0;
+                            $ratingHtml = "";
+
+                            while($tempRating < $currentRating){
+                                if($tempRating + 1 <= $currentRating){
+                                    $ratingHtml .= "<i class='fa-solid fa-star'></i>";
+                                    $tempRating += 1;
+                                } else if ($tempRating + 0.5 <= $currentRating){
+                                    $ratingHtml .= "<i class='fa-solid fa-star-half-stroke'></i>";
+                                    $tempRating += 0.5;
+                                } else {
+                                    break;
+                                }
+                            }
+
+                            $tempRating = ceil($tempRating);
+
+                            while($tempRating < 5){
+                                $ratingHtml .= "<i class='fa-regular fa-star'></i>";
+                                $tempRating += 1;
+                            }
+
+                            $bookingButtonHtml = "";
+                            if($logged){
+                                $bookingButtonHtml = "<button type='button' class='booking-button' onclick='openLoginModal()'><i class='fa-solid fa-check'></i>&nbsp;&nbsp;Book now!</button>";
+                            } else {
+                                $bookingButtonHtml = "<button type='button' class='booking-button' onclick='openBookingModal($workerId})'><i class='fa-solid fa-check'></i>&nbsp;&nbsp;Book now!</button>";
+                            }
+
+                            echo "
+                            <div class='worker-card'>
+                                <h1 class='worker-card-title'>$fullName</h1>
+                                <div class='worker-card-star-container'>
+                                    $ratingHtml
+                                    &nbsp;&nbsp; $currentRating
+                                </div>
+                                <div class='worker-image'>
+                                    <img src='../assets/worker/profile-images/worker-$profileId.jpg' alt='worker-profile'>
+                                </div>
+                                <div class='worker-card-location-row'>
+                                    <h3><i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i>&nbsp;&nbsp;$city</h3>
+                                </div>
+                                <div class='worker-card-types-row'>
+                                   $workerCatergoriesHtml
+                                </div>
+                                <div class='worker-card-button-container'>
+                                    <a href='../worker/view-worker-profile.php?workerId=$workerId'<button type='button' class='view-profile-button'>Profile</button></a>
+                                    $bookingButtonHtml
+                                </div>
+                            </div>
+                            ";
+                        }
+                    }
+
+                ?>
+            </div>
+            <div class="button-container">
+                <?php
                     echo "
+                    <button type='button' class='disabled-button' id='top-workers-button' disabled>Load more&nbsp;
+                        <i class='fa-solid fa-spinner'></i>
+                    </button>";
+                ?>
+            </div>
+        </div>
+        <div class="worker-section" id="top-worker-section">
+            <div class="worker-card-container" id="top-worker-card-container">
+                <?php
+                    for($i = 0; $i < 4; $i++) {
+                        echo "
                     <div class='worker-loading-card'>
                         <div class='worker-loading-card-title'></div>
                         <div class='worker-loading-card-star-container'></div>
@@ -288,19 +420,18 @@
                         <div class='worker-loading-card-button-container'></div>
                             
                     </div>";
-                }
-            ?>
+                    }
+                ?>
+            </div>
+            <div class="button-loading-container" id="top-worker-button-container">
+                <div class="button-loading-state"></div>
+            </div>
         </div>
-        <div class="button-loading-container" id="top-worker-button-container">
-            <div class="button-loading-state"></div>
-        </div>
-    </div>
-    <div class="worker-section" id="worker-section">
-        <h1 class="worker-section-title">Workers nearby</h1>
-        <div class="worker-card-container" id="worker-nearby-card-container">
-            <?php
-                for($i = 0; $i < 4; $i++) {
-                    echo "
+        <div class="worker-section" id="nearby-worker-section">
+            <div class="worker-card-container" id="worker-nearby-card-container">
+                <?php
+                    for($i = 0; $i < 4; $i++) {
+                        echo "
                     <div class='worker-loading-card'>
                         <div class='worker-loading-card-title'></div>
                         <div class='worker-loading-card-star-container'></div>
@@ -310,13 +441,14 @@
                         <div class='worker-loading-card-button-container'></div>
                             
                     </div>";
-                }
-            ?>
-         
-        
-        </div>
-        <div class="button-loading-container" id="nearby-worker-button-container">
-            <div class="button-loading-state"></div>
+                    }
+                ?>
+
+
+            </div>
+            <div class="button-loading-container" id="nearby-worker-button-container">
+                <div class="button-loading-state"></div>
+            </div>
         </div>
     </div>
     
@@ -388,6 +520,63 @@
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/worker/index.js" type="text/javascript"></script>
 <script src="../scripts/customer/create-booking.js" type="text/javascript"></script>
-<?php echo "<script>initialLoad('$workerType')</script>" ?>
+<?php
+    echo "<script>initialLoad('$workerType')</script>";
+
+    function getAllCategories($conn, $workerId){
+        $sql_statement = "SELECT Worker.Worker_ID, P.Plumber_ID, C.Carpenter_ID, E.Electrician_ID, P2.Painter_ID,
+        M.Mason_ID, J.Janitor_ID, M2.Mechanic_ID, Gardener_ID
+                    FROM Worker LEFT JOIN Plumber P on Worker.Worker_ID = P.Plumber_ID
+                    LEFT JOIN Carpenter C on Worker.Worker_ID = C.Carpenter_ID
+                    LEFT JOIN Electrician E on Worker.Worker_ID = E.Electrician_ID
+                    LEFT JOIN Painter P2 on Worker.Worker_ID = P2.Painter_ID
+                    LEFT JOIN Mason M on Worker.Worker_ID = M.Mason_ID
+                    LEFT JOIN Janitor J on Worker.Worker_ID = J.Janitor_ID
+                    LEFT JOIN Mechanic M2 on Worker.Worker_ID = M2.Mechanic_ID
+                    LEFT JOIN Gardener G on Worker.Worker_ID = G.Gardener_ID WHERE Worker_ID = $workerId";
+
+        $result = $conn->query($sql_statement);
+
+        $workerCategories = array();
+
+        if($result->num_rows){
+            while($row = $result->fetch_assoc()){
+                if($row['Plumber_ID'] != null){
+                    array_push($workerCategories, "Plumber");
+                }
+
+                if($row['Carpenter_ID'] != null){
+                    array_push($workerCategories, "Carpenter");
+                }
+
+                if($row['Electrician_ID'] != null){
+                    array_push($workerCategories, "Electrician");
+                }
+
+                if($row['Painter_ID'] != null){
+                    array_push($workerCategories, "Painter");
+                }
+
+                if($row['Mason_ID'] != null){
+                    array_push($workerCategories, "Mason");
+                }
+
+                if($row['Janitor_ID'] != null){
+                    array_push($workerCategories, "Janitor");
+                }
+
+                if($row['Mechanic_ID'] != null){
+                    array_push($workerCategories, "Mechanic");
+                }
+
+                if($row['Gardener_ID'] != null){
+                    array_push($workerCategories, "Gardener");
+                }
+            }
+        }
+
+        return $workerCategories;
+    }
+?>
 </body>
 </html>
