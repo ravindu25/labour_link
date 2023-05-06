@@ -67,6 +67,8 @@ feedbackSearchButton.addEventListener('click', () => {
                 tempSearchFeedbacks.push(feedback);
             } else if (feedback.workerName.toLowerCase().includes(searchTerm)) {
                 tempSearchFeedbacks.push(feedback);
+            } else if (feedback.customerName.toLowerCase().includes(searchTerm)) {
+                tempSearchFeedbacks.push(feedback);
             }
         });
 
