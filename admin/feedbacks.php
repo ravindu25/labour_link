@@ -37,6 +37,118 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         <img src="../assets/error-image.png" alt="error-image" />
     </div>
 </div>
+<div class="feedback-details-container" id="feedback-details-container">
+    <div class="feedback-details-header">
+        <h1>All the details about the feedback</h1>
+    </div>
+    <div class="feedback-details-content">
+        <div class="feedback-details-profile-details">
+            <div class="feedback-details-profile-container">
+                <img src='../assets/worker/profile-images/worker-1.jpg' id="feedback-details-worker-image" alt='worker-profile' />
+                <a href="#" id="feedback-details-worker-details-link" style="cursor: pointer">
+                    <h1 id="feedback-details-worker-name">Chaminda Gunathilaka&nbsp;&nbsp;<i class="fa-solid fa-arrow-up-right-from-square"></i></h1>
+                </a>
+                <span class="blue-badge" id="feedback-details-booking-date">Feedback created date 2023-04-25</span>
+            </div>
+        </div>
+        <div class="feedback-details-rating-observations">
+            <div class="feedback-details-rating-container">
+                <div id="feedback-details-rating-header" class="feedback-details-rating-header">
+                    <h1>Worker rating</h1>
+                </div>
+                <div class="feedback-details-rating-content">
+                    <div class="feedback-details-rating-item">
+                        <div class="feedback-details-rating-item-header">
+                            <h3>Punctuality</h3>
+                            <h3 id="feedback-details-progress-bar-punctuality-text" style="color: #A6A6A6">3 out of 5</h3>
+                        </div>
+                        <div class="recent-feedback-rating-bar">
+                            <div class='recent-feedback-rating-bar-progress' id="feedback-details-progress-bar-punctuality" style='width: calc(50%)'></div>
+                        </div>
+                    </div>
+                    <div class="feedback-details-rating-item">
+                        <div class="feedback-details-rating-item-header">
+                            <h3>Efficiency</h3>
+                            <h3 id="feedback-details-progress-bar-efficiency-text" style="color: #A6A6A6">3 out of 5</h3>
+                        </div>
+                        <div class="recent-feedback-rating-bar">
+                            <div class='recent-feedback-rating-bar-progress' id="feedback-details-progress-bar-efficiency" style='width: calc(50%)'></div>
+                        </div>
+                    </div>
+                    <div class="feedback-details-rating-item">
+                        <div class="feedback-details-rating-item-header">
+                            <h3>Professionalism</h3>
+                            <h3 id="feedback-details-progress-bar-professionalism-text" style="color: #A6A6A6">3 out of 5</h3>
+                        </div>
+                        <div class="recent-feedback-rating-bar">
+                            <div class='recent-feedback-rating-bar-progress' id="feedback-details-progress-bar-professionalism" style='width: calc(50%)'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="feedback-details-observations-container">
+                <div class="feedback-details-observations-header">
+                    <h1 id="feedback-details-observations-header">Extra observations</h1>
+                </div>
+                <div class="feedback-details-extra-observations" id="feedback-details-extra-observations">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="feedback-details-comment-container" id="feedback-details-comment-container">
+        <div class="feedback-details-comment-header" id="feedback-details-comment-header">
+            <h1 id="feedback-details-comment-heading">Written feedback</h1>
+        </div>
+        <p id="feedback-details-comment-text"></p>
+    </div>
+    <div class="feedback-details-button-container">
+        <button class="primary-outline-button" onclick="hideFeedbackDetails()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Close</button>
+        <button class="primary-button" id="feedback-details-booking-button"><i class="fa-solid fa-arrow-turn-up"></i>&nbsp;&nbsp;View booking</button>
+    </div>
+</div>
+<div class="booking-details-container" id="booking-details-container">
+    <div class="booking-details-scroll-wrapper">
+        <div class="booking-details-title">
+            <h1>Current Status of Your <u>Booking</u></h1>
+        </div>
+        <div class="status-container" id="booking-details-status-container"></div>
+        <div class="details-container">
+            <div class="details-row">
+                <h4>Job type</h4>
+                <h4 class="details-value" id="booking-details-job-type"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Worker</h4>
+                <h4 class="details-value" id="booking-details-worker-name"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Start date</h4>
+                <h4 class="details-value" id="booking-details-start-date"></h4>
+            </div>
+            <div class="remaining-time-container" id="remaining-time-container">
+                <h4>This booking will be closed in</h4>
+                <h1 class="countdown-text" id="booking-details-countdown"></h1>
+            </div>
+            <div class="payment-method-container">
+                <div class="payment-image-container">
+                    <h4>Payment Method</h4>
+                    <div class="payment-image-card">
+                        <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
+                             alt="payment method"/>
+                        <h4 id="payment-method-text">Online payments</h4>
+                    </div>
+                </div>
+                <div class="payment-details-container">
+                    <h3>Amount that needs to be paid</h3>
+                    <h2>Rs. 17500.00</h2>
+                </div>
+            </div>
+            <div class="back-button-container">
+                <button type="button" class="primary-button" onclick="closeBookingDetailsModal()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">
@@ -111,18 +223,95 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         </div>
         <div class="recent-feedback-charts-container">
             <div class="recent-feedback-chart-container">
+                <h3>Number of feedbacks(current month)</h3>
                 <canvas id="chart-all-feedbacks"></canvas>
-                <h3>Number of feedbacks with respect to date(current month)</h3>
             </div>
             <div class="recent-feedback-chart-container">
-                <canvas id="chart-feedback-skipping"></canvas>
                 <h3>Customers feedback skipping rate</h3>
+                <canvas id="chart-feedback-skipping"></canvas>
             </div>
         </div>
 
-
+        <!-- Feedbacks table section -->
+        <div class="recent-feedbacks-container" id="recent-feedbacks-container"></div>
+        <div class="feedback-search" id="feedback-search-container">
+            <div class="feedback-search-title">
+                <h1>Search for Feedbacks</h1>
+                <form action="" method="POST">
+                    <div class="feedback-search-input-container">
+                        <label for="feedback-search">Search (Worker name etc)</label>
+                        <div class="feedback-search-input-field">
+                            <input type="text" id="feedback-search" class="feedback-search-input" name="users-search"/>
+                            <button type="button" class="search-icon-small" id="feedback-search-input-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
+        <div class="recent-payments-container" id="feedback-search-table-container">
+            <table class="main-table">
+                <thead>
+                <tr class="main-tr">
+                    <th class="main-th" style="width: 40%;">
+                        <div class="table-heading-container">Comment&nbsp;<button class="sort-button" id="sort-writtenFeedback-button" onclick="sortFeedbacks('writtenFeedback')"><i
+                                        class="fa-solid fa-arrow-down"></i></button>
+                        </div>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">Worker Name&nbsp;<button class="sort-button" id="sort-workerName-button" onclick="sortFeedbacks('workerName')"><i
+                                        class="fa-solid fa-arrow-down"></i></button>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">Customer Name&nbsp;<button class="sort-button" id="sort-customerName-button" onclick="sortFeedbacks('customerName')"><i
+                                        class="fa-solid fa-arrow-down"></i></button>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">Commented Date&nbsp;<button class="sort-button" id="sort-createdTimestamp-button" onclick="sortFeedbacks('createdTimestamp')"><i
+                                        class="fa-solid fa-arrow-down"></i></button>
+                    </th>
+                    <th class="main-th">More actions</th>
+                </tr>
+                </thead>
+                <tbody id="feedback-details-body-table">
 
+                <?php
+                    for($i = 0; $i < 5; $i++){
+                        echo "
+                        <tr class='main-tr'>
+                    <td class='main-td' style='text-align: left;'>
+                        <div class='loading-div' style='width: 75%; height: 20px;'></div>
+                        <br />
+                        <div class='loading-div' style='width: 50%; height: 20px;'></div>
+                    </td>
+                    <td class='main-td'>
+                        <div class='loading-div' style='width: 50%; height: 40px;'></div>
+                    </td>
+                    <td class='main-td'>
+                        <div class='loading-div' style='width: 50%; height: 40px;'></div>
+                    </td>
+                    <td class='main-td'>
+                        <div class='more-button-container'>
+                            <div class='loading-div' style='width: 30%; height: 40px;'></div>
+                            &nbsp;&nbsp;
+                            <div class='loading-div' style='width: 30%; height: 40px;'></div>
+                        </div>
+                    </td>
+                </tr>
+                        ";
+                    }
+                ?>
+
+
+                </tbody>
+            </table>
+            <div class="pagination-container" id="feedback-details-pagination-container">
+                <button class="pagination-button" id="feedback-back-button" onclick="goToPreviousFeedbackTablePage()"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button" id="feedback-back-number-button"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current" id="feedback-current-number-button"><i class="fa-solid fa-2"></i></button>
+                <button class="pagination-button" id="feedback-next-number-button"><i class="fa-solid fa-3"></i></button>
+                <button class="pagination-button" id="feedback-next-button" onclick="goToNextFeedbackTablePage()"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
         <?php
         echo '<script src="../scripts/admin/loader.js" type="text/javascript"></script>';
         echo '<script>closeLoader()</script>';
