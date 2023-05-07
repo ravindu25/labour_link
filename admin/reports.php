@@ -7,7 +7,16 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
 if($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['term']) && $_GET['term'] == 'getBookingCount') {
         $sql_get_ongoing_bookings = "SELECT COUNT(Booking_ID) AS BookingCount, Status AS Status FROM Booking WHERE Status = 'Pending' || Status = 'Accepted'";
-    }
+        $result = $conn->query($sql_get_ongoing_bookings);
+        $resultBookings = array();
+        $resultCount = $result->num_rows;
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $bookingCount = $row['BookingCount'];
+                array_push($resultBookings, array('bookingCount' => $bookingCount));
+            }
+            }
+        }
 }
 ?>
 <!DOCTYPE html>
@@ -117,14 +126,20 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
                         <h1>Total bookings every month</h1>
                         <canvas id="total-bookings"></canvas>
                     </div>
-                    <div class="ongoing-bookings">
-                        <h1>Ongoing bookings</h1>
+                    <div class="ongoing-bookings-graph">
+                        <h1>Ongoing <?php echo $sql_get_ongoing_bookings ?> bookings</h1>
                         <canvas id ="ongoing-bookings"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="feedback-reports">
-                <h1>Feedback report</h1>
+            <div class="user-reports">
+                <h1>User report</h1>
+                <div class="user-reports-graphs">
+                    <div class="classification-of-users-graph">
+                        <h1>Classification of Users in the system</h1>
+                        <canvas id = "classification-of-users"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
         <?php

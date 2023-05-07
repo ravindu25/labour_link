@@ -2,6 +2,7 @@ const popularBookingTypes = document.getElementById('popular-booking-types');
 const monthlyBookingTypes = document.getElementById('monthly-booking-types');
 const totalBookings = document.getElementById('total-bookings');
 const ongoingBookings = document.getElementById('ongoing-bookings');
+const userTypes = document.getElementById('classification-of-users');
 
 function initialLoad(){
     const currentYear = new Date().getFullYear();
@@ -16,6 +17,18 @@ function initialLoad(){
             loadMonthlyBookings(monthlyBookingTypes, data.secondResult);
             loadTotalBookings(totalBookings, data.thirdResult);
             loadOngoingBookings(ongoingBookings, data.fourthResult);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+    fetch(`http://localhost/labour_link/api/charts/users.php?term=getUserCount&year=${currentYear}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then(response => response.json())
+        .then(data => {
+            loadUserTypes(userTypes, data.fifthResult);
         })
         .catch(error => {
             console.log(error);
@@ -219,4 +232,44 @@ function loadOngoingBookings(ongoingBookings, data){
             radius: [180, 450]
         },
     })
+}
+
+function loadUserTypes(userTypes, data){
+    const labels = data.map(element => element.type);
+    const barData = data.map(element => element.userCount);
+    new Chart(userTypes, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Number of users',
+                data: barData,
+                borderWidth: 1
+            }
+            ]
+        },
+        options: {
+            indexAxis: 'y',
+            // Elements options apply to all of the options unless overridden in a dataset
+            // In this case, we are setting the border of each horizontal bar to be 2px wide
+            elements: {
+                bar: {
+                    borderWidth: 2,
+                }
+            },
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        font: {
+                            family: 'Inter',
+                            size: 17,
+                        },
+                        color: 'black'
+                    }
+                },
+            }
+        }
+    });
 }
