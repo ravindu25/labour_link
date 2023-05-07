@@ -1,23 +1,19 @@
 <?php
-session_start();
-//if not logged in redirect to login page
-if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
-    header("Location: admin-login.php");
-}
-if($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['term']) && $_GET['term'] == 'getBookingCount') {
-        $sql_get_ongoing_bookings = "SELECT COUNT(Booking_ID) AS BookingCount, Status AS Status FROM Booking WHERE Status = 'Pending' || Status = 'Accepted'";
-        $result = $conn->query($sql_get_ongoing_bookings);
-        $resultBookings = array();
-        $resultCount = $result->num_rows;
-        if($result->num_rows > 0){
-            while($row = $result->fetch_assoc()){
-                $bookingCount = $row['BookingCount'];
-                array_push($resultBookings, array('bookingCount' => $bookingCount));
-            }
-            }
+    require_once('../db.php');
+    session_start();
+    //if not logged in redirect to login page
+    if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
+        header("Location: admin-login.php");
+    }
+    $sql_get_ongoing_bookings = "SELECT COUNT(Booking_ID) AS BookingCount, Status AS Status FROM Booking WHERE Status = 'Pending' || Status = 'Accepted'";
+    $result = $conn->query($sql_get_ongoing_bookings);
+    $resultBookingsCount = 0;
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $resultBookingsCount = $row['BookingCount'];
         }
-}
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +36,14 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
 </head>
 <body>
 <div class="backdrop-modal" id="backdrop-modal">
+</div>
+<div class="error-message-container" id="error-message-container">
+    <div class="error-message-heading">
+        <h1>Sorry, an unexpected error has occurred. Please try again later or contact customer support for assistance</h1>
+    </div>
+    <div class="error-message-image">
+        <img src="../assets/error-image.png" alt="error-image" />
+    </div>
 </div>
 <div class="backdrop-modal" id="admin-backdrop-modal">
 </div>
@@ -127,7 +131,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
                         <canvas id="total-bookings"></canvas>
                     </div>
                     <div class="ongoing-bookings-graph">
-                        <h1>Ongoing <?php echo $sql_get_ongoing_bookings ?> bookings</h1>
+                        <h1>Ongoing <?php echo $resultBookingsCount ?> bookings</h1>
                         <canvas id ="ongoing-bookings"></canvas>
                     </div>
                 </div>

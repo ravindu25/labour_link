@@ -17,28 +17,37 @@ function initialLoad(){
             loadMonthlyBookings(monthlyBookingTypes, data.secondResult);
             loadTotalBookings(totalBookings, data.thirdResult);
             loadOngoingBookings(ongoingBookings, data.fourthResult);
-        })
-        .catch(error => {
-            console.log(error);
-        });
 
-    fetch(`http://localhost/labour_link/api/charts/users.php?term=getUserCount&year=${currentYear}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-    })
-        .then(response => response.json())
-        .then(data => {
-            loadUserTypes(userTypes, data.fifthResult);
+            fetch(`http://localhost/labour_link/api/charts/users.php?term=getUsersCount`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    loadUserTypes(userTypes, data.fifthResult);
+                })
+                .catch(error => {
+                    const backdrop = document.getElementById('modal-backdrop');
+                    const errorMessageContainer = document.getElementById('error-message-container');
+                    console.log(error);
+
+                    backdrop.style.visibility = 'visible';
+                    errorMessageContainer.style.visibility = 'visible';
+                });
         })
         .catch(error => {
+            const backdrop = document.getElementById('modal-backdrop');
+            const errorMessageContainer = document.getElementById('error-message-container');
             console.log(error);
+
+            backdrop.style.visibility = 'visible';
+            errorMessageContainer.style.visibility = 'visible';
         });
 }
 
 initialLoad();
 
 function loadPopularBookings(popularBookingTypes, data){
-    console.log('Inside the loadPopularBookings ');
     const labels = data.map(element => element.workerType);
     const pieData = data.map(element => element.bookingCount);
     new Chart(popularBookingTypes, {
@@ -235,8 +244,12 @@ function loadOngoingBookings(ongoingBookings, data){
 }
 
 function loadUserTypes(userTypes, data){
-    const labels = data.map(element => element.type);
-    const barData = data.map(element => element.userCount);
+    const labels = data.map(element => element.Type);
+    const barData = data.map(element => parseInt(element.UserCount));
+
+    console.log(labels);
+    console.log(barData);
+
     new Chart(userTypes, {
         type: 'bar',
         data: {

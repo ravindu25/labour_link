@@ -2,7 +2,7 @@
 require_once('../../db.php');
 
 if($_SERVER['REQUEST_METHOD'] === 'GET') {
-if (isset($_GET['term']) && $_GET['term'] == 'getBookingCount') {
+if (isset($_GET['term']) && $_GET['term'] == 'getUsersCount') {
     $sql_get_user_count = "SELECT COUNT(User_ID) AS UserCount, Type FROM User GROUP BY Type";
 
     $result = $conn->query($sql_get_user_count);
