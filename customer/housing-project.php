@@ -207,7 +207,9 @@
             if($result->num_rows > 0){
                 while($row = $result->fetch_assoc()){
                     $address = $row['Address'];
-                    $verified = $row['Paid'];
+                    $paid = $row['Paid'];
+                    $houseID = $row['House_ID'];
+                    $payment_due_id = 001;
                 }
             }
         ?>
@@ -217,15 +219,21 @@
                 <?php echo "<h5><i class='fa-solid fa-location-dot' style='color: var(--primary-bright-color)'></i>&nbsp;&nbsp;Address - $address</h5>" ?>
                 <?php
                     if($paid == 0){
-                        echo "<button type='button' class='primary-button'><i class='fa-solid fa-cart-shopping'></i>&nbsp;&nbsp;Add payment</button>";
+                        echo "<button type='button' class='primary-button' onclick='payNow($payment_due_id, $houseID, 500, \"$address\")'><i class='fa-solid fa-cart-shopping'></i>&nbsp;&nbsp;Add payment</button>";
                     }
                 ?>
             </div>
         </div>
-        <div class="project-progress-container">
+        <?php
+        if($paid==1){
+            echo(' <div class="project-progress-container">
             <h1>Current progress</h1>
-            <div class="project-progress-row">
+            <div class="project-progress-row">' );
+        }
+        ?>
                 <?php
+                    if($paid == 1){
+                       
                     $sql_get_completed_tasks = "SELECT COUNT(Job_Type_ID) AS Completed_Count FROM Job WHERE House_ID = $houseId AND Completion_Flag = 1";
 
                     $numCompleted = 0;
@@ -259,15 +267,23 @@
                         </div>
                         <h5>Completed</h5>
                         ";
-                    }
+                    };
+                }
+       
                 ?>
 
             </div>
         </div>
+    
         <div class="project-tasks-container">
-            <h1>Ongoing tasks</h1>
+            <?php
+            if(paid==1){
+                echo('<h1>Ongoing tasks</h1>');
+            }
+            
+            ?>
             <div class="project-tasks-list">
-            <?php if($verified == true){
+            <?php if($paid == true){
                 $sql_get_all_tasks = "SELECT Job.*, Job_Type.* FROM Job INNER JOIN Job_Type ON Job.Job_Type_ID = Job_Type.Job_Type_ID WHERE Job.House_ID = $houseId ORDER BY Completion_Flag";
 
                 $result = $conn->query($sql_get_all_tasks);
@@ -357,4 +373,73 @@
 ?>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/customer/housing-project.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
+<script>
+
+    function payNow(payment_due_id, house_id, amount, house_address){
+        var merchant_id = "1221879";    
+        //Call AJAX function to get the hash value
+        var xmlhttp = new XMLHttpRequest();
+         xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var hash_val = this.responseText;
+            // Put the payment variables here
+                var payment = {
+                    "sandbox": true,
+                    "merchant_id": merchant_id,    // Replace your Merchant ID
+                    "return_url": undefined,     // Important
+                    "cancel_url": undefined,     // Important
+                    "notify_url": "https://ravinduwegiriya.com/authorize_payment_house.php",
+                    "order_id": house_id,
+                    "items": "Payment to Housing Project at "+house_address,
+                    "amount": amount,
+                    "currency": "LKR",
+                    "hash": hash_val, // *Replace with generated hash retrieved from backend
+                    "first_name": "Saman",
+                    "last_name": "Perera",
+                    "email": "samanp@gmail.com",
+                    "phone": "0771234567",
+                    "address": "No.1, Galle Road",
+                    "city": "Colombo",
+                    "country": "Sri Lanka"
+                };
+                payhere.startPayment(payment);
+                
+         }
+        
+        }
+        xmlhttp.open("POST", "http://localhost/labour_link/customer/gethash.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //send order_id and amount
+        xmlhttp.send("order_id="+house_id+"&amount="+amount);
+        
+        
+
+        
+    }
+    // Payment completed. It can be a successful failure.
+    payhere.onCompleted = function onCompleted(orderId) {
+        console.log("Payment completed. OrderID:" + orderId);
+        //Reload Window
+        window.location.reload();
+
+    };
+
+    // Payment window closed
+    payhere.onDismissed = function onDismissed() {
+        // Note: Prompt user to pay again or show an error page
+        console.log("Payment dismissed");
+    };
+
+    // Error occurred
+    payhere.onError = function onError(error) {
+        // Note: show an error page
+        console.log("Error:"  + error);
+    };
+
+
+
+
+   
+</script>
 </body>
