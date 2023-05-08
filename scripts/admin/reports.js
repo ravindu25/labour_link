@@ -131,7 +131,7 @@ function loadMonthlyBookings(monthlyBookingTypes, data){
         options: {
             barValueSpacing: 20,
             scales: {
-                yAxes: {
+                y: {
                     ticks: {
                         min: 0,
                     }
@@ -185,7 +185,7 @@ function loadTotalBookings(totalBookings, data){
         options: {
             responsive: true,
             scales: {
-                yAxes: {
+                y: {
                     ticks: {
                         min: 0,
                     }

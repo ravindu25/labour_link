@@ -95,6 +95,127 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 <h1>Control panel for managing <u>Bookings</u></h1>
                 <h5>Logged as <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></h5>
             </div>
+            <div class="recent-bookings">
+                <div class="recent-bookings-title">
+                    <h1>Recently made Bookings</h1>
+                </div>
+                <div class="recent-bookings-container">
+                    <?php
+                    require_once('../db.php');
+
+                    // Getting customer id from the session
+                    $customer_id = $customer_id = $_SESSION['user_id'];
+                    $sql_get_bookings = "select Booking.*, User.First_Name, User.Last_Name from Booking inner join User on Booking.Worker_ID = User.User_ID ORDER BY Booking.Created_Date DESC LIMIT 5";
+
+
+                    $result = $conn->query($sql_get_bookings);
+
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+                            $booking_id = $row['Booking_ID'];
+                            $worker_type = $row['Worker_Type'];
+                            $worker_name = $row['First_Name'] . " " . $row['Last_Name'];
+                            $start_date = date("d M Y", strtotime($row['Start_Date']));
+                            $statusValue = $row['Status'];
+                            $sql_get_customer_name = "SELECT * from User where User_ID = {$row['Customer_ID']}";
+                            $result_customer_name = $conn->query($sql_get_customer_name);
+                            $row_customer_name = $result_customer_name->fetch_assoc();
+                            $customer_name = $row_customer_name['First_Name'] . " " . $row_customer_name['Last_Name'];
+
+
+                            $button = '';
+                            switch($statusValue){
+                                case 'Pending':
+                                    $button = '<button class="pending-button">Pending</button>';
+                                    break;
+                                case 'Completed':
+                                    $button = '<button class="completed-button">Completed</button>';
+                                    break;
+                                case 'Rejected':
+                                    $button = '<button class="rejected-button">Rejected</button>';
+                                    break;
+                                case 'Accepted':
+                                    $button = '<button class="in-pogress-button">Accepted</button>';
+                                    break;
+                            }
+
+                            echo "
+                                <div class='booking-card' onclick='showBookingDetails($booking_id)'>
+                                    <div class='card-text'>
+                                        <h3>$worker_type</h3>
+                                        <p>Work by</p>
+                                        <h4>$worker_name</h4>
+                                        <p>Customer</p>
+                                        <h4>$customer_name</h4>
+                                    </div>
+                                    <div class='booking-card-button-row'>
+                                        <div class='badge-container'>
+                                            <div class='blue-badge'>$start_date</div>
+                                        </div>
+                                        $button
+                                    </div>
+                                </div>";
+                        }
+                    }
+                    else {
+                        echo "<h3 class='empty-bookings-heading'>No bookings made yet!</h3>";
+                    }
+                    ?>
+
+
+
+                </div>
+            </div>
+            <div class="booking-search">
+                <div class="booking-search-title">
+                    <h1>Search for bookings</h1>
+                    <form action="" method="POST">
+                        <div class="booking-search-input-container">
+                            <label for="booking-search">Search (Worker name etc)</label>
+                            <div class="booking-search-input-field">
+                                <input type="text" id="booking-search" class="booking-search-input" name="users-search"/>
+                                <button type="button" class="search-icon-small" id="booking-search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="recent-payments-container">
+                <table class="main-table">
+                    <thead>
+                    <tr class="main-tr">
+                        <th class="main-th">
+                            <div class="table-heading-container">Customer name&nbsp;<button class="sort-button" id="worker-name-sort"><i
+                                            class="fa-solid fa-arrow-up"></i></button>
+                            </div>
+                        </th>
+                        <th class="main-th">
+                            <div class="table-heading-container">Worker name&nbsp;<button class="sort-button" id="worker-name-sort"><i
+                                            class="fa-solid fa-arrow-up"></i></button>
+                            </div>
+                        </th>
+                        <th class="main-th">
+                            <div class="table-heading-container">Start date&nbsp;<button class="sort-button" id="start-date-sort"><i
+                                            class="fa-solid fa-arrow-up"></i></button>
+                        </th>
+                        <th class="main-th">
+                            <div class="table-heading-container">End date&nbsp;<button class="sort-button" id="end-date-sort"><i
+                                            class="fa-solid fa-arrow-up"></i></button>
+                        </th>
+                        <th class="main-th">More actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="bookings-table-body">
+                    </tbody>
+                </table>
+                <div class="pagination-container">
+                    <button class="pagination-button" id="previous-page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="pagination-button" id="previous-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                    <button class="pagination-button-current" id="current-page-number"><i class="fa-solid fa-1"></i></button>
+                    <button class="pagination-button" id="next-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                    <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
         </div>
         <?php
         echo '<script src="../scripts/admin/loader.js" type="text/javascript"></script>';
@@ -108,5 +229,5 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
 </footer>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
-<script src="../scripts/admin/payments.js" type="text/javascript"></script>
+<script src="../scripts/admin/bookings.js" type="text/javascript"></script>
 </body>

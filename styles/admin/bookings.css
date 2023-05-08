@@ -63,3 +63,360 @@
     font-size: 18px;
     font-weight: normal;
 }
+
+.recent-bookings-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recent-bookings-title h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.recent-bookings-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.empty-bookings-heading{
+    margin: 12px 0;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    color: var(--primary-color);
+}
+
+.booking-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 190px;
+    margin: 4px 8px;
+    padding: 24px;
+    color: var(--primary-color);
+    background-color: #FFF;
+    border-radius: 12px;
+    border: 3px solid var(--primary-color);
+    font-family: 'Inter', sans-serif;
+}
+
+.booking-card:hover{
+    cursor: pointer;
+    border: 3px solid var(--success-color);
+}
+
+.card-text{
+    text-align: left;
+}
+
+.booking-card h3{
+    margin: 12px 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+.booking-card p{
+    margin: 0;
+    color: var(--dark-color);
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.booking-card h4{
+    margin: 8px 0;
+    color: var(--dark-color);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.blue-badge{
+    display: inline-block;
+    padding: 6px;
+    color: var(--primary-bright-color);
+    background-color: var(--primary-shade-color);
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.badge-container{
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.booking-card-button-row{
+    text-align: center;
+}
+
+.in-pogress-button{
+    outline: none;
+    border: none;
+    margin: 4px auto;
+    padding: 12px 24px;
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 8px;
+    background-color: var(--primary-bright-color);
+}
+
+.completed-button{
+    outline: none;
+    border: none;
+    padding: 12px 24px;
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 8px;
+    background-color: var(--success-color);
+}
+
+.rejected-button {
+    outline: none;
+    border: none;
+    padding: 12px 24px;
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 8px;
+    background-color: var(--danger-color);
+}
+
+.pending-button{
+    outline: none;
+    border: none;
+    padding: 12px 24px;
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 8px;
+    background-color: var(--dark-color);
+}
+
+.booking-search-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.booking-search-title h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.booking-search-input-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-search-input-container label{
+    color: var(--dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.booking-search-input{
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 0 2px 2px;
+    border-radius: 12px 0 0 12px;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 22px;
+    min-width: 200px;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+}
+
+.booking-search-input:valid,
+.booking-search-input:focus,
+.booking-search-input:active{
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 0 2px 2px;
+    border-radius: 12px 0 0 12px;
+}
+
+.booking-search-input-field{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.search-icon-small{
+    height: 46px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    border-width: 2px 2px 2px 0;
+    border-radius: 0 12px 12px 0;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 24px;
+    color: var(--primary-color);
+    background-color: #FFF;
+}
+
+.sort-button{
+    height: 48px;
+    width: 48px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+}
+
+.table-heading-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pending-badge{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--dark-shade-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.accepted-badge{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--primary-bright-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.completed-badge{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--success-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.rejected-badge{
+    display: inline-block;
+    padding: 6px;
+    color: #FFF;
+    background-color: var(--danger-color);
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.update-button{
+    outline: none;
+    border: 3px solid var(--success-dark-color);
+    padding: 8px 18px;
+    color: var(--success-dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.update-button:active{
+    transform: scale(.98);
+}
+
+.disable-button{
+    outline: none;
+    border: 3px solid var(--grey-color);
+    padding: 8px 18px;
+    color: var(--grey-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+}
+
+.delete-button{
+    outline: none;
+    border: 3px solid var(--warning-dark-color);
+    padding: 8px 18px;
+    color: var(--warning-dark-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: #FFF;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.delete-button:active {
+    transform: scale(.96);
+}
+
+.pagination-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.pagination-button{
+    height: 40px;
+    width: 40px;
+    outline: none;
+    border: none;
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    border-radius: 4px;
+    background-color: var(--primary-background-shade-color);
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.pagination-button:active {
+    transform: scale(.96);
+}
+
+.pagination-button:disabled,
+.pagination-button[disabled]{
+    transform: none;
+}
+
+.pagination-button-current{
+    height: 48px;
+    width: 48px;
+    outline: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    border-radius: 12px;
+    background-color: var(--primary-background-shade-color);
+}
