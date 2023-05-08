@@ -194,7 +194,24 @@ function showFeedbackDetails(feedbackToken){
 
             document.getElementById('feedback-details-booking-button').addEventListener('click', () => {
                 hideFeedbackDetails(data);
-                openBookingDetailsModal(data.bookingId);
+
+                fetch(`http://localhost/labour_link/api/bookings.php?bookingId=${data.bookingId}`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        openBookingDetailsModal(data);
+                    })
+                    .catch(error => {
+                        const backdrop = document.getElementById('backdrop-modal');
+                        const errorMessageContainer = document.getElementById('error-message-container');
+
+                        console.log(error);
+
+                        backdrop.style.visibility = 'visible';
+                        errorMessageContainer.style.visibility = 'visible';
+                    });
             });
 
             backdrop.style.visibility = 'visible';
