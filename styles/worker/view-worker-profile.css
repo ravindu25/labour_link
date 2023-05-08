@@ -141,8 +141,8 @@ p {
 
 .project-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
     border: 3px solid #102699;
     padding: 17px;

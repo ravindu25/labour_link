@@ -159,9 +159,6 @@
         </div>
         <div class="current-projects">
             <h1>Ongoing housing projects</h1>
-            <div class="projects-container" >
-
-            </div>
             <?php
                 $sql_get_customer_housings = "SELECT * FROM House WHERE Customer_ID = $userId";
 
@@ -173,7 +170,7 @@
 
                     while($row = $result->fetch_assoc()) {
                         $address = $row['Address'];
-                        $verified = $row['Verified'];
+                        $paid = $row['Paid'];
                         $houseId = $row['House_ID'];
                         $jobsContainerId = "project-items-jobs-container-$houseId";
                         $numberCount += 1;
@@ -190,17 +187,14 @@
                             $numberIcon = "<i class='fa-solid fa-$numberCount'></i>";
                         }
 
-                        if($verified == 1){
-                            $verifiedDisplay = "
-                                <i class='fa-solid fa-circle-check' style='color: var(--success-color)'></i>
-                                &nbsp;&nbsp;
-                                <h5>Verified</h5>
+                        if($paid == 1){
+                            $paidDisplay = "
+                                <span class='green-badge'><i class='fa-solid fa-circle-check' style='color: var(--success-color)'></i>
+                                &nbsp;&nbsp;Paid</span>
                             ";
                         } else {
-                            $verifiedDisplay = "
-                                <i class='fa-solid fa-circle-xmark' style='color: var(--danger-color)'></i>
-                                &nbsp;&nbsp;
-                                <h5>Not verified</h5>
+                            $paidDisplay = "
+                                 <span class='red-badge'><i class='fa-solid fa-circle-xmark' style='color: var(--danger-color)'></i>&nbsp;&nbsp;Not Paid</span>
                             ";
                         }
                         echo "
@@ -213,7 +207,7 @@
                                 </h1>
                                 </div>
                                 <div class='project-item-verified-container'>
-                                    $verifiedDisplay
+                                    $paidDisplay
                                 </div>
                             </div>
                             <div class='project-item-jobs-container' id='$jobsContainerId'>";

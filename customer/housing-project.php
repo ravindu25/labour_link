@@ -202,7 +202,7 @@
 
             $result = $conn->query($sql_get_details);
             $address = null;
-            $verified = null;
+            $paid = null;
 
             if($result->num_rows > 0){
                 while($row = $result->fetch_assoc()){
@@ -210,9 +210,6 @@
                     $verified = $row['Verified'];
                 }
             }
-
-            // TODO: For designing purposes
-            $verified = true;
         ?>
         <div class="project-details-container">
             <h1>Project details</h1>
