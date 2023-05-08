@@ -210,9 +210,6 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
             <div class="worker-type-badge">
                 <h5>Electrician</h5>
             </div>
-            <div class="worker-type-badge">
-                <h5>Plumber</h5>
-            </div>
             <div class='worker-location'>
                 Location : <i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i> <b><?=$city?></b>
             </div>

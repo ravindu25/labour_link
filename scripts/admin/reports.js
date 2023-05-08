@@ -3,6 +3,7 @@ const monthlyBookingTypes = document.getElementById('monthly-booking-types');
 const totalBookings = document.getElementById('total-bookings');
 const ongoingBookings = document.getElementById('ongoing-bookings');
 const userTypes = document.getElementById('classification-of-users');
+const monthlyUserRegistration = document.getElementById('monthly-user-registration');
 
 function initialLoad(){
     const currentYear = new Date().getFullYear();
@@ -25,6 +26,7 @@ function initialLoad(){
                 .then(response => response.json())
                 .then(data => {
                     loadUserTypes(userTypes, data.fifthResult);
+                    loadMonthlyUserRegistration(monthlyUserRegistration, data.sixthResult);
                 })
                 .catch(error => {
                     const backdrop = document.getElementById('modal-backdrop');
@@ -107,17 +109,17 @@ function loadMonthlyBookings(monthlyBookingTypes, data){
         datasets: [
             {
                 label: monthNames[oneBeforeLastMonth - 1],
-                backgroundColor: "red",
+                backgroundColor: "#A5D7E8",
                 data: labels.map(label => updatedData[`${label}-${oneBeforeLastMonth}`])
             },
             {
                 label: monthNames[previousMonth - 1],
-                backgroundColor: "blue",
+                backgroundColor: "#576CBC",
                 data: labels.map(label => updatedData[`${label}-${previousMonth}`])
             },
             {
                 label: monthNames[currentMonth - 1],
-                backgroundColor: "green",
+                backgroundColor: "#19376D",
                 data: labels.map(label => updatedData[`${label}-${currentMonth}`])
             }
         ]
@@ -129,11 +131,11 @@ function loadMonthlyBookings(monthlyBookingTypes, data){
         options: {
             barValueSpacing: 20,
             scales: {
-                yAxes: [{
+                yAxes: {
                     ticks: {
                         min: 0,
                     }
-                }],
+                },
                 x: {
                     ticks: {
                         font: {
@@ -174,28 +176,30 @@ function loadTotalBookings(totalBookings, data){
             datasets: [{
                 label: 'Number of bookings',
                 data: chartData,
-                borderWidth: 1
+                borderWidth: 1,
+                borderColor: 'green',
+                fill: true
             }
             ]
         },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    min: 0,
-                }
-            }],
-            x:{
-                ticks: {
-                    font: {
-                        family: 'Inter',
-                        size: 20,
-                    },
-                    color: 'black'
-                }
-            }
-        },
         options: {
             responsive: true,
+            scales: {
+                yAxes: {
+                    ticks: {
+                        min: 0,
+                    }
+                },
+                x:{
+                    ticks: {
+                        font: {
+                            family: 'Inter',
+                            size: 20,
+                        },
+                        color: 'black'
+                    }
+                }
+            },
             plugins: {
                 legend: {
                     position: 'bottom',
@@ -221,7 +225,8 @@ function loadOngoingBookings(ongoingBookings, data){
         data: {
             labels: labels,
             datasets: [{
-                data: chartData
+                data: chartData,
+                backgroundColor: ['#5C469C' , 'pink']
             }]
         },
         options: {
@@ -247,9 +252,6 @@ function loadUserTypes(userTypes, data){
     const labels = data.map(element => element.Type);
     const barData = data.map(element => parseInt(element.UserCount));
 
-    console.log(labels);
-    console.log(barData);
-
     new Chart(userTypes, {
         type: 'bar',
         data: {
@@ -257,7 +259,8 @@ function loadUserTypes(userTypes, data){
             datasets: [{
                 label: 'Number of users',
                 data: barData,
-                borderWidth: 1
+                borderWidth: 1,
+                backgroundColor: '#19A7CE'
             }
             ]
         },
@@ -273,7 +276,118 @@ function loadUserTypes(userTypes, data){
             responsive: true,
             plugins: {
                 legend: {
-                    position: 'right',
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            family: 'Inter',
+                            size: 17,
+                        },
+                        color: 'black'
+                    }
+                },
+            },
+            scales: {
+                y: {
+                    ticks: {
+                        font: {
+                            family: 'Inter',
+                            size: 20,
+                        },
+                        color: 'black'
+                    }
+                }
+            }
+        }
+    });
+}
+
+function loadMonthlyUserRegistration(monthlyUserRegistration, data){
+    console.log(data);
+
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
+    ];
+    for(let i = 0; i < data.length; i++){
+        data[i]['Month'] = monthNames[parseInt(data[i]['Month']) - 2];
+    }
+
+    let upperStack = []; // For admin
+    let middleStack = []; // For worker
+    let bottomStack = []; // For customer
+
+    for(let i = 0; i < monthNames.length; i++){
+        const adminData = data.find(element => (element.Month === monthNames[i - 1] && element.Type === 'Admin'));
+        if(adminData){
+            upperStack.push(parseInt(adminData.UserCount));
+        } else {
+            upperStack.push(0);
+        }
+
+        const workerData = data.find(element => (element.Month === monthNames[i - 1] && element.Type === 'Worker'));
+        if(workerData){
+            middleStack.push(parseInt(workerData.UserCount));
+        } else {
+            middleStack.push(0);
+        }
+
+        const customerData = data.find(element => (element.Month === monthNames[i - 1] && element.Type === 'Customer'));
+        if(customerData){
+            bottomStack.push(parseInt(customerData.UserCount));
+        } else {
+            bottomStack.push(0);
+        }
+    }
+
+    const labels = data.map(element => monthNames[parseInt(element.Month) - 1]);
+
+
+    var chartData = {
+        labels: monthNames,
+        datasets: [
+            {
+                label: 'Admin',
+                backgroundColor: "#F5C6EC",
+                data: upperStack
+            },
+            {
+                label: 'Worker',
+                backgroundColor: "#7AA874",
+                data: middleStack
+            },
+            {
+                label: 'Customer',
+                backgroundColor: "#9A208C",
+                data: bottomStack
+            }
+        ]
+    };
+
+    var myBarChart = new Chart(monthlyUserRegistration, {
+        type: 'bar',
+        data: chartData,
+        options: {
+            // barValueSpacing: 20,
+            scales: {
+                y: {
+                    stacked: true,
+                    ticks: {
+                        min: 0,
+                    }
+                },
+                x: {
+                    stacked: true,
+                    ticks: {
+                        font: {
+                            family: 'Inter',
+                            size: 20,
+                        },
+                        color: 'black'
+                    }
+                },
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom',
                     labels: {
                         font: {
                             family: 'Inter',
@@ -283,6 +397,6 @@ function loadUserTypes(userTypes, data){
                     }
                 },
             }
-        }
+        },
     });
 }

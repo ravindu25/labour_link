@@ -121,7 +121,7 @@
                         <canvas id="popular-booking-types"></canvas>
                     </div>
                     <div class="monthly-booking-types-graph">
-                        <h1>Booking count based on worker types</h1>
+                        <h1>Recent booking count based on worker types</h1>
                         <canvas id="monthly-booking-types"></canvas>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                         <canvas id="total-bookings"></canvas>
                     </div>
                     <div class="ongoing-bookings-graph">
-                        <h1>Ongoing <?php echo $resultBookingsCount ?> bookings</h1>
+                        <h1>Ongoing bookings : <b><?php echo $resultBookingsCount ?></b></h1>
                         <canvas id ="ongoing-bookings"></canvas>
                     </div>
                 </div>
@@ -142,6 +142,10 @@
                     <div class="classification-of-users-graph">
                         <h1>Classification of Users in the system</h1>
                         <canvas id = "classification-of-users"></canvas>
+                    </div>
+                    <div class="monthly-user-registration-graph">
+                        <h1>Monthly registration of users</h1>
+                        <canvas id = "monthly-user-registration"></canvas>
                     </div>
                 </div>
             </div>
