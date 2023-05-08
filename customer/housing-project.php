@@ -202,27 +202,22 @@
 
             $result = $conn->query($sql_get_details);
             $address = null;
-            $verified = null;
+            $paid = null;
 
             if($result->num_rows > 0){
                 while($row = $result->fetch_assoc()){
                     $address = $row['Address'];
-                    $verified = $row['Verified'];
+                    $verified = $row['Paid'];
                 }
             }
-
-            // TODO: For designing purposes
-            $verified = true;
         ?>
         <div class="project-details-container">
             <h1>Project details</h1>
             <div class="project-details-row">
                 <?php echo "<h5><i class='fa-solid fa-location-dot' style='color: var(--primary-bright-color)'></i>&nbsp;&nbsp;Address - $address</h5>" ?>
                 <?php
-                    if($verified == true){
-                        echo "<h5><i class='fa-solid fa-circle-check' style='color: var(--success-color)'></i>&nbsp;&nbsp;Verified Status - Verified</h5>";
-                    } else {
-                        echo "<h5><i class='fa-solid fa-circle-xmark' style='color: var(--danger-color)'></i>&nbsp;&nbsp;Verified Status - Not Verifed</h5>";
+                    if($paid == 0){
+                        echo "<button type='button' class='primary-button'><i class='fa-solid fa-cart-shopping'></i>&nbsp;&nbsp;Add payment</button>";
                     }
                 ?>
             </div>
@@ -235,7 +230,7 @@
 
                     $numCompleted = 0;
 
-                    if($verified == true) {
+                    if($paid == 1) {
                         $result = $conn->query($sql_get_completed_tasks);
 
                         if ($result->num_rows > 0) {
@@ -341,7 +336,7 @@
             <?php } else { ?>
                 <div class='empty-tasks-container'>
                     <img src='../assets/customer/housing/undraw_task_list_6x9d.svg' alt='project-jobs' />
-                    <h5>You're project not verified. We will be checked your project soon!</h5>
+                    <h5>You haven't paid for the current project. Please add your payment and activate the project.</h5>
                 </div>
             <?php } ?>
         </div>
