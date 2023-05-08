@@ -641,6 +641,23 @@
     font-weight: 500;
 }
 
+.recent-feedbacks{
+    margin: 16px 0;
+}
+
+.recent-feedbacks-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recent-feedbacks-title h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
 .recent-payments{
     margin: 16px 0;
 }

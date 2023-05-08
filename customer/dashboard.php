@@ -28,6 +28,14 @@
 <body>
 <div class="backdrop-modal" id="backdrop-modal">
 </div>
+<div class="error-message-container" id="error-message-container">
+    <div class="error-message-heading">
+        <h1>Sorry, an unexpected error has occurred. Please try again later or contact customer support for assistance</h1>
+    </div>
+    <div class="error-message-image">
+        <img src="../assets/error-image.png" alt="error-image" />
+    </div>
+</div>
 <div class="booking-details-container" id="booking-details-container">
     <div class="booking-details-scroll-wrapper">
         <div class="booking-details-title">
@@ -66,9 +74,79 @@
                 </div>
             </div>
             <div class="back-button-container">
-                <button type="button" class="more-button" id="back-button">Back</button>
+                <button type="button" class="primary-button" id="back-button">Back</button>
             </div>
         </div>
+    </div>
+</div>
+<div class="feedback-details-container" id="feedback-details-container">
+    <div class="feedback-details-header">
+        <h1>All the details about the feedback</h1>
+    </div>
+    <div class="feedback-details-content">
+        <div class="feedback-details-profile-details">
+            <div class="feedback-details-profile-container">
+                <h3 class="worker-details-heading">Worker details</h3>
+                <img src='../assets/worker/profile-images/worker-1.jpg' id="feedback-details-worker-image" alt='worker-profile' />
+                <a href="#" id="feedback-details-worker-details-link" style="cursor: pointer">
+                    <h1 id="feedback-details-worker-name">Chaminda Gunathilaka&nbsp;&nbsp;<i class="fa-solid fa-arrow-up-right-from-square"></i></h1>
+                </a>
+                <span class="blue-badge" id="feedback-details-booking-date">Feedback created date 2023-04-25</span>
+            </div>
+        </div>
+        <div class="feedback-details-rating-observations">
+            <div class="feedback-details-rating-container">
+                <div id="feedback-details-rating-header" class="feedback-details-rating-header">
+                    <h1>Worker rating</h1>
+                </div>
+                <div class="feedback-details-rating-content">
+                    <div class="feedback-details-rating-item">
+                        <div class="feedback-details-rating-item-header">
+                            <h3>Punctuality</h3>
+                            <h3 id="feedback-details-progress-bar-punctuality-text" style="color: #A6A6A6">3 out of 5</h3>
+                        </div>
+                        <div class="recent-feedback-rating-bar">
+                            <div class='recent-feedback-rating-bar-progress' id="feedback-details-progress-bar-punctuality" style='width: calc(50%)'></div>
+                        </div>
+                    </div>
+                    <div class="feedback-details-rating-item">
+                        <div class="feedback-details-rating-item-header">
+                            <h3>Efficiency</h3>
+                            <h3 id="feedback-details-progress-bar-efficiency-text" style="color: #A6A6A6">3 out of 5</h3>
+                        </div>
+                        <div class="recent-feedback-rating-bar">
+                            <div class='recent-feedback-rating-bar-progress' id="feedback-details-progress-bar-efficiency" style='width: calc(50%)'></div>
+                        </div>
+                    </div>
+                    <div class="feedback-details-rating-item">
+                        <div class="feedback-details-rating-item-header">
+                            <h3>Professionalism</h3>
+                            <h3 id="feedback-details-progress-bar-professionalism-text" style="color: #A6A6A6">3 out of 5</h3>
+                        </div>
+                        <div class="recent-feedback-rating-bar">
+                            <div class='recent-feedback-rating-bar-progress' id="feedback-details-progress-bar-professionalism" style='width: calc(50%)'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="feedback-details-observations-container">
+                <div class="feedback-details-observations-header">
+                    <h1 id="feedback-details-observations-header">Extra observations</h1>
+                </div>
+                <div class="feedback-details-extra-observations" id="feedback-details-extra-observations">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="feedback-details-comment-container" id="feedback-details-comment-container">
+        <div class="feedback-details-comment-header" id="feedback-details-comment-header">
+            <h1 id="feedback-details-comment-heading">Written feedback</h1>
+        </div>
+        <p id="feedback-details-comment-text"></p>
+    </div>
+    <div class="feedback-details-button-container">
+        <button class="primary-outline-button" onclick="hideFeedbackDetails()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Close</button>
+        <button class="primary-button" id="feedback-details-booking-button"><i class="fa-solid fa-arrow-turn-up"></i>&nbsp;&nbsp;View booking</button>
     </div>
 </div>
 <?php include_once '../components/navbar.php' ?>
@@ -152,7 +230,9 @@
         <div class="recent-bookings">
             <div class="recent-bookings-title">
                 <h1>Recently made Bookings</h1>
-                <button class="more-button" onclick="window.location.href='bookings.php'">More Bookings</button>
+                <a href="./bookings.php">
+                    <button class="primary-button">More Bookings</button>
+                </a>
             </div>
             <div class="recent-bookings-container">
                 <?php
@@ -205,163 +285,159 @@
                 ?>
             </div>
         </div>
-        <!--Upgrade to premum banner-->
-        <div class="upgrade-banner">
-            <div class="upgrade-icon">
-                <i class="fa-solid fa-angles-up"></i>
-            </div>
-            <div class="upgrade-caption">
-                <h3>Upgrade to Premium for exclusive benefits</h3>
-                <p>From housing packages to discounted services and much more!</p>
-            </div>
-            <button class="upgrade-button">Upgrade Now</button>
-        </div>
         <!--Recent feedbacks section-->
         <div class="recent-feedbacks">
             <div class="recent-feedbacks-title">
                 <h1>Recently made Feedbacks</h1>
-                <button class="more-button">More Feedbacks</button>
+                <a href="./feedbacks.php">
+                    <button class="primary-button">More Feedbacks</button>
+                </a>
             </div>
             <div class="recent-feedbacks-container">
-                <table class="main-table">
-                    <thead>
-                    <tr class="main-tr">
-                        <th class="main-th">Comment</th>
-                        <th class="main-th">Worker name</th>
-                        <th class="main-th">Date</th>
-                        <th class="main-th">Service</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Extremely satisfied with the work done
-                            <br/>
-                            <span class="blue-badge">Updated 15 days ago</span>
-                        </td>
-                        <td class="main-td">Saman Gunawardhana</td>
-                        <td class="main-td">21 Oct 2022</td>
-                        <td class="main-td">Plumbing</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Process was neatly done on time
-                            <br/>
-                            <span class="blue-badge">Updated 20 days ago</span>
-                        </td>
-                        <td class="main-td">Kapila Gunawardana</td>
-                        <td class="main-td">16 Oct 2022</td>
-                        <td class="main-td">Gardening</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Work not completed on time. Slighlty
-                            dissappointing
-                            <br/>
-                            <span class="blue-badge">Updated 27 days ago</span>
-                        </td>
-                        <td class="main-td">Saman Gunathilaka</td>
-                        <td class="main-td">09 Oct 2022</td>
-                        <td class="main-td">Electrical</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Payment not going through
-                            <br/>
-                            <span class="blue-badge">Updated 1 month ago</span>
-                        </td>
-                        <td class="main-td">Kapila Dharmadhasa</td>
-                        <td class="main-td">05 Oct 2022</td>
-                        <td class="main-td">Mason</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <?php
+                    require_once('../db.php');
+
+                    $sql_get_most_recent_feedbacks = "SELECT Feedback.*, Booking.*, Worker.First_Name, Worker.Last_Name FROM Feedback INNER JOIN Booking ON Feedback.Booking_ID = Booking.Booking_ID INNER JOIN User AS Worker ON Booking.Worker_ID = Worker.User_ID WHERE Booking.Customer_ID = $userId ORDER BY Feedback.Timestamp DESC LIMIT 4";
+
+                    $result = $conn->query($sql_get_most_recent_feedbacks);
+
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+                            $feedbackId = $row['Feedback_Token'];
+                            $bookingId = $row['Booking_ID'];
+                            $workerName = $row['First_Name'] . ' ' . $row['Last_Name'];
+                            $workerId = $row['Worker_ID'];
+                            $timestamp = strtotime($row['Timestamp']);
+                            $date = date('Y-m-d', $timestamp);
+
+                            $ratingPun = $row['Star_Punctuality'];
+                            $ratingPunProgress = $ratingPun * 20;
+                            $ratingEfficiency = $row['Star_Efficiency'];
+                            $ratingEfficiencyProgress = $ratingEfficiency * 20;
+                            $ratingProf = $row['Star_Professionalism'];
+                            $ratingProfProgress = $ratingProf * 20;
+
+                            $writtenFeedback = '';
+                            if($row['Written_Feedback'] != ''){
+                                $writtenFeedback = "<p><i>\"$writtenFeedback\"</i></p>";
+                            }
+
+
+                            /*
+                             * Generating random worker image
+                             */
+                            $imageId = rand(1, 4) % 5;
+
+                            echo "
+                            <div class='recent-feedback-item' onclick='showFeedbackDetails($feedbackId)'>
+                                <div class='recent-feedback-item-heading'>
+                                    <div class='recent-feedback-image-container'>
+                                        <img src='../assets/worker/profile-images/worker-$imageId.jpg' alt='worker-profile' />
+                                    </div>
+                                    <div class='recent-feedback-profile-details'>                    
+                                        <h3>$workerName</h3>
+                                        <span class='blue-badge'>$date</span>
+                                    </div>
+                                </div>
+                                <div class='recent-feedback-ratings'>
+                                    <div class='recent-feedback-rating-item'>
+                                        <div class='recent-feedback-rating-header'>
+                                            <h3>Punctuality</h3>
+                                            <h3>$ratingPun out of 5</h3>
+                                        </div>
+                                        <div class='recent-feedback-rating-bar'>
+                                            <div class='recent-feedback-rating-bar-progress' style='width: calc($ratingPunProgress%)'></div>
+                                        </div>
+                                    </div>
+                                    <div class='recent-feedback-rating-item'>
+                                        <div class='recent-feedback-rating-header'>
+                                            <h3>Efficiency</h3>
+                                            <h3>$ratingEfficiency out of 5</h3>
+                                        </div>
+                                        <div class='recent-feedback-rating-bar'>
+                                            <div class='recent-feedback-rating-bar-progress' style='width: calc($ratingEfficiencyProgress%)'></div>
+                                        </div>
+                                    </div>
+                                    <div class='recent-feedback-rating-item'>
+                                        <div class='recent-feedback-rating-header'>
+                                            <h3>Professionalism</h3>
+                                            <h3>$ratingProf out of 5</h3>
+                                        </div>
+                                        <div class='recent-feedback-rating-bar'>
+                                            <div class='recent-feedback-rating-bar-progress' style='width: calc($ratingProfProgress%)'></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ";
+                        }
+                    } else {
+                        echo "<h1 class='empty-feedback-heading'>There is no feedback at the moment!</h1>";
+                    }
+                ?>
             </div>
         </div>
         <!--Housings and payments section-->
-        <div class="housing-payments">
-            <div class="housing-dash-content">
-                <h1>Housing</h1>
-                <div class="housing-card">
-                    <h4>Housing package details</h4>
-                    <h3>Bambalapitiya Colombo</h3>
-                    <span class="blue-badge">Started date - 21 Nov 2022</span>
-                    <div class="housing-job-list">
-                        <div class="housing-job-item">
-                            <div class="job-item-text">
-                                <h4>Plumbing</h4>
-                                <h3>Saman Gunawardhana</h3>
-                            </div>
-                            <div class="jon-item-button">
-                                <button type="button" class="in-pogress-button">In-progress</button>
-                            </div>
-                        </div>
-                        <div class="housing-job-item">
-                            <div class="job-item-text">
-                                <h4>Electrician</h4>
-                                <h3>Sunil Perera</h3>
-                            </div>
-                            <div class="jon-item-button">
-                                <button type="button" class="in-pogress-button">In-progress</button>
-                            </div>
-                        </div>
-                        <div class="housing-job-item">
-                            <div class="job-item-text">
-                                <h4>Painting</h4>
-                                <h3>Sunith Hettiarachchi</h3>
-                            </div>
-                            <div class="jon-item-button">
-                                <button type="button" class="pending-button">Pending</button>
-                            </div>
-                        </div>
-                        <div class="housing-job-item">
-                            <div class="job-item-text">
-                                <h4>Mechanical</h4>
-                                <h3>Dammika Kumara</h3>
-                            </div>
-                            <div class="jon-item-button">
-                                <button type="button" class="completed-button">Completed</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="recent-payments">
+            <div class="recent-payments-title">
+                <h1>Recently made Payments</h1>
+                <a href="./payments.php">
+                    <button class="primary-button">More Payments</button>
+                </a>
             </div>
-            <div class="payments-dash-content">
-                <h1>Payments</h1>
-                <div class="payments-list">
-                    <?php
+            <div class="recent-payments-container">
+                <?php
+                    require_once "../db.php";
+                    $sql = "SELECT Payments_Log.*, Booking.Booking_ID, Customer.First_Name AS CustomerFirstname, Customer.Last_Name AS CustomerLastname, Worker.First_Name AS WorkerFirstname, Worker.Last_Name AS WorkerLastname, Worker.User_ID AS WorkerId FROM Payments_Log INNER JOIN Booking ON Payments_Log.Booking_ID = Booking.Booking_ID INNER JOIN User AS Worker ON Booking.Worker_ID = Worker.User_ID INNER JOIN User AS Customer ON Booking.Customer_ID = Customer.User_ID ORDER BY Timestamp DESC LIMIT 4";
+                    $result = $conn->query($sql);
 
-                        require_once "../db.php";
-                        $sql = "SELECT * FROM Payments_Log INNER JOIN Booking ON Payments_Log.Booking_id = Booking.Booking_id INNER JOIN User ON Booking.Worker_ID = User.User_ID WHERE Booking.Customer_ID = '$userId'";
-                        $result = mysqli_query($conn, $sql);
-                        while($row = mysqli_fetch_assoc($result)){
-                            if($row['Success_Flag'] == 2){
-                                echo(' <div class="payment-item">
-                            <div class="payment-text">
-                                <span class="blue-badge">21 Oct 2022</span>
-                                <h3>'.$row['First_Name']." ".$row['Last_Name'].'</h3>
-                            </div>
-                            <div class="payment-button">
-                                <button type="button" class="payment-amount-button">'."Rs. ".$row['Amount'].".00".'</button>
-                            </div>
-                        </div>
-                       ');
-                            }else{
-                                echo(' <div class="payment-item-failed">
-                            <div class="payment-text">
-                                <span class="blue-badge">21 Oct 2022</span>
-                                <h3>'.$row['First_Name']." ".$row['Last_Name'].'</h3>
-                            </div>
-                            <div class="payment-button">
-                                <button type="button" class="payment-amount-button-failed">'."Rs. ".$row['Amount'].".00".'</button>
-                            </div>
-                        </div>
-                       ');
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+                            $customerName = $row['CustomerFirstname'] . ' ' . $row['CustomerLastname'];
+
+                            $workerId = $row['WorkerId'];
+                            $workerName = $row['WorkerFirstname'] . ' ' . $row['WorkerLastname'];
+
+                            $successFlag = $row['Success_Flag'];
+                            $paymentId = $row['Payment_Log_ID'];
+
+                            $amount = number_format(floatval($row['Amount']), 2);
+                            $paymentDate = explode(' ', $row['Timestamp'])[0];
+
+                            $paymentContainerStyles = '';
+                            $paymentAmountContainerStyles = '';
+
+                            if($successFlag > 0) {
+                                $paymentContainerStyles = 'success-payment-container';
+                                $paymentAmountContainerStyles = 'success-payment-amount-container';
+                            } else {
+                                $paymentContainerStyles = 'failed-payment-container';
+                                $paymentAmountContainerStyles = 'failed-payment-amount-container';
                             }
-                            
 
+                            echo "
+                                    <div class='$paymentContainerStyles'>
+                                        <span class='blue-badge'>$paymentDate</span>
+                                        <div class='payment-container-heading'>
+                                            <div class='payment-heading-item'>
+                                                <h5>Customer name</h5>
+                                                <h3>$customerName</h3>
+                                            </div>
+                                            <div class='payment-heading-item'>
+                                                <h5>Worker name</h5>
+                                                <a href='http://localhost/labour_link/worker/view-worker-profile.php?workerId=$workerId'>
+                                                <h3>$workerName&nbsp;&nbsp;<i class='fa-solid fa-arrow-up-right-from-square'></i></h3>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class='$paymentAmountContainerStyles'>
+                                            <h1>Rs. $amount</h1>
+                                        </div>
+                                    </div>
+                                ";
                         }
-                    ?>
-                   
-                   
-                   
-                </div>
+                    }
+                ?>
             </div>
         </div>
     </section>

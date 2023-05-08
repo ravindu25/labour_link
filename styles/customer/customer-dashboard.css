@@ -315,229 +315,388 @@
     font-weight: normal;
 }
 
-.housing-payments{
+.recent-feedbacks-container{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.housing-dash-content{
-    width: 50%;
-}
-
-.housing-dash-content h1 {
-    color: var(--primary-color);
-    font-family: 'Poppins', sans-serif;
-    font-size: 28px;
-    font-weight: normal;
-}
-
-.housing-card{
-    width: 80%;
-    padding: 48px 36px;
-    background-color: #FFF;
-    border: 3px solid var(--primary-color);
-    border-radius: 12px;
-}
-
-.housing-card h4{
-    margin: 0;
-    color: var(--dark-color);
+.empty-feedback-heading{
+    margin: 12px 0;
+    text-align: center;
     font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 28px;
+    color: var(--primary-color);
 }
 
-.housing-card h3{
+.recent-feedback-item{
+    display: flex;
+    flex-direction: column;
+    margin: 12px;
+    padding: 16px;
+    width: 40%;
+    border-radius: 16px;
+    background-color: white;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+    border: 1px solid #102699;
+}
+
+.recent-feedback-item:active{
+    transform: scale(.96);
+}
+
+.recent-feedback-item-heading{
+    display: flex;
     margin: 16px 0;
-    color: var(--dark-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 32px;
-    font-weight: 500;
 }
 
-.housing-job-list {
-    display: flex;
-    flex-direction: column;
-    margin-top: 24px;
+.recent-feedback-rating-item{
+    margin: 16px 4px;
 }
 
-.housing-job-item{
+.recent-feedback-rating-header{
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin: 8px 0;
 }
 
-.housing-job-item h4{
-    margin: 0;
-    color: var(--primary-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.housing-job-item h3{
+.recent-feedback-rating-header h3{
     margin: 8px 0;
-    color: var(--dark-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 28px;
     font-weight: normal;
+    color: var(--dark-shade-color);
+    font-family: 'Inter', sans-serif;
 }
 
-.payments-dash-content{
-    width: 50%;
+.recent-feedback-image-container{
+    width: 100px;
+    height: 100px;
+    margin-right: 16px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
-.payments-dash-content h1 {
-    color: var(--primary-color);
+.recent-feedback-image-container img{
+    width: 100px;
+    height: 100px;
+}
+
+.recent-feedback-profile-details h3{
+    margin: 8px 0;
     font-family: 'Poppins', sans-serif;
-    font-size: 28px;
     font-weight: normal;
+    font-size: 24px;
 }
 
-.payments-list{
-    display: flex;
-    flex-direction: column;
+.recent-feedback-rating-bar{
+    height: 12px;
+    width: 100%;
+    border-radius: 2px;
+    background-color: var(--primary-background-shade-color);
 }
 
-.payment-item{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    padding: 34px;
+.recent-feedback-rating-bar-progress{
+    height: 100%;
+    width: 60%;
+    border-radius: 2px;
+    background-color: var(--primary-color);
+}
+
+.feedback-details-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) ;
+    margin: 16px;
+    padding: 24px 48px;
+    width: 55vw;
+    max-height: 90vh;
+    color: #102699;
     background-color: #FFF;
-    border: 2px solid var(--success-color);
-    border-radius: 12px;
+    border-radius: 16px;
+    opacity: 1;
+    visibility: hidden;
 }
 
-.payment-item-failed{
+.feedback-details-content{
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
-    padding: 34px;
-    background-color: #FFF;
-    border: 2px solid var(--warning-dark-color);
-    border-radius: 12px;
+    justify-content: center;
+    margin: 16px 0;
 }
 
-.payment-text h3{
+.feedback-details-profile-details{
+    width: 40%;
+    text-align: center;
+    background-color: var(--primary-background-shade-color);
+    margin: 0 16px;
+    padding: 24px 0;
+    border-radius: 8px;
+}
+
+.worker-details-heading{
     margin: 0;
+    font-size: 28px;
+}
+
+.feedback-details-profile-details img{
+    width: 50%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.feedback-details-rating-observations{
+    width: 50%;
+    text-align: center;
+}
+
+.feedback-details-rating-header{
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.icon-button{
+    outline: none;
+    border: none;
+    padding: 12px 18px;
     color: var(--primary-color);
     font-family: 'Inter', sans-serif;
-    font-size: 28px;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 18px;
+    background-color: white;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+}
+
+.icon-button:active{
+    transform: scale(.96);
+}
+
+#feedback-details-worker-name{
+    font-size: 24px;
+    font-weight: normal;
+    margin: 8px;
+    text-align: center;
+}
+
+.feedback-details-header h1{
+    text-align: center;
+    font-size: 36px;
+    margin: 8px;
     font-weight: normal;
 }
 
-.payment-text h4{
-    margin: 8px 0px;
-    color: var(--dark-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: normal;
+.feedback-details-button-container{
+    margin: 20px 0;
+    text-align: center;
 }
 
-.payment-amount-button{
-    outline: none;
-    border: none;
-    padding: 12px 24px;
-    color: var(--success-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 8px;
-    background-color: #FFF;
-    border: 2px solid var(--success-color);
+.feedback-worker-details-profile{
+    display: flex;
 }
 
-.payment-amount-button-failed{
-    outline: none;
-    border: none;
-    padding: 12px 24px;
-    color: var(--warning-dark-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 8px;
-    background-color: #FFF;
-    border: 2px solid var(--warning-dark-color);
-}
-
-.upgrade-banner{
+.feedback-details-worker-details{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #102699;
-    border-radius: 15px;
-    padding: 10px;
-    margin: 30px 0;
+    margin: 16px 24px;
+}
+
+.feedback-details-worker-details h1{
+    font-size: 24px;
+    margin: 8px;
+    color: var(--dark-color);
+    font-weight: normal;
+}
+
+#feedback-details-booking-date{
+    margin-left: 12px;
+}
+
+.feedback-details-rating-header h1{
+    margin: 4px 0;
+    text-align: center;
+    font-size: 28px;
+    margin-top: 16px;
+    color: var(--primary-color);
+}
+
+.feedback-details-rating-item-header{
+    display: flex;
+    justify-content: space-between;
+    color: var(--dark-color);
+    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    margin: 4px 0;
+}
+
+.feedback-details-rating-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.feedback-details-rating-item{
+    margin: 8px 0px;
     width: 100%;
 }
 
-.upgrade-icon{
-    color: #ffffff;
-    margin: 5px 50px 5px 90px;
-    width: auto;
-    height: auto;
-    font-size: 100px;
-}
-
-.upgrade-caption{
-    display: flex;
-    flex-direction: column;
-    margin: 0px 10px;
-    width: 950px;
-}
-
-.upgrade-caption h3{
-    color: white;
-    font-family: Poppins;
-    font-size: 38px;
+.feedback-details-rating-item h3{
+    margin: 0;
     text-align: center;
-    margin: auto;
-    font-weight: bold;
-}
-
-.upgrade-caption p{
-    color: white;
+    color: var(--dark-color);
+    font-weight: normal;
     font-size: 20px;
+}
+
+.feedback-details-observations-container h1{
+    font-size: 28px;
+}
+
+.feedback-details-observations-header{
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.feedback-details-comment-container{
+    margin: 36px 0;
+}
+
+.feedback-details-comment-header{
+    display: flex;
+    align-items: center;
+}
+
+.feedback-details-comment-header h1{
+    margin: 16px;
+    margin-right: 0;
+    font-size: 28px;
+    color: var(--primary-color);
+}
+
+.feedback-details-comment-container p{
+    margin: 0 16px;
+    font-size: 22px;
+    color: #444444;
     font-family: 'Inter', sans-serif;
+}
+
+.feedback-details-extra-observations-container h1{
+    margin: 16px 0;
+    font-size: 28px;
+    color: var(--primary-color);
+    font-weight: normal;
+}
+
+.feedback-details-extra-observations{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 16px;
+}
+
+.feedback-details-extra-observations span{
+    margin: 6px 4px;
+    height: max-content;
+}
+
+.blue-badge{
+    display: inline-block;
+    padding: 6px;
+    color: var(--primary-bright-color);
+    background-color: var(--primary-shade-color);
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.red-badge{
+    display: inline-block;
+    padding: 6px;
+    color: var(--danger-color);
+    background-color: var(--danger-shade-color);
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.green-badge{
+    display: inline-block;
+    padding: 6px;
+    color: var(--success-color);
+    background-color: var(--success-shade-color);
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.recent-payments{
+    margin: 16px 0;
+}
+
+.recent-payments-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recent-payments-title h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.recent-payments-container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.success-payment-container, .failed-payment-container{
+    width: 40%;
+    background-color: white;
+    margin: 16px 12px;
+    padding: 18px;
+    border-radius: 16px;
+    border: 1px solid var(--primary-color);
+}
+
+.payment-container-heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-heading-item{
+    width: 50%;
+}
+
+.payment-heading-item h3{
+    margin: 4px 0;
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+.payment-heading-item h5{
+    margin: 4px 0;
+    font-size: 18px;
+    font-weight: normal;
+    color: var(--grey-color);
+}
+
+.success-payment-amount-container h1, .failed-payment-amount-container h1{
     text-align: center;
+    font-size: 42px;
+    margin: 16px 0;
 }
 
-.upgrade-button{
-    background-color: #354BC0;
-    color: white;
-    /*border: 3px solid #3D3BEE;*/
-    border-radius: 30px;
-    padding: 15px 20px;
-    font-size: 25px;
-    cursor: pointer;
-    animation: pulse 2s infinite;
-    margin: auto;
+.success-payment-amount-container h1{
+    color: var(--success-color);
 }
 
-.upgrade-button:hover {
-    background-color: #fff;
-    color: #102699;
-    border: 2px solid #102699;
+.failed-payment-amount-container h1{
+    color: var(--warning-color);
 }
-
-@keyframes pulse {
-    0% {
-        /* Start with initial size */
-        transform: scale(1);
-    }
-    50% {
-        /* Enlarge button */
-        transform: scale(1.2);
-    }
-    100% {
-        /* Return to initial size */
-        transform: scale(1);
-    }
-}
-                                                                                                                                                                                                                                                                   Now, when you load the page with this button, it will automatically start pulsing without requiring any user interaction. You can adjust the duration of the animation or the scale of the button by modifying the keyframes in the pulse animation.
 
 
 
