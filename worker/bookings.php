@@ -56,7 +56,7 @@ $userId = $_SESSION['user_id'];
             </div>
             <div class="details-row">
                 <h4>Worker</h4>
-                <h4 class="details-value" id="booking-details-worker-name"></h4>
+                <h4 class="details-value" id="booking-details-customer-name"></h4>
             </div>
             <div class="details-row">
                 <h4>Start date</h4>
