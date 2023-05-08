@@ -60,7 +60,7 @@ function openBookingDetailsModal(bookingId){
         paymentImageText.innerText = 'Online payments';
     }
 
-    if(currentBooking.status === 'Pending' && currentBooking.difference >=0){
+    if(currentBooking.status === 'Pending'){
         bookingStatusButton = '<button class="pending-button">Pending</button>';
         rejectButton.disabled = false;
         acceptButton.disabled = false;
