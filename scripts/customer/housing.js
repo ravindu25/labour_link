@@ -16,7 +16,7 @@ locationInput.addEventListener('change', () => {
     const locationText = document.getElementById('place-autocomplete').value;
     const nextButton = document.getElementById('first-page-next-button');
 
-    if(locationText !== ''){
+    if(addressvalid==false){
         nextButton.classList.add('primary-button');
         nextButton.classList.remove('disabled-button');
         nextButton.disabled = false;
@@ -130,7 +130,7 @@ function initAutocomplete(){
         anchorPoint: new google.maps.Point(0, -29),
     });
 
-    autocomplete.addListener('change', () => { console.log('Place changed!')});
+    autocomplete.addListener('place_changed', () => { onPlaceChanged()});
 }
 
 function openHousingCreateModal(){
