@@ -25,6 +25,133 @@ session_start();
     <title>Admin Dashboard | LabourLink</title>
 </head>
 <body>
+<div class="backdrop-modal" id="backdrop-modal">
+</div>
+<div class="error-message-container" id="error-message-container">
+    <div class="error-message-heading">
+        <h1>Sorry, an unexpected error has occurred. Please try again later or contact customer support for assistance</h1>
+    </div>
+    <div class="error-message-image">
+        <img src="../assets/error-image.png" alt="error-image" />
+    </div>
+</div>
+<div class="booking-details-container" id="booking-details-container">
+    <div class="booking-details-scroll-wrapper">
+        <div class="booking-details-title">
+            <h1>Current Status of Your <u>Booking</u></h1>
+        </div>
+        <div class="status-container" id="booking-details-status-container"></div>
+        <div class="details-container">
+            <div class="details-row">
+                <h4>Customer name</h4>
+                <h4 class="details-value" id="booking-details-customer-name"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Job type</h4>
+                <h4 class="details-value" id="booking-details-job-type"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Worker name</h4>
+                <h4 class="details-value" id="booking-details-worker-name"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Start date</h4>
+                <h4 class="details-value" id="booking-details-start-date"></h4>
+            </div>
+            <div class="remaining-time-container" id="remaining-time-container">
+                <h4>This booking will be closed in</h4>
+                <h1 class="countdown-text" id="booking-details-countdown"></h1>
+            </div>
+            <div class="payment-method-container">
+                <div class="payment-image-container">
+                    <h4>Payment Method</h4>
+                    <div class="payment-image-card">
+                        <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
+                             alt="payment method"/>
+                        <h4 id="payment-method-text">Online payments</h4>
+                    </div>
+                </div>
+                <div class="payment-details-container">
+                    <h3>Amount that needs to be paid</h3>
+                    <h2>Rs. 17500.00</h2>
+                </div>
+            </div>
+            <div class="back-button-container">
+                <button type="button" class="primary-button" onclick="closeBookingDetailsModal()" id="back-button">Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="feedback-details-container" id="feedback-details-container">
+    <div class="feedback-details-header">
+        <h1>All the details about the feedback</h1>
+    </div>
+    <div class="feedback-details-content">
+        <div class="feedback-details-profile-details">
+            <div class="feedback-details-profile-container">
+                <h3 class="worker-details-heading">Worker details</h3>
+                <img src='../assets/worker/profile-images/worker-1.jpg' id="feedback-details-worker-image" alt='worker-profile' />
+                <a href="#" id="feedback-details-worker-details-link" style="cursor: pointer">
+                    <h1 id="feedback-details-worker-name">Chaminda Gunathilaka&nbsp;&nbsp;<i class="fa-solid fa-arrow-up-right-from-square"></i></h1>
+                </a>
+                <span class="blue-badge" id="feedback-details-booking-date">Feedback created date 2023-04-25</span>
+            </div>
+        </div>
+        <div class="feedback-details-rating-observations">
+            <div class="feedback-details-rating-container">
+                <div id="feedback-details-rating-header" class="feedback-details-rating-header">
+                    <h1>Worker rating</h1>
+                </div>
+                <div class="feedback-details-rating-content">
+                    <div class="feedback-details-rating-item">
+                        <div class="feedback-details-rating-item-header">
+                            <h3>Punctuality</h3>
+                            <h3 id="feedback-details-progress-bar-punctuality-text" style="color: #A6A6A6">3 out of 5</h3>
+                        </div>
+                        <div class="recent-feedback-rating-bar">
+                            <div class='recent-feedback-rating-bar-progress' id="feedback-details-progress-bar-punctuality" style='width: calc(50%)'></div>
+                        </div>
+                    </div>
+                    <div class="feedback-details-rating-item">
+                        <div class="feedback-details-rating-item-header">
+                            <h3>Efficiency</h3>
+                            <h3 id="feedback-details-progress-bar-efficiency-text" style="color: #A6A6A6">3 out of 5</h3>
+                        </div>
+                        <div class="recent-feedback-rating-bar">
+                            <div class='recent-feedback-rating-bar-progress' id="feedback-details-progress-bar-efficiency" style='width: calc(50%)'></div>
+                        </div>
+                    </div>
+                    <div class="feedback-details-rating-item">
+                        <div class="feedback-details-rating-item-header">
+                            <h3>Professionalism</h3>
+                            <h3 id="feedback-details-progress-bar-professionalism-text" style="color: #A6A6A6">3 out of 5</h3>
+                        </div>
+                        <div class="recent-feedback-rating-bar">
+                            <div class='recent-feedback-rating-bar-progress' id="feedback-details-progress-bar-professionalism" style='width: calc(50%)'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="feedback-details-observations-container">
+                <div class="feedback-details-observations-header">
+                    <h1 id="feedback-details-observations-header">Extra observations</h1>
+                </div>
+                <div class="feedback-details-extra-observations" id="feedback-details-extra-observations">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="feedback-details-comment-container" id="feedback-details-comment-container">
+        <div class="feedback-details-comment-header" id="feedback-details-comment-header">
+            <h1 id="feedback-details-comment-heading">Written feedback</h1>
+        </div>
+        <p id="feedback-details-comment-text"></p>
+    </div>
+    <div class="feedback-details-button-container">
+        <button class="primary-outline-button" onclick="hideFeedbackDetails()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Close</button>
+        <button class="primary-button" id="feedback-details-booking-button"><i class="fa-solid fa-arrow-turn-up"></i>&nbsp;&nbsp;View booking</button>
+    </div>
+</div>
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">
@@ -114,7 +241,7 @@ session_start();
         <div class="recent-bookings">
             <div class="recent-bookings-title">
                 <h1>Recently made Bookings</h1>
-                <button class="more-button">More Bookings</button>
+                <a href="./bookings.php"><button class="primary-button">More Bookings</button></a>
             </div>
             <div class="recent-bookings-container">
                 <?php
@@ -124,16 +251,16 @@ session_start();
                     $customer_id = $customer_id = $_SESSION['user_id'];
                     $sql_get_bookings = "select Booking.*, User.First_Name, User.Last_Name from Booking inner join User on Booking.Worker_ID = User.User_ID ORDER BY Booking.Created_Date DESC LIMIT 5";
 
-                    $status = array("Pending","Completed","Rejected","In-Progress");
 
                     $result = $conn->query($sql_get_bookings);
 
                     if($result->num_rows > 0){
                         while($row = $result->fetch_assoc()){
+                            $booking_id = $row['Booking_ID'];
                             $worker_type = $row['Worker_Type'];
                             $worker_name = $row['First_Name'] . " " . $row['Last_Name'];
                             $start_date = date("d M Y", strtotime($row['Start_Date']));
-                            $statusValue = array_rand($status);
+                            $statusValue = $row['Status'];
                             $sql_get_customer_name = "SELECT * from User where User_ID = {$row['Customer_ID']}";
                             $result_customer_name = $conn->query($sql_get_customer_name);
                             $row_customer_name = $result_customer_name->fetch_assoc();
@@ -142,25 +269,22 @@ session_start();
 
                             $button = '';
                             switch($statusValue){
-                                case 0:
+                                case 'Pending':
                                     $button = '<button class="pending-button">Pending</button>';
                                     break;
-                                case 1:
+                                case 'Completed':
                                     $button = '<button class="completed-button">Completed</button>';
                                     break;
-                                case 2:
+                                case 'Rejected':
                                     $button = '<button class="rejected-button">Rejected</button>';
                                     break;
-                                case 3:
-                                    $button = '<button class="in-pogress-button">In-Progress</button>';
-                                    break;
-                                default:
-                                    $button = '<button class="in-pogress-button">In-Progress</button>';
+                                case 'Accepted':
+                                    $button = '<button class="in-pogress-button">Accepted</button>';
                                     break;
                             }
 
                             echo "
-                                <div class='booking-card'>
+                                <div class='booking-card' onclick='showBookingDetails($booking_id)'>
                                     <div class='card-text'>
                                         <h3>$worker_type</h3>
                                         <p>Work by</p>
@@ -177,6 +301,9 @@ session_start();
                                 </div>";
                         }
                     }
+                    else {
+                        echo "<h3 class='empty-bookings-heading'>No bookings made yet!</h3>";
+                    }
                 ?>
                
                
@@ -186,113 +313,146 @@ session_start();
         <div class="recent-feedbacks">
             <div class="recent-feedbacks-title">
                 <h1>Recently made Feedbacks</h1>
-                <button class="more-button">More Feedbacks</button>
+                <a href="./feedbacks.php"><button class="primary-button">More Feedbacks</button></a>
             </div>
             <div class="recent-feedbacks-container">
-                <table class="main-table">
-                    <thead>
-                    <tr class="main-tr">
-                        <th class="main-th">Comment</th>
-                        <th class="main-th">Worker name</th>
-                        <th class="main-th">Commented date</th>
-                        <th class="main-th">Made by</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Extremely satisfied with the work done
-                            <br/>
-                            <span class="blue-badge">Updated 15 days ago</span>
-                        </td>
-                        <td class="main-td">Saman Gunawardhana</td>
-                        <td class="main-td">21 Oct 2022</td>
-                        <td class="main-td">Mohamed Izzath</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Process was neatly done on time
-                            <br/>
-                            <span class="blue-badge">Updated 20 days ago</span>
-                        </td>
-                        <td class="main-td">Kapila Gunawardana</td>
-                        <td class="main-td">16 Oct 2022</td>
-                        <td class="main-td">Ravindu Wegiriya</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Work not completed on time. Slighlty dissappointing
-                            <br/>
-                            <span class="blue-badge">Updated 27 days ago</span>
-                        </td>
-                        <td class="main-td">Saman Gunathilaka</td>
-                        <td class="main-td">09 Oct 2022</td>
-                        <td class="main-td">Rushdha Rasheed</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">
-                            Payment not going through
-                            <br/>
-                            <span class="blue-badge">Updated 1 month ago</span>
-                        </td>
-                        <td class="main-td">Kapila Dharmadhasa</td>
-                        <td class="main-td">05 Oct 2022</td>
-                        <td class="main-td">Dhananga Deepanjana</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <?php
+                    require_once('../db.php');
+
+                    $sql_get_most_recent_feedbacks = "SELECT Feedback.*, Booking.*, Worker.First_Name, Worker.Last_Name FROM Feedback INNER JOIN Booking ON Feedback.Booking_ID = Booking.Booking_ID INNER JOIN User AS Worker ON Booking.Worker_ID = Worker.User_ID ORDER BY Feedback.Timestamp DESC LIMIT 4";
+
+                    $result = $conn->query($sql_get_most_recent_feedbacks);
+
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+                            $feedbackId = $row['Feedback_Token'];
+                            $bookingId = $row['Booking_ID'];
+                            $workerName = $row['First_Name'] . ' ' . $row['Last_Name'];
+                            $workerId = $row['Worker_ID'];
+                            $timestamp = strtotime($row['Timestamp']);
+                            $date = date('Y-m-d', $timestamp);
+
+                            $ratingPun = $row['Star_Punctuality'];
+                            $ratingPunProgress = $ratingPun * 20;
+                            $ratingEfficiency = $row['Star_Efficiency'];
+                            $ratingEfficiencyProgress = $ratingEfficiency * 20;
+                            $ratingProf = $row['Star_Professionalism'];
+                            $ratingProfProgress = $ratingProf * 20;
+
+                            $writtenFeedback = '';
+                            if($row['Written_Feedback'] != ''){
+                                $writtenFeedback = "<p><i>\"$writtenFeedback\"</i></p>";
+                            }
+
+
+                            /*
+                             * Generating random worker image
+                             */
+                            $imageId = rand(1, 4) % 5;
+
+                            echo "
+                            <div class='recent-feedback-item' onclick='showFeedbackDetails($feedbackId)'>
+                                <div class='recent-feedback-item-heading'>
+                                    <div class='recent-feedback-image-container'>
+                                        <img src='../assets/worker/profile-images/worker-$imageId.jpg' alt='worker-profile' />
+                                    </div>
+                                    <div class='recent-feedback-profile-details'>                    
+                                        <h3>$workerName</h3>
+                                        <span class='blue-badge'>$date</span>
+                                    </div>
+                                </div>
+                                <div class='recent-feedback-ratings'>
+                                    <div class='recent-feedback-rating-item'>
+                                        <div class='recent-feedback-rating-header'>
+                                            <h3>Punctuality</h3>
+                                            <h3>$ratingPun out of 5</h3>
+                                        </div>
+                                        <div class='recent-feedback-rating-bar'>
+                                            <div class='recent-feedback-rating-bar-progress' style='width: calc($ratingPunProgress%)'></div>
+                                        </div>
+                                    </div>
+                                    <div class='recent-feedback-rating-item'>
+                                        <div class='recent-feedback-rating-header'>
+                                            <h3>Efficiency</h3>
+                                            <h3>$ratingEfficiency out of 5</h3>
+                                        </div>
+                                        <div class='recent-feedback-rating-bar'>
+                                            <div class='recent-feedback-rating-bar-progress' style='width: calc($ratingEfficiencyProgress%)'></div>
+                                        </div>
+                                    </div>
+                                    <div class='recent-feedback-rating-item'>
+                                        <div class='recent-feedback-rating-header'>
+                                            <h3>Professionalism</h3>
+                                            <h3>$ratingProf out of 5</h3>
+                                        </div>
+                                        <div class='recent-feedback-rating-bar'>
+                                            <div class='recent-feedback-rating-bar-progress' style='width: calc($ratingProfProgress%)'></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ";
+                        }
+                    }
+                ?>
             </div>
         </div>
         <div class="recent-payments">
             <div class="recent-payments-title">
                 <h1>Recently made Payments</h1>
-                <button class="more-button">More Payments</button>
+                <a href="./payments.php">
+                    <button class="primary-button">More Payments</button>
+                </a>
             </div>
             <div class="recent-payments-container">
-                <table class="main-table">
-                    <thead>
-                    <tr class="main-tr">
-                        <th class="main-th">Customer Name/Date</th>
-                        <th class="main-th">Worker name</th>
-                        <th class="main-th">Amount</th>
-                        <th class="main-th">Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
                     <?php
                         require_once "../db.php";
-                        $sql = "SELECT * FROM Payments_Log INNER JOIN Booking ON Payments_Log.Booking_ID = Booking.Booking_ID INNER JOIN User ON Booking.Worker_ID = User.User_ID ORDER BY Timestamp DESC LIMIT 5";
+                        $sql = "SELECT Payments_Log.*, Booking.Booking_ID, Customer.First_Name AS CustomerFirstname, Customer.Last_Name AS CustomerLastname, Worker.First_Name AS WorkerFirstname, Worker.Last_Name AS WorkerLastname FROM Payments_Log INNER JOIN Booking ON Payments_Log.Booking_ID = Booking.Booking_ID INNER JOIN User AS Worker ON Booking.Worker_ID = Worker.User_ID INNER JOIN User AS Customer ON Booking.Customer_ID = Customer.User_ID ORDER BY Timestamp DESC LIMIT 4";
                         $result = $conn->query($sql);
+
                         if($result->num_rows > 0){
                             while($row = $result->fetch_assoc()){
-                                $sql_get_customer_name = "SELECT * FROM User WHERE User_ID = ".$row['Customer_ID'];
-                                $result_get_customer_name = $conn->query($sql_get_customer_name);
-                                $row_get_customer_name = $result_get_customer_name->fetch_assoc();
-                                $customer_name = $row_get_customer_name['First_Name'].' '.$row_get_customer_name['Last_Name'];
-                                $date = date_create($row['Timestamp']);
-                                $dateInText = date_format($date, 'dS F Y');
-                                echo(' <tr class="main-tr">
-                                <td class="main-td" style="text-align: left;">'.$customer_name.'<br/>
-                                    <span class="blue-badge">'.$dateInText.'</span>
-                                </td>
-                                <td class="main-td">
-                                '.$row['First_Name'].' '.$row['Last_Name'].'
-                                </td>
-                                <td class="main-td">Rs. '.$row['Amount'].'.00</td>
-                                ');
-                                if($row['Success_Flag'] == 2){
-                                    echo('<td class="main-td"><span class="payment-success-badge">Success</span></td>');
-                                }else{
-                                    echo('<td class="main-td"><span class="payment-success-failed">Failed</span></td>');
+                                $customerName = $row['CustomerFirstname'] . ' ' . $row['CustomerLastname'];
+                                $workerName = $row['WorkerFirstname'] . ' ' . $row['WorkerLastname'];
+
+                                $successFlag = $row['Success_Flag'];
+                                $paymentId = $row['Payment_Log_ID'];
+
+                                $amount = number_format(floatval($row['Amount']), 2);
+                                $paymentDate = explode(' ', $row['Timestamp'])[0];
+
+                                $paymentContainerStyles = '';
+                                $paymentAmountContainerStyles = '';
+
+                                if($successFlag > 0) {
+                                    $paymentContainerStyles = 'success-payment-container';
+                                    $paymentAmountContainerStyles = 'success-payment-amount-container';
+                                } else {
+                                    $paymentContainerStyles = 'failed-payment-container';
+                                    $paymentAmountContainerStyles = 'failed-payment-amount-container';
                                 }
-                            echo('</tr>');
+
+                                echo "
+                                    <div class='$paymentContainerStyles'>
+                                        <span class='blue-badge'>$paymentDate</span>
+                                        <div class='payment-container-heading'>
+                                            <div class='payment-heading-item'>
+                                                <h5>Customer name</h5>
+                                                <h3>Mohamed Izzath</h3>
+                                            </div>
+                                            <div class='payment-heading-item'>
+                                                <h5>Worker name</h5>
+                                                <h3>Sunil Gunathilaka</h3>
+                                            </div>
+                                        </div>
+                                        <div class='$paymentAmountContainerStyles'>
+                                            <h1>Rs. $amount</h1>
+                                        </div>
+                                    </div>
+                                ";
                             }
                         }
                     ?>
-                   
-                   
-                    </tbody>
-                </table>
             </div>
         </div>
     </section>
@@ -304,5 +464,6 @@ session_start();
 </footer>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/index.js" type="text/javascript"></script>
+<script src="../scripts/admin/dashboard.js" type="text/javascript"></script>
 </body>
 

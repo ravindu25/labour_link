@@ -1,15 +1,29 @@
-const backButton = document.getElementById("back-button");
+/*
+ * Javascript for bookings section
+ */
+function showBookingDetails(bookingId) {
+    fetch(`http://localhost/labour_link/api/bookings.php?bookingId=${bookingId}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then(response => response.json())
+        .then(data => {
+            openBookingDetailsModal(data);
+        })
+        .catch(error => {
+            const backdrop = document.getElementById('backdrop-modal');
+            const errorMessageContainer = document.getElementById('error-message-container');
 
-let allBookings = [];
+            console.log(error);
 
-function openBookingDetailsModal(bookingId){
+            backdrop.style.visibility = 'visible';
+            errorMessageContainer.style.visibility = 'visible';
+        });
+}
+
+function openBookingDetailsModal(currentBooking){
     const backdropModal = document.getElementById("backdrop-modal");
     const bookingDetails = document.getElementById("booking-details-container");
-
-    const currentBooking = allBookings.find(booking => booking.bookingId == bookingId);
-
-    console.log(bookingId);
-    console.log(allBookings);
 
     let bookingStatusButton = null;
     if(currentBooking.status === 'Pending'){
@@ -24,9 +38,11 @@ function openBookingDetailsModal(bookingId){
 
     const bookingStatusContainer = document.getElementById('booking-details-status-container');
     bookingStatusContainer.innerHTML = bookingStatusButton;
+    const workerLink = `<a href="http://localhost/labour_link/worker/view-worker-profile.php?workerId=${currentBooking.workerId}">${currentBooking.workerName}</a>`;
 
-    document.getElementById('booking-details-job-type').innerText = currentBooking.workerType;
-    document.getElementById('booking-details-worker-name').innerText = currentBooking.workerName;
+    document.getElementById('booking-details-customer-name').innerText = currentBooking.customerName;
+    document.getElementById('booking-details-job-type').innerHTML = currentBooking.workerType;
+    document.getElementById('booking-details-worker-name').innerHTML = workerLink;
     document.getElementById('booking-details-start-date').innerText = currentBooking.startDate;
 
     if(currentBooking.status === 'Pending' || currentBooking.status === 'Accepted') {
@@ -75,21 +91,9 @@ function closeBookingDetailsModal(){
     bookingDetails.style.visibility = 'hidden';
 }
 
-backButton.addEventListener('click', () => { closeBookingDetailsModal() });
-
-function getBookings(dataSource){
-    fetch(dataSource, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-    })
-        .then(response => response.json())
-        .then(data => {
-            allBookings = data;
-        })
-        .catch(error => console.log(error));
-}
-
-getBookings(`http://localhost/labour_link/api/bookings.php?customerId=${userId}&num=5`);
+/*
+ * Javascript for feedback section
+ */
 
 function showFeedbackDetails(feedbackToken){
     const backdrop = document.getElementById('backdrop-modal');
@@ -197,8 +201,7 @@ function showFeedbackDetails(feedbackToken){
                 })
                     .then(response => response.json())
                     .then(data => {
-                        allBookings.push(data);
-                        openBookingDetailsModal(data.bookingId);
+                        openBookingDetailsModal(data);
                     })
                     .catch(error => {
                         const backdrop = document.getElementById('backdrop-modal');

@@ -60,7 +60,7 @@
         <div class="booking-details-title">
             <h1>Current Status of Your <u>Booking</u></h1>
         </div>
-        <div class="status-container" id="booking-details-status-container"></div>
+        <div class="status-container" id="booking-details-job-type"></div>
         <div class="details-container">
             <div class="details-row">
                 <h4>Job type</h4>
