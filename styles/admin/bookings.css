@@ -420,3 +420,80 @@
     border-radius: 12px;
     background-color: var(--primary-background-shade-color);
 }
+
+.main-table{
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    background-color: #FFF;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    color: #323E40;
+}
+
+.main-th{
+    margin: 4px 0;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: normal;
+    font-family: 'Poppins', sans-serif;
+    color: #FFF;
+    background-color: var(--primary-purple-color);
+    border-left: 2px solid #FFF;
+}
+
+.main-td{
+    padding: 12px 8px;
+    color: var(--dark-color);
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    border-left: 2px solid #323E40;
+}
+
+.main-th:first-child{
+    border-spacing: 0;
+    border-width: 0;
+}
+
+.main-td:first-child{
+    border-spacing: 0;
+    border-width: 0;
+}
+
+.main-td .blue-badge{
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+.main-td .red-badge{
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+.main-td .green-badge{
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+.empty-table-body-tr{
+    text-align: center;
+    margin: 16px auto;
+    width: 100%;
+}
+
+.empty-table-body-td{
+    padding: 16px 0;
+}
+
+.empty-table-body-td img{
+    width: 20%;
+    height: auto;
+}
+
+.empty-table-body-td h3{
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    color: var(--primary-color);
+}

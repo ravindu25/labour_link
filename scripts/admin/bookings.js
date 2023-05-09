@@ -239,7 +239,12 @@ function rerenderBookings(currentBookings){
 
         bookingsTableBody.innerHTML += `
             <tr class='main-tr'>
-               <td class='main-td' style='text-align: left;'>
+            <td class='main-td' style='text-align: left;'>
+                    ${booking.customerName}
+                    <br/>
+                    ${bookingStatus}
+               </td>
+               <td class='main-td' style='text-align: center;'>
                     ${booking.workerName}
                     <br/>
                     ${bookingStatus}

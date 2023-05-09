@@ -4,6 +4,7 @@ session_start();
 if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
     header("Location: admin-login.php");
 }
+$userId = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
