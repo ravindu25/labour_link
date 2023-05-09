@@ -113,7 +113,7 @@
                 <table class="main-table">
                     <thead>
                     <tr class="main-tr">
-                        <th class="main-th">Adress / Start Date</th>
+                        <th class="main-th">Address - Start Date</th>
                         <th class="main-th">Customer name</th>
                         <th class="main-th">Service</th>
                         <th class="main-th">Status</th>

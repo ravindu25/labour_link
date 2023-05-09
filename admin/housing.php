@@ -100,6 +100,66 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
         echo '<script src="../scripts/admin/loader.js" type="text/javascript"></script>';
         echo '<script>closeLoader()</script>';
         ?>
+        <div class="recent-housing">
+            <div class="recent-housing-title">
+                <h1>Recent Housing Jobs</h1>
+            </div>
+            <div class="recent-housing-container">
+                <table class="main-table">
+                    <thead>
+                    <tr class="main-tr">
+                        <th class="main-th">Address - Start Date</th>
+                        <th class="main-th">Customer name</th>
+                        <th class="main-th">Worker name</th>
+                        <th class="main-th">Service</th>
+                        <th class="main-th">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="main-tr">
+                        <td class="main-td" style="text-align: left;">Bambalapitiya Colombo
+                            <br />
+                            <span class="blue-badge">20 Nov 2022</span>
+                        </td>
+                        <td class="main-td">Mohamed</td>
+                        <td class="main-td">Dhananga</td>
+                        <td class="main-td">Electrical</td>
+                        <td class="main-td">Pending</td>
+                    </tr>
+                    <tr class="main-tr">
+                        <td class="main-td" style="text-align: left;">Bambalapitiya Colombo
+                            <br />
+                            <span class="blue-badge">20 Nov 2022</span>
+                        </td>
+                        <td class="main-td">Mohamed</td>
+                        <td class="main-td">Dhananga</td>
+                        <td class="main-td">Electrical</td>
+                        <td class="main-td">Pending</td>
+                    </tr>
+                    <tr class="main-tr">
+                        <td class="main-td" style="text-align: left;">Bambalapitiya Colombo
+                            <br />
+                            <span class="blue-badge">20 Nov 2022</span>
+                        </td>
+                        <td class="main-td">Mohamed</td>
+                        <td class="main-td">Dhananga</td>
+                        <td class="main-td">Electrical</td>
+                        <td class="main-td">Pending</td>
+                    </tr>
+                    <tr class="main-tr">
+                        <td class="main-td" style="text-align: left;">Bambalapitiya Colombo
+                            <br />
+                            <span class="blue-badge">20 Nov 2022</span>
+                        </td>
+                        <td class="main-td">Mohamed</td>
+                        <td class="main-td">Dhananga</td>
+                        <td class="main-td">Electrical</td>
+                        <td class="main-td">Pending</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 </main>
 <footer class="footer">
     <div class="footer-row" style="border-top: 1px solid #FFF; padding-top: 16px;">
