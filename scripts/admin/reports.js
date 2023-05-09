@@ -243,7 +243,6 @@ function loadOngoingBookings(ongoingBookings, data){
                     }
                 },
             },
-            radius: [180, 450]
         },
     })
 }
