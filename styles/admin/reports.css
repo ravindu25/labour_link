@@ -223,7 +223,9 @@
 }
 
 .pdf-generate-section{
-    margin: 0 8px;
+    display: flex;
+    margin: 10px;
+    margin-top: 40px;
     padding: 24px;
     background-color: white;
     border: 1px solid var(--primary-color);
@@ -232,8 +234,10 @@
 
 .pdf-generate-header{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    /*justify-content: space-between;*/
     align-items: center;
+    width: 90%;
 }
 
 .pdf-generate-header h1{
@@ -248,7 +252,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
 }
 
 .pdf-generate-content img{
@@ -257,6 +260,6 @@
 }
 
 .pdf-generate-content button{
-    width: 10%;
+    width: 25%;
     height: 50%;
 }

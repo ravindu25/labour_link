@@ -301,35 +301,36 @@ function loadUserTypes(userTypes, data){
 }
 
 function loadMonthlyUserRegistration(monthlyUserRegistration, data){
-    console.log(data);
+    // console.log(data);
 
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
     ];
     for(let i = 0; i < data.length; i++){
-        data[i]['Month'] = monthNames[parseInt(data[i]['Month']) - 2];
+        data[i]['Month'] = monthNames[parseInt(data[i]['Month']) - 1];
     }
 
+    console.log(data);
     let upperStack = []; // For admin
     let middleStack = []; // For worker
     let bottomStack = []; // For customer
 
     for(let i = 0; i < monthNames.length; i++){
-        const adminData = data.find(element => (element.Month === monthNames[i - 1] && element.Type === 'Admin'));
+        const adminData = data.find(element => (element.Month === monthNames[i] && element.Type === 'Admin'));
         if(adminData){
             upperStack.push(parseInt(adminData.UserCount));
         } else {
             upperStack.push(0);
         }
 
-        const workerData = data.find(element => (element.Month === monthNames[i - 1] && element.Type === 'Worker'));
+        const workerData = data.find(element => (element.Month === monthNames[i] && element.Type === 'Worker'));
         if(workerData){
             middleStack.push(parseInt(workerData.UserCount));
         } else {
             middleStack.push(0);
         }
 
-        const customerData = data.find(element => (element.Month === monthNames[i - 1] && element.Type === 'Customer'));
+        const customerData = data.find(element => (element.Month === monthNames[i] && element.Type === 'Customer'));
         if(customerData){
             bottomStack.push(parseInt(customerData.UserCount));
         } else {

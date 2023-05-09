@@ -164,12 +164,12 @@
                 </div>
             </div>
             <div class="pdf-generate-section">
-                <div class="pdf-generate-header">
-                    <h1>Generate pdf for the report</h1>
-                    <button type="button" class="primary-button" onclick="generatePDF()"><i class="fa-solid fa-print"></i>&nbsp;&nbsp;Generate PDF</button>
-                </div>
                 <div class="pdf-generate-content">
                     <img src="../assets/admin/undraw_printing_invoices_-5-r4r.svg" alt="printing-image" />
+                </div>
+                <div class="pdf-generate-header">
+                    <h1>Obtain a pdf version of the report</h1>
+                    <button type="button" class="primary-button" onclick="generatePDF()"><i class="fa-solid fa-print"></i>&nbsp;&nbsp;Generate PDF</button>
                 </div>
             </div>
         </div>

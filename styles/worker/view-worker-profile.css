@@ -49,13 +49,13 @@ p {
 .worker-location{
     margin: 0px 130px;
     font-weight: 30;
-    font-size: 30px;
+    font-size: 25px;
     font-family: Inter;
 }
 
 .detail-row{
     display: flex;
-    font-size: 30px;
+    font-size: 25px;
     color: black;
     font-weight: normal;
     font-family: Inter;
@@ -64,9 +64,9 @@ p {
 
 .subheading{
     position: relative;
-    font-size: 22px;
+    font-size: 28px;
     font-family: Poppins;
-    color: #7C7C7C;
+    color: #102699;
 }
 
 .subheading::after {
