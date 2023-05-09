@@ -63,7 +63,7 @@
 
     function getAllCategories($conn, $workerId){
         $sql_statement = "SELECT Worker.Worker_ID, P.Plumber_ID, C.Carpenter_ID, E.Electrician_ID, P2.Painter_ID,
-        M.Mason_ID, J.Janitor_ID, M2.Mechanic_ID, Gardener_ID
+        M.Mason_ID, J.Janitor_ID, M2.Mechanic_ID, G.Gardener_ID
                     FROM Worker LEFT JOIN Plumber P on Worker.Worker_ID = P.Plumber_ID
                     LEFT JOIN Carpenter C on Worker.Worker_ID = C.Carpenter_ID
                     LEFT JOIN Electrician E on Worker.Worker_ID = E.Electrician_ID

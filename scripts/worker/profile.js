@@ -653,3 +653,76 @@ function sendFeedback(user_id){
     })
 
 }
+
+/*
+    Applying for a job section
+ */
+const addJobTypeCards = document.getElementsByName('add-job-type-select');
+for(let i = 0; i < addJobTypeCards.length; i++){
+    addJobTypeCards[i].addEventListener('click', function(){
+        checkJobCardTypes();
+    })
+}
+
+function checkJobCardTypes(){
+    let checked = false;
+    const addJobTypeCards = document.getElementsByName('add-job-type-select');
+
+    for(let i = 0; i < addJobTypeCards.length; i++){
+        if(addJobTypeCards[i].checked){
+            checked = true;
+            break;
+        }
+    }
+
+    const updateButton = document.getElementById('worker-type-add-button');
+    if(checked){
+        updateButton.addEventListener('click', () => {
+            addWorkerJobType();
+        });
+
+        updateButton.disabled = false;
+        updateButton.classList.add('primary-button');
+        updateButton.classList.remove('disable-button');
+    } else {
+        updateButton.removeEventListener('click', () => {
+            addWorkerJobType();
+        });
+
+        updateButton.disabled = true;
+        updateButton.classList.add('disable-button');
+        updateButton.classList.remove('primary-button');
+    }
+}
+
+function showAddCategoryContainer(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const addCategoryContainer = document.getElementById('add-worker-type-modal');
+
+    backdrop.style.visibility = 'visible';
+    addCategoryContainer.style.visibility = 'visible';
+}
+
+function hideAddCategoryContainer(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const addCategoryContainer = document.getElementById('add-worker-type-modal');
+
+    backdrop.style.visibility = 'hidden';
+    addCategoryContainer.style.visibility = 'hidden';
+}
+
+function showActiveDeactivateContainer(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const activeDeactivateContainer = document.getElementById('update-worker-type-modal');
+
+    backdrop.style.visibility = 'visible';
+    activeDeactivateContainer.style.visibility = 'visible';
+}
+
+function hideActiveDeactivateContainer(){
+    const backdrop = document.getElementById('backdrop-modal');
+    const activeDeactivateContainer = document.getElementById('update-worker-type-modal');
+
+    backdrop.style.visibility = 'hidden';
+    activeDeactivateContainer.style.visibility = 'hidden';
+}

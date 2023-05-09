@@ -178,7 +178,7 @@ a{
     background-color: var(--primary-background-shade-color);
 }
 
-.job-type-select{
+.job-type-select, .job-type-update-select{
     display: none;
 }
 
@@ -200,6 +200,18 @@ a{
 
 .job-type-select:checked + .job-type-card-container{
     border: 3px solid var(--primary-color);
+}
+
+.job-type-update-select + .job-type-card-container{
+    border: 3px solid var(--success-color);
+}
+
+.job-type-update-select:checked + .job-type-card-container{
+    border: 3px solid var(--danger-color);
+}
+
+.job-type-update-select:checked + .job-type-card-container{
+    border: 3px solid var(--danger-color);
 }
 
 .worker-type-modal-button-container{
@@ -877,6 +889,14 @@ a{
     height: 20px;
     width: 20px;
     margin: 4px 8px;
+}
+
+.active-heading{
+    color: var(--success-color);
+}
+
+.deactive-heading{
+    color: var(--danger-color);
 }
 
 @media (max-width: 1350px){

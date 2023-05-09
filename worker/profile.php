@@ -29,6 +29,229 @@
 <body>
 <div class="backdrop-modal" id="backdrop-modal">
 </div>
+<?php
+    require_once('../db.php');
+
+    $sql_statement = "SELECT Worker.Worker_ID, P.Plumber_ID, P.Active AS Plumber_Active, C.Carpenter_ID, C.Active AS Carpenter_Active, E.Electrician_ID, E.Active AS Electrician_Active, P2.Painter_ID, P2.Active AS Painter_Active,
+        M.Mason_ID, M.Active AS Mason_Active, J.Janitor_ID, J.Active AS Janitor_Active, M2.Mechanic_ID, M2.Active AS Mechanic_Active, G.Gardener_ID, G.Active AS Gardener_Active
+                    FROM Worker LEFT JOIN Plumber P on Worker.Worker_ID = P.Plumber_ID
+                    LEFT JOIN Carpenter C on Worker.Worker_ID = C.Carpenter_ID
+                    LEFT JOIN Electrician E on Worker.Worker_ID = E.Electrician_ID
+                    LEFT JOIN Painter P2 on Worker.Worker_ID = P2.Painter_ID
+                    LEFT JOIN Mason M on Worker.Worker_ID = M.Mason_ID
+                    LEFT JOIN Janitor J on Worker.Worker_ID = J.Janitor_ID
+                    LEFT JOIN Mechanic M2 on Worker.Worker_ID = M2.Mechanic_ID
+                    LEFT JOIN Gardener G on Worker.Worker_ID = G.Gardener_ID WHERE Worker_ID = $userId";
+
+    $result = $conn->query($sql_statement);
+
+    $workerCategories = array();
+    $addCategories = array();
+    $activeCategories = array();
+    $deactiveCategories = array();
+
+    if($result->num_rows){
+        while($row = $result->fetch_assoc()){
+            if($row['Plumber_ID'] != null){
+                array_push($workerCategories, "Plumber");
+
+                if($row['Plumber_Active'] == 1){
+                    array_push($activeCategories, "Plumber");
+                } else {
+                    array_push($deactiveCategories, "Plumber");
+                }
+            } else {
+                array_push($addCategories, "Plumber");
+            }
+
+            if($row['Carpenter_ID'] != null){
+                array_push($workerCategories, "Carpenter");
+
+                if($row['Carpenter_Active'] == 1){
+                    array_push($activeCategories, "Carpenter");
+                } else {
+                    array_push($deactiveCategories, "Carpenter");
+                }
+            } else {
+                array_push($addCategories, "Carpenter");
+            }
+
+            if($row['Electrician_ID'] != null){
+                array_push($workerCategories, "Electrician");
+
+                if($row['Electrician_Active'] == 1){
+                    array_push($activeCategories, "Electrician");
+                } else {
+                    array_push($deactiveCategories, "Electrician");
+                }
+            } else {
+                array_push($addCategories, "Electrician");
+            }
+
+            if($row['Painter_ID'] != null){
+                array_push($workerCategories, "Painter");
+
+                if($row['Painter_Active'] == 1){
+                    array_push($activeCategories, "Painter");
+                } else {
+                    array_push($deactiveCategories, "Painter");
+                }
+            } else {
+                array_push($addCategories, "Painter");
+            }
+
+            if($row['Mason_ID'] != null){
+                array_push($workerCategories, "Mason");
+
+                if($row['Mason_Active'] == 1){
+                    array_push($activeCategories, "Mason");
+                } else {
+                    array_push($deactiveCategories, "Mason");
+                }
+            } else {
+                array_push($addCategories, "Mason");
+            }
+
+            if($row['Janitor_ID'] != null){
+                array_push($workerCategories, "Janitor");
+
+                if($row['Janitor_Active'] == 1){
+                    array_push($activeCategories, "Janitor");
+                } else {
+                    array_push($deactiveCategories, "Janitor");
+                }
+            } else {
+                array_push($addCategories, "Janitor");
+            }
+
+            if($row['Mechanic_ID'] != null){
+                array_push($workerCategories, "Mechanic");
+
+                if($row['Mechanic_Active'] == 1){
+                    array_push($activeCategories, "Mechanic");
+                } else {
+                    array_push($deactiveCategories, "Mechanic");
+                }
+            } else {
+                array_push($addCategories, "Mechanic");
+            }
+
+            if($row['Gardener_ID'] != null){
+                array_push($workerCategories, "Gardener");
+
+                if($row['Gardener_Active'] == 1){
+                    array_push($activeCategories, "Gardener");
+                } else {
+                    array_push($deactiveCategories, "Gardener");
+                }
+            } else {
+                array_push($addCategories, "Gardener");
+            }
+        }
+    }
+
+    function getImageUrl($workerType){
+        switch($workerType){
+            case "Plumber":
+                return "../assets/job-card-image/plumbing-image.jpg";
+            case "Carpenter":
+                return "../assets/job-card-image/carpentry-image.jpg";
+            case "Electrician":
+                return "../assets/job-card-image/electrical-image.jpg";
+            case "Painter":
+                return "../assets/job-card-image/painting-image.jpg";
+            case "Mason":
+                return "../assets/job-card-image/masonry-image.jpg";
+            case "Janitor":
+                return "../assets/job-card-image/janitor-image.jpg";
+            case "Mechanic":
+                return "../assets/job-card-image/mechanical-image.jpg";
+            case "Gardener":
+                return "../assets/job-card-image/gardening-image.jpg";
+        }
+    }
+?>
+<div class="worker-type-modal" id="add-worker-type-modal">
+    <div class="worker-type-modal-header">
+        <h1>Add for new worker category!</h1>
+    </div>
+    <div class="worker-type-modal-cards-container">
+        <?php
+            for($i = 0; $i < sizeof($addCategories); $i++){
+                $categoryName = ucfirst($addCategories[$i]);
+                $imageUrl = getImageUrl($addCategories[$i]);
+
+                echo "
+                    <div class='worker-type-modal-card'>
+                    <label>
+                        <input type='checkbox' name='add-job-type-select' value='$addCategories[$i]' class='job-type-select' id='job-type-add-$addCategories[$i]' />
+                        <div class='job-type-card-container'>
+                            <div class='job-type-image-container'>
+                                <img src='$imageUrl' alt='$addCategories[$i]' class='job-type-image' />
+                            </div>
+                            <h3>$categoryName</h3>
+                    </div>
+                    </label>
+                    </div>
+                ";
+            }
+        ?>
+    </div>
+    <div class="worker-type-modal-button-container">
+        <button type="button" class="primary-outline-button" onclick="hideAddCategoryContainer()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" id="worker-type-add-button" class="disable-button"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add category</button>
+    </div>
+</div>
+<div class="success-message-container" id="add-jobType-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Job type added sucessful!</h1>
+</div>
+<div class="failed-message-container" id="add-jobType-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;PJob type adding failed!</h1>
+        <h5 id="housing-create-fail-text">Your login session outdated. Please login again.</h5>
+    </div>
+</div>
+<div class="worker-type-modal" id="update-worker-type-modal">
+    <div class="worker-type-modal-header">
+        <h1>Activate/Deactivate worker category!</h1>
+    </div>
+    <div class="worker-type-modal-cards-container">
+        <?php
+            for($i = 0; $i < sizeof($workerCategories); $i++){
+                $categoryName = ucfirst($workerCategories[$i]);
+                $imageUrl = getImageUrl($workerCategories[$i]);
+                $isActive = true;
+
+                if(in_array($workerCategories[$i], $deactiveCategories)){
+                    $isActive = false;
+                }
+
+                $checkedText = '';
+                if(!$isActive){
+                    $checkedText = 'checked';
+                }
+
+                echo "
+                    <div class='worker-type-modal-card'>
+                    <label>
+                        <input type='checkbox' name='update-job-type-select' value='$workerCategories[$i]' class='job-type-update-select' id='job-type-add-$workerCategories[$i]' $checkedText/>
+                        <div class='job-type-card-container'>
+                            <div class='job-type-image-container'>
+                                <img src='$imageUrl' alt='$workerCategories[$i]' class='job-type-image' />
+                            </div>
+                            <h3>$categoryName</h3>
+                    </div>
+                    </label>
+                    </div>
+                ";
+            }
+        ?>
+    </div>
+    <div class="worker-type-modal-button-container">
+        <button type="button" class="primary-outline-button" onclick="hideActiveDeactivateContainer()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" id="worker-type-add-button" class="disable-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+    </div>
+</div>
 <div class="profile-change-modal-container" id="profile-change-modal-container">
     <div class="change-profile-page">
         <div class="change-profile-banner">
@@ -375,15 +598,21 @@ $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
             </div>
             <div class="quick-action-list">
                 <div class="quick-action-item">
-                    <h3>Secure your account with a new password.</h3>
+                    <h3>Secure your account with a new password!</h3>
                     <div class="quick-action-item-button-container">
                         <button type="button" class="primary-button" onclick="showChangePasswordModal()"><i class="fa-solid fa-unlock-keyhole"></i>&nbsp;&nbsp;Change password</button>
                     </div>
                 </div>
                 <div class="quick-action-item">
-                    <h3>Unlock premium features and take your experience to the next level</h3>
+                    <h3>Add for new worker category!</h3>
                     <div class="quick-action-item-button-container">
-                        <button type="button" class="primary-button"><i class="fa-solid fa-circle-up"></i>&nbsp;&nbsp;Upgrade now</button>
+                        <button type="button" class="primary-button" onclick="showAddCategoryContainer()"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add category</button>
+                    </div>
+                </div>
+                <div class="quick-action-item">
+                    <h3>Activate/Deactivate from worker category</h3>
+                    <div class="quick-action-item-button-container">
+                        <button type="button" class="primary-button" onclick="showActiveDeactivateContainer()"><i class="fa-solid fa-shuffle"></i>&nbsp;&nbsp;Activate/Deactivate</button>
                     </div>
                 </div>
             </div>
