@@ -47,6 +47,18 @@
 </div>
 <div class="backdrop-modal" id="admin-backdrop-modal">
 </div>
+<div class="backdrop-modal" id="backdrop-modal"></div>
+<div class="error-message-container" id="error-message-container">
+    <div class="error-message-heading">
+        <h1>Sorry, an unexpected error has occurred. Please try again later or contact customer support for assistance</h1>
+    </div>
+    <div class="error-message-image">
+        <img src="../assets/error-image.png" alt="error-image" />
+    </div>
+</div>
+<div class="pdf-generate-modal" id="pdf-generate-modal">
+    <iframe id="pdf" style="width: 100%; height: 100%;"></iframe>
+</div>
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">
@@ -113,40 +125,51 @@
                 <h1>Control panel for generating <u>Reports</u></h1>
                 <h5>Logged as <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></h5>
             </div>
-            <div class="booking-reports">
-                <h1>Booking report</h1>
-                <div class="type-based-bookings">
-                    <div class="popular-booking-types-graph">
-                        <h1>Popularity of booking type</h1>
-                        <canvas id="popular-booking-types"></canvas>
+            <div id="report-section">
+                <div class="booking-reports">
+                    <h1>Booking section</h1>
+                    <div class="type-based-bookings" id="type-based-bookings">
+                        <div class="popular-booking-types-graph">
+                            <h1>Popularity of booking type</h1>
+                            <canvas id="popular-booking-types"></canvas>
+                        </div>
+                        <div class="monthly-booking-types-graph">
+                            <h1>Recent booking count based on worker types</h1>
+                            <canvas id="monthly-booking-types"></canvas>
+                        </div>
                     </div>
-                    <div class="monthly-booking-types-graph">
-                        <h1>Recent booking count based on worker types</h1>
-                        <canvas id="monthly-booking-types"></canvas>
+                    <div class="overall-bookings">
+                        <div class="total-booking-details-graph">
+                            <h1>Total bookings every month</h1>
+                            <canvas id="total-bookings"></canvas>
+                        </div>
+                        <div class="ongoing-bookings-graph">
+                            <h1>Ongoing bookings : <b><?php echo $resultBookingsCount ?></b></h1>
+                            <canvas id ="ongoing-bookings"></canvas>
+                        </div>
                     </div>
                 </div>
-                <div class="overall-bookings">
-                    <div class="total-booking-details-graph">
-                        <h1>Total bookings every month</h1>
-                        <canvas id="total-bookings"></canvas>
-                    </div>
-                    <div class="ongoing-bookings-graph">
-                        <h1>Ongoing bookings : <b><?php echo $resultBookingsCount ?></b></h1>
-                        <canvas id ="ongoing-bookings"></canvas>
+                <div class="user-reports">
+                    <h1>User section</h1>
+                    <div class="user-reports-graphs">
+                        <div class="classification-of-users-graph">
+                            <h1>Classification of Users in the system</h1>
+                            <canvas id = "classification-of-users"></canvas>
+                        </div>
+                        <div class="monthly-user-registration-graph">
+                            <h1>Monthly registration of users</h1>
+                            <canvas id = "monthly-user-registration"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="user-reports">
-                <h1>User report</h1>
-                <div class="user-reports-graphs">
-                    <div class="classification-of-users-graph">
-                        <h1>Classification of Users in the system</h1>
-                        <canvas id = "classification-of-users"></canvas>
-                    </div>
-                    <div class="monthly-user-registration-graph">
-                        <h1>Monthly registration of users</h1>
-                        <canvas id = "monthly-user-registration"></canvas>
-                    </div>
+            <div class="pdf-generate-section">
+                <div class="pdf-generate-header">
+                    <h1>Generate pdf for the report</h1>
+                    <button type="button" class="primary-button" onclick="generatePDF()"><i class="fa-solid fa-print"></i>&nbsp;&nbsp;Generate PDF</button>
+                </div>
+                <div class="pdf-generate-content">
+                    <img src="../assets/admin/undraw_printing_invoices_-5-r4r.svg" alt="printing-image" />
                 </div>
             </div>
         </div>
@@ -163,6 +186,8 @@
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/admin/reports.js" type="text/javascript"></script>
-<script src="../scripts/admin/payments.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script src="../scripts/admin/report-pdf.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>

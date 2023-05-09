@@ -58,6 +58,7 @@
             header('Content-Type: application/json');
             echo json_encode($workers);
         }
+        // else if(isset($_GET['workerId']))
     }
 
     function getAllCategories($conn, $workerId){

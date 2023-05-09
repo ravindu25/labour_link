@@ -1,3 +1,18 @@
+.pdf-generate-modal{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    min-width: 30vw;
+    transform: translate(-50%, -50%) ;
+    padding: 32px;
+    color: #102699;
+    background-color: #FFF;
+    border-radius: 24px;
+    opacity: 1;
+    visibility: hidden;
+    text-align: center;
+}
+
 .main-section{
     background-color: #ABC3EF;
 }
@@ -205,4 +220,43 @@
     font-family: 'Poppins', sans-serif;
     font-size: 28px;
     font-weight: normal;
+}
+
+.pdf-generate-section{
+    margin: 0 8px;
+    padding: 24px;
+    background-color: white;
+    border: 1px solid var(--primary-color);
+    border-radius: 15px;
+}
+
+.pdf-generate-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pdf-generate-header h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.pdf-generate-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pdf-generate-content img{
+    width: 40%;
+    height: auto;
+}
+
+.pdf-generate-content button{
+    width: 10%;
+    height: 50%;
 }
