@@ -315,34 +315,6 @@
                 <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
-        </div>
-
-        <!-- Ongoing Discount Section -->
-        <div class="ongoing-discount">
-            <div class="ongoing-discount-title">
-                <h1>Ongoing Discounts</h1>
-            </div>
-            <div class="ongoing-discount-container">
-                <div class="discount-card">
-                    <div class="discount-card-text">
-                        <h3>Till 2020 Dec 10</h3>
-                        <i class="fa-solid fa-champagne-glass"></i>
-                        <h2>Black friday sale</h2>
-                        <h1>10% off from Bookings</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="ongoing-discount">
-                <div class="discount-card">
-                    <div class="discount-card-text">
-                        <h3>Till 2020 Dec 10</h3>
-                        <i class="fa-solid fa-champagne-glass"></i>
-                        <h2>Black friday sale</h2>
-                        <h1>25% off from Housings</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 </main>
 <footer class="footer">

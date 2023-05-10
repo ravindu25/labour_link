@@ -1,6 +1,7 @@
 const backdropModal = document.getElementById("backdrop-modal");
 const adminCreateButton = document.getElementById("create-admin-button");
 const adminCreateCancelButton = document.getElementById("admin-create-cancel-button");
+let currentPage = 0;
 
 backdropModal.addEventListener('click', () => { closeResetModal() });
 adminCreateButton.addEventListener('click', () => { openAdminForm() });
@@ -185,3 +186,118 @@ function showFailMessage(errorText){
         failMessage.style.visibility = 'hidden';
     }, 5000);
 }
+
+function goToPreviousUsersPage(){
+    let start = ((currentPage - 2) * 5) + 1;
+    let end = (start + 4) <= rowCount ? (start + 4) : rowCount;
+
+    for(let i = 1; i <= rowCount; i++){
+        if(i >= start && i <= end){
+            document.getElementById(`users-table-row-${i}`).style.display = 'table-row';
+        } else {
+            document.getElementById(`users-table-row-${i}`).style.display = 'none';
+        }
+    }
+
+    currentPage = currentPage - 1;
+
+    const currPageButton = document.getElementById('current-users-page-number');
+    const prevPageButton = document.getElementById('previous-users-page-number');
+    const nextPageButton = document.getElementById('next-users-page-number');
+
+    const prevArrow = document.getElementById('previous-users-page');
+    const nextArrow = document.getElementById('next-users-page');
+
+    currPageButton.innerHTML = `<i class="fa-solid fa-${currentPage}"></i>`;
+
+    nextPageButton.innerHTML = `<i class="fa-solid fa-${currentPage + 1}"></i>`;
+    nextPageButton.style.display = 'block';
+    nextArrow.disabled = false;
+    nextArrow.style.color = 'var(--primary-color)';
+
+    if(currentPage === 1){
+        prevPageButton.style.display = 'none';
+        prevArrow.disabled = true;
+        prevArrow.style.color = 'var(--grey-color)';
+    } else {
+        prevPageButton.style.display = 'block';
+        prevPageButton.innerHTML = `<i class="fa-solid fa-${currentPage - 1}"></i>`;
+        prevArrow.disabled = false;
+        prevArrow.style.color = 'var(--primary-color)';
+    }
+
+}
+
+function goToNextUsersPage(){
+    let start = (currentPage * 5) + 1;
+    let end = (start + 4) <= rowCount ? (start + 4) : rowCount;
+
+    for(let i = 1; i <= rowCount; i++){
+        if(i >= start && i <= end){
+            document.getElementById(`users-table-row-${i}`).style.display = 'table-row';
+        } else {
+            document.getElementById(`users-table-row-${i}`).style.display = 'none';
+        }
+    }
+
+    currentPage = currentPage + 1;
+
+    const currPageButton = document.getElementById('current-users-page-number');
+    const prevPageButton = document.getElementById('previous-users-page-number');
+    const nextPageButton = document.getElementById('next-users-page-number');
+
+    const prevArrow = document.getElementById('previous-users-page');
+    const nextArrow = document.getElementById('next-users-page');
+
+    currPageButton.innerHTML = `<i class="fa-solid fa-${currentPage}"></i>`;
+
+    if(currentPage < totalPages){
+        nextPageButton.innerHTML = `<i class="fa-solid fa-${currentPage + 1}"></i>`;
+    } else {
+        nextPageButton.style.display = 'none';
+        nextArrow.disabled = true;
+        nextArrow.style.color = 'var(--grey-color)';
+    }
+
+    if(currentPage === 1){
+        prevPageButton.style.display = 'none';
+    } else {
+        prevPageButton.style.display = 'block';
+        prevPageButton.innerHTML = `<i class="fa-solid fa-${currentPage - 1}"></i>`;
+    }
+
+
+    prevArrow.disabled = false;
+    prevArrow.style.color = 'var(--primary-color)';
+
+}
+
+goToNextUsersPage();
+
+function searchUsersTable(){
+    const searchInput = document.getElementById('search-users-input');
+    const searchValue = searchInput.value.toLowerCase();
+
+    if(searchValue === ''){
+        for(let i = 1; i <= rowCount; i++){
+            document.getElementById(`users-table-row-${i}`).style.display = 'table-row';
+        }
+        currentPage = 0;
+        goToNextUsersPage();
+
+        return;
+    }
+
+    for(let i = 1; i <= rowCount; i++){
+        const username = document.getElementById(`users-table-username-${i}`).innerText.toLowerCase();
+        const loginText = document.getElementById(`users-table-login-${i}`).innerText.toLowerCase();
+        const roleText = document.getElementById(`users-table-login-${i}`).innerText.toLowerCase();
+
+        if(username.includes(searchValue) || loginText.includes(searchValue) || roleText.includes(searchValue)){
+            document.getElementById(`users-table-row-${i}`).style.display = 'table-row';
+        } else {
+            document.getElementById(`users-table-row-${i}`).style.display = 'none';
+        }
+    }
+}
+
