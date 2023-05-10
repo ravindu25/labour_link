@@ -59,6 +59,14 @@ $userId = $_SESSION['user_id'];
                 <h4 class="details-value" id="booking-details-customer-name"></h4>
             </div>
             <div class="details-row">
+                <h4>Contact Number</h4>
+                <h4 class="details-value" id="booking-details-contact-number"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Address</h4>
+                <h4 class="details-value" id="booking-details-customer-address"></h4>
+            </div>
+            <div class="details-row">
                 <h4>Start date</h4>
                 <h4 class="details-value" id="booking-details-start-date"></h4>
             </div>
@@ -84,11 +92,6 @@ $userId = $_SESSION['user_id'];
                 <div class="reject-button-container">
                     <button type="button" class="worker-input-button" id="reject-button"><i class="fa fa-ban"></i> Reject</button>
                 </div>
-                <!-- <div class="pending-button-container">
-                    <i class="fa fa-angle-double-left"></i>
-                    <button type="button" class="worker-input-button" id="pending-button">Pending</button>
-                    <i class="fa fa-angle-double-right"></i>
-                </div> -->
                 <div class="accept-button-container">
                     <button type="button" class="worker-input-button" id="accept-button"><i class="fa fa-check"></i> Accept</button>
                 </div>
@@ -96,7 +99,7 @@ $userId = $_SESSION['user_id'];
         </div>
     </div>
 </div>
-<div class="create-booking-container" id="create-booking-container">
+<!-- <div class="create-booking-container" id="create-booking-container">
     <div class="create-booking-scroll-wrapper">
         <div class="create-booking-title">
             <h1>Create new <u>Booking</u></h1>
@@ -194,7 +197,7 @@ $userId = $_SESSION['user_id'];
             </div>
         </form>
     </div>
-</div>
+</div> -->
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">
@@ -300,13 +303,14 @@ $userId = $_SESSION['user_id'];
                 </div>
             </div>
         </div>
+
         <!--Booking search container-->
         <div class="booking-search">
             <div class="booking-search-title">
-                <h1>Search for bookings</h1>
+                <h1>Search Pending for Request bookings</h1>
                 <form action="" method="POST">
                     <div class="booking-search-input-container">
-                        <label for="booking-search">Search (Worker name etc)</label>
+                        <label for="booking-search">Search (Customer name etc)</label>
                         <div class="booking-search-input-field">
                             <input type="text" id="booking-search" class="booking-search-input" name="users-search"/>
                             <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -320,107 +324,22 @@ $userId = $_SESSION['user_id'];
                 <thead>
                 <tr class="main-tr">
                     <th class="main-th">
-                        <div class="table-heading-container">Worker name&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">Customer name&nbsp;<button class="sort-button" id="customer-name-sort"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                         </div>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">Start date&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">Start date&nbsp;<button class="sort-button" id="start-date-sort"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">End date&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">End date&nbsp;<button class="sort-button" id="end-date-sort"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
                     <th class="main-th">More actions</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Saman Gunawardhana
-                        <br/>
-                        <span class="pending-badge">Pending</span>
-                    </td>
-                    <td class="main-td">21 Oct 2022</td>
-                    <td class="main-td">27 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Sunil Perera
-                        <br/>
-                        <span class="pending-badge">Pending</span>
-                    </td>
-                    <td class="main-td">12 Oct 2022</td>
-                    <td class="main-td">20 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Sunith Hettiarachchi
-                        <br/>
-                        <span class="rejected-badge">Rejected</span>
-                    </td>
-                    <td class="main-td">1 Oct 2022</td>
-                    <td class="main-td">5 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Dammika Kumara
-                        <br/>
-                        <span class="completed-badge">Completed</span>
-                    </td>
-                    <td class="main-td">23 Oct 2022</td>
-                    <td class="main-td">28 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Dinesh Attanayaka
-                        <br/>
-                        <span class="completed-badge">Completed</span>
-                    </td>
-                    <td class="main-td">10 Oct 2022</td>
-                    <td class="main-td">24 Oct 2022</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="disable-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                <tbody id="bookings-table-body">
                 </tbody>
             </table>
             <div class="pagination-container">
@@ -431,6 +350,55 @@ $userId = $_SESSION['user_id'];
                 <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
+    </div>
+
+        <!--Booking search container-->
+        <div class="booking-search">
+            <div class="booking-search-title">
+                <h1>Search for All bookings</h1>
+                <form action="" method="POST">
+                    <div class="booking-search-input-container">
+                        <label for="booking-search">Search (Customer name etc)</label>
+                        <div class="booking-search-input-field">
+                            <input type="text" id="booking-search" class="booking-search-input" name="users-search"/>
+                            <button type="button" class="search-icon-small" id="booking-search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="recent-payments-container">
+            <table class="main-table">
+                <thead>
+                <tr class="main-tr">
+                    <th class="main-th">
+                        <div class="table-heading-container">Customer name&nbsp;<button class="sort-button" id="customer-name-sort"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
+                        </div>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">Start date&nbsp;<button class="sort-button" id="start-date-sort"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
+                    </th>
+                    <th class="main-th">
+                        <div class="table-heading-container">End date&nbsp;<button class="sort-button" id="end-date-sort"><i
+                                        class="fa-solid fa-arrow-up"></i></button>
+                    </th>
+                    <th class="main-th">More actions</th>
+                </tr>
+                </thead>
+                <tbody id="bookings-table-body">
+                </tbody>
+            </table>
+            <div class="pagination-container">
+                <button class="pagination-button" id="previous_page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button" id="previous_page_number" disabled><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current" id="current_page_number"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="next_page_number" disabled><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="next_page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+
         </div>
     </section>
 </main>

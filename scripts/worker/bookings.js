@@ -24,6 +24,8 @@ function openBookingDetailsModal(bookingId){
 
     document.getElementById('booking-details-job-type').innerText = currentBooking.workerType;
     document.getElementById('booking-details-customer-name').innerText = currentBooking.customerName;
+    document.getElementById('booking-details-contact-number').innerText = currentBooking.customerContactNo;
+    document.getElementById('booking-details-customer-address').innerText = currentBooking.customerAddress;
     document.getElementById('booking-details-start-date').innerText = currentBooking.startDate;
 
     if(currentBooking.status === 'Pending' || currentBooking.status === 'Accepted') {
@@ -113,15 +115,19 @@ function getBookings(dataSource){
     })
         .then(response => response.json())
         .then(data => {
-            //fetchedBookings = data;
+            fetchedBookings = data;
             allBookings = data;
-           // totalPages = Math.ceil(allBookings.length / 5);
-            //loadInitialPage();
+            pendingBookings = fetchedBookings.filter(booking => booking.status === 'Pending');
+            totalPendingPages = Math.ceil(pendingBookings.length / 5);
+            totalPages = Math.ceil(allBookings.length / 5);
+            loadInitialPage();
         })
         .catch(error => console.log(error));
 }
 
 getBookings(`http://localhost/labour_link/api/bookings.php?workerId=${userId}`);
+
+
 
 function closeBookingDetailsModal(){
     const backdropModal = document.getElementById("backdrop-modal");
@@ -139,23 +145,6 @@ function closeBookingDetailsModal(){
 
     backdropModal.style.visibility = 'hidden';
     bookingDetails.style.visibility = 'hidden';
-}
-
-// Booking create form
-function openCreateBookingModal(){
-    const backdropModal = document.getElementById("backdrop-modal");
-    const bookingDetailsContainer = document.getElementById("booking-details-container");
-
-    backdropModal.style.visibility = 'visible';
-    bookingDetailsContainer.style.visibility = 'visible';
-}
-
-function closeCreateBookingModal(){
-    const backdropModal = document.getElementById("backdrop-modal");
-    const bookingDetailsContainer = document.getElementById("booking-details-container");
-
-    backdropModal.style.visibility = 'hidden';
-    bookingDetailsContainer.style.visibility = 'hidden';
 }
 
 // Get the accept and reject buttons
@@ -205,3 +194,303 @@ function updateBookingStatus(bookingId, status) {
         console.error(error);
     });
 }
+
+/*
+    Purpose - Perform and apply pagination to the booking table
+*/
+const previousPageButton = document.getElementById('previous-page');
+previousPageButton.disabled = true;
+    
+function previousPage(){
+    [currPage, currentBookings] = goToPreviousPage(currPage, allBookings);
+    
+    const currPageButton = document.getElementById('current-page-number');
+    const prevPageButton = document.getElementById('previous-page-number');
+    const nextPageButton = document.getElementById('next-page-number');
+    
+    const prevArrow = document.getElementById('previous-page');
+    const nextArrow = document.getElementById('next-page');
+    
+    currPageButton.innerHTML = `<i class="fa-solid fa-${currPage}"></i>`;
+    
+    if(currPage > 1) {
+         prevPageButton.innerHTML = `<i class="fa-solid fa-${currPage - 1}"></i>`;
+    } else {
+        prevPageButton.style.display = 'none';
+        prevArrow.disabled = true;
+        prevArrow.style.color = 'var(--primary-background-shade-color)';
+    }
+    
+        nextArrow.disabled = false;
+        nextArrow.style.color = 'var(--primary-color)';
+        nextPageButton.style.display = 'block';
+        nextPageButton.innerHTML = `<i class="fa-solid fa-${currPage + 1}"></i>`;
+    }
+    
+    
+    function goToPreviousPage(currPage, allBookings){
+        let selectedBookings = [];
+    
+        currPage -= 1;
+        let start = (currPage - 1) * 5;
+    
+        for(let i = start; i < start + 5; i++){
+            selectedBookings.push(allBookings[i]);
+        }
+    
+        const bookingsTableBody = document.getElementById('bookings-table-body');
+    
+        rerenderBookings(selectedBookings);
+    
+        if(currPage === 1){
+            const previousPageButton = document.getElementById('previous-page');
+            previousPageButton.disabled = true;
+        }
+    
+        const nextPageButton = document.getElementById('next-page');
+        nextPageButton.disabled = false;
+    
+        return [currPage, selectedBookings];
+    }
+    
+    function nextPage(){
+        [currPage, currentBookings] = goToNextPage(currPage, allBookings);
+    
+        const currPageButton = document.getElementById('current-page-number');
+        const prevPageButton = document.getElementById('previous-page-number');
+        const nextPageButton = document.getElementById('next-page-number');
+    
+        const prevArrow = document.getElementById('previous-page');
+        const nextArrow = document.getElementById('next-page');
+    
+        currPageButton.innerHTML = `<i class="fa-solid fa-${currPage}"></i>`;
+    
+        if(currPage < totalPages){
+            nextPageButton.innerHTML = `<i class="fa-solid fa-${currPage + 1}"></i>`;
+        } else {
+            nextPageButton.style.display = 'none';
+            nextArrow.disabled = true;
+            nextArrow.style.color = 'var(--primary-background-shade-color)';
+        }
+    
+        prevArrow.disabled = false;
+        prevArrow.style.color = 'var(--primary-color)';
+        prevPageButton.style.display = 'block';
+        prevPageButton.innerHTML = `<i class="fa-solid fa-${currPage - 1}"></i>`;
+    }
+    
+    function goToNextPage(currPage, allBookings){
+        let selectedBookings = [];
+    
+        let start = (currPage) * 5;
+        currPage += 1;
+    
+        for(let i = start; i < start + 5; i++){
+            if(i < allBookings.length){
+                selectedBookings.push(allBookings[i]);
+            } else{
+                const nextPageButton = document.getElementById('next-page');
+                nextPageButton.disabled = true;
+                break;
+            }
+        }
+    
+        rerenderBookings(selectedBookings);
+    
+        const previousPageButton = document.getElementById('previous-page');
+        previousPageButton.disabled = false;
+    
+    
+        return [currPage, selectedBookings];
+    }
+    
+    function loadInitialPage(){
+        nextPage();
+    
+        const prevPageButton = document.getElementById('previous-page-number');
+        const nextPageButton = document.getElementById('next-page-number');
+        const prevArrow = document.getElementById('previous-page');
+        const nextArrow = document.getElementById('next-page');
+    
+    
+        prevPageButton.style.display = 'none';
+        prevArrow.disabled = true;
+        prevArrow.style.color = 'var(--primary-background-shade-color)';
+    
+        if(currPage < totalPages) {
+            nextArrow.disabled = false;
+            nextArrow.style.color = 'var(--primary-color)';
+            nextPageButton.style.display = 'block';
+            nextPageButton.innerHTML = `<i class="fa-solid fa-${currPage + 1}"></i>`;
+        }
+    }
+    
+    function rerenderBookings(currentBookings){
+        const bookingsTableBody = document.getElementById('bookings-table-body');
+    
+        bookingsTableBody.innerHTML = '';
+        currentBookings.forEach(booking => {
+            let bookingStatus = '';
+            if(booking.status === 'Pending'){
+                bookingStatus = "<span class='pending-badge'>Pending</span>";
+            }else if(booking.status === 'Accepted'){
+                bookingStatus = "<span class='accepted-badge'>Accepted</span>";
+            }else if(booking.status === 'Completed'){
+                bookingStatus = "<span class='completed-badge'>Completed</span>";
+            }else if(booking.status === 'Rejected'){
+                bookingStatus = "<span class='rejected-badge'>Rejected</span>";
+            }
+    
+            let moreAction = '';
+            if(booking.status === 'Completed' || booking.status === 'Rejected'){
+                moreAction = `<button class="update-button" onclick="openBookingDetailsModal(${booking.bookingId})"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;&nbsp;View</button>
+                    <button class="disable-button" onclick="openDeleteModal(${booking.bookingId})"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                    </button>`;
+            } else {
+                moreAction = `<button class="update-button" onclick="openBookingDetailsModal(${booking.bookingId})"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;&nbsp;View</button>
+                                        <button class="delete-button" onclick="openDeleteModal(${booking.bookingId})"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                                        </button>`
+            }
+    
+            bookingsTableBody.innerHTML += `
+                <tr class='main-tr'>
+                   <td class='main-td' style='text-align: left;'>
+                        ${booking.workerName}
+                   </td>
+                        <td class='main-td'>${booking.startDate}</td>
+                        <td class='main-td'>${booking.endDate}</td>
+                        <td class='main-td'>
+                            <div class='more-button-container'>
+                                ${moreAction}
+                            </div>
+                        </td>
+                </tr>
+                                
+            `;
+        })
+    }
+
+// Fetch data to pending for request table
+const pendingPreviousPageButton = document.getElementById('previous_page');
+pendingPreviousPageButton.disabled = true;
+
+function previous_page(){
+    [currentPage, currentPendingBookings] = goToPendingTablePreviousPage(currentPage,pendingBookings);
+
+    const currentPendingPageButton = document.getElementById('current_page_number');
+    const previousPendingPageButton = document.getElementById('previous_page_number');
+    const nextPendingPageButton = document.getElementById('next_page_number');
+
+    const previousPendingArrow = document.getElementById('previuos_page');
+    const nextPendingArrow = document.getElementById('next_page');
+
+    currentPendingPageButton.innerHTML = `<i class="fa-solid fa-${currPage}"></i>`;
+    
+    if(currentPage>1){
+        previousPendingPageButton.innerHTML = `<i class="fa-solid fa-${currPage - 1}"></i>`;
+    }
+    else{
+        previousPendingPageButton.style.display = 'none';
+        previousPendingArrow.disabled = true;
+        previousPendingArrow.style.color = 'var(--primary-background-shade-color)';
+    }
+
+    nextPendingArrow.disabled = false;
+    nextPendingArrow.style.color = 'var(--primary-color)';
+    nextPendingPageButton.style.display = 'block';
+    nextPendingPageButton.innerHTML = `<i class="fa-solid fa-${currPage + 1}"></i>`;
+
+}
+
+function goToPendingTablePreviousPage(currentPage,pendingBookings){
+    let selectedPendingBookings = [];
+
+    c
+}
+
+// function nextPendingPage(){
+//     [currPage, currentBookings] = goToNextPage(currentPage, allBookings);
+
+//     const currPageButton = document.getElementById('current-page-number');
+//     const prevPageButton = document.getElementById('previous-page-number');
+//     const nextPageButton = document.getElementById('next-page-number');
+
+//     const prevArrow = document.getElementById('previous-page');
+//     const nextArrow = document.getElementById('next-page');
+
+//     currPageButton.innerHTML = `<i class="fa-solid fa-${currPage}"></i>`;
+
+//     if(currPage < totalPages){
+//         nextPageButton.innerHTML = `<i class="fa-solid fa-${currPage + 1}"></i>`;
+//     } else {
+//         nextPageButton.style.display = 'none';
+//         nextArrow.disabled = true;
+//         nextArrow.style.color = 'var(--primary-background-shade-color)';
+//     }
+
+//     prevArrow.disabled = false;
+//     prevArrow.style.color = 'var(--primary-color)';
+//     prevPageButton.style.display = 'block';
+//     prevPageButton.innerHTML = `<i class="fa-solid fa-${currPage - 1}"></i>`;
+// }
+
+function goToPendingTablePreviousPage(currnetPendingPage,pendingBookings){
+    let selectedPendingBookings = [];
+
+    currnetPendingPage -= 1;
+
+}
+
+
+function loadInitialPendingPage(){
+    nextPendingpage();
+
+    const prevPendingPageButton = document.getElementById('previous_page_number');
+    const nextPendingPageButton = document.getElementById('next_Page_number');
+    const prevPendingArrow = document.getElementById('previous_page');
+    const nextPendingArrow = document.getElementById('next_page');
+
+    prevPendingPageButton.style.display = 'none';
+    prevPendingArrow.disabled = truue;
+    prevPendingArrow.style.color = 'var(--primary-background-shade-color)';
+
+    if(currentPendingPage < totalPendingPages){
+        nextPendingArrow.disabled = false;
+        nextPendingArrow.style.color = 'var(--primary-color)';
+        nextPendingPageButton.style.display = 'block';
+        nextPendingPageButton.innerHTML = `<i class="fa-solid fa-${currentPendingPage + 1}"></i>`;
+
+    }
+}
+
+function nextPendingpage(){
+    [currentPendingPage,currentPendingBookings] = gotoNextPendingPage(currPendingPage,pendingBookings);
+
+    const currentPendingPageButton = document.getElementById('current_page_number');
+    const previousPendingPageButton = document.getElementById('previous_page_number');
+    const nextPendingPageButton = document.getElementById('next_page_number');
+
+    const previousPendingArrow = document.getElementById('previuos_page');
+    const nextPendingArrow = document.getElementById('next_page');
+
+    currentPendingPageButton.innerHTML = `<i class="fa-solid fa-${currPage}"></i>`;
+
+    if(currentPendingPage<totalPendingPages){
+        nextPendingPageButton.innerHTML = `<i class="fa-solid fa-${currentPendingPage}"></i>`;
+    }
+    else{
+        nextPendingPageButton.style.display = 'none';
+        nextPendingArrow.disabled = true;
+        nextPendingArrow = 'var(--primary-background-shade-color)';
+    }
+
+    previousPendingArrow.disabled = false;
+    previousPendingArrow.style.color = 'var(--primary-color)';
+    previousPendingPageButton.style.display = 'block';
+    previousPendingPageButton.innerHTML = `<i class="fa-solid fa-${currentPendingPage - 1}"></i>`;
+}
+
+function gotoNextPendingPage(currentPendingPage,pendingBookings){
+    let 
+}
+

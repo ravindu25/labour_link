@@ -9,7 +9,7 @@
              */
             $bookingId = $_GET['bookingId'];
 
-            $sql_get_booking = "select Booking.*, Worker.First_Name AS Worker_First_Name, Worker.Last_Name AS Worker_Last_Name, Customer.First_Name AS Customer_First_Name, Customer.Last_Name AS Customer_Last_Name from Booking inner join User AS Worker ON Booking.Worker_ID = Worker.User_ID inner join User AS Customer ON Booking.Customer_ID = Customer.User_ID where Booking.Booking_ID = $bookingId ORDER BY Booking.Created_Date LIMIT 1";
+            $sql_get_booking = "select Booking.*, Worker.First_Name AS Worker_First_Name, Worker.Last_Name AS Worker_Last_Name, Customer.First_Name AS Customer_First_Name, Customer.Last_Name AS Customer_Last_Name, Customer.User_Address AS Customer_Address, Customer.Contact_No AS Customer_Contact_No from Booking inner join User AS Worker ON Booking.Worker_ID = Worker.User_ID inner join User AS Customer ON Booking.Customer_ID = Customer.User_ID where Booking.Booking_ID = $bookingId ORDER BY Booking.Created_Date LIMIT 1";
 
             $result = $conn->query($sql_get_booking);
 
@@ -20,6 +20,8 @@
                     $bookingId = $row['Booking_ID'];
                     $customerId = $row['Customer_ID'];
                     $customerName = $row['Customer_First_Name'] . " " . $row['Customer_Last_Name'];
+                    $customerContactNo = $row['Customer_Contact_No'];
+                    $customerAddress = $row['Customer_Address'];
                     $workerId = $row['Worker_ID'];
                     $workerName = $row['Worker_First_Name'] . " " . $row['Worker_Last_Name'];
                     $createdDate = $row['Created_Date'];
@@ -29,7 +31,7 @@
                     $status = $row['Status'];
                     $paymentMethod = $row['Payment_Method'];
 
-                    $booking = new Booking($bookingId, $customerId, $customerName, $workerId, $workerName,
+                    $booking = new Booking($bookingId, $customerId, $customerName, $customerContactNo, $customerAddress, $workerId, $workerName,
                         $createdDate, $startDate, $endDate, $workerType, $status, $paymentMethod);
                 }
             }
@@ -68,7 +70,7 @@
                     $status = $row['Status'];
                     $paymentMethod = $row['Payment_Method'];
 
-                    $booking = new Booking($bookingId, $customerId, $customerName, $workerId, $workerName,
+                    $booking = new Booking($bookingId, $customerId, $customerName, $customerContactNo, $customerAdress, $workerId, $workerName,
                         $createdDate, $startDate, $endDate, $workerType, $status, $paymentMethod);
 
                     array_push($all_bookings, $booking);
