@@ -27,6 +27,38 @@
 <body>
 <div class="backdrop-modal" id="backdrop-modal">
 </div>
+<div class="housing-job-details-container" id="housing-job-details-container">
+    <div class="housing-job-details-scroll-wrapper">
+        <div class="housing-job-details-title">
+            <h1>More Information about Housing Job in Moratuwa</h1>
+        </div>
+        <div class="details-container">
+            <div class="details-row">
+                <h4>Job type</h4>
+                <h4 class="details-value">Plumber</h4>
+            </div>
+            <div class="details-row">
+                <h4>Customer</h4>
+                <h4 class="details-value">Ravindu Wegiriya</h4>
+            </div>
+            <div class="details-row">
+                <h4>Address</h4>
+                <h4 class="details-value">No. 26/2,Moratuwa.</h4>
+            </div>
+            <div class="details-row">
+                <h4>Contact Number</h4>
+                <h4 class="details-value">071 2637160</h4>
+            </div>
+            <div class="details-row">
+                <h4>Start date</h4>
+                <h4 class="details-value">21-Nov-2022</h4>
+            </div>
+            <div class="back-button-container">
+                <button type="button" class="more-button" id="back-button">Back</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">
@@ -101,186 +133,122 @@
                 echo "<h5>Last accessed $dateInText</h5>";
             ?>            
         </div>
-        <div class="new-housing-job-title">
-            <h1>Need to find new housing job?</h1>
-            <button class="more-button">Find More</button>
-        </div>
-        <div class="recent-housing">
-            <div class="recent-housing-title">
-                <h1>Recent Housing Jobs</h1>
+        <div class="housing-job-card">
+            <div class="housing-job-title">
+                <h1>Available Housing Jobs For Paintings</h1>
             </div>
-            <div class="recent-housing-container">
-                <table class="main-table">
-                    <thead>
-                    <tr class="main-tr">
-                        <th class="main-th">Address - Start Date</th>
-                        <th class="main-th">Customer name</th>
-                        <th class="main-th">Service</th>
-                        <th class="main-th">Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Bambalapitiya Colombo
-                            <br />
-                            <span class="blue-badge">20 Nov 2022</span>
-                        </td>
-                        <td class="main-td">Mohomad</td>
-                        <td class="main-td">Electrical</td>
-                        <td class="main-td">Pending</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Bambalapitiya Colombo
-                            <br />
-                            <span class="blue-badge">20 Nov 2022</span>
-                        </td>
-                        <td class="main-td">Mohomad</td>
-                        <td class="main-td">Electrical</td>
-                        <td class="main-td">Pending</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Bambalapitiya Colombo
-                            <br />
-                            <span class="blue-badge">20 Nov 2022</span>
-                        </td>
-                        <td class="main-td">Mohomad</td>
-                        <td class="main-td">Electrical</td>
-                        <td class="main-td">Pending</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Bambalapitiya Colombo
-                            <br />
-                            <span class="blue-badge">20 Nov 2022</span>
-                        </td>
-                        <td class="main-td">Mohomad</td>
-                        <td class="main-td">Electrical</td>
-                        <td class="main-td">Pending</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="search-housing">
-            <div class="search-housing-title">
-                <h1>Search for housing jobs</h1>
-                <form action="" method="POST">
-                    <div class="housing-search-input-container">
-                        <label for="housing-search">Search (Using customer name etc)</label>
-                        <div class="housing-search-input-field">
-                            <input type="text" id="housing-search" class="housing-search-input" name="users-search"/>
-                            <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <div class="job-cards-container">
+            <div class="housing-job-card-container">
+                <div class="housing-card">
+                    <div class="card-text">
+                        <p>Customer</p>
+                        <h4>Ravindu Wegiriya</h4>
+                    </div>
+                    <div class="housing-job-card-button-row">
+                        <div class="badge-container">
+                            <div class="blue-badge">Moratuwa</div> 
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-            <div class="search-housing-container">
-                <table class="main-table">
-                    <thead>
-                        <tr class="main-tr">
-                        <div class="recent-payments-container">
-            <table class="main-table">
-                <thead>
-                <tr class="main-tr">
-                    <th class="main-th">
-                        <div class="table-heading-container">Adress / Status&nbsp;<button class="sort-button"><i
-                                        class="fa-solid fa-arrow-up"></i></button>
+            <div class="housing-job-card-container">
+                <div class="housing-card">
+                    <div class="card-text">
+                        <p>Customer</p>
+                        <h4>Mohomad Izzath</h4>
+                    </div>
+                    <div class="housing-job-card-button-row">
+                        <div class="badge-container">
+                            <div class="blue-badge">Negambo</div> 
                         </div>
-                    </th>
-                    <th class="main-th">
-                        <div class="table-heading-container">Customer&nbsp;<button class="sort-button"><i
-                                        class="fa-solid fa-arrow-up"></i></button>
-                    </th>
-                    <th class="main-th">
-                        <div class="table-heading-container">Service&nbsp;<button class="sort-button"><i
-                                        class="fa-solid fa-arrow-up"></i></button>
-                    </th>
-                    <th class="main-th">More actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Bambalapitiya Colombo
-                        <br/>
-                        <span class="completed-badge">completed</span>
-                    </td>
-                    <td class="main-td">Mohomad Izzath</td>
-                    <td class="main-td">Electrical</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Bambalapitiya Colombo
-                        <br/>
-                        <span class="rejected-badge">Rejected</span>
-                    </td>
-                    <td class="main-td">Mohomad Izzath</td>
-                    <td class="main-td">Electrical</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Bambalapitiya Colombo
-                        <br/>
-                        <span class="pending-badge">Pending</span>
-                    </td>
-                    <td class="main-td">Mohomad Izzath</td>
-                    <td class="main-td">Electrical</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="main-tr">
-                    <td class="main-td" style="text-align: left;">
-                        Bambalapitiya Colombo
-                        <br/>
-                        <span class="pending-badge">Pending</span>
-                    </td>
-                    <td class="main-td">Mohomad Izzath</td>
-                    <td class="main-td">Electrical</td>
-                    <td class="main-td">
-                        <div class="more-button-container">
-                            <button class="update-button"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;Update
-                            </button>
-                            <button class="rejected-button"><i class="fas fa-times"></i>&nbsp;&nbsp;Reject
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="pagination-container">
-                <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
             </div>
-        </div>
-        </div>
-                        </tr>
-                    </thead>
-                </table>
+            <div class="housing-job-card-container">
+                <div class="housing-card">
+                    <div class="card-text">
+                        <p>Customer</p>
+                        <h4>Ravindu Wegiriya</h4>
+                    </div>
+                    <div class="housing-job-card-button-row">
+                        <div class="badge-container">
+                            <div class="blue-badge">Moratuwa</div> 
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="housing-job-card-container">
+                <div class="housing-card">
+                    <div class="card-text">
+                        <p>Customer</p>
+                        <h4>Ravindu Wegiriya</h4>
+                    </div>
+                    <div class="housing-job-card-button-row">
+                        <div class="badge-container">
+                            <div class="blue-badge">Moratuwa</div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="housing-job-title">
+                <h1>Available Housing Jobs For Paintings</h1>
+            </div>
+            <div class="job-cards-container">
+            <div class="housing-job-card-container">
+                <div class="housing-card">
+                    <div class="card-text">
+                        <p>Customer</p>
+                        <h4>Ravindu Wegiriya</h4>
+                    </div>
+                    <div class="housing-job-card-button-row">
+                        <div class="badge-container">
+                            <div class="blue-badge">Moratuwa</div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="housing-job-card-container">
+                <div class="housing-card">
+                    <div class="card-text">
+                        <p>Customer</p>
+                        <h4>Ravindu Wegiriya</h4>
+                    </div>
+                    <div class="housing-job-card-button-row">
+                        <div class="badge-container">
+                            <div class="blue-badge">Moratuwa</div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="housing-job-card-container">
+                <div class="housing-card">
+                    <div class="card-text">
+                        <p>Customer</p>
+                        <h4>Ravindu Wegiriya</h4>
+                    </div>
+                    <div class="housing-job-card-button-row">
+                        <div class="badge-container">
+                            <div class="blue-badge">Moratuwa</div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="housing-job-card-container">
+                <div class="housing-card">
+                    <div class="card-text">
+                        <p>Customer</p>
+                        <h4>Ravindu Wegiriya</h4>
+                    </div>
+                    <div class="housing-job-card-button-row">
+                        <div class="badge-container">
+                            <div class="blue-badge">Moratuwa</div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
         </div>
     </section>
 </main>
