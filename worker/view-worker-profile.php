@@ -205,10 +205,12 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     <div class="profile-info">
         <h1><?=$fullName?></h1>
         <div class="subheading">WORKER BIO</div>
-        <div class="detail-row">
-            <h3>Category :</h3>
-            <?php
-            $sql_statement = "SELECT Worker.Worker_ID, P.Plumber_ID, C.Carpenter_ID, E.Electrician_ID, P2.Painter_ID,
+        <div class="worker-bio">
+            <div class="detail-row">
+                <div class="detail">
+                    <h3>Category</h3>
+                    <?php
+                        $sql_statement = "SELECT Worker.Worker_ID, P.Plumber_ID, C.Carpenter_ID, E.Electrician_ID, P2.Painter_ID,
         M.Mason_ID, J.Janitor_ID, M2.Mechanic_ID, Gardener_ID
                     FROM Worker LEFT JOIN Plumber P on Worker.Worker_ID = P.Plumber_ID
                     LEFT JOIN Carpenter C on Worker.Worker_ID = C.Carpenter_ID
@@ -219,78 +221,86 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     LEFT JOIN Mechanic M2 on Worker.Worker_ID = M2.Mechanic_ID
                     LEFT JOIN Gardener G on Worker.Worker_ID = G.Gardener_ID WHERE Worker_ID = $userId";
 
-            $result = $conn->query($sql_statement);
+                        $result = $conn->query($sql_statement);
 
-            $workerCategories = array();
+                        $workerCategories = array();
 
-            if($result->num_rows){
-                while($row = $result->fetch_assoc()){
-                    if($row['Plumber_ID'] != null){
-                        array_push($workerCategories, "Plumber");
-                    }
+                        if($result->num_rows){
+                            while($row = $result->fetch_assoc()){
+                                if($row['Plumber_ID'] != null){
+                                    array_push($workerCategories, "Plumber");
+                                }
 
-                    if($row['Carpenter_ID'] != null){
-                        array_push($workerCategories, "Carpenter");
-                    }
+                                if($row['Carpenter_ID'] != null){
+                                    array_push($workerCategories, "Carpenter");
+                                }
 
-                    if($row['Electrician_ID'] != null){
-                        array_push($workerCategories, "Electrician");
-                    }
+                                if($row['Electrician_ID'] != null){
+                                    array_push($workerCategories, "Electrician");
+                                }
 
-                    if($row['Painter_ID'] != null){
-                        array_push($workerCategories, "Painter");
-                    }
+                                if($row['Painter_ID'] != null){
+                                    array_push($workerCategories, "Painter");
+                                }
 
-                    if($row['Mason_ID'] != null){
-                        array_push($workerCategories, "Mason");
-                    }
+                                if($row['Mason_ID'] != null){
+                                    array_push($workerCategories, "Mason");
+                                }
 
-                    if($row['Janitor_ID'] != null){
-                        array_push($workerCategories, "Janitor");
-                    }
+                                if($row['Janitor_ID'] != null){
+                                    array_push($workerCategories, "Janitor");
+                                }
 
-                    if($row['Mechanic_ID'] != null){
-                        array_push($workerCategories, "Mechanic");
-                    }
+                                if($row['Mechanic_ID'] != null){
+                                    array_push($workerCategories, "Mechanic");
+                                }
 
-                    if($row['Gardener_ID'] != null){
-                        array_push($workerCategories, "Gardener");
-                    }
-                }
-            }
+                                if($row['Gardener_ID'] != null){
+                                    array_push($workerCategories, "Gardener");
+                                }
+                            }
+                        }
 
-            for($i = 0; $i < sizeof($workerCategories); $i++){
-                echo "
+                        for($i = 0; $i < sizeof($workerCategories); $i++){
+                            echo "
                     <div class='worker-type-badge'>
-                        <h5>$workerCategories[$i]</h5>
+                        $workerCategories[$i]
                     </div>
                 ";
-            }
-            ?>
-
-            <div class='worker-location'>
-                Location : <i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i> <b><?=$city?></b>
+                        }
+                        ?>
+                </div>
+                <div class="detail">
+                    <h3>Location</h3>
+                    <div class="location-container">
+                        <i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i> <?=$city?>
+                    </div>
+                </div>
+                <div class="detail">
+                    <h3>Rating</h3>
+                    <?php
+                    echo
+                    "<div class='star-container'>
+                        $ratingHtml
+                        <b>$currentRating</b> 
+                    </div>"
+                    ?>
+                </div>
             </div>
-            <?php
-            echo
-            "Rating :
-            <div class='star-container'>
-                   $ratingHtml
-                   <b>$currentRating</b> 
-            </div>"
-            ?>
-        </div>
-        <div class="details-row">
-            <div class = "worker-description">
-                Description :
-                <p>Saman is an experienced electrician who has been working for more than 15 years in the field.
-                    He is also a skilled and dedicated plumber who takes great pride in his work.
-                    Saman has a reputation for being reliable, efficient, and always willing to go the extra mile to
-                    ensure that clients are satisfied with his plumbing services. </p>
+            <div class="detail-row">
+                <div class="detail">
+                    <h3>Description</h3>
+                    <p>Saman is an experienced electrician who has been working for more than 15 years in the field.
+                        He is also a skilled and dedicated plumber who takes great pride in his work.
+                        Saman has a reputation for being reliable, efficient, and always willing to go the extra mile to
+                        ensure that clients are satisfied with his plumbing services. </p>
+                </div>
+                <div class="detail">
+                    <a href='../customer/create-booking.php'>
+                        <button type='button' class='booking-button'>Book now!</button>
+                    </a>
+                </div>
             </div>
-            <a href='../customer/create-booking.php'>
-                <button type='button' class='booking-button'>Book now!</button>
-            </a>
         </div>
     </div>
 </div>
