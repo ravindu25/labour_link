@@ -783,24 +783,50 @@ function updateWorkerType(user_id){
     //get the selected job types
     var selectedJobTypes = document.getElementsByName("update-job-type-select");
     var selectedJobTypesArray = [];
+    var unselectedJobTypesArray = [];
 
     for(var i = 0; i < selectedJobTypes.length; i++){
         if(selectedJobTypes[i].checked){
             selectedJobTypesArray.push(selectedJobTypes[i].value);
+        }else{
+            unselectedJobTypesArray.push(selectedJobTypes[i].value);
         }
     }
 
-    //what i want is to do the query based on the unselected job types
-    var unselectedJobTypes = document.getElementsByName("update-job-type-unselect");
-    var unselectedJobTypesArray = [];
+    // send the selected job types to the server
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            if(this.responseText.trim() == "success"){
+                const successModal = document.getElementById('update-jobType-success');
+                const updateCategoryContainer = document.getElementById('update-worker-type-modal');
+                const backDrop = document.getElementById('backdrop-modal');
 
-    for(var i = 0; i < unselectedJobTypes.length; i++){
-        if(unselectedJobTypes[i].checked){
-            unselectedJobTypesArray.push(unselectedJobTypes[i].value);
+                updateCategoryContainer.style.visibility = 'hidden';
+                successModal.style.visibility = 'visible';
+
+                setTimeout(function(){
+                    successModal.style.display = "none";
+                    backDrop.style.display = "none";
+                    location.reload();
+                }, 3000);
+            } else {
+                const failedModal = document.getElementById('update-jobType-fail');
+                const updateCategoryContainer = document.getElementById('update-worker-type-modal');
+                const backDrop = document.getElementById('backdrop-modal');
+
+                updateCategoryContainer.style.visibility = 'hidden';
+                failedModal.style.visibility = 'visible';
+
+                setTimeout(function(){
+                    failedModal.style.display = "none";
+                    backDrop.style.display = "none";
+                    location.reload();
+                }, 3000);
+            }
         }
-    }
-
-    
-
-
+    };
+    xhttp.open("POST", "http://localhost/labour_link/worker/changeWorkerType.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("selectedJobTypes=" + selectedJobTypesArray + "&user_id=" + user_id + "&unselectedJobTypes=" + unselectedJobTypesArray);
 }

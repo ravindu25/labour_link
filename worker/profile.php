@@ -210,7 +210,16 @@
 <div class="failed-message-container" id="add-jobType-fail">
     <div class="message-text">
         <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Job type adding failed!</h1>
-        <h5 id="housing-create-fail-text">Your login session outdated. Please login again.</h5>
+        <h5 id="add-job-type-fail-text">Your login session outdated. Please login again.</h5>
+    </div>
+</div>
+<div class="success-message-container" id="update-jobType-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Job Type Activation/Deactivation Successful!</h1>
+</div>
+<div class="failed-message-container" id="update-jobType-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Job Type Activation/Deactivation Failed!</h1>
+        <h5 id="update-job-type-fail-text">Your login session outdated. Please login again.</h5>
     </div>
 </div>
 <div class="worker-type-modal" id="update-worker-type-modal">

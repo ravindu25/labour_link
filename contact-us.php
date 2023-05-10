@@ -207,9 +207,22 @@
         $email = $_POST['email'];
         $message = $_POST['message'];
 
-        $sql = "INSERT INTO Message (First_Name, Last_Name, Contact_Num, Email, Message) VALUES ('$first_name', '$last_name', '$contact_number', '$email', '$message')";
-        $result = mysqli_query($conn, $sql);
+        // Prepare the SQL statement using a prepared statement
+        $stmt = $conn->prepare("INSERT INTO Message (First_Name, Last_Name, Contact_Num, Email, Message) VALUES (?, ?, ?, ?, ?)");
 
+        // Bind the input parameters
+        $stmt->bind_param("sssss", $first_name, $last_name, $contact_number, $email, $message);
+
+        // Execute the statement
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        // Close the statement
+        $stmt->close();
+
+        // Close the connection
+        $conn->close();
         if($result){
             echo "Successfuly sent";
             require_once 'mailconfiguration.php';

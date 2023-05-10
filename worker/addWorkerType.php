@@ -23,7 +23,7 @@
             $sql = "INSERT INTO Plumber (Plumber_ID) VALUES ('$user_id')";
         }else if($jobType=="Gardener"){
             $sql = "INSERT INTO Gardener (Gardener_ID) VALUES ('$user_id')";
-        }else if($jobType=="Labourer"){
+        }else if($jobType=="Janitor"){
             $sql = "INSERT INTO Janitor (Janitor_ID) VALUES ('$user_id')";
         }else if($jobType=="Mechanic"){
             $sql = "INSERT INTO Mechanic (Mechanic_ID) VALUES ('$user_id')";
