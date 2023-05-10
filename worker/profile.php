@@ -199,15 +199,17 @@
     </div>
     <div class="worker-type-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="hideAddCategoryContainer()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-        <button type="button" id="worker-type-add-button" class="disable-button"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add category</button>
+        <?php
+        echo('<button type="button" id="worker-type-add-button" class="disable-button" onclick="addCategory('.$userId.')"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add category</button>');
+        ?>
     </div>
 </div>
 <div class="success-message-container" id="add-jobType-success">
-    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Job type added sucessful!</h1>
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Job type added sucessfully!</h1>
 </div>
 <div class="failed-message-container" id="add-jobType-fail">
     <div class="message-text">
-        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;PJob type adding failed!</h1>
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Job type adding failed!</h1>
         <h5 id="housing-create-fail-text">Your login session outdated. Please login again.</h5>
     </div>
 </div>
@@ -249,7 +251,9 @@
     </div>
     <div class="worker-type-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="hideActiveDeactivateContainer()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-        <button type="button" id="worker-type-add-button" class="disable-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>
+        <?php
+        echo('<button type="button" id="worker-type-add-button" class="disable-button" onclick="updateWorkerType('.$userId.')"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>');
+        ?>
     </div>
 </div>
 <div class="profile-change-modal-container" id="profile-change-modal-container">
