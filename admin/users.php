@@ -339,7 +339,7 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                     <br/>
                     <form action="" method="POST">
                         <div class="search-input-container">
-                            <input type="text" id="users-search" class="users-search" name="users-search"/>
+                            <input type="text" id="search-users-input" class="users-search" name="users-search"/>
                             <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </div>
@@ -380,28 +380,43 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 }
 
                 $result = $conn->query($sql);
+                $rowCount = 0;
+
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $sql2 = "SELECT date(Timestamp) FROM Login_Attempt WHERE User_ID=" . $row['User_ID'] . " ORDER BY Timestamp DESC LIMIT 1;";
                         $result2 = $conn->query($sql2);
                         $row2 = $result2->fetch_assoc();
-                        $last_login = $row2['date(Timestamp)'];
+                        $last_login = "";
+                        if(isset($row2['date(Timestamp)'])) {
+                            $last_login = $row2['date(Timestamp)'];
+                        }
                         if ($last_login == "") {
                             $last_login = "Never";
                         } else {
                             //format date with month in words
                             $last_login = date("d M Y", strtotime($last_login));
                         }
+
                         $user_id = $row['User_ID'];
+                        $rowCount = $rowCount + 1;
+                        $username = $row['First_Name'] . ' ' . $row['Last_Name'];
+                        $badgeHTML = '';
+
+                        if($row['Activation_Flag'] == 1) {
+                            $badgeHTML = '<span class="success-badge">Activated account</span>';
+                        } else {
+                            $badgeHTML = '<span class="suspend-badge">Suspended account</span>';
+                        }
                 
-                        echo('<tr class="main-tr">
-                                <td class="main-td" style="text-align: left;">
-                                    ' . $row['First_Name'] . ' ' . $row['Last_Name'] . '
-                                    <br/>'
-                            . ($row['Activation_Flag'] == 1 ? '<span class="success-badge">Active</span>' : '<span class="suspend-badge">Suspended</span>') .
-                            '</td>
-                                <td class="main-td">' . $last_login . '</td>
-                                <td class="main-td">' . $row['Type'] . '</td>
+                        echo('<tr class="main-tr" id="users-table-row-'. $rowCount . '">
+                                <td class="main-td" style="text-align: left;">'
+                                . "<span id='users-table-username-$rowCount'>$username</span>"
+                                . "<br />"
+                                . $badgeHTML
+                                ."</td>
+                                <td class='main-td' id='users-table-login-$rowCount'>$last_login</td>
+                                <td class='main-td' id='users-table-login-$rowCount'>" . $row['Type'] . '</td>
                                 <td class="main-td">
                                     <div class="more-button-container">
                                         <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
@@ -413,7 +428,11 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                             </tr>');
                     }
                     echo '<script src="../scripts/admin/loader.js" type="text/javascript"></script>';
-                    echo '<script>closeLoader()</script>';
+                    echo "<script>
+                            let rowCount = $rowCount;
+                            let totalPages = Math.ceil(rowCount / 5);
+                            closeLoader();
+                        </script>";
                 }
 
                 ?>
@@ -422,11 +441,11 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                 </tbody>
             </table>
             <div class="pagination-container">
-                <button class="pagination-button"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button-current"><i class="fa-solid fa-2"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-3"></i></button>
-                <button class="pagination-button"><i class="fa-solid fa-arrow-right"></i></button>
+                <button class="pagination-button" id="previous-users-page" onclick="goToPreviousUsersPage()"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button" id="previous-users-page-number"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current" id="current-users-page-number"><i class="fa-solid fa-2"></i></button>
+                <button class="pagination-button" id="next-users-page-number"><i class="fa-solid fa-3"></i></button>
+                <button class="pagination-button" id="next-users-page" onclick="goToNextUsersPage()"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
         <div class="create-admin">
