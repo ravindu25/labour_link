@@ -29,6 +29,9 @@
         case 'Gardner':
             $sql = "select User.User_ID, User.First_Name, User.Last_Name from User inner join Gardener on User.User_ID = Gardener.Gardener_ID WHERE Gardener.Active = 1";
             break;
+        default:
+            $sql = "select User.User_ID, User.First_Name, User.Last_Name from User inner join Electrician on User.User_ID = Electrician.Electrician_ID WHERE Electrician.Active = 1";
+            break;
     }
 
     $result = $conn->query($sql);

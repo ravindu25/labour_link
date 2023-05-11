@@ -30,6 +30,14 @@ $userId = $_SESSION['user_id'];
 </div>
 <div class="message-backdrop" id="message-backdrop">
 </div>
+<div class="error-message-container" id="error-message-container">
+    <div class="error-message-heading">
+        <h1>Sorry, an unexpected error has occurred. Please try again later or contact customer support for assistance</h1>
+    </div>
+    <div class="error-message-image">
+        <img src="../assets/error-image.png" alt="error-image" />
+    </div>
+</div>
 <div class="success-message-container" id="booking-create-success">
     <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Booking created successfully</h1>
 </div>
@@ -39,66 +47,66 @@ $userId = $_SESSION['user_id'];
         <h5>Your login session outdated. Please login again.</h5>
     </div>
 </div>
-<div class="booking-details-container" id="booking-details-container">
-    <div><i class="fa fa-close"></i></div>
-    <div class="booking-details-scroll-wrapper">
-        <div class="back-button-container">
-                <button type="button" class="more-button" id="back-button" onclick="closeBookingDetailsModal()"><i class='fa-solid fa-xmark'></i></button>
-        </div>
-        <div class="booking-details-title">
-            <h1>Current Status of Your <u>Booking</u></h1>
-        </div>
-        <div class="status-container" id="booking-details-status-container"></div>
-        <div class="details-container">
-            <div class="details-row">
-                <h4>Job type</h4>
-                <h4 class="details-value" id="booking-details-job-type"></h4>
+    <div class="booking-details-container" id="booking-details-container">
+        <div class="booking-details-scroll-wrapper">
+            <div class="booking-details-title">
+                <h1>Current Status of Your <u>Booking</u></h1>
             </div>
-            <div class="details-row">
-                <h4>Customer</h4>
-                <h4 class="details-value" id="booking-details-customer-name"></h4>
-            </div>
-            <div class="details-row">
-                <h4>Contact Number</h4>
-                <h4 class="details-value" id="booking-details-contact-number"></h4>
-            </div>
-            <div class="details-row">
-                <h4>Address</h4>
-                <h4 class="details-value" id="booking-details-customer-address"></h4>
-            </div>
-            <div class="details-row">
-                <h4>Start date</h4>
-                <h4 class="details-value" id="booking-details-start-date"></h4>
-            </div>
-            <div class="remaining-time-container" id="remaining-time-container">
-                <h4>This booking will be closed in</h4>
-                <h1 class="countdown-text" id="booking-details-countdown"></h1>
-            </div>
-            <div class="payment-method-container">
-                <div class="payment-image-container">
-                    <h4>Payment Method</h4>
-                    <div class="payment-image-card">
-                        <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
-                             alt="payment method"/>
-                        <h4 id="payment-method-text">Online payments</h4>
+            <div class="status-container" id="booking-details-status-container"></div>
+            <div class="details-container">
+                <div class="details-row">
+                    <h4>Job type</h4>
+                    <h4 class="details-value" id="booking-details-job-type"></h4>
+                </div>
+                <div class="details-row">
+                    <h4>Customer</h4>
+                    <h4 class="details-value" id="booking-details-customer-name"></h4>
+                </div>
+                <div class="details-row">
+                    <h4>Contact Number</h4>
+                    <h4 class="details-value" id="booking-details-contact-number"></h4>
+                </div>
+                <div class="details-row">
+                    <h4>Address</h4>
+                    <h4 class="details-value" id="booking-details-customer-address"></h4>
+                </div>
+                <div class="details-row">
+                    <h4>Start date</h4>
+                    <h4 class="details-value" id="booking-details-start-date"></h4>
+                </div>
+                <div class="remaining-time-container" id="remaining-time-container">
+                    <h4>This booking will be closed in</h4>
+                    <h1 class="countdown-text" id="booking-details-countdown"></h1>
+                </div>
+                <div class="payment-method-container">
+                    <div class="payment-image-container">
+                        <h4>Payment Method</h4>
+                        <div class="payment-image-card">
+                            <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
+                                 alt="payment method"/>
+                            <h4 id="payment-method-text">Online payments</h4>
+                        </div>
+                    </div>
+                    <div class="payment-details-container" id="payment-details-container">
+                        <h3>Amount that needs to be paid</h3>
+                        <h2 id="payment-details-amount-text">Rs. 17500.00</h2>
                     </div>
                 </div>
-                <div class="payment-details-container">
-                    <h3>Amount that needs to be paid</h3>
-                    <h2>Rs. 17500.00</h2>
-                </div>
-            </div>
-            <div class="status-button-container">
-                <div class="reject-button-container">
-                    <button type="button" class="worker-input-button" id="reject-button"><i class="fa fa-ban"></i> Reject</button>
-                </div>
-                <div class="accept-button-container">
-                    <button type="button" class="worker-input-button" id="accept-button"><i class="fa fa-check"></i> Accept</button>
+                <div class="back-button-container" id="back-button-container">
+                    <button type="button" class="primary-outline-button" id="back-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Close</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="success-message-container" id="booking-reject-success">
+        <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Booking rejected!</h1>
+    </div>
+    <div class="failed-message-container" id="booking-reject-fail">
+        <div class="message-text">
+            <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking rejection process failed!</h1>
+            <h5>Your login session outdated. Please login again.</h5>
+        </div>
+    </div>
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">

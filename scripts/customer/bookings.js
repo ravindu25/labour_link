@@ -82,6 +82,14 @@ function openBookingDetailsModal(bookingId){
         paymentImageText.innerText = 'Online payments';
     }
 
+    if(currentBooking.status === 'Pending'){
+        const paymentAmountText = document.getElementById('payment-details-amount-text');
+
+        paymentAmountText.style.fontSize = '18px';
+        paymentAmountText.style.color = 'var(--warning-color)';
+        paymentAmountText.innerText = 'Not decided yet. Waiting for workers acceptance.';
+    }
+
     backdropModal.style.visibility = 'visible';
     bookingDetails.style.visibility = 'visible';
 }

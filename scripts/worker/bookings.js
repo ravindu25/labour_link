@@ -1,4 +1,5 @@
 let allBookings = null;
+let currentViewingBooking = null;
 
 function openBookingDetailsModal(bookingId){
     const backdropModal = document.getElementById("backdrop-modal");
@@ -7,6 +8,7 @@ function openBookingDetailsModal(bookingId){
     const acceptButton = document.querySelector("#accept-button");
 
     const currentBooking = allBookings.find(booking => booking.bookingId == bookingId);
+    currentViewingBooking = currentBooking;
 
     let bookingStatusButton = null;
     if(currentBooking.status === 'Pending'){
@@ -63,12 +65,34 @@ function openBookingDetailsModal(bookingId){
     }
 
     if(currentBooking.status === 'Pending'){
-        bookingStatusButton = '<button class="pending-button">Pending</button>';
-        rejectButton.disabled = false;
-        acceptButton.disabled = false;
+        const buttonContainer = document.getElementById('back-button-container');
+        const paymentContainer = document.getElementById('payment-details-container');
 
-        rejectButton.classList.remove("disable-button");
-        acceptButton.classList.remove("disable-button");
+        paymentContainer.innerHTML = `
+            <h3>Please add the amount needs to be paid</h3>
+            <div class="payment-amount-input-container">
+                <label class="payment-amount-label" for="payment-amount-input">Rs.</label>
+                &nbsp;&nbsp;
+                <input type="text" class="payment-amount-input" id="payment-amount-input"/>
+            </div>
+        `;
+
+        const paymentAmountInput = document.getElementById('payment-amount-input');
+        paymentAmountInput.addEventListener('change', () => {
+            paymentAmountValidity(currentBooking.bookingId);
+        });
+
+        buttonContainer.innerHTML = `
+            <button type="button" class="primary-button" id="reject-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Reject booking</button>
+            <button type="button" class="primary-outline-button" style="margin: 0 8px;" id="back-button">Close</button>
+            <button type="button" class="disable-button" id="accept-button" disabled><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Accept booking</button>
+        `;
+        
+        const rejectButton = document.getElementById('reject-button');
+        rejectButton.addEventListener('click', rejectCurrentViewingBooking);
+
+        const closeButton = document.getElementById('back-button');
+        closeButton.addEventListener('click', () => closeModal());
     } 
     else if(currentBooking.status === 'Accepted'){
         bookingStatusButton = '<button class="in-pogress-button">Accepted</button>';
@@ -95,15 +119,15 @@ function openBookingDetailsModal(bookingId){
         acceptButton.className = "disable-button";
     }
 
-    // Add click event listener to accept button
-    acceptButton.addEventListener('click', function() {
-        updateBookingStatus(bookingId, 'Accepted');
-    });
-
-    rejectButton.addEventListener('click', function() {
-        updateBookingStatus(bookingId,'Rejected');
-    });
-
+    // // Add click event listener to accept button
+    // acceptButton.addEventListener('click', function() {
+    //     updateBookingStatus(bookingId, 'Accepted');
+    // });
+    //
+    // rejectButton.addEventListener('click', function() {
+    //     updateBookingStatus(bookingId,'Rejected');
+    // });
+    //
     backdropModal.style.visibility = 'visible';
     bookingDetails.style.visibility = 'visible';
 }
@@ -132,16 +156,6 @@ getBookings(`http://localhost/labour_link/api/bookings.php?workerId=${userId}`);
 function closeBookingDetailsModal(){
     const backdropModal = document.getElementById("backdrop-modal");
     const bookingDetails = document.getElementById("booking-details-container");
-
-     // Add click event listener to accept button
-    acceptButton.removeEventListener('click', function() {
-        updateBookingStatus(bookingId, 'Accepted');
-    });
-
-    // Add click event listener to reject button
-    rejectButton.addEventListener('click', function() {
-        updateBookingStatus(bookingId,'Rejected');
-    });
 
     backdropModal.style.visibility = 'hidden';
     bookingDetails.style.visibility = 'hidden';
@@ -490,7 +504,83 @@ function nextPendingpage(){
     previousPendingPageButton.innerHTML = `<i class="fa-solid fa-${currentPendingPage - 1}"></i>`;
 }
 
-function gotoNextPendingPage(currentPendingPage,pendingBookings){
-    let 
+/*
+ * Checking the payment amount validity
+ */
+
+function paymentAmountValidity(bookingId){
+    const paymentAmountInput = document.getElementById('payment-amount-input');
+    const acceptButton = document.getElementById('accept-button');
+    const inputValue = parseFloat(paymentAmountInput.value);
+
+    if(!isNaN(inputValue) && isFinite(inputValue) && inputValue > 0){
+        acceptButton.addEventListener('click', () => updateBookingStatus(bookingId, 'Accepted'));
+
+        acceptButton.disabled = false;
+        acceptButton.classList.add('primary-button');
+        acceptButton.classList.remove('disable-button');
+    } else {
+        acceptButton.removeEventListener('click', () => updateBookingStatus(bookingId, 'Accepted'));
+        acceptButton.disabled = true;
+        acceptButton.classList.remove('primary-button');
+        acceptButton.classList.add('disable-button');
+    }
+}
+
+function rejectCurrentViewingBooking(){
+    const bookingId = currentViewingBooking.bookingId;
+    const status = 'Rejected-by-worker';
+
+    fetch(`http://localhost/labour_link/api/bookings.php?bookingId=${bookingId}&status=${status}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+    })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'success'){
+                const backdropModal = document.getElementById('backdrop-modal');
+                const rejectSuccessContainer = document.getElementById('booking-reject-success');
+                const bookingDetails = document.getElementById("booking-details-container");
+
+                bookingDetails.style.visibility = 'hidden';
+                backdropModal.style.visibliity = 'visible';
+                rejectSuccessContainer.style.visibility = 'visible';
+
+                setTimeout(() => {
+                    backdropModal.style.visibliity = 'hidden';
+                    rejectSuccessContainer.style.visibility = 'hidden';
+                    window.location.reload();
+                }, 5000);
+            } else {
+                const backdropModal = document.getElementById('backdrop-modal');
+                const rejectFailedContainer = document.getElementById('booking-reject-fail');
+                const bookingDetails = document.getElementById("booking-details-container");
+
+                bookingDetails.style.visibility = 'hidden';
+                backdropModal.style.visibliity = 'visible';
+                rejectFailedContainer.style.visibility = 'visible';
+
+                setTimeout(() => {
+                    backdropModal.style.visibliity = 'hidden';
+                    rejectFailedContainer.style.visibility = 'hidden';
+                    window.location.reload();
+                }, 5000);
+            }
+        })
+        .catch(error => {
+            const backdropModal = document.getElementById('backdrop-modal');
+            const errorMessageContainer = document.getElementById('error-message-container');
+            const bookingDetails = document.getElementById("booking-details-container");
+
+            bookingDetails.style.visibility = 'hidden';
+            backdropModal.style.visibility = 'visible';
+            errorMessageContainer.style.visibility = 'visible';
+        });
+
+
+}
+
+function updateViewingBookingStatus(bookingId, status){
+    console.log(bookingId, status);
 }
 

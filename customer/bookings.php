@@ -60,7 +60,7 @@
         <div class="booking-details-title">
             <h1>Current Status of Your <u>Booking</u></h1>
         </div>
-        <div class="status-container" id="booking-details-job-type"></div>
+        <div class="status-container" id="booking-details-status-container"></div>
         <div class="details-container">
             <div class="details-row">
                 <h4>Job type</h4>
@@ -87,13 +87,13 @@
                         <h4 id="payment-method-text">Online payments</h4>
                     </div>
                 </div>
-                <div class="payment-details-container">
+                <div class="payment-details-container" id="payment-details-container">
                     <h3>Amount that needs to be paid</h3>
-                    <h2>Rs. 17500.00</h2>
+                    <h2 id="payment-details-amount-text">Rs. 17500.00</h2>
                 </div>
             </div>
             <div class="back-button-container">
-                <button type="button" class="more-button" id="back-button">Back</button>
+                <button type="button" class="primary-button" id="back-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Close</button>
             </div>
         </div>
     </div>

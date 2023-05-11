@@ -70,7 +70,7 @@
                     $status = $row['Status'];
                     $paymentMethod = $row['Payment_Method'];
 
-                    $booking = new Booking($bookingId, $customerId, $customerName, $customerContactNo, $customerAdress, $workerId, $workerName,
+                    $booking = new Booking($bookingId, $customerId, $customerName, $workerId, $workerName,
                         $createdDate, $startDate, $endDate, $workerType, $status, $paymentMethod);
 
                     array_push($all_bookings, $booking);
@@ -119,6 +119,30 @@
 
             header('Content-Type: application/json');
             echo json_encode($all_bookings);
+        }
+    } else if($_SERVER['REQUEST_METHOD'] === 'PUT' && $_GET['bookingId'] && $_GET['status']){
+        $bookingId = $_GET['bookingId'];
+        $status = $_GET['status'];
+
+        // Valid status for booking ['Pending', 'Accepted-by-worker', 'Rejected-by-worker', 'Accepted-by-customer', 'Rejected-by-customer', 'Completed']
+
+        $validStatus = array('Pending', 'Accepted-by-worker', 'Rejected-by-worker', 'Accepted-by-customer', 'Rejected-by-customer', 'Completed');
+
+        if(in_array($status, $validStatus)){
+            $sql_update_booking = "UPDATE Booking SET Status = '$status' WHERE Booking_ID = $bookingId";
+
+            header('Content-Type: application/json');
+
+            if($result = $conn->query($sql_update_booking)){
+                http_response_code(200);
+                echo json_encode(array("status"=>"success", "bookingId"=> $bookingId));
+            } else {
+                http_response_code(500);
+                echo json_encode(array("status"=>"failed"));
+            }
+        } else {
+            http_response_code(400);
+            echo json_encode(array("status"=>"failed", "message"=>"Invalid status"));
         }
     } else if($_SERVER['REQUEST_METHOD'] === 'DELETE' && $_GET['bookingId']){
         $bookingId = $_GET['bookingId'];
