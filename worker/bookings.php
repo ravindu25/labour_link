@@ -161,20 +161,20 @@ $userId = $_SESSION['user_id'];
         <!--Recent bookings section-->
         <div class="recent-bookings">
             <div class="recent-bookings-title">
-                <h1>Recent Bookings</h1>
+                <h1>Currently ongoing bookings</h1>
             </div>
             <div class="recent-bookings-container">
             <?php
                 require_once '../db.php';
 
-                $sql_get_status = "SELECT Booking.*, First_Name,Last_Name ,Start_Date, Worker_Type, Created_Date ,Status FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} ORDER BY Created_Date DESC LIMIT 5";
+                $sql_get_status = "SELECT Booking.*, First_Name, Last_Name,Start_Date, Worker_Type, Created_Date ,Status FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} AND Booking.Status IN ('Pending', 'Accepted-by-customer', 'Accepted-by-worker') ORDER BY Created_Date DESC";
 
 
                 $result = $conn->query($sql_get_status);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $bookingId = $row['Booking_ID'];
-                    
+
 
                         $status = $row['Status'];
 
@@ -212,6 +212,13 @@ $userId = $_SESSION['user_id'];
                 
                     ');
                     }
+                } else {
+                   echo "
+                    <div class='empty-ongoing-booking-container'>
+                        <img src='../assets/worker/bookings/undraw_Booking_re_gw4j.png' alt='no ongoing bookings' />
+                        <h3>There are no bookings currently ongoing!</h3>
+                    </div>
+                   ";
                 }
                 ?>
                 </div>
@@ -224,6 +231,20 @@ $userId = $_SESSION['user_id'];
         <div class="booking-search">
             <div class="booking-search-title">
                 <h1>Search for All bookings</h1>
+                <?php
+                    $sql_get_booking_count = "SELECT COUNT(Booking_ID) AS Booking_Count FROM Booking WHERE Worker_ID = $userId";
+
+                    $bookingCount = 0;
+                    $result = $conn->query($sql_get_booking_count);
+
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+                            $bookingCount = $row['Booking_Count'];
+                        }
+                    }
+
+                    if($bookingCount > 0){
+                ?>
                 <form action="" method="POST">
                     <div class="booking-search-input-container">
                         <label for="booking-search">Search (Customer name etc)</label>
@@ -233,9 +254,11 @@ $userId = $_SESSION['user_id'];
                         </div>
                     </div>
                 </form>
+                <?php } ?>
             </div>
         </div>
-        <div class="recent-payments-container">
+        <?php if($bookingCount > 0) { ?>
+            <div class="recent-payments-container">
             <table class="main-table">
                 <thead>
                 <tr class="main-tr">
@@ -266,7 +289,12 @@ $userId = $_SESSION['user_id'];
                 <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
-
+        <?php } else { ?>
+            <div class="empty-all-bookings-container">
+                <img src="../assets/worker/bookings/undraw_Domain_names_re_0uun.png" alt="no bookings" />
+                <h3>There are no bookings at the moment!</h3>
+            </div>
+        <?php } ?>
         </div>
     </section>
 </main>

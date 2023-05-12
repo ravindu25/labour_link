@@ -12,22 +12,22 @@ nextButton.classList.remove('primary-button');
 nextButton.classList.add('disabled-button');
 nextButton.disabled = true;
 
-locationInput.addEventListener('change', () => {
-    const locationText = document.getElementById('place-autocomplete').value;
-    const nextButton = document.getElementById('first-page-next-button');
-
-    if(addressvalid==false){
-        nextButton.classList.add('primary-button');
-        nextButton.classList.remove('disabled-button');
-        nextButton.disabled = false;
-
-
-    } else {
-        nextButton.classList.remove('primary-button');
-        nextButton.classList.add('disabled-button');
-        nextButton.disabled = true;
-    }
-});
+// locationInput.addEventListener('change', () => {
+//     const locationText = document.getElementById('place-autocomplete').value;
+//     const nextButton = document.getElementById('first-page-next-button');
+//
+//     if(addressvalid==false){
+//         nextButton.classList.add('primary-button');
+//         nextButton.classList.remove('disabled-button');
+//         nextButton.disabled = false;
+//
+//
+//     } else {
+//         nextButton.classList.remove('primary-button');
+//         nextButton.classList.add('disabled-button');
+//         nextButton.disabled = true;
+//     }
+// });
 
 function addClickEventsToJobCards(){
     let jobElements = document.getElementsByName('job-selection');
@@ -54,6 +54,8 @@ addClickEventsToJobCards();
 function onPlaceChanged() {
     const housingCreateImage = document.getElementById('housing-create-image');
     const locationDiv = document.getElementById('location-map');
+    const nextButton = document.getElementById('first-page-next-button');
+
     let place = autocomplete.getPlace();
 
     marker.setVisible(false);
@@ -63,9 +65,17 @@ function onPlaceChanged() {
     if (!place.geometry || !place.geometry.location) {
         housingCreateImage.style.display = 'block';
         locationDiv.style.display = 'none';
+
+        nextButton.classList.remove('primary-button');
+        nextButton.classList.add('disabled-button');
+        nextButton.disabled = true;
     } else {
         housingCreateImage.style.display = 'none';
         locationDiv.style.display = 'block';
+
+        nextButton.classList.add('primary-button');
+        nextButton.classList.remove('disabled-button');
+        nextButton.disabled = false;
 
         // If the place has a geometry, then present it on a map.
         if (place.geometry.viewport) {
@@ -99,11 +109,6 @@ function onPlaceChanged() {
                 });
     }
     );
-
-
-
-
-
 }
 
 function updateLocationField(value) {
@@ -130,7 +135,9 @@ function initAutocomplete(){
         anchorPoint: new google.maps.Point(0, -29),
     });
 
-    autocomplete.addListener('place_changed', () => { onPlaceChanged()});
+    autocomplete.addListener('place_changed', () => {
+        onPlaceChanged()
+    });
 }
 
 function openHousingCreateModal(){

@@ -537,7 +537,9 @@ $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
                 <div class="profile-image">
                     <?php
                     echo "
-                            <img src='../assets/profile-image/$userId.jpg' alt='profile-image' />
+                           <div class='image-crop-container'>
+                                <img src='../assets/profile-image/$userId.jpg' alt='profile-image' />
+                           </div>
                         ";
                     ?>
                     <div class="profile-change-container">
