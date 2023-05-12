@@ -224,53 +224,7 @@ $userId = $_SESSION['user_id'];
             </div>
         </div>
 
-        <!--Booking search container-->
-        <div class="booking-search">
-            <div class="booking-search-title">
-                <h1>Search Pending for Request bookings</h1>
-                <form action="" method="POST">
-                    <div class="booking-search-input-container">
-                        <label for="booking-search">Search (Customer name etc)</label>
-                        <div class="booking-search-input-field">
-                            <input type="text" id="booking-search" class="booking-search-input" name="users-search"/>
-                            <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="recent-payments-container">
-            <table class="main-table">
-                <thead>
-                <tr class="main-tr">
-                    <th class="main-th">
-                        <div class="table-heading-container">Customer name&nbsp;<button class="sort-button" id="customer-name-sort"><i
-                                        class="fa-solid fa-arrow-up"></i></button>
-                        </div>
-                    </th>
-                    <th class="main-th">
-                        <div class="table-heading-container">Start date&nbsp;<button class="sort-button" id="start-date-sort"><i
-                                        class="fa-solid fa-arrow-up"></i></button>
-                    </th>
-                    <th class="main-th">
-                        <div class="table-heading-container">End date&nbsp;<button class="sort-button" id="end-date-sort"><i
-                                        class="fa-solid fa-arrow-up"></i></button>
-                    </th>
-                    <th class="main-th">More actions</th>
-                </tr>
-                </thead>
-                <tbody id="bookings-table-body">
-                </tbody>
-            </table>
-            <div class="pagination-container">
-                <button class="pagination-button" id="previous-page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="pagination-button" id="previous-page-number" disabled><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button-current" id="current-page-number"><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button" id="next-page-number" disabled><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-        </div>
-    </div>
+
 
         <!--Booking search container-->
         <div class="booking-search">
@@ -311,11 +265,11 @@ $userId = $_SESSION['user_id'];
                 </tbody>
             </table>
             <div class="pagination-container">
-                <button class="pagination-button" id="previous_page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="pagination-button" id="previous_page_number" disabled><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button-current" id="current_page_number"><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button" id="next_page_number" disabled><i class="fa-solid fa-1"></i></button>
-                <button class="pagination-button" id="next_page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
+                <button class="pagination-button" id="previous-page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="pagination-button" id="previous-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button-current" id="current-page-number"><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="next-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
 

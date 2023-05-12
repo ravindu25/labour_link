@@ -731,7 +731,7 @@
     font-size: 24px;
     font-weight: 500;
     border-radius: 4px;
-    /* background-color: var(--primary-background-shade-color); */
+    background-color: var(--primary-background-color);
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
 }
 
@@ -754,7 +754,7 @@
     font-size: 36px;
     font-weight: 500;
     border-radius: 12px;
-    /* background-color: var(--primary-background-shade-color); */
+     background-color: var(--primary-background-color);
 }
 
 .create-booking-container{

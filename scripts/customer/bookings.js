@@ -392,24 +392,20 @@ function rerenderBookings(currentBookings){
         let bookingStatus = '';
         if(booking.status === 'Pending'){
             bookingStatus = "<span class='pending-badge'>Pending</span>";
-        }else if(booking.status === 'Accepted'){
-            bookingStatus = "<span class='accepted-badge'>Accepted</span>";
+        }else if(booking.status === 'Accepted-by-worker'){
+            bookingStatus = "<span class='accepted-badge'>Accepted by worker</span>";
+        }else if(booking.status === 'Accepted-by-customer' || booking.status === 'Accepted'){
+            bookingStatus = "<span class='accepted-badge'>Accepted by customer</span>";
         }else if(booking.status === 'Completed'){
             bookingStatus = "<span class='completed-badge'>Completed</span>";
-        }else if(booking.status === 'Rejected'){
-            bookingStatus = "<span class='rejected-badge'>Rejected</span>";
+        }else if(booking.status === 'Rejected-by-worker'){
+            bookingStatus = "<span class='rejected-badge'>Rejected by worker</span>";
+        }else if(booking.status === 'Rejected-by-customer'){
+            bookingStatus = "<span class='rejected-badge'>Rejected by customer</span>";
         }
 
-        let moreAction = '';
-        if(booking.status === 'Completed' || booking.status === 'Rejected'){
-            moreAction = `<button class="update-button" onclick="openBookingDetailsModal(${booking.bookingId})"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;&nbsp;View</button>
-                <button class="disable-button" onclick="openDeleteModal(${booking.bookingId})"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                </button>`;
-        } else {
-            moreAction = `<button class="update-button" onclick="openBookingDetailsModal(${booking.bookingId})"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;&nbsp;View</button>
-                                    <button class="delete-button" onclick="openDeleteModal(${booking.bookingId})"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
-                                    </button>`
-        }
+        let moreAction = `<button class="update-button" onclick="openBookingDetailsModal(${booking.bookingId})"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;&nbsp;View</button>
+                `;
 
         bookingsTableBody.innerHTML += `
             <tr class='main-tr'>
