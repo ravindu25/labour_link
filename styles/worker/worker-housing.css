@@ -116,6 +116,7 @@
 .job-cards-container{
     display: flex;
     flex-direction: row;
+    align-items: stretch;
 }
 
 
@@ -123,7 +124,7 @@
 .housing-card{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     width: 190px;
     margin: 8px 18px;
     padding: 20px;
@@ -194,7 +195,7 @@
     background-color: #FFF;
     border-radius: 16px;
     opacity: 1;
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
 .housing-job-details-scroll-wrapper{

@@ -84,6 +84,45 @@ function showAdvertisementContainer(houseId, jobId){
 
     backdrop.style.visibility = 'visible';
     advertisementContainer.style.visibility = 'visible';
+
+    //add event listener to create advertisement button
+    const createAdvertisementButton = document.getElementById('place-advertisement-button');
+    createAdvertisementButton.addEventListener('click', () => {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                if(this.responseText.trim()=="success"){
+                    const successmodal = document.getElementById('advertise-complete-container');
+                    advertisementContainer.style.visibility="hidden";
+                    successmodal.style.visibility="visible";
+                    setTimeout(() => {
+                        successmodal.style.visibility = 'hidden';
+                        backdrop.style.visibility = 'hidden';
+                        window.location.reload();   
+                    }
+                    , 3000);
+
+                    
+                }else if(this.responseText.trim()=="fail"){
+                    const failedmodal = document.getElementById('advertise-failed-container');
+                    advertisementContainer.style.visibility="hidden";
+                    successmodal.style.visibility="visible";
+                    setTimeout(() => {
+                        failedmodal.style.visibility = 'hidden';
+                        backdrop.style.visibility = 'hidden';
+                        window.location.reload();
+                    }
+                    , 3000);
+                }
+            }
+        };
+        xhttp.open("POST", "http://localhost/labour_link/customer/placeAdvertisement.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("houseID=" + houseId + "&jobID=" + jobId);
+        
+
+    }
+    );
 }
 
 function hideAdvertisementContainer(){
