@@ -103,7 +103,7 @@
         <?php
 
             require_once('../db.php');
-            $sql_check_if_painter = "SELECT * FROM Painter WHERE Painter_ID = '$userId'";
+            $sql_check_if_painter = "SELECT * FROM Painter WHERE Painter_ID = '$userId' AND Active = 1";
             $result_check_if_painter = $conn -> query($sql_check_if_painter);
             //if num of rows greater than 0, then user is a painter
             if($result_check_if_painter -> num_rows == 1){
@@ -137,7 +137,7 @@
 
             }
 
-            $sql_check_if_electrician = "SELECT * FROM Electrician WHERE Electrician_ID = '$userId'";
+            $sql_check_if_electrician = "SELECT * FROM Electrician WHERE Electrician_ID = '$userId' AND Active = 1";
             $result_check_if_electrician = $conn -> query($sql_check_if_electrician);
             //if num of rows greater than 0, then user is a painter
             if($result_check_if_electrician -> num_rows == 1){
@@ -171,11 +171,11 @@
 
             }
 
-            $sql_check_if_mason = "SELECT * FROM Mason WHERE Mason_ID = '$userId'";
+            $sql_check_if_mason = "SELECT * FROM Mason WHERE Mason_ID = '$userId' AND Active = 1";
             $result_check_if_mason = $conn -> query($sql_check_if_mason);
             //if num of rows greater than 0, then user is a painter
             if($result_check_if_mason -> num_rows == 1){
-                $sql_get_mason_jobs = "SELECT * FROM Job INNER JOIN House ON Job.House_ID = House.House_ID INNER JOIN User ON House.Customer_ID = User.User_ID WHERE Job_Type_ID = 1 OR Job_Type_ID = 2 OR Job_Type_ID = 4 OR Job_Type_ID = 6 AND Advertisement_Status = 1";
+                $sql_get_mason_jobs = "SELECT * FROM Job INNER JOIN House ON Job.House_ID = House.House_ID INNER JOIN User ON House.Customer_ID = User.User_ID WHERE Advertisement_Status = 1 AND (Job_Type_ID = 1 OR Job_Type_ID = 2 OR Job_Type_ID = 4 OR Job_Type_ID = 6)";
                 $result_get_mason_jobs = $conn -> query($sql_get_mason_jobs);
 
                 if($result_get_mason_jobs -> num_rows > 0){
@@ -205,11 +205,11 @@
 
             }
 
-            $sql_check_if_plumber = "SELECT * FROM Plumber WHERE Plumber_ID = '$userId'";
+            $sql_check_if_plumber = "SELECT * FROM Plumber WHERE Plumber_ID = '$userId' AND Active = 1";
             $result_check_if_plumber = $conn -> query($sql_check_if_plumber);
             //if num of rows greater than 0, then user is a painter
             if($result_check_if_plumber -> num_rows == 1){
-                $sql_get_plumber_jobs = "SELECT * FROM Job INNER JOIN House ON Job.House_ID = House.House_ID INNER JOIN User ON House.Customer_ID = User.User_ID WHERE Job_Type_ID = 7 OR Job_Type_ID = 8 AND Advertisement_Status = 1";
+                $sql_get_plumber_jobs = "SELECT * FROM Job INNER JOIN House ON Job.House_ID = House.House_ID INNER JOIN User ON House.Customer_ID = User.User_ID WHERE Advertisement_Status = 1 AND (Job_Type_ID = 7 OR Job_Type_ID = 8)";
                 $result_get_plumber_jobs = $conn -> query($sql_get_plumber_jobs);
 
                 if($result_get_plumber_jobs -> num_rows > 0){
@@ -240,7 +240,7 @@
             }
 
 
-            $sql_check_if_gardener = "SELECT * FROM Gardener WHERE Gardener_ID = '$userId'";
+            $sql_check_if_gardener = "SELECT * FROM Gardener WHERE Gardener_ID = '$userId' AND Active = 1";
             $result_check_if_gardener = $conn -> query($sql_check_if_gardener);
             //if num of rows greater than 0, then user is a painter
             if($result_check_if_gardener -> num_rows == 1){
