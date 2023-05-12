@@ -424,7 +424,7 @@
 
 .back-button-container{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     padding: 12px;
     text-align: center;
 }
@@ -478,6 +478,7 @@
 }
 
 #reject-button {
+    border-color: #ca0707;
     background-color: #ca0707;
 }
 
@@ -696,18 +697,6 @@
     transform: scale(.98);
 }
 
-.disable-button{
-    outline: none;
-    border: 3px solid var(--grey-color);
-    padding: 8px 18px;
-    color: var(--grey-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    border-radius: 12px;
-    background-color: #FFF;
-}
-
 .delete-button{
     outline: none;
     border: 3px solid var(--warning-dark-color);
@@ -742,7 +731,7 @@
     font-size: 24px;
     font-weight: 500;
     border-radius: 4px;
-    /* background-color: var(--primary-background-shade-color); */
+    background-color: var(--primary-background-color);
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
 }
 
@@ -765,7 +754,7 @@
     font-size: 36px;
     font-weight: 500;
     border-radius: 12px;
-    /* background-color: var(--primary-background-shade-color); */
+     background-color: var(--primary-background-color);
 }
 
 .create-booking-container{
@@ -944,4 +933,31 @@
     color: #FFF;
     border-color: var(--primary-color);
     background-color: var(--primary-color);
+}
+
+.payment-amount-input-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.payment-amount-label{
+    font-size: 32px;
+    font-family: 'Inter', sans-serif;
+    font-weight: normal;
+    color: var(--primary-color);
+}
+
+.payment-amount-input{
+    width: 60%;
+    font-size: 32px;
+    font-family: 'Inter', sans-serif;
+    font-weight: normal;
+    color: var(--primary-color);
+    border: 3px solid var(--primary-background-shade-color);
+    border-radius: 8px;
+    padding: 8px;
+    outline: none;
+    background-color: transparent;
 }

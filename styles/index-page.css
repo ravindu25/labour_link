@@ -219,7 +219,7 @@ a{
     margin: 16px 0;
 }
 
-.primary-button, .primary-outline-button{
+.primary-button, .primary-outline-button, .disable-button{
     outline: none;
     border: 3px solid var(--primary-color);
     padding: 12px 18px;
@@ -235,6 +235,12 @@ a{
 .primary-outline-button{
     color: var(--primary-color);
     background-color: white;
+}
+
+.disable-button{
+    border: 3px solid var(--grey-color);
+    color: var(--grey-color);
+    background-color: #FFF;
 }
 
 .primary-button:active, .primary-outline-button:active{

@@ -487,12 +487,6 @@ $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
                     <h4 class="sidebar-icon-heading">Bookings</h4>
                 </div>
             </a>
-            <a href="./feedbacks.php">
-                <div class="sidebar-item">
-                    <i class="fa-regular fa-message sidebar-item-icon"></i>
-                    <h4 class="sidebar-icon-heading">Feedbacks</h4>
-                </div>
-            </a>
             <a href="./housing.php">
                 <div class="sidebar-item">
                     <i class="fa-solid fa-house sidebar-item-icon"></i>

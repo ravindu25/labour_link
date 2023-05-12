@@ -72,7 +72,7 @@
     </div>
     <div class="create-advertisement-button-container">
         <button class="create-advertisement-secondary-button" onclick="hideAdvertisementContainer()">Cancel</button>
-        <button class="create-advertisement-primary-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Place advertisement!</button>
+        <button class="create-advertisement-primary-button" id="place-advertisement-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Place advertisement!</button>
     </div>
 </div>
 <div class="advertise-complete-container" id="advertise-complete-container">

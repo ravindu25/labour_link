@@ -28,35 +28,8 @@
 <div class="backdrop-modal" id="backdrop-modal">
 </div>
 <div class="housing-job-details-container" id="housing-job-details-container">
-    <div class="housing-job-details-scroll-wrapper">
-        <div class="housing-job-details-title">
-            <h1>More Information about Housing Job in Moratuwa</h1>
-        </div>
-        <div class="details-container">
-            <div class="details-row">
-                <h4>Job type</h4>
-                <h4 class="details-value">Plumber</h4>
-            </div>
-            <div class="details-row">
-                <h4>Customer</h4>
-                <h4 class="details-value">Ravindu Wegiriya</h4>
-            </div>
-            <div class="details-row">
-                <h4>Address</h4>
-                <h4 class="details-value">No. 26/2,Moratuwa.</h4>
-            </div>
-            <div class="details-row">
-                <h4>Contact Number</h4>
-                <h4 class="details-value">071 2637160</h4>
-            </div>
-            <div class="details-row">
-                <h4>Start date</h4>
-                <h4 class="details-value">21-Nov-2022</h4>
-            </div>
-            <div class="back-button-container">
-                <button type="button" class="more-button" id="back-button">Back</button>
-            </div>
-        </div>
+    <div class="housing-job-details-scroll-wrapper" id="housing-details-modal">
+        
     </div>
 </div>
 <?php include_once '../components/navbar.php' ?>
@@ -74,12 +47,6 @@
                 <div class="sidebar-item">
                     <i class="fa-solid fa-b sidebar-item-icon"></i>
                     <h4 class="sidebar-icon-heading">Bookings</h4>
-                </div>
-            </a>
-            <a href="./feedbacks.php">
-                <div class="sidebar-item">
-                    <i class="fa-regular fa-message sidebar-item-icon"></i>
-                    <h4 class="sidebar-icon-heading">Feedbacks</h4>
                 </div>
             </a>
             <a href="./housing.php">
@@ -133,123 +100,50 @@
                 echo "<h5>Last accessed $dateInText</h5>";
             ?>            
         </div>
-        <div class="housing-job-card">
-            <div class="housing-job-title">
-                <h1>Available Housing Jobs For Paintings</h1>
-            </div>
-            <div class="job-cards-container">
-            <div class="housing-job-card-container">
-                <div class="housing-card">
-                    <div class="card-text">
-                        <p>Customer</p>
-                        <h4>Ravindu Wegiriya</h4>
-                    </div>
-                    <div class="housing-job-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">Moratuwa</div> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="housing-job-card-container">
-                <div class="housing-card">
-                    <div class="card-text">
-                        <p>Customer</p>
-                        <h4>Mohomad Izzath</h4>
-                    </div>
-                    <div class="housing-job-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">Negambo</div> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="housing-job-card-container">
-                <div class="housing-card">
-                    <div class="card-text">
-                        <p>Customer</p>
-                        <h4>Ravindu Wegiriya</h4>
-                    </div>
-                    <div class="housing-job-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">Moratuwa</div> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="housing-job-card-container">
-                <div class="housing-card">
-                    <div class="card-text">
-                        <p>Customer</p>
-                        <h4>Ravindu Wegiriya</h4>
-                    </div>
-                    <div class="housing-job-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">Moratuwa</div> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
+        <?php
 
-            <div class="housing-job-title">
-                <h1>Available Housing Jobs For Paintings</h1>
-            </div>
-            <div class="job-cards-container">
-            <div class="housing-job-card-container">
-                <div class="housing-card">
-                    <div class="card-text">
-                        <p>Customer</p>
-                        <h4>Ravindu Wegiriya</h4>
-                    </div>
-                    <div class="housing-job-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">Moratuwa</div> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="housing-job-card-container">
-                <div class="housing-card">
-                    <div class="card-text">
-                        <p>Customer</p>
-                        <h4>Ravindu Wegiriya</h4>
-                    </div>
-                    <div class="housing-job-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">Moratuwa</div> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="housing-job-card-container">
-                <div class="housing-card">
-                    <div class="card-text">
-                        <p>Customer</p>
-                        <h4>Ravindu Wegiriya</h4>
-                    </div>
-                    <div class="housing-job-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">Moratuwa</div> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="housing-job-card-container">
-                <div class="housing-card">
-                    <div class="card-text">
-                        <p>Customer</p>
-                        <h4>Ravindu Wegiriya</h4>
-                    </div>
-                    <div class="housing-job-card-button-row">
-                        <div class="badge-container">
-                            <div class="blue-badge">Moratuwa</div> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
+            require_once('../db.php');
+            $sql_check_if_painter = "SELECT * FROM Painter WHERE Painter_ID = '$userId'";
+            $result_check_if_painter = $conn -> query($sql_check_if_painter);
+            //if num of rows greater than 0, then user is a painter
+            if($result_check_if_painter -> num_rows == 1){
+                $sql_get_painter_jobs = "SELECT * FROM Job INNER JOIN House ON Job.House_ID = House.House_ID INNER JOIN User ON House.Customer_ID = User.User_ID WHERE Job_Type_ID = 5 AND Advertisement_Status = 1";
+                $result_get_painter_jobs = $conn -> query($sql_get_painter_jobs);
+
+                if($result_get_painter_jobs -> num_rows > 0){
+                    echo(' <div class="housing-job-card">
+                    <div class="housing-job-title">
+                        <h1>Available Housing Jobs For Painting</h1>
+                    </div><div class="job-cards-container">');
+                    while($row = $result_get_painter_jobs->fetch_assoc()){
+                        echo('
+                        
+                    
+                            <div class="housing-card" onclick="showHousingDetailsContainer('.$row['House_ID'].',\'Painter\')" >
+                                <div class="card-text">
+                                    <p>Customer</p>
+                                    <h4>'.$row['First_Name'].' '.$row['Last_Name'].'</h4>
+                                </div>
+                                <div class="housing-job-card-button-row">
+                                    <div class="badge-container">
+                                        <div class="blue-badge">'.$row['Address'].'</div> 
+                                    </div>
+                                </div>
+                                </div>
+                        ');
+                    }
+                    echo('</div></div>');
+                }
+
+            }
+        ?>
+       
+            
+           
         </div>
+
+
+           
     </section>
 </main>
 <footer class="footer">
@@ -259,4 +153,36 @@
 </footer>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
+<script>
+    function showHousingDetailsContainer(House_ID, Type){
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                document.getElementById('housing-details-modal').innerHTML = this.responseText;
+                const housingDetailsContainer = document.querySelector('.housing-job-details-container');
+                const backdrop = document.querySelector('#backdrop-modal');
+                housingDetailsContainer.style.visibility = "visible";
+                backdrop.style.visibility = "visible";
+                //add event listener to back button
+                const backButton = document.getElementById('back-button');
+                backButton.addEventListener('click', () => {
+                    const housingDetailsContainer = document.querySelector('.housing-job-details-container');
+                    const backdrop = document.querySelector('#backdrop-modal');
+                    housingDetailsContainer.style.visibility = "hidden";
+                    backdrop.style.visibility = "hidden";
+    })
+              
+            }
+        };
+        xhttp.open("POST", "http://localhost/labour_link/worker/getHousingDetails.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("houseID=" + House_ID + "&type=" + Type);
+        
+
+    }
+
+    
+
+</script>
 </body>
