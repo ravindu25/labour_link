@@ -649,7 +649,7 @@ $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
         $userid=$_SESSION['user_id'];
         // Get the filename of the uploaded image
         //change file name to what we want
-        $target_file = $target_dir . $userid.".jpg";
+        $target_file = $target_dir . $userid. ".jpg";
 
         // Check if the uploaded file is an image
         $check = getimagesize($_FILES["picture-upload-input"]["tmp_name"]);

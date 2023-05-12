@@ -217,7 +217,7 @@ function updatePassword(user_id){
 
 }
 
-unction showEditButton(buttonId){
+function showEditButton(buttonId){
     const editButton = document.getElementById(buttonId);
 
     editButton.style.visibility = 'visible';
@@ -603,3 +603,6 @@ function updateName(user_id){
 
 }
 
+function displayFeedback(){
+    fetch('http://localhost/labour_link/api/',);
+}

@@ -6,7 +6,7 @@ fileSelectInput.addEventListener('change', () => {
     checkFileInput();
 })
 
-editItemContainers.forEach(editItem => {
+editItemContainers.forEach((editItem) => {
     const editItemContainer = document.getElementById(editItem);
 
     editItemContainer.addEventListener('mouseover', () => {
