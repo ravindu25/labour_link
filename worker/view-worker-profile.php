@@ -17,6 +17,7 @@ echo $workerType;
 $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker on User.User_ID = Worker.Worker_ID where Worker_ID=$workerID";
 
             $result = $conn->query($sql_get_workers_details);
+            $description = '';
 
             if($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -25,6 +26,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     $fullName = $row['First_Name'] . " " . $row['Last_Name'];
                     $city = $row['City'];
                     $currentRating = $row['Current_Rating'];
+                    $description = $row['Description'];
 
                     $imageNumber = rand(1, 4);
                     $imageUrl = "../assets/worker/profile-images/worker-$imageNumber.jpg";
@@ -52,7 +54,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <!-- Google fonts imports -->
@@ -74,6 +76,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
 
 </head>
 <body>
+<div class="backdrop-modal" id="backdrop-modal"></div>
 <div class="register-select-modal" id="register-modal"></div>
 <div class="register-select-content" id="register-modal-content">
     <div class="register-select-heading">
@@ -197,6 +200,14 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
         </form>
     </div>
 </div>
+<div class="add-feedback-modal" id="add-feedback-modal">
+    <div class="add-feedback-modal-header">
+        <h1>Add feedbacks to your profile</h1>
+    </div>
+    <div class="feedback-list-container" id="feedback-list-container">
+
+    </div>
+</div>
 <?php include_once '../components/navbar.php' ?>
 <div class="profile-container">
     <div class="profile-picture">
@@ -205,11 +216,13 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     <div class="profile-info">
         <h1><?=$fullName?></h1>
         <div class="subheading">WORKER BIO</div>
+        <hr style="color: #30CEF0; width: 100%" />
         <div class="worker-bio">
             <div class="detail-row">
                 <div class="detail">
                     <h3>Category</h3>
-                    <?php
+                    <div class="worker-type-badge-row">
+                        <?php
                         $sql_statement = "SELECT Worker.Worker_ID, P.Plumber_ID, C.Carpenter_ID, E.Electrician_ID, P2.Painter_ID,
         M.Mason_ID, J.Janitor_ID, M2.Mechanic_ID, Gardener_ID
                     FROM Worker LEFT JOIN Plumber P on Worker.Worker_ID = P.Plumber_ID
@@ -219,7 +232,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     LEFT JOIN Mason M on Worker.Worker_ID = M.Mason_ID
                     LEFT JOIN Janitor J on Worker.Worker_ID = J.Janitor_ID
                     LEFT JOIN Mechanic M2 on Worker.Worker_ID = M2.Mechanic_ID
-                    LEFT JOIN Gardener G on Worker.Worker_ID = G.Gardener_ID WHERE Worker_ID = $userId";
+                    LEFT JOIN Gardener G on Worker.Worker_ID = G.Gardener_ID WHERE Worker_ID = $workerID";
 
                         $result = $conn->query($sql_statement);
 
@@ -269,6 +282,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                 ";
                         }
                         ?>
+                    </div>
                 </div>
                 <div class="detail">
                     <h3>Location</h3>
@@ -288,14 +302,11 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                 </div>
             </div>
             <div class="detail-row">
-                <div class="detail">
+                <div class="detail" style="width: 60vw">
                     <h3>Description</h3>
-                    <p>Saman is an experienced electrician who has been working for more than 15 years in the field.
-                        He is also a skilled and dedicated plumber who takes great pride in his work.
-                        Saman has a reputation for being reliable, efficient, and always willing to go the extra mile to
-                        ensure that clients are satisfied with his plumbing services. </p>
+                    <p> <?php echo $description ?> </p>
                 </div>
-                <div class="detail">
+                <div class="detail" style="width: 10vw">
                     <a href='../customer/create-booking.php'>
                         <button type='button' class='booking-button'>Book now!</button>
                     </a>
@@ -306,7 +317,15 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
 </div>
 <div class="feedbacks-container">
     <div class="subheading">CUSTOMER FEEDBACK</div>
+    <hr style="color: #30CEF0;" />
     <div class="detail-row">
+        <button type="button" class="add-feedback-button" onclick="displayFeedbacks()">
+            <div class="add-feedback-icon">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+            <h1>Edit feedback</h1>
+        </button>
+        <div class="add-feedback-list" id="add-feedback-list"></div>
         <div class="feedback">
             <div class="feedback-body">
                 <p>"John is a fantastic web developer. He is easy to work with and produces high-quality work. Highly recommend!"</p>
@@ -322,14 +341,6 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
             </div>
             <div class="feedback-footer">
                 <span>- Bob Johnson</span>
-            </div>
-        </div>
-        <div class="feedback">
-            <div class="feedback-body">
-                <p>"Professional, reliable, and great communication throughout project.!"</p>
-            </div>
-            <div class="feedback-footer">
-                <span> - Ashen Gunarathne</span>
             </div>
         </div>
         <div class="feedback">

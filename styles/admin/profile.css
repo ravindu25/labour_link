@@ -504,6 +504,10 @@
     transform: scale(.96);
 }
 
+.update-button:hover{
+    visibility: visible;
+}
+
 .details-edit-modal{
     position: fixed;
     left: 50%;
