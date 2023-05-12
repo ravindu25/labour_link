@@ -30,6 +30,14 @@
 </div>
 <div class="message-backdrop" id="message-backdrop">
 </div>
+<div class="error-message-container" id="error-message-container">
+    <div class="error-message-heading">
+        <h1>Sorry, an unexpected error has occurred. Please try again later or contact customer support for assistance</h1>
+    </div>
+    <div class="error-message-image">
+        <img src="../assets/error-image.png" alt="error-image" />
+    </div>
+</div>
 <div class="success-message-container" id="booking-create-success">
     <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Booking created successfully</h1>
 </div>
@@ -67,7 +75,7 @@
                 <h4 class="details-value" id="booking-details-job-type"></h4>
             </div>
             <div class="details-row">
-                <h4>Worker</h4>
+                <h4>Worker name</h4>
                 <h4 class="details-value" id="booking-details-worker-name"></h4>
             </div>
             <div class="details-row">
@@ -92,10 +100,37 @@
                     <h2 id="payment-details-amount-text">Rs. 17500.00</h2>
                 </div>
             </div>
-            <div class="back-button-container">
-                <button type="button" class="primary-button" id="back-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Close</button>
+            <div class="back-button-container" id="back-button-container">
+                <button type="button" class="primary-outline-button" id="back-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Close</button>
             </div>
         </div>
+    </div>
+</div>
+<div class="success-message-container" id="booking-reject-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Booking rejected!</h1>
+</div>
+<div class="failed-message-container" id="booking-reject-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking rejection process failed!</h1>
+        <h5>Your login session outdated. Please login again.</h5>
+    </div>
+</div>
+<div class="success-message-container" id="booking-accepted-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Booking successfully accepted!</h1>
+</div>
+<div class="failed-message-container" id="booking-accept-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking acception process failed!</h1>
+        <h5 id="booking-accept-fail-text">Your login session outdated. Please login again.</h5>
+    </div>
+</div>
+<div class="success-message-container" id="booking-complete-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Booking successfully completed!</h1>
+</div>
+<div class="failed-message-container" id="booking-complete-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking completeion process failed!</h1>
+        <h5 id="booking-accept-fail-text">Your login session outdated. Please login again.</h5>
     </div>
 </div>
 <div class="create-booking-container" id="create-booking-container">
@@ -284,12 +319,16 @@
 
                             if($status === 'Pending'){
                                 $button = '<button class="pending-button">Pending</button>';
-                            } else if($status === 'Accepted'){
-                                $button = '<button class="in-pogress-button">Accepted</button>';
-                            } else if($status === 'Completed'){
+                            } else if($status === 'Accepted-by-worker'){
+                                $button = '<button class="in-pogress-button">Accepted by worker</button>';
+                            }else if($status === 'Accepted-by-customer'){
+                                $button = '<button class="in-pogress-button">Accepted by customer</button>';
+                            }else if($status === 'Completed'){
                                 $button = '<button class="completed-button">Completed</button>';
-                            } else {
-                                $button = '<button class="rejected-button">Rejected</button>';
+                            } else if($status === 'Rejected-by-worker') {
+                                $button = '<button class="rejected-button">Rejected by worker</button>';
+                            } else if($status === 'Rejected-by-customer'){
+                                $button = '<button class="rejected-button">Rejected by customer</button>';
                             }
 
 

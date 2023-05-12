@@ -107,6 +107,15 @@ $userId = $_SESSION['user_id'];
             <h5>Your login session outdated. Please login again.</h5>
         </div>
     </div>
+    <div class="success-message-container" id="booking-accepted-success">
+        <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Booking successfully accepted!</h1>
+    </div>
+    <div class="failed-message-container" id="booking-accept-fail">
+        <div class="message-text">
+            <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking acception process failed!</h1>
+            <h5 id="booking-accept-fail-text">Your login session outdated. Please login again.</h5>
+        </div>
+    </div>
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">
@@ -164,8 +173,6 @@ $userId = $_SESSION['user_id'];
             <?php
                 require_once '../db.php';
 
-                // $sql = "SELECT First_Name,Last_Name ,Start_Date , Completion_Flag FROM user INNER JOIN booking ON user.User_ID = booking.Customer_ID INNER JOIN confirmed_booking ON booking.Booking_ID = confirmed_booking.Booking_ID";
-
                 $sql_get_status = "SELECT Booking.*, First_Name,Last_Name ,Start_Date, Worker_Type, Created_Date ,Status FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} ORDER BY Created_Date DESC LIMIT 5";
 
 
@@ -181,12 +188,16 @@ $userId = $_SESSION['user_id'];
 
                             if($status === 'Pending'){
                                 $button = '<button class="pending-button">Pending</button>';
-                            } else if($status === 'Accepted'){
-                                $button = '<button class="in-pogress-button">Accepted</button>';
-                            } else if($status === 'Completed'){
+                            } else if($status === 'Accepted-by-worker'){
+                                $button = '<button class="in-pogress-button">Accepted by worker</button>';
+                            }else if($status === 'Accepted-by-customer'){
+                                $button = '<button class="in-pogress-button">Accepted by customer</button>';
+                            }else if($status === 'Completed'){
                                 $button = '<button class="completed-button">Completed</button>';
-                            } else {
-                                $button = '<button class="rejected-button">Rejected</button>';
+                            } else if($status === 'Rejected-by-worker') {
+                                $button = '<button class="rejected-button">Rejected by worker</button>';
+                            } else if($status === 'Rejected-by-customer'){
+                                $button = '<button class="rejected-button">Rejected by customer</button>';
                             }
                         echo('
                         <div class="booking-card" onclick="openBookingDetailsModal('.$bookingId.')">
