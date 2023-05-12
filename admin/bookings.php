@@ -167,56 +167,74 @@ $userId = $_SESSION['user_id'];
 
                 </div>
             </div>
+            <!--Booking search container-->
             <div class="booking-search">
                 <div class="booking-search-title">
-                    <h1>Search for bookings</h1>
-                    <form action="" method="POST">
-                        <div class="booking-search-input-container">
-                            <label for="booking-search">Search (Worker name etc)</label>
-                            <div class="booking-search-input-field">
-                                <input type="text" id="booking-search" class="booking-search-input" name="users-search"/>
-                                <button type="button" class="search-icon-small" id="booking-search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            </div>
-                        </div>
-                    </form>
+                    <h1>Search for All bookings</h1>
+                    <?php
+                        $sql_get_booking_count = "SELECT COUNT(Booking_ID) AS Booking_Count FROM Booking";
+
+                        $bookingCount = 0;
+                        $result = $conn->query($sql_get_booking_count);
+
+                        if($result->num_rows > 0){
+                            while($row = $result->fetch_assoc()){
+                                $bookingCount = $row['Booking_Count'];
+                            }
+                        }
+
+                        if($bookingCount > 0){
+                            ?>
+                            <form action="" method="POST">
+                                <div class="booking-search-input-container">
+                                    <label for="booking-search">Search (Customer name etc)</label>
+                                    <div class="booking-search-input-field">
+                                        <input type="text" id="booking-search" class="booking-search-input" name="users-search"/>
+                                        <button type="button" class="search-icon-small" id="booking-search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        <?php } ?>
                 </div>
             </div>
-            <div class="recent-payments-container">
-                <table class="main-table">
-                    <thead>
-                    <tr class="main-tr">
-                        <th class="main-th">
-                            <div class="table-heading-container">Customer name&nbsp;<button class="sort-button" id="worker-name-sort"><i
-                                            class="fa-solid fa-arrow-up"></i></button>
-                            </div>
-                        </th>
-                        <th class="main-th">
-                            <div class="table-heading-container">Worker name&nbsp;<button class="sort-button" id="worker-name-sort"><i
-                                            class="fa-solid fa-arrow-up"></i></button>
-                            </div>
-                        </th>
-                        <th class="main-th">
-                            <div class="table-heading-container">Start date&nbsp;<button class="sort-button" id="start-date-sort"><i
-                                            class="fa-solid fa-arrow-up"></i></button>
-                        </th>
-                        <th class="main-th">
-                            <div class="table-heading-container">End date&nbsp;<button class="sort-button" id="end-date-sort"><i
-                                            class="fa-solid fa-arrow-up"></i></button>
-                        </th>
-                        <th class="main-th">More actions</th>
-                    </tr>
-                    </thead>
-                    <tbody id="bookings-table-body">
-                    </tbody>
-                </table>
-                <div class="pagination-container">
-                    <button class="pagination-button" id="previous-page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button class="pagination-button" id="previous-page-number" disabled><i class="fa-solid fa-1"></i></button>
-                    <button class="pagination-button-current" id="current-page-number"><i class="fa-solid fa-1"></i></button>
-                    <button class="pagination-button" id="next-page-number" disabled><i class="fa-solid fa-1"></i></button>
-                    <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
+            <?php if($bookingCount > 0) { ?>
+                <div class="recent-payments-container">
+                    <table class="main-table">
+                        <thead>
+                        <tr class="main-tr">
+                            <th class="main-th">
+                                <div class="table-heading-container">Customer name&nbsp;<button class="sort-button" id="customer-name-sort"><i
+                                                class="fa-solid fa-arrow-up"></i></button>
+                                </div>
+                            </th>
+                            <th class="main-th">
+                                <div class="table-heading-container">Start date&nbsp;<button class="sort-button" id="start-date-sort"><i
+                                                class="fa-solid fa-arrow-up"></i></button>
+                            </th>
+                            <th class="main-th">
+                                <div class="table-heading-container">End date&nbsp;<button class="sort-button" id="end-date-sort"><i
+                                                class="fa-solid fa-arrow-up"></i></button>
+                            </th>
+                            <th class="main-th">More actions</th>
+                        </tr>
+                        </thead>
+                        <tbody id="bookings-table-body">
+                        </tbody>
+                    </table>
+                    <div class="pagination-container">
+                        <button class="pagination-button" id="previous-page" onclick="previousPage()"><i class="fa-solid fa-arrow-left"></i></button>
+                        <button class="pagination-button" id="previous-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                        <button class="pagination-button-current" id="current-page-number"><i class="fa-solid fa-1"></i></button>
+                        <button class="pagination-button" id="next-page-number" disabled><i class="fa-solid fa-1"></i></button>
+                        <button class="pagination-button" id="next-page" onclick="nextPage()"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
                 </div>
-            </div>
+            <?php } else { ?>
+                <div class="empty-all-bookings-container">
+                    <img src="../assets/worker/bookings/undraw_Domain_names_re_0uun.png" alt="no bookings" />
+                    <h3>There are no bookings at the moment!</h3>
+                </div>
+            <?php } ?>
         </div>
         <?php
         echo '<script src="../scripts/admin/loader.js" type="text/javascript"></script>';

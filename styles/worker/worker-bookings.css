@@ -183,6 +183,23 @@
     background-color: var(--dark-color);
 }
 
+.empty-ongoing-booking-container{
+    width: 100%;
+    text-align: center;
+}
+
+.empty-ongoing-booking-container img{
+    width: 40%;
+    height: auto;
+    border-radius: 16px;
+}
+
+.empty-ongoing-booking-container h3{
+    font-size: 24px;
+    font-weight: normal;
+    color: var(--primary-color);
+}
+
 .success-message-container{
     position: fixed;
     left: 50%;
@@ -960,4 +977,21 @@
     padding: 8px;
     outline: none;
     background-color: transparent;
+}
+
+.empty-all-bookings-container{
+    width: 100%;
+    text-align: center;
+}
+
+.empty-all-bookings-container img{
+    width: 40%;
+    height: auto;
+    border-radius: 16px;
+}
+
+.empty-all-bookings-container h3{
+    font-size: 24px;
+    font-weight: normal;
+    color: var(--primary-color);
 }
