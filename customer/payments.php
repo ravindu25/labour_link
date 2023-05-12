@@ -222,7 +222,7 @@
                             <input type="text" id="booking-search" class="booking-search-input" name="users-search"/>
                             <button class="search-icon-small"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
-                    </div>
+                    </div>  
                 </form>
             </div>
         </div>
@@ -242,7 +242,7 @@
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">Status&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">Mode&nbsp;<button class="sort-button"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
                     <th class="main-th">More actions</th>
@@ -273,14 +273,17 @@
                             <span class=\"blue-badge\">".$paymentDateInText."</span>
                         </td>
                         <td class=\"main-td\">Rs. ".$row['Amount']."</td>
-                        <td class=\"main-td\">".$successMessage."</td>
+                        <td class=\"main-td\">".$row['Status_Message']."</td>
                         <td class=\"main-td\">
-                            <div class=\"more-button-container\">
-                                <button class=\"view-button\"><i class=\"fa-solid fa-up-right-from-square\"></i>&nbsp;&nbsp;View
-                                </button>
-                            </div>
-                        </td>
-                    </tr>");
+                        ".$row['Mode']." ");
+                        if($row['Mode']=="VISA"){
+                            echo("<i class='fa-brands fa-cc-visa'></i>");
+                        }else if($row['Mode']=="MASTER"){
+                            echo("<i class='fa-brands fa-cc-mastercard'></i>");
+                        }
+                        echo("</td>
+                        </tr>");
+                       
 
                     }
                 }
