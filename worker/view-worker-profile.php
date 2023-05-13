@@ -204,8 +204,10 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     <div class="add-feedback-modal-header">
         <h1>Add feedbacks to your profile</h1>
     </div>
-    <div class="feedback-list-container" id="feedback-list-container">
-
+    <div class="feedback-list-container" id="feedback-list-container"></div>
+    <div class="add-feedback-modal-button-container">
+        <button type="button" class="primary-outline-button" onclick="hideAddCategoryContainer()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" id="feedback-add-button" class="disable-button"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add feedback</button>
     </div>
 </div>
 <?php include_once '../components/navbar.php' ?>
