@@ -213,6 +213,7 @@
 
 .worker-card-types-row{
     display: flex;
+    flex-wrap: wrap;
     font-size: 20px;
     color: black;
     font-weight: normal;
@@ -221,6 +222,7 @@
 
 .worker-type-badge{
     padding: 4px 12px;
+    margin: 4px 0;
     margin-left: 8px;
     margin-right: 4px;
     border-radius: 6px;

@@ -166,7 +166,11 @@ function createCard(worker){
                         <h5>${workerCategory}</h5>
                   </div>
     `);
-    const workerCategoryText = workerCategoryArray.toString();
+
+    let workerCategoryText = '';
+    workerCategoryArray.forEach(element => {
+        workerCategoryText += element;
+    });
 
     if(logged === false){
         bookingButtonHtml = '<button type="button" class="booking-button" onclick="openLoginModal()"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Book now!</button>';
