@@ -228,14 +228,28 @@
     </div>
     <div class="worker-type-modal-cards-container">
         <?php
+            echo "
+                <script>
+                    let categoryStates = [];
+                </script>
+            ";
             for($i = 0; $i < sizeof($workerCategories); $i++){
                 $categoryName = ucfirst($workerCategories[$i]);
                 $imageUrl = getImageUrl($workerCategories[$i]);
-                $isActive = true;
+                $isActive = 1;
 
                 if(in_array($workerCategories[$i], $deactiveCategories)){
-                    $isActive = false;
+                    $isActive = 0;
                 }
+
+                echo "
+                    <script>
+                    categoryStates.push({
+                        category: '$workerCategories[$i]',
+                        isActive: $isActive,
+                    })
+                    </script>
+                ";
 
                 $checkedText = '';
                 if(!$isActive){
@@ -245,7 +259,7 @@
                 echo "
                     <div class='worker-type-modal-card'>
                     <label>
-                        <input type='checkbox' name='update-job-type-select' value='$workerCategories[$i]' class='job-type-update-select' id='job-type-add-$workerCategories[$i]' $checkedText/>
+                        <input type='checkbox' name='active-deactive-job-type-select' value='$workerCategories[$i]' class='job-type-update-select' id='job-type-add-$workerCategories[$i]' $checkedText/>
                         <div class='job-type-card-container'>
                             <div class='job-type-image-container'>
                                 <img src='$imageUrl' alt='$workerCategories[$i]' class='job-type-image' />
@@ -260,15 +274,13 @@
     </div>
     <div class="worker-type-modal-button-container">
         <button type="button" class="primary-outline-button" onclick="hideActiveDeactivateContainer()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-        <?php
-        echo('<button type="button" id="worker-type-add-button" class="disable-button" onclick="updateWorkerType('.$userId.')"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>');
-        ?>
+        <button type="button" id="worker-type-switch-button" class="disable-button" disabled><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update details</button>;
     </div>
 </div>
 <div class="profile-change-modal-container" id="profile-change-modal-container">
     <div class="change-profile-page">
         <div class="change-profile-banner">
-            <h1>Change your  profile picture now!</h1>
+            <h1>Change your profile picture now!</h1>
         </div>
         <div class="current-picture-container" id="current-picture-container">
             <?php
@@ -536,9 +548,18 @@ $activationFlag = $row['Activation_Flag'] == 1 ? 'Activated': 'Not activated';
             <div class="profile-image-container">
                 <div class="profile-image">
                     <?php
+                        $profileUrl = '';
+                        $imageExists = file_exists("../assets/profile-image/$userId.jpg");
+                        if($imageExists){
+                            $profileUrl = "../assets/profile-image/$userId.jpg";
+                        } else {
+                            $imageId = $userId % 4 + 1;
+                            $profileUrl = "../assets/worker/profile-images/worker-$imageId.jpg";
+                        }
+
                     echo "
                            <div class='image-crop-container'>
-                                <img src='../assets/profile-image/$userId.jpg' alt='profile-image' />
+                                <img src='$profileUrl' alt='profile-image' />
                            </div>
                         ";
                     ?>
