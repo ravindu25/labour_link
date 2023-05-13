@@ -158,7 +158,7 @@
     display: flex;
     flex-wrap: wrap;
     padding: 16px 0;
-    align-items: start;
+    align-items: stretch;
     justify-content: center;
 }
 
@@ -167,7 +167,6 @@
     flex-direction: column;
     justify-content: center;
     max-width: 21%;
-    height: 540px;
     padding: 28px 16px;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -194,7 +193,6 @@
 .worker-image{
     width: 75%;
     margin: 0 auto;
-    height: auto;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -213,6 +211,7 @@
 
 .worker-card-types-row{
     display: flex;
+    flex-wrap: wrap;
     font-size: 20px;
     color: black;
     font-weight: normal;
@@ -221,6 +220,7 @@
 
 .worker-type-badge{
     padding: 4px 12px;
+    margin: 4px 0;
     margin-left: 8px;
     margin-right: 4px;
     border-radius: 6px;

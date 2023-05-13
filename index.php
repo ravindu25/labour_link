@@ -36,7 +36,18 @@
         <div class="job-card">
             <img src="./assets/job-card-image/plumbing-image.jpg" alt="Plumbing" class="job-card-image"/>
             <div class="card-text">
-                <p>20+ Workers Available</p>
+                <?php
+                    require_once('./db.php');
+                    $sql_get_plumber_count = "SELECT COUNT(Plumber_ID) AS Count FROM Plumber WHERE Active = 1";
+
+                    $result = $conn->query($sql_get_plumber_count);
+                    if($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $count = ceil($row['Count'] / 5) * 5;
+                            echo "<p>$count+ Workers Available</p>";
+                        }
+                    }
+                ?>
                 <a href="worker/index.php?workertype=plumber">
                     <button type="button" class="card-button">Plumbing</button>
                 </a>
@@ -45,7 +56,18 @@
         <div class="job-card">
             <img src="./assets/job-card-image/carpentry-image.jpg" alt="Carpentry" class="job-card-image"/>
             <div class="card-text">
-                <p>35+ Workers Available</p>
+                <?php
+                    require_once('./db.php');
+                    $sql_get_carpenter_count = "SELECT COUNT(Carpenter_ID) AS Count FROM Carpenter WHERE Active = 1";
+
+                    $result = $conn->query($sql_get_carpenter_count);
+                    if($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $count = ceil($row['Count'] / 5) * 5;
+                            echo "<p>$count+ Workers Available</p>";
+                        }
+                    }
+                ?>
                 <a href="worker/index.php?workertype=carpenter">
                     <button type="button" class="card-button">Carpentry</button>
                 </a>
@@ -54,7 +76,18 @@
         <div class="job-card">
             <img src="./assets/job-card-image/electrical-image.jpg" alt="Electrical" class="job-card-image"/>
             <div class="card-text">
-                <p>15+ Workers Available</p>
+                <?php
+                    require_once('./db.php');
+                    $sql_get_electrical_count = "SELECT COUNT(Electrician_ID) AS Count FROM Electrician WHERE Active = 1";
+
+                    $result = $conn->query($sql_get_electrical_count);
+                    if($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $count = ceil($row['Count'] / 5) * 5;
+                            echo "<p>$count+ Workers Available</p>";
+                        }
+                    }
+                ?>
                 <a href="worker/index.php?workertype=electrician">
                     <button type="button" class="card-button">Electrical</button>
                 </a>
@@ -63,7 +96,18 @@
         <div class="job-card">
             <img src="./assets/job-card-image/painting-image.jpg" alt="Painting" class="job-card-image"/>
             <div class="card-text">
-                <p>55+ Workers Available</p>
+                <?php
+                    require_once('./db.php');
+                    $sql_get_painter_count = "SELECT COUNT(Painter_ID) AS Count FROM Painter WHERE Active = 1";
+
+                    $result = $conn->query($sql_get_painter_count);
+                    if($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $count = ceil($row['Count'] / 5) * 5;
+                            echo "<p>$count+ Workers Available</p>";
+                        }
+                    }
+                ?>
                 <a href="worker/index.php?workertype=painter">
                     <button type="button" class="card-button">Painting</button>
                 </a>
@@ -72,7 +116,18 @@
         <div class="job-card">
             <img src="./assets/job-card-image/masonry-image.jpg" alt="Masonry" class="job-card-image"/>
             <div class="card-text">
-                <p>40+ Workers Available</p>
+                <?php
+                    require_once('./db.php');
+                    $sql_get_mason_count = "SELECT COUNT(Mason_ID) AS Count FROM Mason WHERE Active = 1";
+
+                    $result = $conn->query($sql_get_painter_count);
+                    if($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $count = ceil($row['Count'] / 5) * 5;
+                            echo "<p>$count+ Workers Available</p>";
+                        }
+                    }
+                ?>
                 <a href="worker/index.php?workertype=mason">
                     <button type="button" class="card-button">Masonry</button>
                 </a>
@@ -81,7 +136,18 @@
         <div class="job-card">
             <img src="./assets/job-card-image/janitor-image.jpg" alt="Janitorial" class="job-card-image"/>
             <div class="card-text">
-                <p>60+ Workers Available</p>
+                <?php
+                    require_once('./db.php');
+                    $sql_get_janitor_count = "SELECT COUNT(Janitor_ID) AS Count FROM Janitor WHERE Active = 1";
+
+                    $result = $conn->query($sql_get_janitor_count);
+                    if($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $count = ceil($row['Count'] / 5) * 5;
+                            echo "<p>$count+ Workers Available</p>";
+                        }
+                    }
+                ?>
                 <a href="worker/index.php?workertype=janitor">
                     <button type="button" class="card-button">Janitorial</button>
                 </a>
@@ -90,7 +156,18 @@
         <div class="job-card">
             <img src="./assets/job-card-image/mechanical-image.jpg" alt="Mechanical" class="job-card-image"/>
             <div class="card-text">
-                <p>40+ Workers Available</p>
+                <?php
+                    require_once('./db.php');
+                    $sql_get_mechanic_count = "SELECT COUNT(Mechanic_ID) AS Count FROM Mechanic WHERE Active = 1";
+
+                    $result = $conn->query($sql_get_mechanic_count);
+                    if($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $count = ceil($row['Count'] / 5) * 5;
+                            echo "<p>$count+ Workers Available</p>";
+                        }
+                    }
+                ?>
                 <a href="worker/index.php?workertype=mechanic">
                     <button type="button" class="card-button">Mechanical</button>
                 </a>
@@ -99,7 +176,18 @@
         <div class="job-card">
             <img src="./assets/job-card-image/gardening-image.jpg" alt="Gardening" class="job-card-image"/>
             <div class="card-text">
-                <p>20+ Workers Available</p>
+                <?php
+                    require_once('./db.php');
+                    $sql_get_mechanic_count = "SELECT COUNT(Gardener_ID) AS Count FROM Gardener WHERE Active = 1";
+
+                    $result = $conn->query($sql_get_mechanic_count);
+                    if($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $count = ceil($row['Count'] / 5) * 5;
+                            echo "<p>$count+ Workers Available</p>";
+                        }
+                    }
+                ?>
                 <a href="worker/index.php?workertype=gardener">
                     <button type="button" class="card-button">Gardening</button>
                 </a>
@@ -114,7 +202,9 @@
             <h1>Looking for appropriate labour to build your dream house?</h1>
             <h3>Labour Link provides housing construction packages to fulfill your needs</h3>
             <div class="housing-content-button-container">
-                <button class="primary-button" type="button"><i class="fa-solid fa-house-user"></i>&nbsp;&nbsp;Learn More</button>
+                <a href="./customer/housing.php">
+                    <button class="primary-button" type="button"><i class="fa-solid fa-house-user"></i>&nbsp;&nbsp;Learn More</button>
+                </a>
             </div>
         </div>
     </div>
