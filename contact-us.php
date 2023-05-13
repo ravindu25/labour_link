@@ -244,8 +244,6 @@
         }else{
             //echo the mysql error if the query fails
             echo mysqli_error($conn);
-
-        
         }
 
         

@@ -347,6 +347,15 @@
                                 $tempRating += 1;
                             }
 
+                            $fileExists = file_exists("../assets/profile-image/$workerId.jpg");
+                            $imageUrl = "";
+
+                            if($fileExists){
+                                $imageUrl = "../assets/profile-image/$workerId.jpg";
+                            } else {
+                                $imageUrl = "../assets/worker/profile-images/worker-$profileId.jpg";
+                            }
+
                             $bookingButtonHtml = "";
                             if($logged){
                                 $bookingButtonHtml = "<button type='button' class='booking-button' onclick='openLoginModal()'><i class='fa-solid fa-check'></i>&nbsp;&nbsp;Book now!</button>";
@@ -362,7 +371,7 @@
                                     &nbsp;&nbsp; $currentRating
                                 </div>
                                 <div class='worker-image'>
-                                    <img src='../assets/worker/profile-images/worker-$profileId.jpg' alt='worker-profile'>
+                                    <img src='$imageUrl' alt='worker-profile'>
                                 </div>
                                 <div class='worker-card-location-row'>
                                     <h3><i class='fa-solid fa-location-dot' style='color: var(--primary-color)'></i>&nbsp;&nbsp;$city</h3>
