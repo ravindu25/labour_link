@@ -132,6 +132,11 @@ function initialLoad(workerType){
          .catch(error => console.log(error));
 }
 
+function setDefaultImage(workerId){
+    const image = document.getElementById(`worker-profile-image-${workerId}`);
+    image.src = `../../labour_link/assets/worker/profile-images/worker-${workerId % 4 + 1}.jpg`;
+}
+
 function createCard(worker){
     const currentRating = parseFloat(worker.currentRating);
     const workerCategories = worker.workerCategories;
@@ -186,7 +191,7 @@ function createCard(worker){
                     &nbsp;&nbsp; ${currentRating}
                 </div>
                 <div class="worker-image">
-                    <img src="../assets/worker/profile-images/worker-${profileId}.jpg" alt="worker-profile">
+                    <img id="worker-profile-image-${workerID}" src="../assets/profile-image/${workerID}.jpg" onerror="setDefaultImage(${workerID})" alt="worker-profile">
                 </div>
                 <div class="worker-card-location-row">
                     <h3><i class="fa-solid fa-location-dot" style="color: var(--primary-color)"></i>&nbsp;&nbsp;${worker.city}</h3>
@@ -241,7 +246,6 @@ function initialWorkerLoad(allWorkers){
 
         return;
     }
-
     const upperBound = (allWorkers.length < 4)? allWorkers.length: 4;
     for(let i = 0; i < upperBound; i++){
         const worker = allWorkers[i];
