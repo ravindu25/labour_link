@@ -245,7 +245,7 @@
                         <div class="table-heading-container">Mode&nbsp;<button class="sort-button"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
-                    <th class="main-th">More actions</th>
+                    <th class="main-th">Mode</th>
                 </tr>
                 </thead>
                 <tbody>

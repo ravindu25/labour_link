@@ -4,6 +4,8 @@
     if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Worker') {
         header("Location: ../login.php");
     }
+
+    $worker_id = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -137,7 +139,7 @@
                     <tbody>
                     <?php
                         require_once "../db.php";
-                        $worker_id = $_SESSION['user_id'];
+                        // $worker_id = $_SESSION['user_id'];
                         $sql = "SELECT * FROM Payments_Due INNER JOIN Booking ON Payments_Due.Booking_ID = Booking.Booking_ID INNER JOIN User ON Booking.Worker_ID =User.User_ID WHERE Booking.Worker_ID = $worker_id AND Payments_Due.PayHere_Payment_ID IS NULL;";
                         $result = $conn->query($sql);
                         if($result->num_rows > 0){
@@ -192,17 +194,18 @@
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">Status&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">Status Message&nbsp;<button class="sort-button"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
-                    <th class="main-th">More actions</th>
+                    <th class="main-th">Mode</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
                         require_once "../db.php";
-                        $worker_id=$_SESSION['user_id'];
-                        $sql = "SELECT * FROM Payments_Log INNER JOIN Booking ON Payments_Log.Booking_ID = Booking.Booking_ID WHERE Booking.Worker_ID = $worker_id;";
+                        // $worker_id=$_SESSION['user_id'];
+    
+                        $sql = "SELECT * FROM Payments_Log INNER JOIN Booking ON Payments_Log.Booking_ID = Booking.Booking_ID WHERE Booking.Worker_ID = '$worker_id';";
                         $result = $conn->query($sql);
                         if($result->num_rows > 0){
                             while($row = $result->fetch_assoc()){
@@ -218,19 +221,22 @@
                                 </td>
                                 <td class="main-td">Rs. '.$row['Amount'].'.00</td>
                                 ');
-                                if($row['Success_Flag'] == 2){
-                                    echo('<td class="main-td"><span class="payment-success-badge">Success</span></td>');
-                                }else{
-                                    echo('<td class="main-td"><span class="payment-success-failed">Failed</span></td>');
+                                // if($row['Success_Flag'] == 2){
+                                //     echo('<td class="main-td"><span class="payment-success-badge">Success</span></td>');
+                                // }else{
+                                //     echo('<td class="main-td"><span class="payment-success-failed">Failed</span></td>');
+                                // }
+                                echo('<td class="main-td">'.$row['Status_Message'].'</td>');
+                               echo(' <td class=\"main-td\ style="text-align: center;">
+                                '.$row['Mode'].'&nbsp;&nbsp;');
+                                if($row['Mode']=="VISA"){
+                                    echo("<i class='fa-brands fa-cc-visa'></i>");
+                                }else if($row['Mode']=="MASTER"){
+                                    echo("<i class='fa-brands fa-cc-mastercard'></i>");
                                 }
-                            echo('<td class="main-td">
-                            <div class="more-button-container">
-                                <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                                </button>
-                            </div>
-                        </td>
-                    </tr>');
-                            }
+                                echo("</td>
+                                </tr>");
+                        }
                         }
                     ?>
              

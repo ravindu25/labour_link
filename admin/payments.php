@@ -176,10 +176,10 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
                     <th class="main-th">
-                        <div class="table-heading-container">Status&nbsp;<button class="sort-button"><i
+                        <div class="table-heading-container">Status Message&nbsp;<button class="sort-button"><i
                                         class="fa-solid fa-arrow-up"></i></button>
                     </th>
-                    <th class="main-th">More actions</th>
+                    <th class="main-th">Mode</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -205,17 +205,19 @@ if (!isset($_SESSION['username']) || $_SESSION['user_type'] != 'Admin') {
                                 <td class="main-td">Rs. '.$row['Amount'].'.00</td>
                                 ');
                                 if($row['Success_Flag'] == 2){
-                                    echo('<td class="main-td"><span class="payment-success-badge">Success</span></td>');
+                                    echo('<td class="main-td"><span class="payment-success-badge">'.$row['Status_Message'].'</span></td>');
                                 }else{
-                                    echo('<td class="main-td"><span class="payment-success-failed">Failed</span></td>');
+                                    echo('<td class="main-td"><span class="payment-success-failed">'.$row['Status_Message'].'</span></td>');
                                 }
-                            echo('<td class="main-td">
-                            <div class="more-button-container">
-                                <button class="view-button"><i class="fa-solid fa-up-right-from-square"></i>&nbsp;&nbsp;View
-                                </button>
-                            </div>
-                        </td>
-                    </tr>');
+                                echo(' <td class="main-td" style="text-align: center;">
+                                '.$row['Mode'].'&nbsp;&nbsp;');
+                                if($row['Mode']=="VISA"){
+                                    echo("<i class='fa-brands fa-cc-visa'></i>");
+                                }else if($row['Mode']=="MASTER"){
+                                    echo("<i class='fa-brands fa-cc-mastercard'></i>");
+                                }
+                                echo("</td>
+                                </tr>");
                             }
                         }
                     ?>
