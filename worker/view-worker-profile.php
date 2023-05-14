@@ -301,7 +301,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
 <?php include_once '../components/navbar.php' ?>
 <div class="profile-container">
     <div class="profile-picture">
-        <img src="../assets/worker/profile-images/worker-1.jpg">
+        <img src="../assets/profile-image/<?=$workerID?>.jpg">
     </div>
     <div class="profile-info">
         <h1 style="font-size: 50px"><?=$fullName?></h1>
