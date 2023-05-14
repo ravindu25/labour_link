@@ -13,9 +13,7 @@
                      </div>
                  </a>
                 ";
-    }
-
-    if(strpos('carpentry', $searchTerm) !== false || strpos('carpenters', $searchTerm) !== false){
+    }else if(strpos('carpentry', $searchTerm) !== false || strpos('carpenters', $searchTerm) !== false){
         echo "
                 <a href='/labour_link/worker/index.php?workertype=carpenter'>
                     <div class='search-item'>
@@ -23,9 +21,7 @@
                      </div>
                  </a>
                 ";
-    }
-
-    if(strpos('electrical', $searchTerm) !== false || strpos('electricians', $searchTerm) !== false){
+    }else if(strpos('electrical', $searchTerm) !== false || strpos('electricians', $searchTerm) !== false){
         echo "
                 <a href='/labour_link/worker/index.php?workertype=electrician'>
                     <div class='search-item'>
@@ -33,9 +29,7 @@
                      </div>
                  </a>
                 ";
-    }
-
-    if(strpos('painting', $searchTerm) !== false || strpos('painters', $searchTerm) !== false){
+    }else if(strpos('painting', $searchTerm) !== false || strpos('painters', $searchTerm) !== false){
         echo "
                 <a href='/labour_link/worker/index.php?workertype=painter'>
                     <div class='search-item'>
@@ -43,9 +37,7 @@
                      </div>
                  </a>
                 ";
-    }
-
-    if(strpos('masonry', $searchTerm) !== false || strpos('masons', $searchTerm) !== false){
+    }else if(strpos('masonry', $searchTerm) !== false || strpos('masons', $searchTerm) !== false){
         echo "
                 <a href='/labour_link/worker/index.php?workertype=mason'>
                     <div class='search-item'>
@@ -53,9 +45,7 @@
                      </div>
                  </a>
                 ";
-    }
-
-    if(strpos('janitorial', $searchTerm) !== false || strpos('janitors', $searchTerm) !== false){
+    }else if(strpos('janitorial', $searchTerm) !== false || strpos('janitors', $searchTerm) !== false){
         echo "
                 <a href='/labour_link/worker/index.php?workertype=janitor'>
                     <div class='search-item'>
@@ -63,9 +53,7 @@
                      </div>
                  </a>
                 ";
-    }
-
-    if(strpos('mechanical', $searchTerm) !== false || strpos('mechanics', $searchTerm) !== false){
+    }else if(strpos('mechanical', $searchTerm) !== false || strpos('mechanics', $searchTerm) !== false){
         echo "
                 <a href='/labour_link/worker/index.php?workertype=mechanic'>
                     <div class='search-item'>
@@ -73,9 +61,7 @@
                      </div>
                  </a>
                 ";
-    }
-
-    if(strpos('gardening', $searchTerm) !== false || strpos('gardeners', $searchTerm) !== false){
+    }else if(strpos('gardening', $searchTerm) !== false || strpos('gardeners', $searchTerm) !== false){
         echo "
                 <a href='/labour_link/worker/index.php?workertype=gardener'>
                     <div class='search-item'>
@@ -83,7 +69,7 @@
                      </div>
                  </a>
                 ";
-    }
+    }else{
 
     $result = $conn->query($sql);
     $startCount = 1;
@@ -103,4 +89,5 @@
     } else {
         echo "No results found";
     }
+}
 ?>
