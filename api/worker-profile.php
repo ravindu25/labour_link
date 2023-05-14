@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
             header('Content-Type: application/json');
             echo json_encode($feedbacks);
         }
-    } else if(isset($_GET['action']) && $_GET['action'] == 'getSelectedFeedbacks'){
+    } else if(isset($_GET['action']) && $_GET['action'] == 'getSelectedFeedbacks') {
         if (isset($_GET['workerId'])) {
 
             $workerId = $_GET['workerId'];
@@ -40,7 +40,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             $feedbacks = array();
 
-            if($result->num_rows > 0){
+            if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $feedback = $row['Feedback'];
                     $token = $row['Token'];
@@ -53,15 +53,14 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
             echo json_encode($feedbacks);
         }
     }
-}
-
-else if($_SERVER['REQUEST_METHOD'] === 'POST'){
+} else if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $data = json_decode(file_get_contents('php://input'), true);
 
     $workerId = $data['workerId'];
     $feedbackTokens = $data['feedbackTokens'];
 
     $sql_delete_feedbacks = "DELETE FROM Profile_Feedback WHERE Worker_ID = $workerId";
+    $result = $conn->query($sql_delete_feedbacks);
 
     $sql_insert_feedbacks = "";
     if(sizeof($feedbackTokens) == 3){
@@ -73,6 +72,21 @@ else if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
 
     if($result = $conn->query($sql_insert_feedbacks)){
+        http_response_code(200);
+        echo json_encode(array("status"=>"success"));
+    } else {
+        http_response_code(500);
+        echo json_encode(array("status"=>"failed"));
+    }
+} else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    $workerId = $data['workerId'];
+    $description = $data['description'];
+
+    $sql_update_description = "UPDATE Worker SET Description = '$description' WHERE Worker_ID = $workerId";
+
+    if($result = $conn->query($sql_update_description)){
         http_response_code(200);
         echo json_encode(array("status"=>"success"));
     } else {

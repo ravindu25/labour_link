@@ -77,16 +77,18 @@ function saveFeedbackItem(){
         }
     }
 
+    const body = {
+        workerId: workerID,
+        feedbackTokens: selectedFeedbackArray
+    };
+    console.log(body);
+
     fetch ('http://localhost/labour_link/api/worker-profile.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            workerId: workerID,
-            feedback: selectedFeedbackArray
-        })
-
+        body: JSON.stringify(body)
     }).then(response => response.json())
         .then(data => {
             const backdropModal = document.getElementById('backdrop-modal');
@@ -103,7 +105,89 @@ function saveFeedbackItem(){
         })
         .catch(error => {
             const backdropModal = document.getElementById('backdrop-modal');
-            const errorMessageContainer = document.getElementById('feedback-add-error');
+            const errorMessageContainer = document.getElementById('error-message-container');
+
+            hideUpdateFeedbackContainer();
+            console.log(error);
+
+            backdropModal.style.visibility = 'visible';
+            errorMessageContainer.style.visibility = 'visible';
+        });
+}
+
+function showUpdateDescriptionContainer(){
+    const backdropModal = document.getElementById('backdrop-modal');
+    const updateDescriptionContainer = document.getElementById('update-description-container');
+    const descriptionTextArea = document.getElementById('update-description-textarea');
+
+    descriptionTextArea.value = document.getElementById('worker-description-text').innerText;
+    descriptionTextArea.addEventListener('change', checkDescriptionValidity);
+
+    backdropModal.style.visibility = 'visible';
+    updateDescriptionContainer.style.visibility = 'visible';
+}
+
+function hideUpdateDescriptionContainer(){
+    const backdropModal = document.getElementById('backdrop-modal');
+    const updateDescriptionContainer = document.getElementById('update-description-container');
+    const descriptionTextArea = document.getElementById('update-description-textarea');
+
+    descriptionTextArea.removeEventListener('change', checkDescriptionValidity);
+
+    backdropModal.style.visibility = 'hidden';
+    updateDescriptionContainer.style.visibility = 'hidden';
+}
+
+function checkDescriptionValidity(){
+    const typingDescription = document.getElementById('update-description-textarea').value;
+    const currentDescription = document.getElementById('worker-description-text').innerText;
+    const saveButton = document.getElementById('save-description-button');
+
+    if(typingDescription !== currentDescription){
+        saveButton.addEventListener('click', saveDescription);
+        saveButton.classList.add('primary-button');
+        saveButton.classList.remove('disable-button');
+        saveButton.disabled = false;
+    } else {
+        saveButton.removeEventListener('click', saveDescription);
+        saveButton.classList.add('disable-button');
+        saveButton.classList.remove('primary-button');
+        saveButton.disabled = true;
+    }
+}
+
+function saveDescription(){
+    const typingDescription = document.getElementById('update-description-textarea').value;
+
+    fetch(`http://localhost/labour_link/api/worker-profile.php`,{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            workerId: workerID,
+            description: typingDescription
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            const backdropModal = document.getElementById('backdrop-modal');
+            const successMessageContainer = document.getElementById('description-update-success');
+
+            hideUpdateDescriptionContainer();
+
+            backdropModal.style.visibility = 'visible';
+            successMessageContainer.style.visibility = 'visible';
+            setTimeout(() => {
+                backdropModal.style.visibility = 'hidden';
+                successMessageContainer.style.visibility = 'hidden';
+                location.reload();
+            })
+        })
+        .catch(error => {
+            const backdropModal = document.getElementById('backdrop-modal');
+            const errorMessageContainer = document.getElementById('error-message-container');
+
+            hideUpdateDescriptionContainer();
+            console.log(error);
 
             backdropModal.style.visibility = 'visible';
             errorMessageContainer.style.visibility = 'visible';

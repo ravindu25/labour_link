@@ -232,13 +232,34 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
         <button type="button" id="feedback-add-button" class="disable-button"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Save</button>
     </div>
 </div>
+<div class="update-description-container" id="update-description-container">
+    <div class="update-description-header">
+        <h1>Update your description</h1>
+    </div>
+    <div class="update-description-comment">
+        <textarea id="update-description-textarea"></textarea>
+    </div>
+    <div class="update-description-button-container">
+        <button type="button" class="primary-outline-button" onclick="hideUpdateDescriptionContainer()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" id="save-description-button" class="disable-button" disabled><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Save</button>
+    </div>
+</div>
+<div class="success-message-container" id="description-update-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Worker current description successfully updated!</h1>
+</div>
+<div class="failed-message-container" id="description-update-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Worker description updation failed!</h1>
+        <h5>Your login session outdated. Please login again.</h5>
+    </div>
+</div>
 <?php include_once '../components/navbar.php' ?>
 <div class="profile-container">
     <div class="profile-picture">
         <img src="../assets/worker/profile-images/worker-1.jpg">
     </div>
     <div class="profile-info">
-        <h1><?=$fullName?></h1>
+        <h1 style="font-size: 50px"><?=$fullName?></h1>
         <div class="subheading">WORKER BIO</div>
         <hr style="color: #30CEF0; width: 100%" />
         <div class="worker-bio">
@@ -326,16 +347,27 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                 </div>
             </div>
             <div class="detail-row">
-                <div class="detail" style="width: 60vw">
-                    <h3>Description</h3>
-                    <p> <?php echo $description ?> </p>
-                </div>
-                <div class="detail" style="width: 10vw">
-                    <a href='../customer/create-booking.php'>
-                        <button type='button' class='booking-button'>Book now!</button>
-                    </a>
+                <div class="detail" style="min-width: 60vw">
+                    <div class="description-heading">
+                        <?php
+                            if($description == null || $description == ""){
+                                echo "<h3>No description provided</h3>";
+                            } else {
+                                echo "<h3>Description</h3>";
+                            }
+                            if($currentLoggedUserId == $workerID){
+                                echo "<button type='button' class='primary-outline-button' style='border: none;' onclick='showUpdateDescriptionContainer()'><i class='fa-solid fa-pencil'></i>&nbsp;&nbsp;Edit</button>";
+                            }
+                        ?>
+                    </div>
+                    <p id="worker-description-text">
+                        <?php echo $description ?>
+                    </p>
                 </div>
             </div>
+            <a href='../customer/create-booking.php'>
+                <button type='button' class='booking-button'>Book now!</button>
+            </a>
         </div>
     </div>
 </div>
