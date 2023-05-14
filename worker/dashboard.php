@@ -153,6 +153,9 @@
         <div class="recent-bookings">
             <div class="recent-bookings-title">
                 <h1>Currently ongoing bookings</h1>
+                <a href="./bookings.php">
+                    <button class="primary-button">More Bookings</button>
+                </a>
             </div>
             <div class="recent-bookings-container">
                 <?php
@@ -215,6 +218,64 @@
             </div>
         </div>
         </div>
+        <div class="recent-payments">
+            <div class="recent-payments-title">
+                <h1>Recently made Payments</h1>
+                <a href="./payments.php">
+                    <button class="primary-button">More Payments</button>
+                </a>
+            </div>
+            <div class="recent-payments-container">
+                <?php
+                    require_once "../db.php";
+                    $sql = "SELECT Payments_Log.*, Booking.Booking_ID, Customer.First_Name AS CustomerFirstname, Customer.Last_Name AS CustomerLastname, Worker.First_Name AS WorkerFirstname, Worker.Last_Name AS WorkerLastname FROM Payments_Log INNER JOIN Booking ON Payments_Log.Booking_ID = Booking.Booking_ID INNER JOIN User AS Worker ON Booking.Worker_ID = Worker.User_ID INNER JOIN User AS Customer ON Booking.Customer_ID = Customer.User_ID WHERE Booking.Worker_ID = {$_SESSION['user_id']} ORDER BY Timestamp DESC LIMIT 4";
+                    $result = $conn->query($sql);
+
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+                            $customerName = $row['CustomerFirstname'] . ' ' . $row['CustomerLastname'];
+                            $workerName = $row['WorkerFirstname'] . ' ' . $row['WorkerLastname'];
+
+                            $successFlag = $row['Success_Flag'];
+                            $paymentId = $row['Payment_Log_ID'];
+
+                            $amount = number_format(floatval($row['Amount']), 2);
+                            $paymentDate = explode(' ', $row['Timestamp'])[0];
+
+                            $paymentContainerStyles = '';
+                            $paymentAmountContainerStyles = '';
+
+                            if($successFlag > 0) {
+                                $paymentContainerStyles = 'success-payment-container';
+                                $paymentAmountContainerStyles = 'success-payment-amount-container';
+                            } else {
+                                $paymentContainerStyles = 'failed-payment-container';
+                                $paymentAmountContainerStyles = 'failed-payment-amount-container';
+                            }
+
+                            echo "
+                                    <div class='$paymentContainerStyles'>
+                                        <span class='blue-badge'>$paymentDate</span>
+                                        <div class='payment-container-heading'>
+                                            <div class='payment-heading-item'>
+                                                <h5>Customer name</h5>
+                                                <h3>$customerName</h3>
+                                            </div>
+                                            <div class='payment-heading-item'>
+                                                <h5>Worker name</h5>
+                                                <h3>$workerName</h3>
+                                            </div>
+                                        </div>
+                                        <div class='$paymentAmountContainerStyles'>
+                                            <h1>Rs. $amount</h1>
+                                        </div>
+                                    </div>
+                                ";
+                        }
+                    }
+                ?>
+            </div>
+        </div>
     </section>
 </main>
 <footer class="footer">
@@ -222,7 +283,10 @@
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+<?php
+    echo "<script>let userId = {$_SESSION['user_id']};</script>";
+?>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
-<script src="../scripts/customer/dashboard.js" type="text/javascript"></script>
+<script src="../scripts/worker/dashboard.js" type="text/javascript"></script>
 </body>

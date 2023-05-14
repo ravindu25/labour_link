@@ -438,11 +438,11 @@ session_start();
                                         <div class='payment-container-heading'>
                                             <div class='payment-heading-item'>
                                                 <h5>Customer name</h5>
-                                                <h3>Mohamed Izzath</h3>
+                                                <h3>$customerName</h3>
                                             </div>
                                             <div class='payment-heading-item'>
                                                 <h5>Worker name</h5>
-                                                <h3>Sunil Gunathilaka</h3>
+                                                <h3>$workerName</h3>
                                             </div>
                                         </div>
                                         <div class='$paymentAmountContainerStyles'>

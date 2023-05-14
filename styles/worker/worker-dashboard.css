@@ -376,58 +376,84 @@
     font-weight: normal;
 }
 
-.payments-dash-content{
-    width: 50%;
+.recent-payments{
+    margin: 16px 0;
 }
 
-.payments-dash-content h1 {
+.recent-payments-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recent-payments-title h1{
     color: var(--primary-color);
     font-family: 'Poppins', sans-serif;
     font-size: 28px;
     font-weight: normal;
 }
 
-.payments-list{
-    display: flex;
-    flex-direction: column;
-}
-
-.payment-item{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    padding: 20px;
-    background-color: #FFF;
-    border: 2px solid var(--success-color);
-    border-radius: 12px;
-}
-
-.payment-text h3{
-    margin: 0;
-    color: var(--primary-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 28px;
-    font-weight: normal;
-}
-
-.payment-text h4{
-    margin: 8px 0px;
-    color: var(--dark-color);
-    font-family: 'Inter', sans-serif;
+.payment-success-badge{
     font-size: 20px;
-    font-weight: normal;
-}
-
-.payment-amount-button{
-    outline: none;
-    border: none;
-    padding: 12px 24px;
-    color: var(--success-color);
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
+    color: var(--success-bright-color);
     font-weight: bold;
-    border-radius: 8px;
-    background-color: #FFF;
-    border: 2px solid var(--success-color);
+}
+
+.payment-success-failed{
+    font-size: 20px;
+    color: var(--warning-color);
+    font-weight: bold;
+}
+
+.recent-payments-container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.success-payment-container, .failed-payment-container{
+    width: 40%;
+    background-color: white;
+    margin: 16px 12px;
+    padding: 18px;
+    border-radius: 16px;
+    border: 1px solid var(--primary-color);
+}
+
+.payment-container-heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-heading-item{
+    width: 50%;
+}
+
+.payment-heading-item h3{
+    margin: 4px 0;
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+.payment-heading-item h5{
+    margin: 4px 0;
+    font-size: 18px;
+    font-weight: normal;
+    color: var(--grey-color);
+}
+
+.success-payment-amount-container h1, .failed-payment-amount-container h1{
+    text-align: center;
+    font-size: 42px;
+    margin: 16px 0;
+}
+
+.success-payment-amount-container h1{
+    color: var(--success-color);
+}
+
+.failed-payment-amount-container h1{
+    color: var(--warning-color);
 }
