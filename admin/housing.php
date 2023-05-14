@@ -123,13 +123,13 @@
                 </div>
             </a>
             <a href="./feedbacks.php">
-                <div class="sidebar-item">
+                <div class="sidebar-item sidebar-item-selected">
                     <i class="fa-regular fa-message sidebar-item-icon"></i>
                     <h4 class="sidebar-icon-heading">Feedbacks</h4>
                 </div>
             </a>
             <a href="./housing.php">
-                <div class="sidebar-item sidebar-item-selected">
+                <div class="sidebar-item">
                     <i class="fa-solid fa-house sidebar-item-icon"></i>
                     <h4 class="sidebar-icon-heading">Housing</h4>
                 </div>
@@ -138,6 +138,18 @@
                 <div class="sidebar-item">
                     <i class="fa-regular fa-credit-card sidebar-item-icon"></i>
                     <h4 class="sidebar-icon-heading">Payments</h4>
+                </div>
+            </a>
+            <a href="./users.php">
+                <div class="sidebar-item">
+                    <i class="fa-solid fa-user-check sidebar-item-icon"></i>
+                    <h4 class="sidebar-icon-heading">Users</h4>
+                </div>
+            </a>
+            <a href="./reports.php">
+                <div class="sidebar-item">
+                    <i class="fa-regular fa-newspaper sidebar-item-icon"></i>
+                    <h4 class="sidebar-icon-heading">Reports</h4>
                 </div>
             </a>
             <a href="./profile.php">
