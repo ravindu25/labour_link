@@ -193,13 +193,13 @@ function rerenderCreateFeedbackBookings(currentPage, currentBookings){
 }
 
 function selectBooking(bookingId){
-    const parentContainer = document.getElementById('create-feedback-bookings-cards-container');
+    const parentContainer = document.getElementById('create-feedback-bookings-cards-container'); // For getting the parent of booking cards
     const nextButton = document.getElementById('first-page-next-button');
-    const bookingsCards = Array.from(parentContainer.children);
+    const bookingsCards = Array.from(parentContainer.children); // [booking-card-1, booking-card-2, ...	]
 
     currentBookingId = bookingId;
 
-    bookingsCards.forEach(bookingCard => {
+    bookingsCards.forEach(bookingCard => { // Setting the styling of all booking cards to default
         if(bookingCard.classList.contains('feedback-booking-card-selected')){
             bookingCard.classList.remove('feedback-booking-card-selected');
             bookingCard.classList.add('feedback-booking-card');
@@ -208,7 +208,7 @@ function selectBooking(bookingId){
 
     const bookingCard = document.getElementById(`booking-card-${bookingId}`);
 
-    if(!bookingCard.classList.contains('feedback-booking-card-selected')){
+    if(!bookingCard.classList.contains('feedback-booking-card-selected')){ // Setting the activated styling of the selected booking card
         bookingCard.classList.add('feedback-booking-card-selected');
     }
 }
@@ -226,7 +226,7 @@ function updateStarRating(text, ratingAmount){
     }
 }
 
-function goToNextFeedbackPage(){
+function goToNextFeedbackPage(){  //go to first page from scend page
     const firstPage = document.getElementById('first-page');
     const secondPage = document.getElementById('second-page');
     const ratingTitle = document.getElementById('create-feedback-third-title');
@@ -617,25 +617,16 @@ function showFeedbackDetails(feedbackToken){
             /*
              * Setting up the worker details
              */
-
-            //If the feedback was set earlier than 14 days, dont allow the user to edit the feedback
-            const feedbackDate = new Date(data.createdTimestamp.split(' ')[0]);
-            const currentDate = new Date();
-            const timeDifference = currentDate.getTime() - feedbackDate.getTime();
-            const daysDifference = timeDifference / (1000 * 3600 * 24);
-            if(daysDifference > 14){
-
-                document.getElementById('feedback-details-rating-header').innerHTML="<h1>Worker rating</h1>&nbsp;&nbsp;";
-            }else{
-                document.getElementById('feedback-details-rating-header').innerHTML="  <h1>Worker rating</h1>&nbsp;&nbsp;<button class=\"icon-button\" id=\"feedback-rating-update\"><i class=\"fa-solid fa-pen-nib\"></i></button>";
-                const feedbackRatingUpdateButton = document.getElementById('feedback-rating-update');
-                feedbackRatingUpdateButton.addEventListener('click', () => {
-                    currentUpdatingFeedback = data;
-                    tempUpdatingFeedback = {...currentUpdatingFeedback};
-                    hideFeedbackDetails(data);
-                    showRatingUpdateModal(data.feedbackToken);
-                });
-            }
+            
+            
+            document.getElementById('feedback-details-rating-header').innerHTML="  <h1>Worker rating</h1>&nbsp;&nbsp;<button class=\"icon-button\" id=\"feedback-rating-update\"><i class=\"fa-solid fa-pen-nib\"></i></button>";
+            const feedbackRatingUpdateButton = document.getElementById('feedback-rating-update');
+            feedbackRatingUpdateButton.addEventListener('click', () => {
+                currentUpdatingFeedback = data;
+                tempUpdatingFeedback = {...currentUpdatingFeedback};
+                hideFeedbackDetails(data);
+                showRatingUpdateModal(data.feedbackToken);
+            });
 
             currentUpdatingFeedback = data;
 
@@ -1031,8 +1022,6 @@ function checkCommentTextValidity(){
     const commentTextArea = document.getElementById('feedback-comment-textarea');
     const updateButton = document.getElementById('feedback-comment-update-button');
 
-    console.log('checkCommentTextValidity');
-
     if(commentTextArea.value !== tempUpdatingFeedback.writtenFeedback){
         currentUpdatingFeedback.writtenFeedback = commentTextArea.value;
 
@@ -1048,9 +1037,9 @@ function checkCommentTextValidity(){
             updateFeedbackDetails(currentUpdatingFeedback);
         });
 
-        updateButton.classList.add('primary-button');
-        updateButton.classList.remove('disabled-button');
-        updateButton.disabled = false;
+        updateButton.classList.add('disabled-button');
+        updateButton.classList.remove('primary-button');
+        updateButton.disabled = true;
     }
 }
 
@@ -1079,7 +1068,9 @@ function updateFeedbackDetails(newFeedback){
             const backdrop = document.getElementById('backdrop-modal');
             const errorMessageContainer = document.getElementById('feedback-update-fail');
 
+            hideObservationUpdateModal();
             hideRatingUpdateModal();
+            hideCommentUpdateModal();
             backdrop.style.visibility = 'visible';
             errorMessageContainer.style.visibility = 'visible';
             location.reload();

@@ -58,10 +58,6 @@ session_start();
                 <h4>Start date</h4>
                 <h4 class="details-value" id="booking-details-start-date"></h4>
             </div>
-            <div class="remaining-time-container" id="remaining-time-container">
-                <h4>This booking will be closed in</h4>
-                <h1 class="countdown-text" id="booking-details-countdown"></h1>
-            </div>
             <div class="payment-method-container">
                 <div class="payment-image-container">
                     <h4>Payment Method</h4>
@@ -71,12 +67,12 @@ session_start();
                         <h4 id="payment-method-text">Online payments</h4>
                     </div>
                 </div>
-                <div class="payment-details-container">
+                <div class="payment-details-container" id="payment-details-container">
                     <h3>Amount that needs to be paid</h3>
                     <h2>Rs. 17500.00</h2>
                 </div>
             </div>
-            <div class="back-button-container">
+            <div class="back-button-container" id="back-button-container">
                 <button type="button" class="primary-button" onclick="closeBookingDetailsModal()" id="back-button">Back</button>
             </div>
         </div>
@@ -275,11 +271,17 @@ session_start();
                                 case 'Completed':
                                     $button = '<button class="completed-button">Completed</button>';
                                     break;
-                                case 'Rejected':
-                                    $button = '<button class="rejected-button">Rejected</button>';
+                                case 'Rejected-by-worker':
+                                    $button = '<button class="rejected-button">Rejected by worker</button>';
                                     break;
-                                case 'Accepted':
-                                    $button = '<button class="in-pogress-button">Accepted</button>';
+                                case 'Rejected-by-customer':
+                                    $button = '<button class="rejected-button">Rejected by customer</button>';
+                                    break;
+                                case 'Accepted-by-worker':
+                                    $button = '<button class="in-pogress-button">Accepted by worker</button>';
+                                    break;
+                                case 'Accepted-by-customer':
+                                    $button = '<button class="in-pogress-button">Accepted by customer</button>';
                                     break;
                             }
 
@@ -305,8 +307,6 @@ session_start();
                         echo "<h3 class='empty-bookings-heading'>No bookings made yet!</h3>";
                     }
                 ?>
-               
-               
                 
             </div>
         </div>

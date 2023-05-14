@@ -508,7 +508,7 @@
         <textarea id="feedback-comment-textarea" rows="5"></textarea>
     </div>
     <div class="feedback-comment-update-button-container">
-        <button type="button" class="primary-outline-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" class="primary-outline-button" onclick="hideCommentUpdateModal()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
         <button type="button" id="feedback-comment-update-button" class="disabled-button" disabled><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Update</button>
     </div>
 </div>

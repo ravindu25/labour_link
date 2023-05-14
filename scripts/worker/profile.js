@@ -1,4 +1,4 @@
-const editItemContainers = ['edit-item-username', 'edit-item-email', 'edit-item-contactnum', 'edit-item-nic', 'edit-item-dob', 'edit-item-address'];
+const editItemContainers = ['edit-item-username', 'edit-item-contactnum', 'edit-item-dob', 'edit-item-address'];
 
 const fileSelectInput = document.getElementById('picture-upload-input');
 
@@ -714,6 +714,11 @@ function hideAddCategoryContainer(){
 function showActiveDeactivateContainer(){
     const backdrop = document.getElementById('backdrop-modal');
     const activeDeactivateContainer = document.getElementById('update-worker-type-modal');
+    const typeBox = document.getElementsByName('active-deactive-job-type-select');
+
+    for(let i = 0; i < typeBox.length; i++) {
+        typeBox[i].addEventListener('change', checkActiveDeactiveValidity);
+    }
 
     backdrop.style.visibility = 'visible';
     activeDeactivateContainer.style.visibility = 'visible';
@@ -722,9 +727,47 @@ function showActiveDeactivateContainer(){
 function hideActiveDeactivateContainer(){
     const backdrop = document.getElementById('backdrop-modal');
     const activeDeactivateContainer = document.getElementById('update-worker-type-modal');
+    const typeBox = document.getElementsByName('active-deactive-job-type-select');
+
+    for(let i = 0; i < typeBox.length; i++) {
+        typeBox[i].removeEventListener('change', checkActiveDeactiveValidity);
+    }
 
     backdrop.style.visibility = 'hidden';
     activeDeactivateContainer.style.visibility = 'hidden';
+}
+
+function checkActiveDeactiveValidity(){
+    let changed = false;
+    const typeBox = document.getElementsByName('active-deactive-job-type-select');
+    const updateButton = document.getElementById('worker-type-switch-button');
+
+    for(let i = 0; i < typeBox.length; i++) {
+        const element = categoryStates.find(categoryElement => categoryElement.category === typeBox[i].value);
+
+        if((typeBox[i].checked && element.isActive === 1) || (!typeBox[i].checked && element.isActive === 0)){
+            changed = true;
+        }
+
+    }
+
+    if(changed === true){
+        updateButton.addEventListener('click',() => {
+            updateWorkerType(userId);
+        });
+
+        updateButton.classList.add('primary-button');
+        updateButton.classList.remove('disable-button');
+        updateButton.disabled = false;
+    } else {
+        updateButton.removeEventListener('click',() => {
+            updateWorkerType(userId);
+        });
+
+        updateButton.classList.add('disable-button');
+        updateButton.classList.remove('primary-button');
+        updateButton.disabled = true;
+    }
 }
 
 function addCategory(user_id){
@@ -781,7 +824,7 @@ function addCategory(user_id){
 
 function updateWorkerType(user_id){
     //get the selected job types
-    var selectedJobTypes = document.getElementsByName("update-job-type-select");
+    var selectedJobTypes = document.getElementsByName("active-deactive-job-type-select");
     var selectedJobTypesArray = [];
     var unselectedJobTypesArray = [];
 
