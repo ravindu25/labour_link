@@ -27,6 +27,57 @@
 <body>
 <div class="backdrop-modal" id="backdrop-modal">
 </div>
+<div class="booking-details-container" id="booking-details-container">
+    <div class="booking-details-scroll-wrapper">
+        <div class="booking-details-title">
+            <h1>Current Status of Your <u>Booking</u></h1>
+        </div>
+        <div class="status-container" id="booking-details-status-container"></div>
+        <div class="details-container">
+            <div class="details-row">
+                <h4>Job type</h4>
+                <h4 class="details-value" id="booking-details-job-type"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Customer</h4>
+                <h4 class="details-value" id="booking-details-customer-name"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Contact Number</h4>
+                <h4 class="details-value" id="booking-details-contact-number"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Address</h4>
+                <h4 class="details-value" id="booking-details-customer-address"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Start date</h4>
+                <h4 class="details-value" id="booking-details-start-date"></h4>
+            </div>
+            <div class="remaining-time-container" id="remaining-time-container">
+                <h4>This booking will be closed in</h4>
+                <h1 class="countdown-text" id="booking-details-countdown"></h1>
+            </div>
+            <div class="payment-method-container">
+                <div class="payment-image-container">
+                    <h4>Payment Method</h4>
+                    <div class="payment-image-card">
+                        <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
+                             alt="payment method"/>
+                        <h4 id="payment-method-text">Online payments</h4>
+                    </div>
+                </div>
+                <div class="payment-details-container" id="payment-details-container">
+                    <h3>Amount that needs to be paid</h3>
+                    <h2 id="payment-details-amount-text">Rs. 17500.00</h2>
+                </div>
+            </div>
+            <div class="back-button-container" id="back-button-container">
+                <button type="button" class="primary-outline-button" id="back-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">
@@ -101,57 +152,68 @@
         <!--Recent bookings section-->
         <div class="recent-bookings">
             <div class="recent-bookings-title">
-                <h1>Recent Bookings</h1>
-                <button class="primary-button" onclick="window.location.href='bookings.php'">More Bookings</button>
+                <h1>Currently ongoing bookings</h1>
             </div>
             <div class="recent-bookings-container">
-            <?php
-                require_once '../db.php';
+                <?php
+                    require_once '../db.php';
 
-                // $sql = "SELECT First_Name,Last_Name ,Start_Date , Completion_Flag FROM user INNER JOIN booking ON user.User_ID = booking.Customer_ID INNER JOIN confirmed_booking ON booking.Booking_ID = confirmed_booking.Booking_ID";
+                    $sql_get_status = "SELECT Booking.*, First_Name, Last_Name,Start_Date, Worker_Type, Created_Date ,Status FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} AND Booking.Status IN ('Pending', 'Accepted-by-customer', 'Accepted-by-worker') ORDER BY Created_Date DESC";
 
-                $sql = "SELECT First_Name,Last_Name ,Start_Date, Worker_Type, Created_Date FROM User INNER JOIN Booking ON User.User_ID = Booking.Customer_ID WHERE Booking.Worker_ID={$_SESSION['user_id']} ORDER BY Created_Date DESC LIMIT 5";
 
-                // $array1 = array("Plumbing","Carpentry","Electrical","Painting","Masonry","Janitorial","Mechanical","Gardening");
-                $array2 = array("Pending","Completed","Rejected","In-Progress");
+                    $result = $conn->query($sql_get_status);
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $bookingId = $row['Booking_ID'];
 
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
 
-                        $arrValue = array_rand($array2,1);
-                        if($arrValue == 0){
-                            $btn = "<button class='pending-button'>Pending</button>";  
-                        }
-                        else if($arrValue == 1){
-                            $btn = "<button class='completed-button'>Completed</button>";
-                        }
-                        else if($arrValue == 2){
-                            $btn = "<button class='rejected-button'>Rejected</button>";
-                        }
-                        else {
-                            $btn = "<button class='in-pogress-button'>In-Progress</button>";  
-                        }
-                        echo('
-                        <div class="booking-card"
+                            $status = $row['Status'];
+
+                            $button = '<button class="pending-button">Pending</button>';
+
+                            if($status === 'Pending'){
+                                $button = '<button class="pending-button">Pending</button>';
+                            } else if($status === 'Accepted-by-worker'){
+                                $button = '<button class="in-pogress-button">Accepted by worker</button>';
+                            }else if($status === 'Accepted-by-customer'){
+                                $button = '<button class="in-pogress-button">Accepted by customer</button>';
+                            }else if($status === 'Completed'){
+                                $button = '<button class="completed-button">Completed</button>';
+                            } else if($status === 'Rejected-by-worker') {
+                                $button = '<button class="rejected-button">Rejected by worker</button>';
+                            } else if($status === 'Rejected-by-customer'){
+                                $button = '<button class="rejected-button">Rejected by customer</button>';
+                            }
+                            echo('
+                        <div class="booking-card" onclick="openBookingDetailsModal('.$bookingId.')">
                             <div class="card-text">
                                 <h3>'.$row['Worker_Type'].'</h3>
                                 <p>Customer</p>
                                 <h4>' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</h4>
+                            </div>
                             <div class="booking-card-button-row">
                                 <div class="badge-container">
                                     <div class="blue-badge">' . date("d M Y", strtotime($row['Start_Date'])) . '</div> 
                                 </div>
-                                '. $btn .'
+                                <div id="booking-card-status-'.$bookingId.'">
+                                '. $button .'
+                                </div>
                             </div>
                         </div>
-
+                
                     ');
+                        }
+                    } else {
+                        echo "
+                    <div class='empty-ongoing-booking-container'>
+                        <img src='../assets/worker/bookings/undraw_Booking_re_gw4j.png' alt='no ongoing bookings' />
+                        <h3>There are no bookings currently ongoing!</h3>
+                    </div>
+                   ";
                     }
-                }
                 ?>
-                </div>
             </div>
+        </div>
         </div>
     </section>
 </main>
@@ -162,5 +224,5 @@
 </footer>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
-<script src="../scripts/customer/bookings.js" type="text/javascript"></script>
+<script src="../scripts/customer/dashboard.js" type="text/javascript"></script>
 </body>
