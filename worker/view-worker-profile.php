@@ -13,6 +13,11 @@ if(isset($_GET['workerType'])){
 }
 
 echo $workerType;
+$currentLoggedUserId = null;
+
+if(isset($_SESSION['user_id'])){
+    $currentLoggedUserId = $_SESSION['user_id'];
+}
 
 $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker on User.User_ID = Worker.Worker_ID where Worker_ID=$workerID";
 
@@ -64,8 +69,8 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
 
     <!-- CSS files -->
     <link href="../styles/index-page.css" rel="stylesheet"/>
-    <link href="../styles/worker/view-worker-profile.css" rel="stylesheet"/>
     <link href="../styles/customer/customer-bookings.css" rel="stylesheet"/>
+    <link href="../styles/worker/view-worker-profile.css" rel="stylesheet"/>
     <title>Worker Profile | LabourLink</title>
 
     <!--Fontawesome-->
@@ -200,14 +205,31 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
         </form>
     </div>
 </div>
+<div class="success-message-container" id="feedback-add-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Viewing feedbacks successfully updated!</h1>
+</div>
+<div class="failed-message-container" id="feedback-add-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Viewing feedback updation failed!</h1>
+        <h5>Your login session outdated. Please login again.</h5>
+    </div>
+</div>
+<div class="error-message-container" id="error-message-container">
+    <div class="error-message-heading">
+        <h1>Sorry, an unexpected error has occurred. Please try again later or contact customer support for assistance</h1>
+    </div>
+    <div class="error-message-image">
+        <img src="../assets/error-image.png" alt="error-image" />
+    </div>
+</div>
 <div class="add-feedback-modal" id="add-feedback-modal">
     <div class="add-feedback-modal-header">
         <h1>Add feedbacks to your profile</h1>
     </div>
     <div class="feedback-list-container" id="feedback-list-container"></div>
     <div class="add-feedback-modal-button-container">
-        <button type="button" class="primary-outline-button" onclick="hideAddCategoryContainer()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
-        <button type="button" id="feedback-add-button" class="disable-button"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add feedback</button>
+        <button type="button" class="primary-outline-button" onclick="hideUpdateFeedbackContainer()"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</button>
+        <button type="button" id="feedback-add-button" class="disable-button"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Save</button>
     </div>
 </div>
 <?php include_once '../components/navbar.php' ?>
@@ -320,40 +342,66 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
 <div class="feedbacks-container">
     <div class="subheading">CUSTOMER FEEDBACK</div>
     <hr style="color: #30CEF0;" />
-    <div class="detail-row">
-        <button type="button" class="add-feedback-button" onclick="displayFeedbacks()">
-            <div class="add-feedback-icon">
-                <i class="fa-solid fa-pen-to-square"></i>
-            </div>
-            <h1>Edit feedback</h1>
-        </button>
-        <div class="add-feedback-list" id="add-feedback-list"></div>
-        <div class="feedback">
-            <div class="feedback-body">
-                <p>"John is a fantastic web developer. He is easy to work with and produces high-quality work. Highly recommend!"</p>
-            </div>
-            <div class="feedback-footer">
-                <span> - Jane Smith</span>
-            </div>
-        </div>
-        <div class="feedback">
-            <div class="feedback-body">
-                <p>"John helped me build a beautiful and functional website for my business. He was able to take my vision
-                    and turn it into a reality. I couldn't be happier with the end result."</p>
-            </div>
-            <div class="feedback-footer">
-                <span>- Bob Johnson</span>
-            </div>
-        </div>
-        <div class="feedback">
-            <div class="feedback-body">
-                <p>"I hired Carpenter Rushin to build custom bookshelves in my living room, and I couldn't be happier with the results.
-                    The craftsmanship is impeccable and the attention to detail is outstanding. ."</p>
-            </div>
-            <div class="feedback-footer">
-                <span>- Heshan Samaranayake</span>
-            </div>
-        </div>
+    <div class="detail-row" style="justify-content: center">
+        <?php
+            $sql_get_choosen_feedbacks = "SELECT Feedback.Written_Feedback AS Written_Feedback FROM Worker INNER JOIN Profile_Feedback ON Worker.Worker_ID = Profile_Feedback.Worker_ID INNER JOIN Feedback ON Profile_Feedback.Feedback_Token = Feedback.Feedback_Token WHERE Worker.Worker_ID = $workerID";
+
+            $result = $conn->query($sql_get_choosen_feedbacks);
+
+            if($result->num_rows > 0){
+                while($row = $result->fetch_assoc()){
+                    echo "
+                        <div class='feedback'>
+                            <div class='feedback-body'>
+                                <p>$row[Written_Feedback]</p>
+                            </div>           
+                        </div>
+                    ";
+                }
+            } else {
+                echo "
+                    <div class='feedback'>
+                        <div class='feedback-body'>
+                            <p>No feedbacks yet!</p>
+                        </div>           
+                    </div>
+                ";
+            }
+
+            $sql_get_written_feedback_count = "SELECT  COUNT(Feedback_Token) AS Feedback_Count from Feedback inner join Booking on Feedback.Booking_ID = Booking.Booking_ID WHERE Booking.Worker_ID = $workerID AND Feedback.Written_Feedback != ''";
+
+            $feedbackCount = 0;
+
+            $result = $conn->query($sql_get_written_feedback_count);
+            if($result->num_rows > 0){
+                while($row = $result->fetch_assoc()){
+                    $feedbackCount = $row['Feedback_Count'];
+                }
+            }
+
+            if($currentLoggedUserId == $workerID){
+                if($feedbackCount > 0) {
+                    echo "
+                    <button type='button' class='add-feedback-button' onclick='displayFeedbacks()'>
+                        <div class='add-feedback-icon'>
+                            <i class='fa-solid fa-pen-to-square'></i>
+                        </div>
+                        <h1>Edit feedback</h1>
+                    </button>
+                ";
+                } else {
+                    echo "
+                    <button type='button' class='add-feedback-disable-button'>
+                        <div class='add-feedback-icon'>
+                            <i class='fa-solid fa-pen-to-square'></i>
+                        </div>
+                        <h1>Edit feedback</h1>
+                        <p>Currently, there are no feedbacks available to you</p>
+                    </button>
+                ";
+                }
+            }
+        ?>
     </div>
 </div>
 <footer class="footer">

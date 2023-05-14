@@ -295,10 +295,29 @@ function createFeedback(){
    if (this.readyState == 4 && this.status == 200) {
          console.log(this.responseText);
          if(this.responseText.trim() == "Success"){
-                alert('Feedback successfully submitted');
-                
+                const backdropModal = document.getElementById('backdrop-modal');
+                const successModal = document.getElementById('feedback-create-success');
+
+                backdropModal.style.visibility = 'visible';
+                successModal.style.visibility = 'visible';
+
+                setTimeout(() => {
+                    backdropModal.style.visibility = 'hidden';
+                    successModal.style.visibility = 'hidden';
+
+                }, 5000);
         }else{
-                alert('Feedback submission failed');
+             const backdropModal = document.getElementById('backdrop-modal');
+             const successModal = document.getElementById('feedback-create-fail');
+
+             backdropModal.style.visibility = 'visible';
+             successModal.style.visibility = 'visible';
+
+             setTimeout(() => {
+                 backdropModal.style.visibility = 'hidden';
+                 successModal.style.visibility = 'hidden';
+
+             }, 5000);
         }
     }
    

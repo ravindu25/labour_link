@@ -114,7 +114,7 @@ p {
     height: 50px;
 }
 
-.booking-button, .primary-button{
+.booking-button{
     outline: none;
     border: 3px solid var(--primary-color);
     padding: 12px 18px;
@@ -169,7 +169,7 @@ p {
     transition: border-color 0.3s ease;
 }
 
-.add-feedback-button h1{
+.add-feedback-button h1, .add-feedback-disable-button h1{
     color: #102699;
     font-size: 28px;
     font-family: 'Inter', sans-serif;
@@ -183,10 +183,21 @@ p {
     border-radius: 10px;
 }
 
-.feedback {
+.add-feedback-disable-button{
     display: flex;
     flex-direction: column;
     width: 400px;
+    margin-right: 25px;
+    padding: 25px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    background-color: lightsteelblue;
+}
+
+.feedback {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
     margin-right: 25px;
     padding: 17px;
     border: 1px solid #ccc;
