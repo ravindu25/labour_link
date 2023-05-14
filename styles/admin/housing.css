@@ -251,13 +251,17 @@
 }
 
 .main-section{
-    background-color: var(--primary-background-shade-color);
+    background-color: #ABC3EF;
+}
+
+.sidebar-item-selected{
+    background-color: #ABC3EF;
 }
 
 .main-heading{
     padding: 12px 24px;
-    color: var(--primary-color);
-    background-color: var(--primary-shade-color);
+    color: #FFF;
+    background-color: var(--primary-color);
     border-radius: 12px;
 }
 

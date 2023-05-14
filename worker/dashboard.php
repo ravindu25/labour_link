@@ -102,7 +102,7 @@
         <div class="recent-bookings">
             <div class="recent-bookings-title">
                 <h1>Recent Bookings</h1>
-                <button class="more-button" onclick="window.location.href='bookings.php'">More Bookings</button>
+                <button class="primary-button" onclick="window.location.href='bookings.php'">More Bookings</button>
             </div>
             <div class="recent-bookings-container">
             <?php
@@ -150,140 +150,6 @@
                     }
                 }
                 ?>
-                </div>
-            </div>
-        </div>
-        <!--Recent feedbacks section-->
-        <div class="recent-feedbacks">
-            <div class="recent-feedbacks-title">
-                <h1>Recent Feedbacks</h1>
-                <button class="more-button" onclick="window.location.href='feedbacks.php'">More Feedbacks</button>
-            </div>
-            <div class="recent-feedbacks-container">
-                <table class="main-table">
-                    <thead>
-                    <tr class="main-tr">
-                        <th class="main-th">Comment</th>
-                        <th class="main-th">Customer name</th>
-                        <th class="main-th">Commented date</th>
-                        <th class="main-th">Service</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Extremely satisfied with the work done
-                            <br />
-                            <span class="blue-badge">Updated 15 days ago</span>
-                        </td>
-                        <td class="main-td">Mohomed Izzath</td>
-                        <td class="main-td">21 Oct 2022</td>
-                        <td class="main-td">Electrical</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Process was neatly done on time
-                            <br />
-                            <span class="blue-badge">Updated 20 days ago</span>
-                        </td>
-                        <td class="main-td">Ravindu Wegiriya</td>
-                        <td class="main-td">16 Oct 2022</td>
-                        <td class="main-td">Electrical</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Work not completed on time. Slighlty dissappointing
-                            <br />
-                            <span class="blue-badge">Updated 27 days ago</span>
-                        </td>
-                        <td class="main-td">Dhananga Deepanjana</td>
-                        <td class="main-td">09 Oct 2022</td>
-                        <td class="main-td">Electrical</td>
-                    </tr>
-                    <tr class="main-tr">
-                        <td class="main-td" style="text-align: left;">Payment not going through
-                            <br />
-                            <span class="blue-badge">Updated 1 month ago</span>
-                        </td>
-                        <td class="main-td">Rushdha Rasheed</td>
-                        <td class="main-td">05 Oct 2022</td>
-                        <td class="main-td">Electrical</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!--Housings and payments section-->
-        <div class="housing-payments">
-            <div class="housing-dash-content">
-                <h1>Housing</h1>
-                <div class="housing-card">
-                    <h4>Housing package details</h4>
-                    <h3>Bambalapitiya Colombo</h3>
-                    <span class="blue-badge">Started date - 21 Nov 2022</span>
-                    <div class="housing-job-item">
-                            <div class="job-item-text">
-                                <h3>Electrical</h3>
-                            </div>
-                            <div class="jon-item-button">
-                                <button type="button" class="pending-button">Pending</button>
-                            </div>
-                        </div>
-                </div>
-                <div class="housing-card">
-                    <h4>Housing package details</h4>
-                    <h3>Kollupitiya Colombo</h3>
-                    <span class="blue-badge">Started date - 10 Nov 2022</span>
-                    <div class="housing-job-item">
-                            <div class="job-item-text">
-                                <h3>Electrical</h3>
-                            </div>
-                            <div class="jon-item-button">
-                                <button type="button" class="completed-button">Completed</button>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            <div class="payments-dash-content">
-                <h1>Payments</h1>
-                <div class="payments-list">
-                    <div class="payment-item">
-                        <div class="payment-text">
-                            <span class="blue-badge">21 Oct 2022</span>
-                            <h3>Mohomed Izzath</h3>
-                            <h4>Saman Gunawardhana</h4>
-                        </div>
-                        <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 27900.00</button>
-                        </div>
-                    </div>
-                    <div class="payment-item">
-                        <div class="payment-text">
-                            <span class="blue-badge">19 Oct 2022</span>
-                            <h3>Ravindu Wegiriya</h3>
-                            <h4>Saman Gunawardhana</h4>
-                        </div>
-                        <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 12000.00</button>
-                        </div>
-                    </div>
-                    <div class="payment-item">
-                        <div class="payment-text">
-                            <span class="blue-badge">21 Oct 2022</span>
-                            <h3>Dhananga Deepanjana</h3>
-                            <h4>Saman Gunawardhana</h4>
-                        </div>
-                        <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 17000.00</button>
-                        </div>
-                    </div>
-                    <div class="payment-item">
-                        <div class="payment-text">
-                            <span class="blue-badge">19 Oct 2022</span>
-                            <h3>Rushdha Rasheed</h3>
-                            <h4>Saman Gunawardhana</h4>
-                        </div>
-                        <div class="payment-button">
-                            <button type="button" class="payment-amount-button">Rs. 21000.00</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
