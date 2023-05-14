@@ -1,3 +1,8 @@
+const bookingCreateCancelButton = document.getElementById("booking-create-cancel-button");
+
+bookingCreateCancelButton.addEventListener('click', () => {
+    closeCreateBookingModal();
+});
 
 
 function displayFeedbacks(){
@@ -192,4 +197,24 @@ function saveDescription(){
             backdropModal.style.visibility = 'visible';
             errorMessageContainer.style.visibility = 'visible';
         });
+}
+
+/*
+ * Booking create modal
+ */
+
+function openCreateBookingModal(){
+    const backdropModal = document.getElementById("backdrop-modal");
+    const createBookingContainer = document.getElementById("create-booking-container");
+
+    backdropModal.style.visibility = 'visible';
+    createBookingContainer.style.visibility = 'visible';
+}
+
+function closeCreateBookingModal(){
+    const backdropModal = document.getElementById("backdrop-modal");
+    const createBookingContainer = document.getElementById("create-booking-container");
+
+    backdropModal.style.visibility = 'hidden';
+    createBookingContainer.style.visibility = 'hidden';
 }

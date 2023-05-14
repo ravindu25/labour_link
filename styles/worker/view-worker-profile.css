@@ -1,3 +1,181 @@
+.create-booking-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    height: 90vh;
+    transform: translate(-50%, -50%) ;
+    margin: 16px;
+    max-height: 90vh;
+    min-width: 50vw;
+    color: #102699;
+    background-color: #FFF;
+    border-radius: 16px;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.create-booking-scroll-wrapper{
+    margin: 32px 48px;
+    margin-right: 24px;
+    padding-right: 24px;
+    overflow: auto;
+    height: calc(100% - 64px);
+}
+
+.create-booking-title{
+    padding: 16px 12px;
+    background-color: var(--primary-shade-color);
+    border-radius: 12px;
+}
+
+.create-booking-title h1{
+    margin: 0;
+    text-align: center;
+    font-weight: normal;
+    font-family: 'Inter', sans-serif;
+}
+
+.form-input-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+    font-size: 20px;
+}
+
+.form-input-row select{
+    outline: none;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    min-width: 300px;
+    color: var(--primary-color);
+    padding: 8px;
+    width: 320px;
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+}
+
+.form-input-row input[type="date"]{
+    outline: none;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    min-width: 300px;
+    color: var(--primary-color);
+    padding: 8px;
+    width: 300px;
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+}
+
+.time-row{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.time-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 144px;
+    width: 120px;
+    margin: 4px 8px;
+    text-align: center;
+    border: 3px solid var(--primary-color);
+    border-radius: 12px;
+}
+
+.time-card-input{
+    display: none;
+}
+
+.time-card-input:checked + .time-card{
+    color: #FFF;
+    background-color: var(--primary-color);
+}
+
+.time-card h3{
+    margin: 0;
+    font-size: 64px;
+    font-family: 'Inter', sans-serif;
+}
+
+.time-card h4{
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+}
+
+.form-time-row label{
+    font-size: 20px;
+}
+
+.form-payment-row{
+    margin-top: 12px;
+}
+
+#end-date-container{
+    display: none;
+}
+
+.payment-methods-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-method-image{
+    width: 140px;
+    height: 140px;
+}
+
+.form-payment-row label{
+    font-size: 20px;
+}
+
+.payment-method-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    border: 3px solid var(--grey-color);
+    border-radius: 12px;
+    margin: 4px 12px;
+}
+
+.payment-method-radio{
+    display: none;
+}
+
+.payment-method-radio:checked + .payment-method-card{
+    border: 3px solid var(--primary-color);
+}
+
+.payment-method-card h5{
+    margin: 12px 4px;
+    font-size: 18px;
+    text-align: center;
+    font-weight: normal;
+    font-family: 'Inter', sans-serif;
+    color: var(--dark-color);
+}
+
+.form-button-container{
+    display: flex;
+    justify-content: center;
+    margin: 24px 12px;
+}
+
+.submit-button{
+    margin-left: 12px;
+    color: #FFF;
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+}
+
 .profile-container {
     display: flex;
     flex-direction: row;

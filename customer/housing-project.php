@@ -277,7 +277,7 @@
     
         <div class="project-tasks-container">
             <?php
-            if(paid==1){
+            if($paid==1){
                 echo('<h1>Ongoing tasks</h1>');
             }
             
