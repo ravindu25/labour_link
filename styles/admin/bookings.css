@@ -1,3 +1,142 @@
+.booking-details-container{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    height: 90vh;
+    transform: translate(-50%, -50%) ;
+    margin: 16px;
+    max-height: 90vh;
+    color: #102699;
+    background-color: #FFF;
+    border-radius: 16px;
+    opacity: 1;
+    visibility: hidden;
+}
+
+.booking-details-scroll-wrapper{
+    margin: 32px 48px;
+    margin-right: 24px;
+    padding-right: 24px;
+    overflow: auto;
+    height: calc(100% - 64px);
+}
+
+.booking-details-title{
+    padding: 16px 12px;
+    background-color: var(--primary-shade-color);
+    border-radius: 12px;
+}
+
+.booking-details-title h1{
+    margin: 0;
+    text-align: center;
+    font-weight: normal;
+}
+
+.status-container{
+    margin: 12px;
+    text-align: center;
+}
+
+.status-button{
+    outline: none;
+    border: none;
+    margin: 4px auto;
+    padding: 12px 24px;
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 8px;
+    background-color: var(--primary-bright-color);
+}
+
+.details-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+}
+
+.details-row h4{
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.details-value{
+    padding: 8px;
+    width: 320px;
+    background-color: var(--primary-shade-color);
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+}
+
+.remaining-time-container h4{
+    margin: 0;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.countdown-text{
+    font-family: 'Inter', sans-serif;
+    font-size: 48px;
+    text-align: center;
+}
+
+.payment-method-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-image-container{
+    width: 50%;
+    text-align: center;
+}
+
+.payment-image-container h4{
+    margin: 0;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+}
+
+.payment-image-card{
+    padding: 24px 12px;
+    text-align: center;
+}
+
+.payment-image{
+    width: 60%;
+}
+
+.payment-image-card h4{
+    text-align: center;
+}
+
+.payment-details-container h3{
+    font-size: 28px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.payment-details-container h2{
+    font-size: 56px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.back-button-container{
+    padding: 12px;
+    text-align: center;
+}
+
+.back-button-container button{
+    min-width: 180px;
+}
+
 .main-section{
     background-color: #ABC3EF;
 }
@@ -89,6 +228,36 @@
     font-family: 'Inter', sans-serif;
     font-size: 28px;
     color: var(--primary-color);
+}
+
+.recent-bookings h1{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.recent-bookings-charts-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.recent-booking-chart-container{
+    width: 50%;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 8px 4px;
+    background-color: white;
+    border: 1px solid var(--primary-color);
+}
+
+.recent-booking-chart-container h3{
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+    text-align: center;
 }
 
 .booking-card{
@@ -395,7 +564,7 @@
     font-size: 24px;
     font-weight: 500;
     border-radius: 4px;
-    background-color: var(--primary-background-shade-color);
+    background-color: var(--primary-background-color);
     transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
 }
 
@@ -418,7 +587,7 @@
     font-size: 36px;
     font-weight: 500;
     border-radius: 12px;
-    background-color: var(--primary-background-shade-color);
+    background-color: var(--primary-background-color);
 }
 
 .main-table{
