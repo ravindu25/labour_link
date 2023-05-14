@@ -1,7 +1,7 @@
 
 
 function displayFeedbacks(){
-    fetch(`http://localhost/labour_link/api/worker-profile.php?workerId=${workerID}`,{
+    fetch(`http://localhost/labour_link/api/worker-profile.php?action=getAllFeedbacks&workerId=${workerID}`,{
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     })
@@ -35,7 +35,7 @@ function displayFeedbacks(){
         .catch(error => console.log(error));
 }
 
-function hideAddCategoryContainer(){
+function hideUpdateFeedbackContainer(){
     const backdrop = document.getElementById('backdrop-modal');
     const addFeedbackModal = document.getElementById('add-feedback-modal');
 
@@ -83,15 +83,29 @@ function saveFeedbackItem(){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            workerId: userId,
+            workerId: workerID,
             feedback: selectedFeedbackArray
         })
 
     }).then(response => response.json())
         .then(data => {
-            console.log(data);
+            const backdropModal = document.getElementById('backdrop-modal');
+            const successMessageContainer = document.getElementById('feedback-add-success');
+            hideUpdateFeedbackContainer();
+
+            backdropModal.style.visibility = 'visible';
+            successMessageContainer.style.visibility = 'visible';
+            setTimeout(() => {
+                backdropModal.style.visibility = 'hidden';
+                successMessageContainer.style.visibility = 'hidden';
+                location.reload();
+            }, 5000);
         })
         .catch(error => {
-            console.log(error);
-        })
+            const backdropModal = document.getElementById('backdrop-modal');
+            const errorMessageContainer = document.getElementById('feedback-add-error');
+
+            backdropModal.style.visibility = 'visible';
+            errorMessageContainer.style.visibility = 'visible';
+        });
 }

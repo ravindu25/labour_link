@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             $workerId = $_GET['workerId'];
 
-            $sql_get_feedback = "SELECT Written_Feedback AS Feedback, Feedback_Token AS Token from Feedback inner join Booking on Feedback.Booking_ID = Booking.Booking_ID WHERE Booking.Worker_ID = $workerId";
+            $sql_get_feedback = "SELECT Written_Feedback AS Feedback, Feedback_Token AS Token from Feedback inner join Booking on Feedback.Booking_ID = Booking.Booking_ID WHERE Booking.Worker_ID = $workerId AND Feedback.Written_Feedback != ''";
 
             $result = $conn->query($sql_get_feedback);
 
@@ -60,6 +60,8 @@ else if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $workerId = $data['workerId'];
     $feedbackTokens = $data['feedbackTokens'];
+
+    $sql_delete_feedbacks = "DELETE FROM Profile_Feedback WHERE Worker_ID = $workerId";
 
     $sql_insert_feedbacks = "";
     if(sizeof($feedbackTokens) == 3){
