@@ -187,7 +187,7 @@ function submitHousing(){
             body: JSON.stringify({
                 "customerid": userId,
                 "address": address,
-                "verified": "false",
+                "paid": "false",
                 "jobselection": jobSelections
             })
         }

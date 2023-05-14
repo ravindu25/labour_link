@@ -365,9 +365,13 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                     </p>
                 </div>
             </div>
-            <a href='../customer/create-booking.php'>
-                <button type='button' class='booking-button'>Book now!</button>
-            </a>
+            <?php
+                if($_SESSION['user_type'] == 'Customer'){
+                    echo "<button type='button' class='primary-button' style='width: 200px; margin-top: 24px;'>Book now!</button>";
+                } else {
+                    echo "<button type='button' class='disable-button' style='width: 200px;margin-top: 24px;' disabled>Book now!</button>";
+                }
+            ?>
         </div>
     </div>
 </div>
