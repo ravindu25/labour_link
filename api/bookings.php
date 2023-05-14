@@ -156,6 +156,8 @@
                         if($result = $conn->query($sql_update_booking)){
                             http_response_code(200);
                             echo json_encode(array("status"=>"success", "bookingId"=> $bookingId));
+
+
                         } else {
                             $sql_update_booking = "UPDATE Booking SET Status = 'Pending' WHERE Booking_ID = $bookingId";
 
@@ -189,6 +191,7 @@
                         if($result = $conn->query($sql_add_payment_details)){
                             http_response_code(200);
                             echo json_encode(array("status"=>"success", "bookingId"=> $bookingId));
+
                         } else {
                             $sql_update_booking = "UPDATE Booking SET Status = 'Accepted-by-customer' WHERE Booking_ID = $bookingId";
 
@@ -200,6 +203,8 @@
                     } else {
                         http_response_code(200);
                         echo json_encode(array("status"=>"success", "bookingId"=> $bookingId));
+
+                        //if status rejected 
                     }
                 } else {
                     http_response_code(200);
