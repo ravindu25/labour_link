@@ -173,8 +173,6 @@ submitButton.addEventListener('click', (e) => {
         timeToComplete = (new Date(endDateInput.value) - new Date(startDateInput.value)) / (1000 * 60 * 60 * 24);
     }
 
-    // Note: Debugging
-    console.log(timeToComplete);
 
     const formData = {'job-type': jobTypeInput.value, 'worker-id': workerInput.value, 'start-date': startDateInput.value, 'time-input': timeToComplete, 'payment-method': paymentMethod.value};
     createBooking(`http://localhost/labour_link/customer/create-booking.php`, formData);

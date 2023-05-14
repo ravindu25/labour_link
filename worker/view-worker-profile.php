@@ -70,6 +70,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
     <!-- CSS files -->
     <link href="../styles/index-page.css" rel="stylesheet"/>
     <link href="../styles/customer/customer-bookings.css" rel="stylesheet"/>
+    <link href="../styles/dashboard.css" rel="stylesheet" />
     <link href="../styles/worker/view-worker-profile.css" rel="stylesheet"/>
     <title>Worker Profile | LabourLink</title>
 
@@ -82,45 +83,80 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
 </head>
 <body>
 <div class="backdrop-modal" id="backdrop-modal"></div>
-<div class="register-select-modal" id="register-modal"></div>
-<div class="register-select-content" id="register-modal-content">
-    <div class="register-select-heading">
-        <img src="../assets/svg/user-check-solid.svg" alt="house icon" class="register-select-icon" />
-        <h1>Select registration type</h1>
-    </div>
-    <div class="reg-type-container">
-        <div class="reg-type-card">
-            <img src="../assets/home-page/job-type/labour-type.svg" alt="worker" class="reg-type-image" />
-            <button type="button" onclick="window.location.href='../worker-registration.php'" class="card-button">Worker</button>
-        </div>
-        <div class="reg-type-card">
-            <img src="../assets/home-page/job-type/customer-type.svg" alt="customer" class="reg-type-image" />
-            <button type="button" onclick="window.location.href='../customer-registration.php'" class="card-button">Customer</button>
-        </div>
-    </div>
+<div class="message-backdrop" id="message-backdrop">
 </div>
 <div class="create-booking-container" id="create-booking-container">
     <div class="create-booking-scroll-wrapper">
         <div class="create-booking-title">
-            <h1>Create new <u>Booking</u></h1>
+            <h1 style="width: 100%">Create new <u>Booking</u></h1>
         </div>
         <form id="booking-create-form">
             <div class="form-input-row">
                 <label for="job-type">Job type</label>
-                <select id="job-type" name="job-type" disabled>
-                    <option value="Electrician" selected>Electrician</option>
-                    <option value="Plumber">Plumber</option>
-                    <option value="Painter">Painter</option>
-                    <option value="Carpenter">Carpenter</option>
-                    <option value="Mason">Mason</option>
-                    <option value="Janitor">Janitor</option>
-                    <option value="Mechanical">Mechanical</option>
-                    <option value="Gardner">Gardner</option>
+                <select id="job-type" name="job-type">
+                    <?php
+                        $sql_statement = "SELECT Worker.Worker_ID, P.Plumber_ID, C.Carpenter_ID, E.Electrician_ID, P2.Painter_ID,
+        M.Mason_ID, J.Janitor_ID, M2.Mechanic_ID, Gardener_ID
+                    FROM Worker LEFT JOIN Plumber P on Worker.Worker_ID = P.Plumber_ID AND P.Active = 1
+                    LEFT JOIN Carpenter C on Worker.Worker_ID = C.Carpenter_ID AND C.Active = 1
+                    LEFT JOIN Electrician E on Worker.Worker_ID = E.Electrician_ID AND E.Active = 1
+                    LEFT JOIN Painter P2 on Worker.Worker_ID = P2.Painter_ID AND P2.Active = 1
+                    LEFT JOIN Mason M on Worker.Worker_ID = M.Mason_ID AND M.Active = 1
+                    LEFT JOIN Janitor J on Worker.Worker_ID = J.Janitor_ID AND J.Active = 1
+                    LEFT JOIN Mechanic M2 on Worker.Worker_ID = M2.Mechanic_ID AND M2.Active = 1
+                    LEFT JOIN Gardener G on Worker.Worker_ID = G.Gardener_ID AND G.Active = 1 WHERE Worker_ID = $workerID";
+
+                        $result = $conn->query($sql_statement);
+
+                        $workerCategories = array();
+
+                        if($result->num_rows){
+                            while($row = $result->fetch_assoc()){
+                                if($row['Plumber_ID'] != null){
+                                    array_push($workerCategories, "Plumber");
+                                }
+
+                                if($row['Carpenter_ID'] != null){
+                                    array_push($workerCategories, "Carpenter");
+                                }
+
+                                if($row['Electrician_ID'] != null){
+                                    array_push($workerCategories, "Electrician");
+                                }
+
+                                if($row['Painter_ID'] != null){
+                                    array_push($workerCategories, "Painter");
+                                }
+
+                                if($row['Mason_ID'] != null){
+                                    array_push($workerCategories, "Mason");
+                                }
+
+                                if($row['Janitor_ID'] != null){
+                                    array_push($workerCategories, "Janitor");
+                                }
+
+                                if($row['Mechanic_ID'] != null){
+                                    array_push($workerCategories, "Mechanic");
+                                }
+
+                                if($row['Gardener_ID'] != null){
+                                    array_push($workerCategories, "Gardener");
+                                }
+                            }
+                        }
+
+                        for($i = 0; $i < count($workerCategories); $i++){
+                            echo "<option value='$workerCategories[$i]'>$workerCategories[$i]</option>";
+                        }
+                    ?>
                 </select>
             </div>
             <div class="form-input-row">
                 <label for="worker-id">Worker</label>
-                <select id="worker-id" name="worker-name"></select>
+                <select id="worker-id" name="worker-name">
+                    <?php echo "<option value='$userId' selected>$fullName</option>"; ?>
+                </select>
             </div>
             <div class="form-input-row">
                 <label for="start-date">Start date</label>
@@ -205,6 +241,15 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
         </form>
     </div>
 </div>
+<div class="success-message-container" id="booking-create-success">
+    <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Booking created successfully</h1>
+</div>
+<div class="failed-message-container" id="booking-create-fail">
+    <div class="message-text">
+        <h1><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Booking creation failed</h1>
+        <h5>Your login session outdated. Please login again.</h5>
+    </div>
+</div>
 <div class="success-message-container" id="feedback-add-success">
     <h1><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Viewing feedbacks successfully updated!</h1>
 </div>
@@ -265,60 +310,9 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
         <div class="worker-bio">
             <div class="detail-row">
                 <div class="detail">
-                    <h3>Category</h3>
+                    <h3>Active worker categories</h3>
                     <div class="worker-type-badge-row">
                         <?php
-                        $sql_statement = "SELECT Worker.Worker_ID, P.Plumber_ID, C.Carpenter_ID, E.Electrician_ID, P2.Painter_ID,
-        M.Mason_ID, J.Janitor_ID, M2.Mechanic_ID, Gardener_ID
-                    FROM Worker LEFT JOIN Plumber P on Worker.Worker_ID = P.Plumber_ID
-                    LEFT JOIN Carpenter C on Worker.Worker_ID = C.Carpenter_ID
-                    LEFT JOIN Electrician E on Worker.Worker_ID = E.Electrician_ID
-                    LEFT JOIN Painter P2 on Worker.Worker_ID = P2.Painter_ID
-                    LEFT JOIN Mason M on Worker.Worker_ID = M.Mason_ID
-                    LEFT JOIN Janitor J on Worker.Worker_ID = J.Janitor_ID
-                    LEFT JOIN Mechanic M2 on Worker.Worker_ID = M2.Mechanic_ID
-                    LEFT JOIN Gardener G on Worker.Worker_ID = G.Gardener_ID WHERE Worker_ID = $workerID";
-
-                        $result = $conn->query($sql_statement);
-
-                        $workerCategories = array();
-
-                        if($result->num_rows){
-                            while($row = $result->fetch_assoc()){
-                                if($row['Plumber_ID'] != null){
-                                    array_push($workerCategories, "Plumber");
-                                }
-
-                                if($row['Carpenter_ID'] != null){
-                                    array_push($workerCategories, "Carpenter");
-                                }
-
-                                if($row['Electrician_ID'] != null){
-                                    array_push($workerCategories, "Electrician");
-                                }
-
-                                if($row['Painter_ID'] != null){
-                                    array_push($workerCategories, "Painter");
-                                }
-
-                                if($row['Mason_ID'] != null){
-                                    array_push($workerCategories, "Mason");
-                                }
-
-                                if($row['Janitor_ID'] != null){
-                                    array_push($workerCategories, "Janitor");
-                                }
-
-                                if($row['Mechanic_ID'] != null){
-                                    array_push($workerCategories, "Mechanic");
-                                }
-
-                                if($row['Gardener_ID'] != null){
-                                    array_push($workerCategories, "Gardener");
-                                }
-                            }
-                        }
-
                         for($i = 0; $i < sizeof($workerCategories); $i++){
                             echo "
                     <div class='worker-type-badge'>
@@ -367,7 +361,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
             </div>
             <?php
                 if($_SESSION['user_type'] == 'Customer'){
-                    echo "<button type='button' class='primary-button' style='width: 200px; margin-top: 24px;'>Book now!</button>";
+                    echo "<button type='button' class='primary-button' style='width: 200px; margin-top: 24px;' onclick='openCreateBookingModal()'>Book now!</button>";
                 } else {
                     echo "<button type='button' class='disable-button' style='width: 200px;margin-top: 24px;' disabled>Book now!</button>";
                 }
@@ -503,6 +497,7 @@ echo "<script>
 ?>
 <script src="../scripts/modals.js" type="text/javascript"></script>
 <script src="../scripts/index.js" type="text/javascript"></script>
+<script src="../scripts/customer/create-booking.js" type="text/javascript"></script>
 <script src="../scripts/worker/view-worker-profile.js" type="text/javascript"></script>
 </body>
 </html>
