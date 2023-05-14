@@ -1,11 +1,10 @@
-const allFeedbacksChart = document.getElementById('chart-all-feedbacks');
-
-
-function showFeedbackCount(allFeedbackCount, year, month) {
+function loadMonthlyBookingChart(data){
+    const monthlyBookingChart = document.getElementById('chart-all-bookings');
     /*
      * Fill the array with number of days in the month
      */
-    const numberOfDays = new Date(year, month, 0).getDate();
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth() + 1;
     const currentDate = new Date().getDate();
     let xAxisLabels = [];
     let yAxisValues = [];
@@ -15,20 +14,20 @@ function showFeedbackCount(allFeedbackCount, year, month) {
         const dayText = i < 10 ? `0${i}` : i;
         xAxisLabels.push(`${year}-${monthText}-${dayText}`);
 
-        const element = allFeedbackCount.find(element => element.date === `${year}-${monthText}-${dayText}`);
+        const element = data.find(element => element.date === `${year}-${monthText}-${dayText}`);
         if(element){
-            yAxisValues.push(element.feedbackCount);
+            yAxisValues.push(element.bookingCount);
         } else {
             yAxisValues.push(0);
         }
     }
 
-    new Chart(allFeedbacksChart, {
+    new Chart(monthlyBookingChart, {
         type: 'line',
         data: {
             labels: xAxisLabels,
             datasets: [{
-                label: 'Number of Feedbacks',
+                label: 'Number of Bookings',
                 fill: true,
                 backgroundColor: '#C4DDF2',
                 data: yAxisValues,
@@ -50,28 +49,47 @@ function showFeedbackCount(allFeedbackCount, year, month) {
     });
 }
 
-function showFeedbackSkippingRate(skippingRateData){
-    const skippingRateChart = document.getElementById('chart-feedback-skipping');
-    const xAxisLabels = skippingRateData.map(element => element.customerName);
-    const yAxisValues = skippingRateData.map(element => element.feedbackCount);
+function loadOnlineModeBookings(data){
+    const onlineBookingsChart = document.getElementById('chart-online-bookings');
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
 
-    new Chart(skippingRateChart, {
-        type: 'bar',
+
+    const currentMonth = new Date().getMonth() + 1;
+    let xAxisLabels = [];
+    let yAxisValues = [];
+
+    for(let i = 1; i <= currentMonth; i++){
+        const monthText = monthNames[i - 1];
+        xAxisLabels.push(monthText);
+
+        const element = data.find(element => parseInt(element.month) === i);
+        if(element){
+            yAxisValues.push(element.bookingCount);
+        } else {
+            yAxisValues.push(0);
+        }
+    }
+
+    new Chart(onlineBookingsChart, {
+        type: 'line',
         data: {
             labels: xAxisLabels,
             datasets: [{
-                label: 'Number of skipped Feedbacks',
+                label: 'Number of Bookings',
                 fill: true,
-                backgroundColor: '#F2D49B',
+                backgroundColor: '#F2CD5C',
                 data: yAxisValues,
-                borderColor: '#FF5B19',
-                borderWidth: 2
+                borderColor: '#F28705',
+                borderWidth: 1
             }]
         },
         options: {
             responsive: true,
             scales: {
                 y: {
+                    beginAtZero: true,
                     ticks: {
                         stepSize: 1
                     }

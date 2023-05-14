@@ -65,6 +65,40 @@
 
             header('Content-Type: application/json');
             echo json_encode(array('firstResult' => $firstResult, 'secondResult' => $secondResult, 'thirdResult' => $thirdResult, 'fourthResult' => $fourthResult));
+        }else if(isset($_GET['term']) && $_GET['term'] == 'getAdminBookingData'){
+            $currentMonth = date('m');
+            $currentYear = date('Y');
+
+            $sql_get_monthly_bookings = "SELECT COUNT(Booking_ID) AS BookingCount, DATE(Start_Date) AS Date FROM Booking WHERE MONTH(Start_Date) = $currentMonth GROUP BY DAY(Start_Date)";
+
+            $result = $conn->query($sql_get_monthly_bookings);
+            $monthlyBookingResults = array();
+
+            if($result->num_rows > 0){
+                while($row = $result->fetch_assoc()){
+                    $date = $row['Date'];
+                    $bookingCount = $row['BookingCount'];
+                    array_push($monthlyBookingResults, array('date' => $date, 'bookingCount' => $bookingCount));
+                }
+            }
+
+            $sql_get_online_bookings = "SELECT COUNT(Booking_ID) AS BookingCount, MONTH(Start_Date) AS Month FROM Booking WHERE YEAR(Start_Date) = $currentYear AND Payment_Method = 'Online' GROUP BY MONTH(Start_Date)";
+
+            $result = $conn->query($sql_get_online_bookings);
+            $onlineBookingResults = array();
+
+            if($result->num_rows > 0){
+                while($row = $result->fetch_assoc()){
+                    $month = $row['Month'];
+                    $bookingCount = $row['BookingCount'];
+                    array_push($onlineBookingResults, array('month' => $month, 'bookingCount' => $bookingCount));
+                }
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode(array('monthlyBookingResults' => $monthlyBookingResults, 'onlineBookingResults' => $onlineBookingResults));
+
+
         }
     }
 

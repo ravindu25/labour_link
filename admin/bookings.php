@@ -30,6 +30,57 @@ $userId = $_SESSION['user_id'];
 </div>
 <div class="backdrop-modal" id="admin-backdrop-modal">
 </div>
+<div class="error-message-container" id="error-message-container">
+    <div class="error-message-heading">
+        <h1>Sorry, an unexpected error has occurred. Please try again later or contact customer support for assistance</h1>
+    </div>
+    <div class="error-message-image">
+        <img src="../assets/error-image.png" alt="error-image" />
+    </div>
+</div>
+<div class="booking-details-container" id="booking-details-container">
+    <div class="booking-details-scroll-wrapper">
+        <div class="booking-details-title">
+            <h1>Current Status of Your <u>Booking</u></h1>
+        </div>
+        <div class="status-container" id="booking-details-status-container"></div>
+        <div class="details-container">
+            <div class="details-row">
+                <h4>Customer name</h4>
+                <h4 class="details-value" id="booking-details-customer-name"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Job type</h4>
+                <h4 class="details-value" id="booking-details-job-type"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Worker name</h4>
+                <h4 class="details-value" id="booking-details-worker-name"></h4>
+            </div>
+            <div class="details-row">
+                <h4>Start date</h4>
+                <h4 class="details-value" id="booking-details-start-date"></h4>
+            </div>
+            <div class="payment-method-container">
+                <div class="payment-image-container">
+                    <h4>Payment Method</h4>
+                    <div class="payment-image-card">
+                        <img class="payment-image" id="payment-image" src="../assets/customer/dashboard/undraw_credit_card_re_blml.svg"
+                             alt="payment method"/>
+                        <h4 id="payment-method-text">Online payments</h4>
+                    </div>
+                </div>
+                <div class="payment-details-container" id="payment-details-container">
+                    <h3>Amount that needs to be paid</h3>
+                    <h2>Rs. 17500.00</h2>
+                </div>
+            </div>
+            <div class="back-button-container" id="back-button-container">
+                <button type="button" class="primary-button" onclick="closeBookingDetailsModal()" id="back-button">Back</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?php include_once '../components/navbar.php' ?>
 <main class="main-section">
     <section class="sidebar">
@@ -97,50 +148,69 @@ $userId = $_SESSION['user_id'];
                 <h5>Logged as <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></h5>
             </div>
             <div class="recent-bookings">
+                <h1>Bookings trends</h1>
+            </div>
+            <div class="recent-bookings-charts-container">
+                <div class="recent-booking-chart-container">
+                    <h3>Number of bookings(current month)</h3>
+                    <canvas id="chart-all-bookings"></canvas>
+                </div>
+                <div class="recent-booking-chart-container">
+                    <h3>Number of online mode bookings</h3>
+                    <canvas id="chart-online-bookings"></canvas>
+                </div>
+            </div>
+            <div class="recent-bookings">
                 <div class="recent-bookings-title">
                     <h1>Recently made Bookings</h1>
                 </div>
                 <div class="recent-bookings-container">
                     <?php
-                    require_once('../db.php');
+                        require_once('../db.php');
 
-                    // Getting customer id from the session
-                    $customer_id = $customer_id = $_SESSION['user_id'];
-                    $sql_get_bookings = "select Booking.*, User.First_Name, User.Last_Name from Booking inner join User on Booking.Worker_ID = User.User_ID ORDER BY Booking.Created_Date DESC LIMIT 5";
-
-
-                    $result = $conn->query($sql_get_bookings);
-
-                    if($result->num_rows > 0){
-                        while($row = $result->fetch_assoc()){
-                            $booking_id = $row['Booking_ID'];
-                            $worker_type = $row['Worker_Type'];
-                            $worker_name = $row['First_Name'] . " " . $row['Last_Name'];
-                            $start_date = date("d M Y", strtotime($row['Start_Date']));
-                            $statusValue = $row['Status'];
-                            $sql_get_customer_name = "SELECT * from User where User_ID = {$row['Customer_ID']}";
-                            $result_customer_name = $conn->query($sql_get_customer_name);
-                            $row_customer_name = $result_customer_name->fetch_assoc();
-                            $customer_name = $row_customer_name['First_Name'] . " " . $row_customer_name['Last_Name'];
+                        // Getting customer id from the session
+                        $customer_id = $customer_id = $_SESSION['user_id'];
+                        $sql_get_bookings = "select Booking.*, User.First_Name, User.Last_Name from Booking inner join User on Booking.Worker_ID = User.User_ID ORDER BY Booking.Created_Date DESC LIMIT 5";
 
 
-                            $button = '';
-                            switch($statusValue){
-                                case 'Pending':
-                                    $button = '<button class="pending-button">Pending</button>';
-                                    break;
-                                case 'Completed':
-                                    $button = '<button class="completed-button">Completed</button>';
-                                    break;
-                                case 'Rejected':
-                                    $button = '<button class="rejected-button">Rejected</button>';
-                                    break;
-                                case 'Accepted':
-                                    $button = '<button class="in-pogress-button">Accepted</button>';
-                                    break;
-                            }
+                        $result = $conn->query($sql_get_bookings);
 
-                            echo "
+                        if($result->num_rows > 0){
+                            while($row = $result->fetch_assoc()){
+                                $booking_id = $row['Booking_ID'];
+                                $worker_type = $row['Worker_Type'];
+                                $worker_name = $row['First_Name'] . " " . $row['Last_Name'];
+                                $start_date = date("d M Y", strtotime($row['Start_Date']));
+                                $statusValue = $row['Status'];
+                                $sql_get_customer_name = "SELECT * from User where User_ID = {$row['Customer_ID']}";
+                                $result_customer_name = $conn->query($sql_get_customer_name);
+                                $row_customer_name = $result_customer_name->fetch_assoc();
+                                $customer_name = $row_customer_name['First_Name'] . " " . $row_customer_name['Last_Name'];
+
+
+                                $button = '';
+                                switch($statusValue){
+                                    case 'Pending':
+                                        $button = '<button class="pending-button">Pending</button>';
+                                        break;
+                                    case 'Completed':
+                                        $button = '<button class="completed-button">Completed</button>';
+                                        break;
+                                    case 'Rejected-by-worker':
+                                        $button = '<button class="rejected-button">Rejected by worker</button>';
+                                        break;
+                                    case 'Rejected-by-customer':
+                                        $button = '<button class="rejected-button">Rejected by customer</button>';
+                                        break;
+                                    case 'Accepted-by-worker':
+                                        $button = '<button class="in-pogress-button">Accepted by worker</button>';
+                                        break;
+                                    case 'Accepted-by-customer':
+                                        $button = '<button class="in-pogress-button">Accepted by customer</button>';
+                                        break;
+                                }
+
+                                echo "
                                 <div class='booking-card' onclick='showBookingDetails($booking_id)'>
                                     <div class='card-text'>
                                         <h3>$worker_type</h3>
@@ -156,14 +226,12 @@ $userId = $_SESSION['user_id'];
                                         $button
                                     </div>
                                 </div>";
+                            }
                         }
-                    }
-                    else {
-                        echo "<h3 class='empty-bookings-heading'>No bookings made yet!</h3>";
-                    }
+                        else {
+                            echo "<h3 class='empty-bookings-heading'>No bookings made yet!</h3>";
+                        }
                     ?>
-
-
 
                 </div>
             </div>
@@ -208,6 +276,11 @@ $userId = $_SESSION['user_id'];
                                 </div>
                             </th>
                             <th class="main-th">
+                                <div class="table-heading-container">Worker name&nbsp;<button class="sort-button" id="worker-name-sort"><i
+                                                class="fa-solid fa-arrow-up"></i></button>
+                                </div>
+                            </th>
+                            <th class="main-th">
                                 <div class="table-heading-container">Start date&nbsp;<button class="sort-button" id="start-date-sort"><i
                                                 class="fa-solid fa-arrow-up"></i></button>
                             </th>
@@ -246,7 +319,9 @@ $userId = $_SESSION['user_id'];
         <p>© 2022 Labour Link | All Rights Reserved</p>
     </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../scripts/index.js" type="text/javascript"></script>
 <script src="../scripts/modals.js" type="text/javascript"></script>
-<script src="../scripts/admin/bookings.js" type="text/javascript"></script>
+<script src="../scripts/admin/bookings/bookings.js" type="text/javascript"></script>
+<script src="../scripts/admin/bookings/bookings-charts.js" type="text/javascript"></script>
 </body>

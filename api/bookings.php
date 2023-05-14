@@ -129,6 +129,41 @@
 
             header('Content-Type: application/json');
             echo json_encode($all_bookings);
+        } else {
+            // Getting all the bookings
+            $sql_get_all_bookings = "select Booking.*, Worker.First_Name AS Worker_First_Name, Worker.Last_Name AS Worker_Last_Name, Worker.User_Address AS Worker_Address, Worker.Contact_No AS Worker_Contact_Num ,Customer.First_Name AS Customer_First_Name, Customer.Last_Name AS Customer_Last_Name, Customer.User_Address AS Customer_Address, Customer.Contact_No AS Customer_Contact_No from Booking inner join User AS Worker ON Booking.Worker_ID = Worker.User_ID inner join User AS Customer ON Booking.Customer_ID = Customer.User_ID ORDER BY Booking.Created_Date DESC";
+
+            $result = $conn->query($sql_get_all_bookings);
+
+            $all_bookings = array();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $bookingId = $row['Booking_ID'];
+                    $customerId = $row['Customer_ID'];
+                    $customerName = $row['Customer_First_Name'] . " " . $row['Customer_Last_Name'];
+                    $customerContactNo = $row['Customer_Contact_No'];
+                    $customerAddress = $row['Customer_Address'];
+                    $workerId = $row['Worker_ID'];
+                    $workerName = $row['Worker_First_Name'] . " " . $row['Worker_Last_Name'];
+                    $workerContactNo = $row['Worker_Contact_Num'];
+                    $workerAddress = $row['Worker_Address'];
+                    $createdDate = $row['Created_Date'];
+                    $startDate = $row['Start_Date'];
+                    $endDate = $row['End_Date'];
+                    $workerType = $row['Worker_Type'];
+                    $status = $row['Status'];
+                    $paymentMethod = $row['Payment_Method'];
+                    $paymentAmount = $row['Payment_Amount'];
+
+                    $booking = new Booking($bookingId, $customerId, $customerName, $customerAddress, $customerContactNo, $workerAddress, $workerContactNo,$workerId, $workerName,$createdDate, $startDate, $endDate, $workerType, $status, $paymentMethod, $paymentAmount);
+
+                    array_push($all_bookings, $booking);
+                }
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($all_bookings);
         }
     } else if($_SERVER['REQUEST_METHOD'] === 'PUT' && isset($_GET['action']) && $_GET['action'] === 'updateStatus'){
         $data = json_decode(file_get_contents('php://input'), true);
