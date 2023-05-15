@@ -49,6 +49,7 @@
                 /*
                  * Get the most recent 3 or fewer bookings to select to provide feedback
                  */
+//  worker feedback table ek star rating eka update krnna kiwwe
                 require_once('../db.php');
 
                 $customerId = $_SESSION['user_id'];
@@ -730,6 +731,7 @@
                     </td>
                     <td class='main-td'>
                         <div class='loading-div' style='width: 50%; height: 40px;'></div>
+                        <div class='loading-div' style='width: 50%; height: 20px;'></div>
                     </td>
                     <td class='main-td'>
                         <div class='loading-div' style='width: 50%; height: 40px;'></div>

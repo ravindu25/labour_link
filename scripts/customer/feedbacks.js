@@ -12,6 +12,7 @@ let currentViewingFeedbacks = [];
 let sortingDetails = { 'writtenFeedback': null, 'workerName': null, 'createdTimestamp': null };
 let currentUpdatingFeedback = null;
 let tempUpdatingFeedback = null;
+let currStarRating = 0;
 const feedbackSearchButton = document.getElementById('feedback-search-input-button');
 
 const extraObservationButton = document.getElementById('feedback-observation-update');
@@ -443,6 +444,7 @@ function getFeedbackRow(feedback){
             <td class="main-td">
                 <a href="http://localhost/labour_link/worker/view-worker-profile.php?workerId=${feedback.workerId}">
                 ${feedback.workerName}
+                ${feedback.workerCurrentRating}
             </td>
             <td class="main-td">${feedback.createdTimestamp.split(' ')[0]}</td>
             <td class="main-td">
@@ -733,6 +735,8 @@ function showFeedbackDetails(feedbackToken){
                 }
                 document.getElementById('feedback-details-extra-observations').innerHTML = extraObservations;
             }
+
+            document.getElementById('feedback-details-comment-text').innerText = data.currStarRating;
 
             document.getElementById('feedback-details-booking-button').addEventListener('click', () => {
                 hideFeedbackDetails(data);
