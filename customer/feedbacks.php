@@ -49,7 +49,8 @@
                 /*
                  * Get the most recent 3 or fewer bookings to select to provide feedback
                  */
-//  worker feedback table ek star rating eka update krnna kiwwe
+
+                //  Customerge feedback table ekata star rating eka dann kyla kiwwe
                 require_once('../db.php');
 
                 $customerId = $_SESSION['user_id'];
@@ -721,6 +722,35 @@
                 <tbody id="feedback-details-body-table">
 
                 <?php
+                require_once('../db.php');
+
+                $sql_get_star_rating = "SELECT Feedback.*, Booking.*, Worker.First_Name, Worker.Last_Name , Worker.Current_Rating FROM Feedback INNER JOIN Booking ON Feedback.Booking_ID = Booking.Booking_ID INNER JOIN User AS Worker ON Booking.Worker_ID = Worker.User_ID WHERE Booking.Customer_ID = $customerId";
+
+                $result = $conn->query($sql_get_star_rating);
+
+                if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()){
+                        $feedbackId = $row['Feedback_Token'];
+                        $bookingId = $row['Booking_ID'];
+                        $workerName = $row['First_Name'] . ' ' . $row['Last_Name'];
+                        $currRating = $row['Current_Rating'];
+                        $workerId = $row['Worker_ID'];
+                        $timestamp = strtotime($row['Timestamp']);
+                        $date = date('Y-m-d', $timestamp);
+
+                        $ratingPun = $row['Star_Punctuality'];
+                        $ratingPunProgress = $ratingPun * 20;
+                        $ratingEfficiency = $row['Star_Efficiency'];
+                        $ratingEfficiencyProgress = $ratingEfficiency * 20;
+                        $ratingProf = $row['Star_Professionalism'];
+                        $ratingProfProgress = $ratingProf * 20;
+
+                        $writtenFeedback = '';
+                        if($row['Written_Feedback'] != ''){
+                            $writtenFeedback = "<p><i>\"$writtenFeedback\"</i></p>";
+                        }
+                }
+
                     for($i = 0; $i < 5; $i++){
                         echo "
                         <tr class='main-tr'>
@@ -731,7 +761,7 @@
                     </td>
                     <td class='main-td'>
                         <div class='loading-div' style='width: 50%; height: 40px;'></div>
-                        <div class='loading-div' style='width: 50%; height: 20px;'></div>
+                        <div></div>
                     </td>
                     <td class='main-td'>
                         <div class='loading-div' style='width: 50%; height: 40px;'></div>

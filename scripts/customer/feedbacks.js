@@ -12,7 +12,6 @@ let currentViewingFeedbacks = [];
 let sortingDetails = { 'writtenFeedback': null, 'workerName': null, 'createdTimestamp': null };
 let currentUpdatingFeedback = null;
 let tempUpdatingFeedback = null;
-let currStarRating = 0;
 const feedbackSearchButton = document.getElementById('feedback-search-input-button');
 
 const extraObservationButton = document.getElementById('feedback-observation-update');
@@ -296,33 +295,10 @@ function createFeedback(){
    if (this.readyState == 4 && this.status == 200) {
          console.log(this.responseText);
          if(this.responseText.trim() == "Success"){
-                const backdropModal = document.getElementById('backdrop-modal');
-                const successModal = document.getElementById('feedback-create-success');
-
-                backdropModal.style.visibility = 'visible';
-                successModal.style.visibility = 'visible';
-
-                hideFeedbackContainer();
-
-                setTimeout(() => {
-                    backdropModal.style.visibility = 'hidden';
-                    successModal.style.visibility = 'hidden';
-
-                }, 5000);
+                alert('Feedback successfully submitted');
+                
         }else{
-             const backdropModal = document.getElementById('backdrop-modal');
-             const successModal = document.getElementById('feedback-create-fail');
-
-             backdropModal.style.visibility = 'visible';
-             successModal.style.visibility = 'visible';
-
-             hideFeedbackContainer();
-
-             setTimeout(() => {
-                 backdropModal.style.visibility = 'hidden';
-                 successModal.style.visibility = 'hidden';
-
-             }, 5000);
+                alert('Feedback submission failed');
         }
     }
    
@@ -444,7 +420,6 @@ function getFeedbackRow(feedback){
             <td class="main-td">
                 <a href="http://localhost/labour_link/worker/view-worker-profile.php?workerId=${feedback.workerId}">
                 ${feedback.workerName}
-                ${feedback.workerCurrentRating}
             </td>
             <td class="main-td">${feedback.createdTimestamp.split(' ')[0]}</td>
             <td class="main-td">
@@ -735,8 +710,6 @@ function showFeedbackDetails(feedbackToken){
                 }
                 document.getElementById('feedback-details-extra-observations').innerHTML = extraObservations;
             }
-
-            document.getElementById('feedback-details-comment-text').innerText = data.currStarRating;
 
             document.getElementById('feedback-details-booking-button').addEventListener('click', () => {
                 hideFeedbackDetails(data);
