@@ -749,6 +749,7 @@
                         if($row['Written_Feedback'] != ''){
                             $writtenFeedback = "<p><i>\"$writtenFeedback\"</i></p>";
                         }
+                    }
                 }
 
                     for($i = 0; $i < 5; $i++){

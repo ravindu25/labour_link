@@ -68,7 +68,10 @@
     <h1>Do you want to place advertisement on the selected job?</h1>
     <div class="advertisement-create-image-container">
         <img src="../assets/customer/housing/undraw_Social_sharing_re_pvmr.png" alt="create-advertisement" />
-        <h5>Once advertisement is placed workers can apply for your job!</h5>
+        <h5>Once advertisement is placed workers can apply for your job!</h5><br>
+        
+        <h5>How many workers do you need?</h5>
+        <input type="text" class="worker-amount-input" id="worker-amount-input"/>
     </div>
     <div class="create-advertisement-button-container">
         <button class="create-advertisement-secondary-button" onclick="hideAdvertisementContainer()">Cancel</button>

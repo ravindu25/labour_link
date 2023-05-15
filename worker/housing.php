@@ -123,11 +123,19 @@
                                 <div class="card-text">
                                     <p>Customer</p>
                                     <h4>'.$row['First_Name'].' '.$row['Last_Name'].'</h4>
+                                    <p>Worker Amount - '.$row['Worker_Amount'].'</p>
                                 </div>
                                 <div class="housing-job-card-button-row">
                                     <div class="badge-container">
                                         <div class="blue-badge">'.$row['Address'].'</div> 
                                     </div>
+                                    ');
+                                    if($row['Worker_Amount'] > 5){
+                                        echo('<div class="badge-container"><div class="blue-badge">Company Preffered</div></div> ');
+                                    }
+                                       
+                                        
+                                    echo('
                                 </div>
                                 </div>
                         ');
@@ -157,11 +165,19 @@
                                 <div class="card-text">
                                     <p>Customer</p>
                                     <h4>'.$row['First_Name'].' '.$row['Last_Name'].'</h4>
+                                    <p>Worker Amount - '.$row['Worker_Amount'].'</p>
                                 </div>
                                 <div class="housing-job-card-button-row">
                                     <div class="badge-container">
                                         <div class="blue-badge">'.$row['Address'].'</div> 
                                     </div>
+                                    ');
+                                    if($row['Worker_Amount'] > 5){
+                                        echo('<div class="badge-container"><div class="blue-badge">Company Preffered</div></div> ');
+                                    }
+                                       
+                                        
+                                    echo('
                                 </div>
                                 </div>
                         ');
@@ -191,11 +207,19 @@
                                 <div class="card-text">
                                     <p>Customer</p>
                                     <h4>'.$row['First_Name'].' '.$row['Last_Name'].'</h4>
+                                    <p>Worker Amount - '.$row['Worker_Amount'].'</p>
                                 </div>
                                 <div class="housing-job-card-button-row">
                                     <div class="badge-container">
                                         <div class="blue-badge">'.$row['Address'].'</div> 
                                     </div>
+                                    ');
+                                    if($row['Worker_Amount'] > 5){
+                                        echo('<div class="badge-container"><div class="blue-badge">Company Preffered</div></div> ');
+                                    }
+                                       
+                                        
+                                    echo('
                                 </div>
                                 </div>
                         ');
@@ -225,14 +249,22 @@
                                 <div class="card-text">
                                     <p>Customer</p>
                                     <h4>'.$row['First_Name'].' '.$row['Last_Name'].'</h4>
+                                    <p>Worker Amount - '.$row['Worker_Amount'].'</p>
                                 </div>
                                 <div class="housing-job-card-button-row">
-                                    <div class="badge-container">
-                                        <div class="blue-badge">'.$row['Address'].'</div> 
-                                    </div>
+                                <div class="badge-container">
+                                    <div class="blue-badge">'.$row['Address'].'</div> 
                                 </div>
-                                </div>
-                        ');
+                                ');
+                                if($row['Worker_Amount'] > 5){
+                                    echo('<div class="badge-container"><div class="blue-badge">Company Preffered</div></div> ');
+                                }
+                                   
+                                    
+                                echo('
+                            </div>
+                            </div>
+                    ');
                     }
                     echo('</div></div>');
                 }
@@ -260,11 +292,19 @@
                                 <div class="card-text">
                                     <p>Customer</p>
                                     <h4>'.$row['First_Name'].' '.$row['Last_Name'].'</h4>
+                                    <p>Worker Amount - '.$row['Worker_Amount'].'</p>
                                 </div>
                                 <div class="housing-job-card-button-row">
                                     <div class="badge-container">
                                         <div class="blue-badge">'.$row['Address'].'</div> 
                                     </div>
+                                    ');
+                                    if($row['Worker_Amount'] > 5){
+                                        echo('<div class="badge-container"><div class="blue-badge">Company Preffered</div></div> ');
+                                    }
+                                       
+                                        
+                                    echo('
                                 </div>
                                 </div>
                         ');

@@ -366,3 +366,32 @@
     font-size: 20px;
     font-weight: normal;
 }
+
+
+.worker-amount-input-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.worker-amount-label{
+    font-size: 32px;
+    font-family: 'Inter', sans-serif;
+    font-weight: normal;
+    color: var(--primary-color);
+}
+
+.worker-amount-input{
+    width: 30%;
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: normal;
+    color: var(--primary-color);
+    border: 3px solid var(--primary-background-shade-color);
+    border-radius: 8px;
+    padding: 8px;
+    outline: none;
+    background-color: transparent;
+    text-align: center;
+}

@@ -76,6 +76,7 @@ function showAdvertisementContainer(houseId, jobId){
     const backdrop = document.getElementById('backdrop-modal');
     const advertisementContainer = document.getElementById('create-advertise-container');
 
+
     backdrop.addEventListener('click', () => {
         hideAdvertisementContainer();
     });
@@ -88,6 +89,7 @@ function showAdvertisementContainer(houseId, jobId){
     //add event listener to create advertisement button
     const createAdvertisementButton = document.getElementById('place-advertisement-button');
     createAdvertisementButton.addEventListener('click', () => {
+        const worker_amount = document.getElementById('worker-amount-input').value;
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
@@ -118,7 +120,7 @@ function showAdvertisementContainer(houseId, jobId){
         };
         xhttp.open("POST", "http://localhost/labour_link/customer/placeAdvertisement.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("houseID=" + houseId + "&jobID=" + jobId);
+        xhttp.send("houseID=" + houseId + "&jobID=" + jobId + "&worker_amount=" + worker_amount);
         
 
     }
