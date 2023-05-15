@@ -407,8 +407,21 @@ function getFeedbackRow(feedback){
         }
     });
     const observationText = observationsArray.join(' ');
+    let ratingData = 0;
 
-    
+    fetch(`http://localhost/labour_link/api/get-worker-rating.php?workerId=${feedback.workerId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }).then(reponse => reponse.json())
+        .then(data => {
+            ratingData = data.workerRating;
+            document.getElementById(`worker-rating-${feedback.workerId}`).innerText = ratingData;
+        })
+        .catch(error => {
+            console.log(error);
+        })
 
     const feedbackRow = `
         <tr class="main-tr">
@@ -421,6 +434,7 @@ function getFeedbackRow(feedback){
                 <a href="http://localhost/labour_link/worker/view-worker-profile.php?workerId=${feedback.workerId}">
                 ${feedback.workerName}
             </td>
+            <td id="worker-rating-${feedback.workerId}">${feedback.workerId}</td>
             <td class="main-td">${feedback.createdTimestamp.split(' ')[0]}</td>
             <td class="main-td">
                 <div class="more-button-container">

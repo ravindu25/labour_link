@@ -1,4 +1,4 @@
-const editItemContainers = ['edit-item-username', 'edit-item-email', 'edit-item-contactnum', 'edit-item-nic', 'edit-item-dob', 'edit-item-address'];
+const editItemContainers = ['edit-item-username',  'edit-item-contactnum',  'edit-item-dob', 'edit-item-address'];
 
 const fileSelectInput = document.getElementById('picture-upload-input');
 

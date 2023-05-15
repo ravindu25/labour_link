@@ -713,6 +713,10 @@
                                         class="fa-solid fa-arrow-down"></i></button>
                     </th>
                     <th class="main-th">
+                        <div class="table-heading-container">Worker rating&nbsp;<button class="sort-button" id="sort-workerName-button" onclick="sortFeedbacks('workerName')"><i
+                                        class="fa-solid fa-arrow-down"></i></button>
+                    </th>
+                    <th class="main-th">
                         <div class="table-heading-container">Commented Date&nbsp;<button class="sort-button" id="sort-createdTimestamp-button" onclick="sortFeedbacks('createdTimestamp')"><i
                                         class="fa-solid fa-arrow-down"></i></button>
                     </th>
@@ -724,7 +728,7 @@
                 <?php
                 require_once('../db.php');
 
-                $sql_get_star_rating = "SELECT Feedback.*, Booking.*, Worker.First_Name, Worker.Last_Name , Worker.Current_Rating FROM Feedback INNER JOIN Booking ON Feedback.Booking_ID = Booking.Booking_ID INNER JOIN User AS Worker ON Booking.Worker_ID = Worker.User_ID WHERE Booking.Customer_ID = $customerId";
+                $sql_get_star_rating = "SELECT Feedback.*, Booking.*, Worker.First_Name, Worker.Last_Name , Worker_Table.Current_Rating AS Current_Rating FROM Feedback INNER JOIN Booking ON Feedback.Booking_ID = Booking.Booking_ID INNER JOIN User AS Worker ON Booking.Worker_ID = Worker.User_ID INNER JOIN Worker AS Worker_Table WHERE Booking.Customer_ID = $customerId";
 
                 $result = $conn->query($sql_get_star_rating);
 
@@ -737,6 +741,8 @@
                         $workerId = $row['Worker_ID'];
                         $timestamp = strtotime($row['Timestamp']);
                         $date = date('Y-m-d', $timestamp);
+
+                        $workerRating = $row['Current_Rating'];
 
                         $ratingPun = $row['Star_Punctuality'];
                         $ratingPunProgress = $ratingPun * 20;
