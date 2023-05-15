@@ -360,7 +360,7 @@ $sql_get_workers_details = "Select User.*, Worker.* from User inner join Worker 
                 </div>
             </div>
             <?php
-                if($_SESSION['user_type'] == 'Customer'){
+                if(isset($_SESSION['user_type'] ) && $_SESSION['user_type'] == 'Customer'){
                     echo "<button type='button' class='primary-button' style='width: 200px; margin-top: 24px;' onclick='openCreateBookingModal()'>Book now!</button>";
                 } else {
                     echo "<button type='button' class='disable-button' style='width: 200px;margin-top: 24px;' disabled>Book now!</button>";
