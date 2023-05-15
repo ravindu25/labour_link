@@ -225,8 +225,6 @@ $userId = $_SESSION['user_id'];
             </div>
         </div>
 
-
-
         <!--Booking search container-->
         <div class="booking-search">
             <div class="booking-search-title">

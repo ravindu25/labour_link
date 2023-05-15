@@ -467,6 +467,7 @@ document.getElementById('end-date-sort').addEventListener('click', () =>{
 
     const endDateSort = document.getElementById('end-date-sort');
 
+
     if(endDateAsc === true){
         endDateSort.innerHTML = `<i class="fa-solid fa-arrow-up"></i>`;
     } else {

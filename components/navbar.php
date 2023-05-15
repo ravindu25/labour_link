@@ -226,7 +226,7 @@
             xhttp.send("searchInput="+searchInput);
 
         }else{
-            document.getElementById("searchResult").innerHTML = "No Results";
+            // document.getElementById("searchResult").innerHTML = "No Results";
         }
        
            

@@ -6,10 +6,10 @@
 
         $customerId = $postData['customerid'];
         $address = $postData['address'];
-        $verified = $postData['verified'];
+        $paid = $postData['paid'];
         $jobSelection = $postData['jobselection'];
 
-        $sql_create_housing = "INSERT INTO House(Customer_ID, Address, Verified) VALUES($customerId, '$address', $verified)";
+        $sql_create_housing = "INSERT INTO House(Customer_ID, Address, Paid) VALUES($customerId, '$address', $paid)";
         $result_create_housing = $conn->query($sql_create_housing);
 
         $sql_get_housing_id = "SELECT House_ID FROM House WHERE Customer_ID = $customerId AND Address = '$address'";

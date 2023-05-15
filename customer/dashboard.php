@@ -68,12 +68,12 @@
                         <h4 id="payment-method-text">Online payments</h4>
                     </div>
                 </div>
-                <div class="payment-details-container">
+                <div class="payment-details-container" id="payment-details-container">
                     <h3>Amount that needs to be paid</h3>
                     <h2>Rs. 17500.00</h2>
                 </div>
             </div>
-            <div class="back-button-container">
+            <div class="back-button-container" id="back-button-container">
                 <button type="button" class="primary-button" id="back-button">Back</button>
             </div>
         </div>
@@ -257,12 +257,16 @@
 
                             if($status === 'Pending'){
                                 $button = '<button class="pending-button">Pending</button>';
-                            } else if($status === 'Accepted'){
-                                $button = '<button class="in-pogress-button">Accepted</button>';
+                            } else if($status === 'Accepted-by-customer'){
+                                $button = '<button class="in-pogress-button">Accepted by customer</button>';
+                            } else if($status === 'Accepted-by-worker'){
+                                $button = '<button class="in-pogress-button">Accepted by worker</button>';
                             } else if($status === 'Completed'){
                                 $button = '<button class="completed-button">Completed</button>';
-                            } else {
-                                $button = '<button class="rejected-button">Rejected</button>';
+                            } else if($status === 'Rejected-by-customer') {
+                                $button = '<button class="rejected-button">Rejected by customer</button>';
+                            } else if($status === 'Rejected-by-worker') {
+                                $button = '<button class="rejected-button">Rejected by worker</button>';
                             }
 
 

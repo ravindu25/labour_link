@@ -117,16 +117,8 @@ function openBookingDetailsModal(bookingId){
                         `;
 
         buttonContainer.innerHTML = `
-            <button type="button" class="primary-button" id="reject-button"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Reject booking</button>
             <button type="button" class="primary-outline-button" style="margin: 0 8px;" id="back-button">Close</button>
-            <button type="button" class="primary-button" id="accept-button"><i class="fa-solid fa-check"></i>&nbsp;&nbsp;Accept booking</button>
         `;
-
-        const acceptButton = document.getElementById('accept-button');
-        acceptButton.addEventListener('click', acceptCurrentViewingBooking);
-
-        const rejectButton = document.getElementById('reject-button');
-        rejectButton.addEventListener('click', rejectCurrentViewingBooking);
     } else if(currentBooking.status === 'Rejected-by-worker') {
         const buttonContainer = document.getElementById('back-button-container');
         const paymentContainer = document.getElementById('payment-details-container');

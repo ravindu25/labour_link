@@ -301,6 +301,8 @@ function createFeedback(){
                 backdropModal.style.visibility = 'visible';
                 successModal.style.visibility = 'visible';
 
+                hideFeedbackContainer();
+
                 setTimeout(() => {
                     backdropModal.style.visibility = 'hidden';
                     successModal.style.visibility = 'hidden';
@@ -312,6 +314,8 @@ function createFeedback(){
 
              backdropModal.style.visibility = 'visible';
              successModal.style.visibility = 'visible';
+
+             hideFeedbackContainer();
 
              setTimeout(() => {
                  backdropModal.style.visibility = 'hidden';
