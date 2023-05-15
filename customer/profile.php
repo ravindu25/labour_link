@@ -407,12 +407,6 @@
                     </div>
                 </div>
                 <div class="quick-action-item">
-                    <h3>Unlock premium features and take your experience to the next level!</h3>
-                    <div class="quick-action-item-button-container">
-                        <button type="button" class="primary-button"><i class="fa-solid fa-circle-up"></i>&nbsp;&nbsp;Upgrade now</button>
-                    </div>
-                </div>
-                <div class="quick-action-item">
                     <h3>Your feedback matters! Help us improve by sharing your thoughts.</h3>
                     <div class="quick-action-item-button-container">
                         <button type="button" class="primary-button" onclick="showProvideFeedbackModal()"><i class="fa-solid fa-message"></i>&nbsp;&nbsp;Send feedback</button>
